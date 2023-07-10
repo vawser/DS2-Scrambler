@@ -4,6 +4,11 @@ Randomizes game params in Dark Souls II: Scholar of the First Sin.
 
 Inspired by TKGP's [Irregulator](https://github.com/JKAnderson/Irregulator) for DS3 and Mechapope's [Paramdomizer](https://github.com/Mechapope/Paramdomizer) for DS1.
 
+Supports:
+* Treasure randomisation.
+* Weapon randomisation.
+* Armor randomisation.
+
 # Usage
 1. Run the application.
 2. Select the mod folder you wish to scramble. For example: *C:\Users\Name\Documents\Fromsoft\MyMod*
