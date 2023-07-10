@@ -5,9 +5,9 @@ Randomizes game params in Dark Souls II: Scholar of the First Sin.
 Inspired by TKGP's [Irregulator](https://github.com/JKAnderson/Irregulator) for DS3 and Mechapope's [Paramdomizer](https://github.com/Mechapope/Paramdomizer) for DS1.
 
 Supports:
-* Treasure randomisation.
-* Weapon randomisation.
-* Armor randomisation.
+* Treasure randomisation
+* Weapon randomisation
+* Armor randomisation
 
 # Usage
 1. Run the application.
