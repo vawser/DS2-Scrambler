@@ -1,0 +1,24 @@
+50940000;Champion's Tablet
+50950000;Ladder Miniature
+50960000;Soul Vessel
+50990000;Dull Ember
+62160000;Black Separation Crystal
+53300000;Soul of Nadalia- Bride of Ash
+62030000;White Sign Soapstone
+62040000;Small White Sign Soapstone
+62045000;Red Sign Soapstone
+60525000;Estus Flask Shard
+60526000;Sublime Bone Dust
+62020000;Bone of Order
+62000000;Dried Fingers
+64600000;Loyce Soul
+60537000;Fragrant Branch of Yore
+60536000;Pharros' Lockstone
+60538000;Fire Seed
+60527000;Bonfire Ascetic
+60500000;Very Good Carving
+60490000;Im Sorry Carving
+60480000;Thank You Carving
+60470000;Hello Carving
+51010000;Simpletons Spice
+51020000;Skeptics Spice

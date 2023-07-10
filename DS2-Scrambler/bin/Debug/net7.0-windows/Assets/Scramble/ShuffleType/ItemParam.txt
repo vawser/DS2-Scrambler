@@ -1,0 +1,5 @@
+speffect_id
+base_price
+sell_price
+animation_speed
+max_held_count
