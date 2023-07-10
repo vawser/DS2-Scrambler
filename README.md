@@ -10,7 +10,7 @@ Inspired by TKGP's [Irregulator](https://github.com/JKAnderson/Irregulator) for 
 3. Toggle the scramble settings as you wish, each type of scrambling can be toggled on or off.
 4. Press Scramble. A new mod scalled *MyMod-Scrambled* will be created in the same directory as *MyMod*.
 
-To run the mod, I recommend you use [ModEngine2](https://github.com/soulsmods/ModEngine2).
+To run the mod, I recommend you use ModEngine.
 
 # Features
 By default each Scramble option will scramble all fields within the param. 
