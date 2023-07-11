@@ -10,6 +10,8 @@ using static SoulsFormats.PARAM;
 using System.Windows.Shapes;
 using System.Windows;
 using System.Windows.Documents;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+using System.Windows.Media.TextFormatting;
 
 namespace DS2_Scrambler
 {
@@ -28,9 +30,17 @@ namespace DS2_Scrambler
             return result;
         }
 
-        public static Match RegexMatch(this string input, string pattern, RegexOptions regexOptions = RegexOptions.IgnoreCase)
+        public static void Shuffle<T>(this IList<T> list, Random rand)
         {
-            return Regex.Match(input, pattern, regexOptions);
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rand.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
         }
     }
 
@@ -48,6 +58,7 @@ namespace DS2_Scrambler
         List<string> GestureItems = new List<string>();
         List<string> BossIDs = new List<string>();
         List<string> CharacterIDs = new List<string>();
+        List<string> EnemyIDs = new List<string>();
 
         Dictionary<string, List<string>> ShuffleParamFields = new Dictionary<string, List<string>>();
 
@@ -134,6 +145,14 @@ namespace DS2_Scrambler
                 var list = line.Split(";");
                 //Console.WriteLine(list[0]);
                 CharacterIDs.Add(list[0]);
+            }
+
+            // Build Enemy ID list
+            foreach (string line in File.ReadLines(configPath + "Enemy-IDs.txt", Encoding.UTF8))
+            {
+                var list = line.Split(";");
+                //Console.WriteLine(list[0]);
+                EnemyIDs.Add(list[0]);
             }
 
             // Build ShuffleParamFields dictionary
@@ -1197,85 +1216,6 @@ namespace DS2_Scrambler
         }
         #endregion
 
-        #region Scramble - Enemy Placement
-        public Regulation Scramble_EnemyPlacement(bool ignoreKeyCharacters, bool ignoreBosses)
-        {
-            string paramName = "generatoregistparam";
-            List<List<int>> valueList = new List<List<int>>();
-
-            // Build list of values
-            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
-            {
-                if (wrapper.Name.Contains(paramName))
-                {
-                    PARAM param = wrapper.Param;
-                    var param_rows = param.Rows;
-
-                    foreach (PARAM.Row row in param_rows)
-                    {
-                        int EnemyParamID = 0;
-                        int LogicParamID = 0;
-                        int DefaultLogicParamID = 0;
-
-                        foreach (PARAM.Cell cell in row.Cells)
-                        {
-                            if (cell.Def.InternalName == "EnemyParamID")
-                                EnemyParamID = (int)cell.Value;
-
-                            if (cell.Def.InternalName == "LogicParamID")
-                                EnemyParamID = (int)cell.Value;
-
-                            if (cell.Def.InternalName == "DefaultLogicParamID")
-                                EnemyParamID = (int)cell.Value;
-                        }
-
-                        List<int> value_list = new List<int>() { EnemyParamID, LogicParamID, DefaultLogicParamID };
-
-                        valueList.Add(value_list);
-                    }
-                }
-            }
-
-            // Re-assign values
-            // Build list of values
-            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
-            {
-                if (wrapper.Name.Contains(paramName))
-                {
-                    PARAM param = wrapper.Param;
-                    var param_rows = param.Rows;
-
-                    foreach (PARAM.Row row in param_rows)
-                    {
-                        List<int> chosenValues = valueList[rand.Next(valueList.Count)];
-
-                        int EnemyParamID = 0;
-                        int LogicParamID = 0;
-                        int DefaultLogicParamID = 0;
-
-                        foreach (PARAM.Cell cell in row.Cells)
-                        {
-                            if (cell.Def.InternalName == "EnemyParamID")
-                                EnemyParamID = (int)cell.Value;
-
-                            if (cell.Def.InternalName == "LogicParamID")
-                                EnemyParamID = (int)cell.Value;
-
-                            if (cell.Def.InternalName == "DefaultLogicParamID")
-                                EnemyParamID = (int)cell.Value;
-                        }
-
-                        List<int> value_list = new List<int>() { EnemyParamID, LogicParamID, DefaultLogicParamID };
-
-                        list.Add(value_list);
-                    }
-                }
-            }
-
-            return regulation;
-        }
-        #endregion
-
         #region Scramble - LogicComParam
         public Regulation Scramble_LogicComParam(string paramName, bool useGenerateType)
         {
@@ -1302,7 +1242,530 @@ namespace DS2_Scrambler
         }
         #endregion
 
+        #region Scramble - EnemyGeneratorRegist
+        // Not used
+        public Regulation Scramble_EnemyGeneratorRegist(bool sharedEnemyPool, bool ignoreKeyCharacters, bool ignoreBosses)
+        {
+            string paramName = "generatorregistparam";
+            List<List<int>> valueList = new List<List<int>>();
+
+            // Done per map
+            if (!sharedEnemyPool)
+            {
+                foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+                {
+                    if (wrapper.Name.Contains(paramName))
+                    {
+                        PARAM param = wrapper.Param;
+                        var param_rows = param.Rows;
+
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            bool addRow = true;
+
+                            int EnemyParamID = 0;
+                            int LogicParamID = 0;
+                            int DefaultLogicParamID = 0;
+
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName == "EnemyParamID")
+                                    EnemyParamID = (int)cell.Value;
+
+                                if (cell.Def.InternalName == "LogicParamID")
+                                    LogicParamID = (int)cell.Value;
+
+                                if (cell.Def.InternalName == "DefaultLogicParamID")
+                                    DefaultLogicParamID = (int)cell.Value;
+                            }
+
+                            if (EnemyParamID > 0 && EnemyParamID != 837400)
+                            {
+                                if (ignoreKeyCharacters)
+                                    addRow = MayAdjustRow(EnemyParamID, CharacterIDs);
+
+                                // Only check if editRow is still true
+                                if (addRow && ignoreBosses)
+                                    addRow = MayAdjustRow(EnemyParamID, BossIDs);
+
+                                if (addRow)
+                                {
+                                    List<int> value_list = new List<int>() { EnemyParamID, LogicParamID, DefaultLogicParamID };
+                                    valueList.Add(value_list);
+                                }
+                            }
+                        }
+
+                        // Change entries
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            bool editRow = true;
+
+                            List<int> chosenValues = valueList[rand.Next(valueList.Count)];
+
+                            int newEnemyParamID = chosenValues[0];
+                            int newLogicParamID = chosenValues[1];
+                            int newDefaultLogicParamID = chosenValues[2];
+
+                            int oldEnemyParamID = 0;
+                            int oldLogicParamID = 0;
+                            int oldDefaultLogicParamID = 0;
+
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName == "EnemyParamID")
+                                    oldEnemyParamID = (int)cell.Value;
+
+                                if (cell.Def.InternalName == "LogicParamID")
+                                    oldLogicParamID = (int)cell.Value;
+
+                                if (cell.Def.InternalName == "DefaultLogicParamID")
+                                    oldDefaultLogicParamID = (int)cell.Value;
+                            }
+
+                            if (oldEnemyParamID > 0 && oldEnemyParamID != 837400)
+                            {
+                                if (ignoreKeyCharacters)
+                                    editRow = MayAdjustRow(oldEnemyParamID, CharacterIDs);
+
+                                // Only check if editRow is still true
+                                if (editRow && ignoreBosses)
+                                    editRow = MayAdjustRow(oldEnemyParamID, BossIDs);
+
+                                if (editRow)
+                                {
+                                    foreach (PARAM.Cell cell in row.Cells)
+                                    {
+                                        if (cell.Def.InternalName == "EnemyParamID")
+                                            cell.Value = newEnemyParamID;
+
+                                        if (cell.Def.InternalName == "LogicParamID")
+                                            cell.Value = newLogicParamID;
+
+                                        if (cell.Def.InternalName == "DefaultLogicParamID")
+                                            cell.Value = newDefaultLogicParamID;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            // Done with a shared pool across all maps
+            else
+            {
+                foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+                {
+                    if (wrapper.Name.Contains(paramName))
+                    {
+                        PARAM param = wrapper.Param;
+                        var param_rows = param.Rows;
+
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            bool addRow = true;
+
+                            int EnemyParamID = 0;
+                            int LogicParamID = 0;
+                            int DefaultLogicParamID = 0;
+
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName == "EnemyParamID")
+                                    EnemyParamID = (int)cell.Value;
+
+                                if (cell.Def.InternalName == "LogicParamID")
+                                    LogicParamID = (int)cell.Value;
+
+                                if (cell.Def.InternalName == "DefaultLogicParamID")
+                                    DefaultLogicParamID = (int)cell.Value;
+                            }
+
+                            if (EnemyParamID > 0 && EnemyParamID != 837400)
+                            {
+                                if (ignoreKeyCharacters)
+                                    addRow = MayAdjustRow(EnemyParamID, CharacterIDs);
+
+                                // Only check if editRow is still true
+                                if (addRow && ignoreBosses)
+                                    addRow = MayAdjustRow(EnemyParamID, BossIDs);
+
+                                if (addRow)
+                                {
+                                    List<int> value_list = new List<int>() { EnemyParamID, LogicParamID, DefaultLogicParamID };
+                                    valueList.Add(value_list);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Change entries
+                foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+                {
+                    if (wrapper.Name.Contains(paramName))
+                    {
+                        PARAM param = wrapper.Param;
+                        var param_rows = param.Rows;
+
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            bool editRow = true;
+
+                            List<int> chosenValues = valueList[rand.Next(valueList.Count)];
+
+                            int newEnemyParamID = chosenValues[0];
+                            int newLogicParamID = chosenValues[1];
+                            int newDefaultLogicParamID = chosenValues[2];
+
+                            int oldEnemyParamID = 0;
+                            int oldLogicParamID = 0;
+                            int oldDefaultLogicParamID = 0;
+
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName == "EnemyParamID")
+                                    oldEnemyParamID = (int)cell.Value;
+
+                                if (cell.Def.InternalName == "LogicParamID")
+                                    oldLogicParamID = (int)cell.Value;
+
+                                if (cell.Def.InternalName == "DefaultLogicParamID")
+                                    oldDefaultLogicParamID = (int)cell.Value;
+                            }
+
+                            if (oldEnemyParamID > 0 && oldEnemyParamID != 837400)
+                            {
+                                if (ignoreKeyCharacters)
+                                    editRow = MayAdjustRow(oldEnemyParamID, CharacterIDs);
+
+                                // Only check if editRow is still true
+                                if (editRow && ignoreBosses)
+                                    editRow = MayAdjustRow(oldEnemyParamID, BossIDs);
+
+                                if (editRow)
+                                {
+                                    foreach (PARAM.Cell cell in row.Cells)
+                                    {
+                                        if (cell.Def.InternalName == "EnemyParamID")
+                                            cell.Value = newEnemyParamID;
+
+                                        if (cell.Def.InternalName == "LogicParamID")
+                                            cell.Value = newLogicParamID;
+
+                                        if (cell.Def.InternalName == "DefaultLogicParamID")
+                                            cell.Value = newDefaultLogicParamID;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return regulation;
+        }
+
+        public bool MayAdjustRow(int value, List<string> list)
+        {
+            bool change = true;
+
+            foreach (string entry in list)
+            {
+                int target_id = int.Parse(entry.Remove(entry.Length - 2, 2));
+                string r = value.ToString();
+                r = r.Remove(r.Length - 2, 2);
+                int short_row_id = int.Parse(r);
+
+                if (short_row_id == target_id)
+                {
+                    change = false;
+                }
+            }
+
+            return change;
+        }
+        #endregion
+
+        #region Scramble - EnemyGeneratorLocation
+        public Regulation Scramble_EnemyGeneratorLocation(bool useOrderedPlacement, bool ignoreKeyCharacters, bool ignoreBosses, bool ignoreNGPlus)
+        {
+            Dictionary<string, List<int>> characterDict = new Dictionary<string, List<int>>();
+            Dictionary<string, List<int>> bossDict = new Dictionary<string, List<int>>();
+            Dictionary<string, List<int>> ngPlusDict = new Dictionary<string, List<int>>();
+
+            // Build lists
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                PARAM param = wrapper.Param;
+                List<PARAM.Row> param_rows = param.Rows;
+                List<int> characterRowIDs = new List<int>();
+                List<int> bossRowIDs = new List<int>();
+                List<int> ngPlusRowIDs = new List<int>();
+
+                if (wrapper.Name.Contains("generatorparam"))
+                {
+                    string map_id = wrapper.Name.Replace("generatorparam_", "");
+
+                    // If enemy has ApperanceEventID between 2 and 8, add it to the NG+ enemy per map dictionary
+                    if (ignoreNGPlus)
+                    {
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            bool isNGPlusRow = false;
+
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName == "ApperanceEventID")
+                                {
+                                    uint flag = (uint)cell.Value;
+
+                                    if (flag >= 2 && flag <= 8)
+                                    {
+                                        isNGPlusRow = true;
+                                    }
+                                }
+                            }
+
+                            if (isNGPlusRow)
+                            {
+                                ngPlusRowIDs.Add(row.ID);
+                            }
+                        }
+
+                        ngPlusDict.Add(map_id, ngPlusRowIDs);
+                    }
+
+                    // If enemy is considered a 'key' character, add it to the Character per map dictionary
+                    if (ignoreKeyCharacters)
+                    {
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            bool isCharacterRow = false;
+                            uint EnemyID = 0;
+
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName == "GeneratorRegistParam")
+                                    EnemyID = (uint)cell.Value;
+                            }
+
+                            if (EnemyID > 0)
+                            {
+                                foreach (string entry in CharacterIDs)
+                                {
+                                    int target_id = int.Parse(entry.Remove(entry.Length - 2, 2));
+                                    string r = EnemyID.ToString();
+                                    r = r.Remove(r.Length - 4, 4);
+                                    int short_row_id = int.Parse(r);
+
+                                    if (short_row_id == target_id)
+                                        isCharacterRow = true;
+                                }
+                            }
+
+                            if (isCharacterRow)
+                            {
+                                characterRowIDs.Add(row.ID);
+                            }
+                        }
+
+                        characterDict.Add(map_id, characterRowIDs);
+                    }
+
+                    // If enemy is considered a 'boss' enemy, add it to the Boss per map dictionary
+                    if (ignoreBosses)
+                    {
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            bool isBossRow = false;
+                            uint EnemyID = 0;
+
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName == "GeneratorRegistParam")
+                                    EnemyID = (uint)cell.Value;
+                            }
+
+                            if (EnemyID > 0)
+                            {
+                                foreach (string entry in BossIDs)
+                                {
+                                    int target_id = int.Parse(entry.Remove(entry.Length - 2, 2));
+                                    string r = EnemyID.ToString();
+                                    r = r.Remove(r.Length - 4, 4);
+                                    int short_row_id = int.Parse(r);
+
+                                    if (short_row_id == target_id)
+                                        isBossRow = true;
+                                }
+                            }
+
+                            if (isBossRow)
+                            {
+                                bossRowIDs.Add(row.ID);
+                            }
+                        }
+                        
+                        bossDict.Add(map_id, bossRowIDs);
+                    }
+                }
+            }
+
+            // Apply changes
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                PARAM param = wrapper.Param;
+                List<PARAM.Row> param_rows = param.Rows;
+
+                if (wrapper.Name.Contains("generatorlocation"))
+                {
+                    string map_id = wrapper.Name.Replace("generatorlocation_", "");
+
+                    if(ignoreNGPlus)
+                    {
+                        foreach (int row_id in ngPlusDict[map_id])
+                        {
+                            param_rows = param_rows.Where(row => row.ID != row_id).ToList();
+                        }
+                    }
+                    if (ignoreKeyCharacters)
+                    {
+                        foreach (int row_id in characterDict[map_id])
+                        {
+                            param_rows = param_rows.Where(row => row.ID != row_id).ToList();
+                        }
+                    }
+                    if (ignoreBosses)
+                    {
+                        foreach (int row_id in bossDict[map_id])
+                        {
+                            param_rows = param_rows.Where(row => row.ID != row_id).ToList();
+                        }
+                    }
+
+                    if (useOrderedPlacement)
+                    {
+                        List<List<float>> positionList = new List<List<float>>();
+
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            var values = new List<float>();
+
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName == "PositionX")
+                                    values.Add((float)cell.Value);
+
+                                if (cell.Def.InternalName == "PositionY")
+                                    values.Add((float)cell.Value);
+
+                                if (cell.Def.InternalName == "PositionZ")
+                                    values.Add((float)cell.Value);
+                            }
+
+                            positionList.Add(values);
+                        }
+
+                        positionList.Shuffle(rand);
+                        int index = 0;
+
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName == "PositionX")
+                                    cell.Value = positionList[index][0];
+
+                                if (cell.Def.InternalName == "PositionY")
+                                    cell.Value = positionList[index][1];
+
+                                if (cell.Def.InternalName == "PositionZ")
+                                    cell.Value = positionList[index][2];
+                            }
+
+                            index = index + 1;
+                        }
+                    }
+                    else
+                    {
+                        RandomizeTriple<float, float, float>(param_rows, "PositionX", "PositionY", "PositionZ");
+                    }
+
+                    RandomizeTriple<float, float, float>(param_rows, "RotationX", "RotationY", "RotationZ");
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - TreasureBoxParam
+        public Regulation Scramble_TreasureBoxParam()
+        {
+            string paramName = "treasureboxparam";
+
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                PARAM param = wrapper.Param;
+                List<PARAM.Row> param_rows = param.Rows;
+
+                if (wrapper.Name.Contains(paramName))
+                {
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        bool isTrapped = true;
+
+                        if (rand.Next(100) < 50)
+                            isTrapped = false;
+
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            if(isTrapped)
+                            {
+                                if (cell.Def.InternalName == "chest_type")
+                                    cell.Value = 1;
+
+                                if (cell.Def.InternalName == "bullet_id_1")
+                                    cell.Value = 200001030;
+
+                                if (cell.Def.InternalName == "bullet_id_2")
+                                    cell.Value = 200001130;
+
+                                if (cell.Def.InternalName == "bullet_id_3")
+                                    cell.Value = 200001330;
+
+                                if (cell.Def.InternalName == "bullet_id_4")
+                                    cell.Value = 200001230;
+                            }
+                            else
+                            {
+                                if (cell.Def.InternalName == "chest_type")
+                                    cell.Value = 0;
+
+                                if (cell.Def.InternalName == "bullet_id_1")
+                                    cell.Value = 0;
+
+                                if (cell.Def.InternalName == "bullet_id_2")
+                                    cell.Value = 0;
+
+                                if (cell.Def.InternalName == "bullet_id_3")
+                                    cell.Value = 0;
+
+                                if (cell.Def.InternalName == "bullet_id_4")
+                                    cell.Value = 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
         #region Util
+
         // Used to get matches rows based on a substring match
         // For example, matches 3160 is a boss, 1316000 is a row that should be matched
         public List<PARAM.Row> GetRowsFromSubMatch(List<PARAM.Row> rows, List<string> list, int targetAdjust, int rowAdjust, string appendString, bool invertMatch = false)

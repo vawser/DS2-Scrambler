@@ -131,3 +131,4 @@
 784001;Cromwell the Pardoner - Dead
 785000;Blue Sentinel Targray
 785001;Blue Sentinel Targray - Dead
+786000;Dyna & Tillo

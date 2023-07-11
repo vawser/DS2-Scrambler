@@ -60,12 +60,19 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tab_Map = new System.Windows.Forms.TabPage();
+            this.groupBox29 = new System.Windows.Forms.GroupBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.c_Scramble_TreasureBoxParam = new System.Windows.Forms.CheckBox();
             this.groupBox28 = new System.Windows.Forms.GroupBox();
             this.c_Generate_LogicComParam = new System.Windows.Forms.CheckBox();
             this.label56 = new System.Windows.Forms.Label();
             this.label55 = new System.Windows.Forms.Label();
             this.c_Scramble_LogicComParam = new System.Windows.Forms.CheckBox();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.c_EnemyPlacement_IgnoreNGPlus = new System.Windows.Forms.CheckBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.c_EnemyPlacement_OrderedPlacement = new System.Windows.Forms.CheckBox();
+            this.label59 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.c_Scramble_EnemyPlacement = new System.Windows.Forms.CheckBox();
             this.c_EnemyPlacement_IgnoreKeyCharacters = new System.Windows.Forms.CheckBox();
@@ -148,6 +155,8 @@
             this.c_Generate_WeaponReinforceParam = new System.Windows.Forms.CheckBox();
             this.label24 = new System.Windows.Forms.Label();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.c_IgnoreRequirements_WeaponParam = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
             this.c_IgnoreFists_WeaponParam = new System.Windows.Forms.CheckBox();
             this.c_Scramble_WeaponParam = new System.Windows.Forms.CheckBox();
@@ -169,6 +178,8 @@
             this.c_Generate_ArmorReinforceParam = new System.Windows.Forms.CheckBox();
             this.label27 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.c_IgnoreRequirements_ArmorParam = new System.Windows.Forms.CheckBox();
             this.c_Scramble_ArmorParam = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.c_Generate_ArmorParam = new System.Windows.Forms.CheckBox();
@@ -187,10 +198,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.b_ToggleOff = new System.Windows.Forms.Button();
             this.b_ToggleRecommended = new System.Windows.Forms.Button();
-            this.label57 = new System.Windows.Forms.Label();
-            this.c_IgnoreRequirements_WeaponParam = new System.Windows.Forms.CheckBox();
-            this.label58 = new System.Windows.Forms.Label();
-            this.c_IgnoreRequirements_ArmorParam = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tag_Treasure.SuspendLayout();
@@ -199,6 +206,7 @@
             this.groupBox10.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tab_Map.SuspendLayout();
+            this.groupBox29.SuspendLayout();
             this.groupBox28.SuspendLayout();
             this.groupBox22.SuspendLayout();
             this.tab_Player.SuspendLayout();
@@ -542,6 +550,7 @@
             // 
             // tab_Map
             // 
+            this.tab_Map.Controls.Add(this.groupBox29);
             this.tab_Map.Controls.Add(this.groupBox28);
             this.tab_Map.Controls.Add(this.groupBox22);
             this.tab_Map.Location = new System.Drawing.Point(4, 24);
@@ -552,13 +561,43 @@
             this.tab_Map.Text = "Map";
             this.tab_Map.UseVisualStyleBackColor = true;
             // 
+            // groupBox29
+            // 
+            this.groupBox29.Controls.Add(this.label61);
+            this.groupBox29.Controls.Add(this.c_Scramble_TreasureBoxParam);
+            this.groupBox29.Location = new System.Drawing.Point(6, 162);
+            this.groupBox29.Name = "groupBox29";
+            this.groupBox29.Size = new System.Drawing.Size(808, 54);
+            this.groupBox29.TabIndex = 19;
+            this.groupBox29.TabStop = false;
+            this.groupBox29.Text = "TreasureBoxParam";
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(180, 22);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(330, 15);
+            this.label61.TabIndex = 14;
+            this.label61.Text = "Scramble which chests are trapped, and the trap within them.";
+            // 
+            // c_Scramble_TreasureBoxParam
+            // 
+            this.c_Scramble_TreasureBoxParam.AutoSize = true;
+            this.c_Scramble_TreasureBoxParam.Location = new System.Drawing.Point(6, 21);
+            this.c_Scramble_TreasureBoxParam.Name = "c_Scramble_TreasureBoxParam";
+            this.c_Scramble_TreasureBoxParam.Size = new System.Drawing.Size(158, 19);
+            this.c_Scramble_TreasureBoxParam.TabIndex = 13;
+            this.c_Scramble_TreasureBoxParam.Text = "Scramble Trapped Chests";
+            this.c_Scramble_TreasureBoxParam.UseVisualStyleBackColor = true;
+            // 
             // groupBox28
             // 
             this.groupBox28.Controls.Add(this.c_Generate_LogicComParam);
             this.groupBox28.Controls.Add(this.label56);
             this.groupBox28.Controls.Add(this.label55);
             this.groupBox28.Controls.Add(this.c_Scramble_LogicComParam);
-            this.groupBox28.Location = new System.Drawing.Point(6, 117);
+            this.groupBox28.Location = new System.Drawing.Point(6, 222);
             this.groupBox28.Name = "groupBox28";
             this.groupBox28.Size = new System.Drawing.Size(808, 81);
             this.groupBox28.TabIndex = 18;
@@ -578,7 +617,7 @@
             // label56
             // 
             this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(150, 47);
+            this.label56.Location = new System.Drawing.Point(180, 47);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(429, 15);
             this.label56.TabIndex = 16;
@@ -588,7 +627,7 @@
             // label55
             // 
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(150, 22);
+            this.label55.Location = new System.Drawing.Point(180, 22);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(298, 15);
             this.label55.TabIndex = 14;
@@ -606,6 +645,10 @@
             // 
             // groupBox22
             // 
+            this.groupBox22.Controls.Add(this.c_EnemyPlacement_IgnoreNGPlus);
+            this.groupBox22.Controls.Add(this.label60);
+            this.groupBox22.Controls.Add(this.c_EnemyPlacement_OrderedPlacement);
+            this.groupBox22.Controls.Add(this.label59);
             this.groupBox22.Controls.Add(this.label44);
             this.groupBox22.Controls.Add(this.c_Scramble_EnemyPlacement);
             this.groupBox22.Controls.Add(this.c_EnemyPlacement_IgnoreKeyCharacters);
@@ -614,34 +657,73 @@
             this.groupBox22.Controls.Add(this.label43);
             this.groupBox22.Location = new System.Drawing.Point(6, 6);
             this.groupBox22.Name = "groupBox22";
-            this.groupBox22.Size = new System.Drawing.Size(808, 105);
+            this.groupBox22.Size = new System.Drawing.Size(808, 150);
             this.groupBox22.TabIndex = 17;
             this.groupBox22.TabStop = false;
-            this.groupBox22.Text = "Enemy Placement";
+            this.groupBox22.Text = "GeneratorLocation";
+            // 
+            // c_EnemyPlacement_IgnoreNGPlus
+            // 
+            this.c_EnemyPlacement_IgnoreNGPlus.AutoSize = true;
+            this.c_EnemyPlacement_IgnoreNGPlus.Location = new System.Drawing.Point(6, 121);
+            this.c_EnemyPlacement_IgnoreNGPlus.Name = "c_EnemyPlacement_IgnoreNGPlus";
+            this.c_EnemyPlacement_IgnoreNGPlus.Size = new System.Drawing.Size(129, 19);
+            this.c_EnemyPlacement_IgnoreNGPlus.TabIndex = 17;
+            this.c_EnemyPlacement_IgnoreNGPlus.Text = "Ignore New Game+";
+            this.c_EnemyPlacement_IgnoreNGPlus.UseVisualStyleBackColor = true;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(180, 122);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(367, 15);
+            this.label60.TabIndex = 18;
+            this.label60.Text = "Stops the scrambler from using and changing New Game+ enemies.";
+            // 
+            // c_EnemyPlacement_OrderedPlacement
+            // 
+            this.c_EnemyPlacement_OrderedPlacement.AutoSize = true;
+            this.c_EnemyPlacement_OrderedPlacement.Location = new System.Drawing.Point(6, 46);
+            this.c_EnemyPlacement_OrderedPlacement.Name = "c_EnemyPlacement_OrderedPlacement";
+            this.c_EnemyPlacement_OrderedPlacement.Size = new System.Drawing.Size(150, 19);
+            this.c_EnemyPlacement_OrderedPlacement.TabIndex = 15;
+            this.c_EnemyPlacement_OrderedPlacement.Text = "Use Ordered Placement";
+            this.c_EnemyPlacement_OrderedPlacement.UseVisualStyleBackColor = true;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(180, 47);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(596, 15);
+            this.label59.TabIndex = 16;
+            this.label59.Text = "The scrambler will retain an enemy in all positions, and prevent multiple enemies" +
+    " being placed in the same spot.";
             // 
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(150, 22);
+            this.label44.Location = new System.Drawing.Point(180, 22);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(248, 15);
+            this.label44.Size = new System.Drawing.Size(260, 15);
             this.label44.TabIndex = 14;
-            this.label44.Text = "Scramble the enemies throughout every map.";
+            this.label44.Text = "Scramble the enemy positions within each map.";
             // 
             // c_Scramble_EnemyPlacement
             // 
             this.c_Scramble_EnemyPlacement.AutoSize = true;
             this.c_Scramble_EnemyPlacement.Location = new System.Drawing.Point(6, 21);
             this.c_Scramble_EnemyPlacement.Name = "c_Scramble_EnemyPlacement";
-            this.c_Scramble_EnemyPlacement.Size = new System.Drawing.Size(122, 19);
+            this.c_Scramble_EnemyPlacement.Size = new System.Drawing.Size(165, 19);
             this.c_Scramble_EnemyPlacement.TabIndex = 13;
-            this.c_Scramble_EnemyPlacement.Text = "Scramble Enemies";
+            this.c_Scramble_EnemyPlacement.Text = "Scramble Enemy Positions";
             this.c_Scramble_EnemyPlacement.UseVisualStyleBackColor = true;
             // 
             // c_EnemyPlacement_IgnoreKeyCharacters
             // 
             this.c_EnemyPlacement_IgnoreKeyCharacters.AutoSize = true;
-            this.c_EnemyPlacement_IgnoreKeyCharacters.Location = new System.Drawing.Point(6, 46);
+            this.c_EnemyPlacement_IgnoreKeyCharacters.Location = new System.Drawing.Point(6, 71);
             this.c_EnemyPlacement_IgnoreKeyCharacters.Name = "c_EnemyPlacement_IgnoreKeyCharacters";
             this.c_EnemyPlacement_IgnoreKeyCharacters.Size = new System.Drawing.Size(141, 19);
             this.c_EnemyPlacement_IgnoreKeyCharacters.TabIndex = 9;
@@ -651,17 +733,20 @@
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(150, 47);
+            this.label42.Location = new System.Drawing.Point(180, 72);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(500, 15);
+            this.label42.Size = new System.Drawing.Size(475, 15);
             this.label42.TabIndex = 10;
-            this.label42.Text = "Stops the scrambler from changing the location of key characters such as the Emer" +
-    "ald Herald.";
+            this.label42.Text = "Stops the scrambler from using and changing key characters such as the Emerald He" +
+    "rald.";
             // 
             // c_EnemyPlacement_IgnoreBosses
             // 
             this.c_EnemyPlacement_IgnoreBosses.AutoSize = true;
-            this.c_EnemyPlacement_IgnoreBosses.Location = new System.Drawing.Point(6, 71);
+            this.c_EnemyPlacement_IgnoreBosses.Checked = true;
+            this.c_EnemyPlacement_IgnoreBosses.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.c_EnemyPlacement_IgnoreBosses.Enabled = false;
+            this.c_EnemyPlacement_IgnoreBosses.Location = new System.Drawing.Point(6, 96);
             this.c_EnemyPlacement_IgnoreBosses.Name = "c_EnemyPlacement_IgnoreBosses";
             this.c_EnemyPlacement_IgnoreBosses.Size = new System.Drawing.Size(98, 19);
             this.c_EnemyPlacement_IgnoreBosses.TabIndex = 11;
@@ -671,11 +756,11 @@
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(150, 72);
+            this.label43.Location = new System.Drawing.Point(180, 97);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(290, 15);
+            this.label43.Size = new System.Drawing.Size(345, 15);
             this.label43.TabIndex = 12;
-            this.label43.Text = "Stops the scrambler from changing the boss enemies.";
+            this.label43.Text = "Stops the scrambler from using and changing the boss enemies.";
             // 
             // tab_Player
             // 
@@ -1490,6 +1575,25 @@
             this.groupBox14.Text = "WeaponParam";
             this.groupBox14.Enter += new System.EventHandler(this.groupBox14_Enter);
             // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(199, 97);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(257, 15);
+            this.label57.TabIndex = 12;
+            this.label57.Text = "Removes all weapon requirements for wielding.";
+            // 
+            // c_IgnoreRequirements_WeaponParam
+            // 
+            this.c_IgnoreRequirements_WeaponParam.AutoSize = true;
+            this.c_IgnoreRequirements_WeaponParam.Location = new System.Drawing.Point(6, 97);
+            this.c_IgnoreRequirements_WeaponParam.Name = "c_IgnoreRequirements_WeaponParam";
+            this.c_IgnoreRequirements_WeaponParam.Size = new System.Drawing.Size(145, 19);
+            this.c_IgnoreRequirements_WeaponParam.TabIndex = 11;
+            this.c_IgnoreRequirements_WeaponParam.Text = "Remove Requirements";
+            this.c_IgnoreRequirements_WeaponParam.UseVisualStyleBackColor = true;
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -1709,6 +1813,25 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "ArmorParam";
             // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(205, 72);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(244, 15);
+            this.label58.TabIndex = 14;
+            this.label58.Text = "Removes all armor requirements for wearing.";
+            // 
+            // c_IgnoreRequirements_ArmorParam
+            // 
+            this.c_IgnoreRequirements_ArmorParam.AutoSize = true;
+            this.c_IgnoreRequirements_ArmorParam.Location = new System.Drawing.Point(6, 72);
+            this.c_IgnoreRequirements_ArmorParam.Name = "c_IgnoreRequirements_ArmorParam";
+            this.c_IgnoreRequirements_ArmorParam.Size = new System.Drawing.Size(145, 19);
+            this.c_IgnoreRequirements_ArmorParam.TabIndex = 13;
+            this.c_IgnoreRequirements_ArmorParam.Text = "Remove Requirements";
+            this.c_IgnoreRequirements_ArmorParam.UseVisualStyleBackColor = true;
+            // 
             // c_Scramble_ArmorParam
             // 
             this.c_Scramble_ArmorParam.AutoSize = true;
@@ -1890,44 +2013,6 @@
             this.b_ToggleRecommended.UseVisualStyleBackColor = true;
             this.b_ToggleRecommended.Click += new System.EventHandler(this.b_ToggleRecommended_Click);
             // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(199, 97);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(257, 15);
-            this.label57.TabIndex = 12;
-            this.label57.Text = "Removes all weapon requirements for wielding.";
-            // 
-            // c_IgnoreRequirements_WeaponParam
-            // 
-            this.c_IgnoreRequirements_WeaponParam.AutoSize = true;
-            this.c_IgnoreRequirements_WeaponParam.Location = new System.Drawing.Point(6, 97);
-            this.c_IgnoreRequirements_WeaponParam.Name = "c_IgnoreRequirements_WeaponParam";
-            this.c_IgnoreRequirements_WeaponParam.Size = new System.Drawing.Size(145, 19);
-            this.c_IgnoreRequirements_WeaponParam.TabIndex = 11;
-            this.c_IgnoreRequirements_WeaponParam.Text = "Remove Requirements";
-            this.c_IgnoreRequirements_WeaponParam.UseVisualStyleBackColor = true;
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(205, 72);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(244, 15);
-            this.label58.TabIndex = 14;
-            this.label58.Text = "Removes all armor requirements for wearing.";
-            // 
-            // c_IgnoreRequirements_ArmorParam
-            // 
-            this.c_IgnoreRequirements_ArmorParam.AutoSize = true;
-            this.c_IgnoreRequirements_ArmorParam.Location = new System.Drawing.Point(6, 72);
-            this.c_IgnoreRequirements_ArmorParam.Name = "c_IgnoreRequirements_ArmorParam";
-            this.c_IgnoreRequirements_ArmorParam.Size = new System.Drawing.Size(145, 19);
-            this.c_IgnoreRequirements_ArmorParam.TabIndex = 13;
-            this.c_IgnoreRequirements_ArmorParam.Text = "Remove Requirements";
-            this.c_IgnoreRequirements_ArmorParam.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1960,6 +2045,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tab_Map.ResumeLayout(false);
+            this.groupBox29.ResumeLayout(false);
+            this.groupBox29.PerformLayout();
             this.groupBox28.ResumeLayout(false);
             this.groupBox28.PerformLayout();
             this.groupBox22.ResumeLayout(false);
@@ -2180,5 +2267,12 @@
         private CheckBox c_IgnoreRequirements_WeaponParam;
         private Label label58;
         private CheckBox c_IgnoreRequirements_ArmorParam;
+        private CheckBox c_EnemyPlacement_OrderedPlacement;
+        private Label label59;
+        private GroupBox groupBox29;
+        private Label label61;
+        private CheckBox c_Scramble_TreasureBoxParam;
+        private CheckBox c_EnemyPlacement_IgnoreNGPlus;
+        private Label label60;
     }
 }

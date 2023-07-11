@@ -242,8 +242,18 @@ namespace DS2_Scrambler
                 // Map
                 if (c_Scramble_EnemyPlacement.Checked)
                 {
-                    progress.Report("Scramble: Enemy Placement");
-                    reg = scrambler.Scramble_EnemyPlacement(c_EnemyPlacement_IgnoreKeyCharacters.Checked, c_EnemyPlacement_IgnoreBosses.Checked);
+                    // This method is decent, but variety is limited and bosses aren't handled well.
+                    progress.Report("Scramble: Enemy Locations");
+                    reg = scrambler.Scramble_EnemyGeneratorLocation(c_EnemyPlacement_OrderedPlacement.Checked, c_EnemyPlacement_IgnoreKeyCharacters.Checked, c_EnemyPlacement_IgnoreBosses.Checked, c_EnemyPlacement_IgnoreNGPlus.Checked);
+
+                    // This method doesn't seem to work well in-game, causes enemies to lose AI and crash occured.
+                    //progress.Report("Scramble: Enemy Generator Regist");
+                    //reg = scrambler.Scramble_EnemyGeneratorRegist(c_AnyEnemy_EnemyPlacement.Checked, c_EnemyPlacement_IgnoreKeyCharacters.Checked, c_EnemyPlacement_IgnoreBosses.Checked);
+                }
+                if (c_Scramble_TreasureBoxParam.Checked)
+                {
+                    progress.Report("Scramble: Chest Traps");
+                    reg = scrambler.Scramble_TreasureBoxParam();
                 }
                 if (c_Scramble_LogicComParam.Checked)
                 {
