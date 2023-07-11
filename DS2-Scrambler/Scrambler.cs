@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using static SoulsFormats.PARAM;
 using System.Windows.Shapes;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace DS2_Scrambler
 {
@@ -45,6 +46,8 @@ namespace DS2_Scrambler
         List<string> KeyItems = new List<string>();
         List<string> ToolItems = new List<string>();
         List<string> GestureItems = new List<string>();
+        List<string> BossIDs = new List<string>();
+        List<string> CharacterIDs = new List<string>();
 
         Dictionary<string, List<string>> ShuffleParamFields = new Dictionary<string, List<string>>();
 
@@ -97,7 +100,7 @@ namespace DS2_Scrambler
             foreach (string line in File.ReadLines(configPath + "Key-Items.txt", Encoding.UTF8))
             {
                 var list = line.Split(";");
-                Console.WriteLine(list[0]);
+               // Console.WriteLine(list[0]);
                 KeyItems.Add(list[0]);
             }
 
@@ -105,7 +108,7 @@ namespace DS2_Scrambler
             foreach (string line in File.ReadLines(configPath + "Tool-Items.txt", Encoding.UTF8))
             {
                 var list = line.Split(";");
-                Console.WriteLine(list[0]);
+                //Console.WriteLine(list[0]);
                 ToolItems.Add(list[0]);
             }
 
@@ -113,8 +116,24 @@ namespace DS2_Scrambler
             foreach (string line in File.ReadLines(configPath + "Gesture-Items.txt", Encoding.UTF8))
             {
                 var list = line.Split(";");
-                Console.WriteLine(list[0]);
+                //Console.WriteLine(list[0]);
                 GestureItems.Add(list[0]);
+            }
+
+            // Build Boss ID list
+            foreach (string line in File.ReadLines(configPath + "Boss-IDs.txt", Encoding.UTF8))
+            {
+                var list = line.Split(";");
+                //Console.WriteLine(list[0]);
+                BossIDs.Add(list[0]);
+            }
+
+            // Build Character ID list
+            foreach (string line in File.ReadLines(configPath + "Character-IDs.txt", Encoding.UTF8))
+            {
+                var list = line.Split(";");
+                //Console.WriteLine(list[0]);
+                CharacterIDs.Add(list[0]);
             }
 
             // Build ShuffleParamFields dictionary
@@ -141,7 +160,7 @@ namespace DS2_Scrambler
                 foreach (string line in File.ReadLines(filepath, Encoding.UTF8))
                 {
                     list.Add(line);
-                    Console.WriteLine(line);
+                    //Console.WriteLine(line);
                 }
 
                 GenerateParamFields.Add(name, list);
@@ -398,7 +417,7 @@ namespace DS2_Scrambler
         #endregion
 
         #region Scramble - ArmorParam
-        public Regulation Scramble_ArmorParam(string paramName, bool useGenerateType)
+        public Regulation Scramble_ArmorParam(string paramName, bool useGenerateType, bool ignoreRequirements)
         {
             foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
             {
@@ -417,6 +436,18 @@ namespace DS2_Scrambler
                     {
                         ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
                         GenerateValuesForParam(wrapper, param_rows);
+                    }
+
+                    if (ignoreRequirements)
+                    {
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName.Contains("requirement"))
+                                    cell.Value = 0;
+                            }
+                        }
                     }
                 }
             }
@@ -566,7 +597,7 @@ namespace DS2_Scrambler
         #endregion
 
         #region Scramble - WeaponParam
-        public Regulation Scramble_WeaponParam(string paramName, bool useGenerateType, bool ignoreFists)
+        public Regulation Scramble_WeaponParam(string paramName, bool useGenerateType, bool ignoreFists, bool ignoreRequirements)
         {
             foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
             {
@@ -602,6 +633,18 @@ namespace DS2_Scrambler
                     {
                         ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
                         GenerateValuesForParam(wrapper, param_rows);
+                    }
+
+                    if (ignoreRequirements)
+                    {
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName.Contains("requirement"))
+                                    cell.Value = 0;
+                            }
+                        }
                     }
                 }
             }
@@ -854,33 +897,481 @@ namespace DS2_Scrambler
         }
         #endregion
 
+        #region Scramble - EnemyParam
+        public Regulation Scramble_EnemyParam(string paramName, bool useGenerateType, bool isBossOnly = false)
+        {
+            string fieldAppend = "";
+            if (isBossOnly)
+                fieldAppend = "_Boss";
+
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    if (isBossOnly)
+                    {
+                        param_rows = param_rows.Where(row => BossIDs.Contains(row.ID.ToString())).ToList();
+                    }
+                    else
+                    {
+                        param_rows = param_rows.Where(row => !BossIDs.Contains(row.ID.ToString())).ToList();
+                    }
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields, fieldAppend);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields, fieldAppend);
+                        GenerateValuesForParam(wrapper, param_rows, fieldAppend);
+                    }
+
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        var baseHP = 100;
+
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            if (cell.Def.InternalName == "stat_hp")
+                            {
+                                baseHP = (int)cell.Value;
+                            }
+
+                            // Add NG+ HP based on base HP value
+                            if (cell.Def.InternalName == "stat_hp_ng1")
+                            {
+                                cell.Value = (int)(baseHP * 1.3);
+                            }
+                            if (cell.Def.InternalName == "stat_hp_ng2")
+                            {
+                                cell.Value = (int)(baseHP * 1.55);
+                            }
+                            if (cell.Def.InternalName == "stat_hp_ng3")
+                            {
+                                cell.Value = (int)(baseHP * 1.8);
+                            }
+                            if (cell.Def.InternalName == "stat_hp_ng4")
+                            {
+                                cell.Value = (int)(baseHP * 1.95);
+                            }
+                            if (cell.Def.InternalName == "stat_hp_ng5")
+                            {
+                                cell.Value = (int)(baseHP * 2.05);
+                            }
+                            if (cell.Def.InternalName == "stat_hp_ng6")
+                            {
+                                cell.Value = (int)(baseHP * 2.2);
+                            }
+                            if (cell.Def.InternalName == "stat_hp_ng7")
+                            {
+                                cell.Value = (int)(baseHP * 2.45);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - EnemyMoveParam
+        public Regulation Scramble_EnemyMoveParam(string paramName, bool useGenerateType, bool isBossOnly = false)
+        {
+            string fieldAppend = "";
+            if (isBossOnly)
+                fieldAppend = "_Boss";
+
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    if (isBossOnly)
+                    {
+                        param_rows = param_rows.Where(row => BossIDs.Contains(row.ID.ToString())).ToList();
+                    }
+                    else
+                    {
+                        param_rows = param_rows.Where(row => !BossIDs.Contains(row.ID.ToString())).ToList();
+                    }
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields, fieldAppend);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields, fieldAppend);
+                        GenerateValuesForParam(wrapper, param_rows, fieldAppend);
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - EnemyDamageParam
+        public Regulation Scramble_EnemyDamageParam(string paramName, bool useGenerateType, bool isBossOnly = false)
+        {
+            string fieldAppend = "";
+            if (isBossOnly)
+                fieldAppend = "_Boss";
+
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows.Where(row => row.ID >= 100000000).ToList();
+
+                    if (isBossOnly)
+                    {
+                        param_rows = GetRowsFromSubMatch(param_rows, BossIDs, 2, 4, "1");
+                    }
+                    else
+                    {
+                        param_rows = GetRowsFromSubMatch(param_rows, BossIDs, 2, 4, "1", true);
+                    }
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields, fieldAppend);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields, fieldAppend);
+                        GenerateValuesForParam(wrapper, param_rows, fieldAppend);
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - EnemyBulletParam
+        public Regulation Scramble_EnemyBulletParam(string paramName, bool useGenerateType, bool isBossOnly = false)
+        {
+            string fieldAppend = "";
+            if (isBossOnly)
+                fieldAppend = "_Boss";
+
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    if (isBossOnly)
+                    {
+                        param_rows = GetRowsFromSubMatch(param.Rows, BossIDs, 2, 4, "1");
+                    }
+                    else
+                    {
+                        param_rows = GetRowsFromSubMatch(param.Rows, BossIDs, 2, 4, "1", true);
+                    }
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields, fieldAppend);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields, fieldAppend);
+                        GenerateValuesForParam(wrapper, param_rows, fieldAppend);
+                    }
+
+                    // Adjustments
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        bool hasChildBulletID_1 = false;
+                        bool hasChildBulletID_2 = false;
+                        bool hasChildBulletID_3 = false;
+
+                        int childBulletID_1 = -1;
+                        int childBulletID_2 = -1;
+                        int childBulletID_3 = -1;
+
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            if(cell.Def.InternalName == "child_bullet_1_bullet_id")
+                            {
+                                hasChildBulletID_1 = true;
+                                childBulletID_1 = (int)cell.Value;
+                            }
+                            if (cell.Def.InternalName == "child_bullet_1_damage_id" && hasChildBulletID_1)
+                            {
+                                cell.Value = childBulletID_1;
+                            }
+
+                            if (cell.Def.InternalName == "child_bullet_2_bullet_id")
+                            {
+                                hasChildBulletID_2 = true;
+                                childBulletID_2 = (int)cell.Value;
+                            }
+                            if (cell.Def.InternalName == "child_bullet_2_damage_id" && hasChildBulletID_2)
+                            {
+                                cell.Value = childBulletID_2;
+                            }
+
+                            if (cell.Def.InternalName == "child_bullet_3_bullet_id")
+                            {
+                                hasChildBulletID_3 = true;
+                                childBulletID_3 = (int)cell.Value;
+                            }
+                            if (cell.Def.InternalName == "child_bullet_3_damage_id" && hasChildBulletID_3)
+                            {
+                                cell.Value = childBulletID_3;
+                            }
+
+                            if(hasChildBulletID_1 || hasChildBulletID_2 || hasChildBulletID_3)
+                            {
+                                if (cell.Def.InternalName == "spawn_child_bullet_on_hit")
+                                {
+                                    cell.Value = 1;
+                                }
+                                if (cell.Def.InternalName == "spawn_child_bullet_on_expire")
+                                {
+                                    cell.Value = 1;
+                                }
+                                if (cell.Def.InternalName == "child_bullet_spawn_delay")
+                                {
+                                    if(rand.Next(100) < 25)
+                                        cell.Value = rand.NextDouble();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - EnemyBehaviorParam
+        public Regulation Scramble_EnemyBehaviorParam(string paramName, bool useGenerateType, bool isBossOnly = false)
+        {
+            string fieldAppend = "";
+            if (isBossOnly)
+                fieldAppend = "_Boss";
+
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows.Where(row => row.ID >= 100000).ToList();
+
+                    if (isBossOnly)
+                    {
+                        param_rows = GetRowsFromSubMatch(param_rows, BossIDs, 2, 2, "");
+                    }
+                    else
+                    {
+                        param_rows = GetRowsFromSubMatch(param_rows, BossIDs, 2, 2, "", true);
+                    }
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields, fieldAppend);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields, fieldAppend);
+                        GenerateValuesForParam(wrapper, param_rows, fieldAppend);
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - Enemy Placement
+        public Regulation Scramble_EnemyPlacement(bool ignoreKeyCharacters, bool ignoreBosses)
+        {
+            string paramName = "generatoregistparam";
+            List<List<int>> valueList = new List<List<int>>();
+
+            // Build list of values
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name.Contains(paramName))
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        int EnemyParamID = 0;
+                        int LogicParamID = 0;
+                        int DefaultLogicParamID = 0;
+
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            if (cell.Def.InternalName == "EnemyParamID")
+                                EnemyParamID = (int)cell.Value;
+
+                            if (cell.Def.InternalName == "LogicParamID")
+                                EnemyParamID = (int)cell.Value;
+
+                            if (cell.Def.InternalName == "DefaultLogicParamID")
+                                EnemyParamID = (int)cell.Value;
+                        }
+
+                        List<int> value_list = new List<int>() { EnemyParamID, LogicParamID, DefaultLogicParamID };
+
+                        valueList.Add(value_list);
+                    }
+                }
+            }
+
+            // Re-assign values
+            // Build list of values
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name.Contains(paramName))
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        List<int> chosenValues = valueList[rand.Next(valueList.Count)];
+
+                        int EnemyParamID = 0;
+                        int LogicParamID = 0;
+                        int DefaultLogicParamID = 0;
+
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            if (cell.Def.InternalName == "EnemyParamID")
+                                EnemyParamID = (int)cell.Value;
+
+                            if (cell.Def.InternalName == "LogicParamID")
+                                EnemyParamID = (int)cell.Value;
+
+                            if (cell.Def.InternalName == "DefaultLogicParamID")
+                                EnemyParamID = (int)cell.Value;
+                        }
+
+                        List<int> value_list = new List<int>() { EnemyParamID, LogicParamID, DefaultLogicParamID };
+
+                        list.Add(value_list);
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - LogicComParam
+        public Regulation Scramble_LogicComParam(string paramName, bool useGenerateType)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        GenerateValuesForParam(wrapper, param_rows);
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
         #region Util
+        // Used to get matches rows based on a substring match
+        // For example, matches 3160 is a boss, 1316000 is a row that should be matched
+        public List<PARAM.Row> GetRowsFromSubMatch(List<PARAM.Row> rows, List<string> list, int targetAdjust, int rowAdjust, string appendString, bool invertMatch = false)
+        {
+            var new_rows = new List<PARAM.Row>();
+
+            foreach (PARAM.Row row in rows)
+            {
+                bool addRow = false;
+
+                foreach (string entry in list)
+                {
+                    int target_id = int.Parse(appendString + entry.Remove(entry.Length - targetAdjust, targetAdjust));
+                    string r = row.ID.ToString();
+                    r = r.Remove(r.Length - rowAdjust, rowAdjust);
+                    int short_row_id = int.Parse(r);
+
+                    if (invertMatch)
+                    {
+                        if (short_row_id != target_id)
+                        {
+                            addRow = true;
+                        }
+                        else
+                        {
+                            addRow = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (short_row_id == target_id)
+                            addRow = true;
+                    }
+                }
+
+                if(addRow)
+                    new_rows.Add(row);
+            }
+
+            return new_rows;
+        }
+
         public int GetRandomRowID(List<PARAM.Row> list)
         {
             return list[rand.Next(list.Count)].ID;
         }
 
-        public void ShuffleValuesForParam(ParamWrapper wrapper, List<PARAM.Row> param_rows, Dictionary<string, List<string>> dict)
+        public void ShuffleValuesForParam(ParamWrapper wrapper, List<PARAM.Row> param_rows, Dictionary<string, List<string>> dict, string wrapperAppend = "")
         {
             try
             {
-                var fields = dict[wrapper.Name];
+                var fields = dict[wrapper.Name + wrapperAppend];
 
                 RandomizeFromList(param_rows, fields);
             }
             catch (Exception ex)
             {
-                Util.ShowError($"{ex}\n\nFailed to find fields for {wrapper.Name}.");
+                Util.ShowError($"{ex}\n\nFailed to find fields for {wrapper.Name + wrapperAppend}.");
             }
         }
 
-        public void GenerateValuesForParam(ParamWrapper wrapper, List<PARAM.Row> param_rows)
+        public void GenerateValuesForParam(ParamWrapper wrapper, List<PARAM.Row> param_rows, string wrapperAppend = "")
         {
             var cellType = "";
 
             try
             {
-                var dict = GenerateParamValues[wrapper.Name];
+                var dict = GenerateParamValues[wrapper.Name + wrapperAppend];
 
                 foreach (PARAM.Row row in param_rows)
                 {
@@ -957,14 +1448,15 @@ namespace DS2_Scrambler
             }
             catch (OverflowException ex)
             {
-                Util.ShowError($"{ex}\n\nAttempted to assign use GenerateType value that exceeds {cellType} capacity - {wrapper.Name}.");
+                Util.ShowError($"{ex}\n\nAttempted to assign use GenerateType value that exceeds {cellType} capacity - {wrapper.Name + wrapperAppend}.");
             }
             catch (Exception ex)
             {
-                Util.ShowError($"{ex}\n\nFailed to find values for {wrapper.Name}.");
+                Util.ShowError($"{ex}\n\nFailed to find values for {wrapper.Name + wrapperAppend}.");
             }
         }
 
+        // Credit to TKGP for these functions
         private void RandomizeOne<T>(IEnumerable<PARAM.Row> rows, string param, bool plusMode = false)
         {
             if (plusMode)

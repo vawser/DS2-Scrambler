@@ -1,0 +1,8 @@
+damage_0;10;1000;RANDOM
+damage_1;0;250;WEIGHTED
+damage_2;0;250;WEIGHTED
+damage_mult;1.0;1.5;RANDOM
+counter_damage_mult;1.0;2.0;RANDOM
+stamina_damage_mult;100;2000;RANDOM
+knockback_amount;1;10;RANDOM
+knockback_speed;0.5;5;RANDOM

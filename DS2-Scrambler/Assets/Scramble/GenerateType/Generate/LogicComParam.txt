@@ -1,0 +1,4 @@
+sight_distance;1.0;100;RANDOM
+detect_distance;1.0;100;RANDOM
+vision_cone_horizontal_angle;0.1;3.142;RANDOM
+vision_cone_vertical_angle;0.1;3.142;RANDOM

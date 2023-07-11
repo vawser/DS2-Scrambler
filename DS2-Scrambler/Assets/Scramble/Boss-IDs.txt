@@ -1,0 +1,61 @@
+137021;Prowling Magus
+154000;Skeleton Lord
+154001;Skeleton Lord
+154010;Skeleton Lord
+154011;Skeleton Lord
+154020;Skeleton Lord
+154021;Skeleton Lord
+212000;Guardian Dragon
+303300;Flexile Sentry
+305000;Smelter Demon
+305200;Blue Smelter Demon
+309600;Last Giant
+309700;Giant Lord
+318000;The Pursuer - Drangleic Castle
+318010;The Pursuer - Forest of Fallen Giants
+318011;The Pursuer - Forest of Fallen Giants - Encounter
+318020;The Pursuer - Iron Keep
+318030;The Pursuer - Lost Bastille
+318040;The Pursuer - Things Betwixt
+324000;Belfry Gargoyle
+325000;Ruin Sentinel
+326000;The Rotten
+332000;Throne Defender
+333000;Velstadt
+334000;Throne Watcher
+500000;Covetous Demon
+501000;Mytha- the Baneful Queen
+503000;Scorpioness Najka
+504000;Looking Glass Knight
+506100;Darklurker
+506101;Darklurker (Clone)
+514600;Vendrick (hollow)
+600000;Ancient Dragon
+602000;Demon of Song
+603000;The Duke's Dear Freja
+607000;Old Iron King
+611010;Dragonrider - Heide's Tower of Flame
+611500;Dragonrider - Drangleic Castle
+611510;Dragonrider - Drangleic Castle
+619110;Executioner's Chariot
+625000;Old Dragonslayer
+626000;The Lost Sinner
+627000;Nashandra
+628000;Royal Rat Authority
+684000;Vendrick
+685000;Skeleton (Elana)
+686000;Small Undead Boar (Elana)
+687000;Velstadt (Elana)
+675000;Fume Knight
+679000;Aava- the King's Pet
+679001;Aava- the King's Pet
+679002;Aava- the King's Pet
+679100;Lud- the King's Pet
+679101;Zallen- the King's Pet
+680000;Sir Alonne
+681000;Sinh- the Slumbering Dragon
+682000;Elana- Squalid Queen
+690000;Burnt Ivory King
+692000;Aldia- Scholar of the First Sin
+730000;Looking Glass Phantom (Faraam)
+731010;Looking Glass Phantom (Knight)
