@@ -242,7 +242,7 @@ namespace DS2_Scrambler
                 // Map
                 if (c_Scramble_EnemyPlacement.Checked)
                 {
-                    // This method is decent, but variety is limited and bosses aren't handled well.
+                    // This method is decent, but variety is limited and bosses don't mesh with position changes.
                     progress.Report("Scramble: Enemy Locations");
                     reg = scrambler.Scramble_EnemyGeneratorLocation(c_EnemyPlacement_OrderedPlacement.Checked, c_EnemyPlacement_IgnoreKeyCharacters.Checked, c_EnemyPlacement_IgnoreBosses.Checked, c_EnemyPlacement_IgnoreNGPlus.Checked);
 
