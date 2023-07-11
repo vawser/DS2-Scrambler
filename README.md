@@ -2,12 +2,9 @@
 
 Randomizes game params in Dark Souls II: Scholar of the First Sin.
 
-Inspired by TKGP's [Irregulator](https://github.com/JKAnderson/Irregulator) for DS3 and Mechapope's [Paramdomizer](https://github.com/Mechapope/Paramdomizer) for DS1.
+Supports randomisation of item loot, enemy location, enemy attributes and equipment, boss attributes and player attributes and equipment.
 
-Supports:
-* Treasure randomisation
-* Weapon randomisation
-* Armor randomisation
+![scrambler](https://github.com/vawser/DS2-Scrambler/assets/4229194/86c54591-c891-4fed-8a85-5c8c6b8944ba)
 
 # Usage
 1. Run the application.
@@ -21,3 +18,4 @@ To run the mod, I recommend you use ModEngine.
 * [SoulsFormats](https://github.com/JKAnderson/SoulsFormats) by TKGP.
 * [Irregulator](https://github.com/JKAnderson/Irregulator) by TKGP.
 * [DSMS](https://github.com/soulsmods/DSMapStudio) by the DSMS Team.
+
