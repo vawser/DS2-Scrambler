@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using SoulsFormats;
 using System.Text.RegularExpressions;
 using static SoulsFormats.PARAM;
+using System.Windows.Shapes;
+using System.Windows;
 
 namespace DS2_Scrambler
 {
@@ -50,6 +52,10 @@ namespace DS2_Scrambler
         Dictionary<string, Dictionary<string, List<string>>> GenerateParamValues = new Dictionary<string, Dictionary<string, List<string>>>();
 
         public ParamWrapper ItemParam;
+        public ParamWrapper SpellParam;
+        public ParamWrapper RingParam;
+        public ParamWrapper WeaponParam;
+        public ParamWrapper ArmorParam;
 
         #region Scramble - Core
         public Scrambler(string seed, Regulation reg)
@@ -68,6 +74,22 @@ namespace DS2_Scrambler
                 if (wrapper.Name == "ItemParam")
                 {
                     ItemParam = wrapper;
+                }
+                if (wrapper.Name == "SpellParam")
+                {
+                    SpellParam = wrapper;
+                }
+                if (wrapper.Name == "RingParam")
+                {
+                    RingParam = wrapper;
+                }
+                if (wrapper.Name == "WeaponParam")
+                {
+                    WeaponParam = wrapper;
+                }
+                if (wrapper.Name == "ArmorParam")
+                {
+                    ArmorParam = wrapper;
                 }
             }
 
@@ -98,7 +120,7 @@ namespace DS2_Scrambler
             // Build ShuffleParamFields dictionary
             foreach (string filepath in Directory.GetFiles(shufflePath))
             {
-                var name = Path.GetFileNameWithoutExtension(filepath);
+                var name = System.IO.Path.GetFileNameWithoutExtension(filepath);
                 var list = new List<string>();
 
                 foreach (string line in File.ReadLines(filepath, Encoding.UTF8))
@@ -112,7 +134,8 @@ namespace DS2_Scrambler
             // Build GenerateParamFields dictionary
             foreach (string filepath in Directory.GetFiles(generatePath + "Shuffle"))
             {
-                var name = Path.GetFileNameWithoutExtension(filepath);
+
+                var name = System.IO.Path.GetFileNameWithoutExtension(filepath);
                 var list = new List<string>();
 
                 foreach (string line in File.ReadLines(filepath, Encoding.UTF8))
@@ -127,12 +150,13 @@ namespace DS2_Scrambler
             // Build GenerateParamValues dictionary
             foreach (string filepath in Directory.GetFiles(generatePath + "Generate"))
             {
-                var name = Path.GetFileNameWithoutExtension(filepath);
+                var name = System.IO.Path.GetFileNameWithoutExtension(filepath);
                 var dict = new Dictionary<string, List<string>>();
 
                 foreach (string line in File.ReadLines(filepath, Encoding.UTF8))
                 {
                     var list = line.Split(";");
+
                     var value_list = new List<string> { list[1], list[2], list[3] };
 
                     dict.Add(list[0], value_list);
@@ -401,6 +425,34 @@ namespace DS2_Scrambler
         }
         #endregion
 
+        #region Scramble - ArmorReinforceParam
+        public Regulation Scramble_ArmorReinforceParam(string paramName, bool useGenerateType)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    param_rows = param_rows.Where(row => row.ID >= 11010100 && row.ID <= 18000000).ToList();
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        GenerateValuesForParam(wrapper, param_rows);
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
         #region Scramble - ItemParam
         public Regulation Scramble_ItemParam(string paramName, bool useGenerateType)
         {
@@ -558,7 +610,256 @@ namespace DS2_Scrambler
         }
         #endregion
 
+        #region Scramble - WeaponReinforceParam
+        public Regulation Scramble_WeaponReinforceParam(string paramName, bool useGenerateType)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    var new_rows = new List<PARAM.Row>();
+
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        if (row.ID >= 1000 && row.ID <= 5540)
+                            new_rows.Add(row);
+
+                        if (row.ID >= 11000 && row.ID <= 11840)
+                            new_rows.Add(row);
+                    }
+
+                    param_rows = new_rows;
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        GenerateValuesForParam(wrapper, param_rows);
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - WeaponTypeParam
+        public Regulation Scramble_WeaponTypeParam(string paramName, bool useGenerateType)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        GenerateValuesForParam(wrapper, param_rows);
+                    }
+
+                    // Zero bow_distance for non-bow rows
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            List<int> rows = new List<int>{ 360, 361, 362, 363, 364, 365, 370, 371, 380, 381, 385, 386, 540 };
+
+                            if (!rows.Contains(row.ID))
+                            {
+                                if (cell.Def.InternalName == "bow_distance")
+                                {
+                                    cell.Value = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - NpcPlayerStatusParam
+        public Regulation Scramble_NpcPlayerStatusParam(string paramName, bool useGenerateType)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    param_rows = param_rows.Where(row => row.ID >= 6940).ToList();
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        GenerateValuesForParam(wrapper, param_rows);
+
+                        List<PARAM.Row> weaponList = new List<PARAM.Row>();
+                        List<PARAM.Row> shieldList = new List<PARAM.Row>();
+                        List<PARAM.Row> npcSpellList = new List<PARAM.Row>();
+                        List<PARAM.Row> headArmorList = new List<PARAM.Row>();
+                        List<PARAM.Row> chestArmorList = new List<PARAM.Row>();
+                        List<PARAM.Row> armArmorList = new List<PARAM.Row>();
+                        List<PARAM.Row> legArmorList = new List<PARAM.Row>();
+                        List<PARAM.Row> ringList = new List<PARAM.Row>();
+
+                        // Armor
+                        foreach (PARAM.Row aRow in ArmorParam.Rows)
+                        {
+                            var last_digit = (aRow.ID % 10);
+
+                            if (aRow.ID >= 11010100 && aRow.ID <= 17950103)
+                            {
+                                if (last_digit == 0)
+                                    headArmorList.Add(aRow);
+
+                                if (last_digit == 1)
+                                    chestArmorList.Add(aRow);
+
+                                if (last_digit == 2)
+                                    armArmorList.Add(aRow);
+
+                                if (last_digit == 3)
+                                    legArmorList.Add(aRow);
+                             }
+                        }
+
+                        // Rings
+                        foreach (PARAM.Row rRow in RingParam.Rows)
+                        {
+                            if (rRow.ID >= 40010000 && rRow.ID <= 41130000)
+                                ringList.Add(rRow);
+                        }
+
+                        // NPC Spells
+                        foreach (PARAM.Row sRow in SpellParam.Rows)
+                        {
+                            if (sRow.ID >= 71010000)
+                                npcSpellList.Add(sRow);
+                        }
+
+                        // Weapons/Shields
+                        foreach (PARAM.Row wRow in WeaponParam.Rows)
+                        {
+                            if (wRow.ID >= 1000000 && wRow.ID <= 5660000)
+                                weaponList.Add(wRow);
+
+                            if (wRow.ID >= 11000000 && wRow.ID <= 11840000)
+                                shieldList.Add(wRow);
+                        }
+
+                        // Generate from lists
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName.Contains("spell_item"))
+                                    cell.Value = GetRandomRowID(npcSpellList);
+
+                                if (cell.Def.InternalName.Contains("right_weapon_item_1"))
+                                    cell.Value = GetRandomRowID(weaponList);
+
+                                if (cell.Def.InternalName.Contains("right_weapon_item_2"))
+                                    cell.Value = GetRandomRowID(weaponList);
+
+                                if (cell.Def.InternalName.Contains("right_weapon_item_3"))
+                                    cell.Value = GetRandomRowID(weaponList);
+
+                                if (rand.Next(100) < 50)
+                                {
+                                    if (cell.Def.InternalName.Contains("left_weapon_item_1"))
+                                        cell.Value = GetRandomRowID(shieldList);
+                                }
+                                else
+                                {
+                                    if (cell.Def.InternalName.Contains("left_weapon_item_1"))
+                                        cell.Value = GetRandomRowID(weaponList);
+                                }
+
+                                if (cell.Def.InternalName.Contains("right_weapon_item_2"))
+                                    cell.Value = GetRandomRowID(weaponList);
+
+                                if (cell.Def.InternalName.Contains("right_weapon_item_3"))
+                                    cell.Value = GetRandomRowID(weaponList);
+
+                                if (cell.Def.InternalName.Contains("head_item"))
+                                    cell.Value = GetRandomRowID(headArmorList);
+
+                                if (cell.Def.InternalName.Contains("chest_item"))
+                                    cell.Value = GetRandomRowID(chestArmorList);
+
+                                if (cell.Def.InternalName.Contains("hands_item"))
+                                    cell.Value = GetRandomRowID(armArmorList);
+
+                                if (cell.Def.InternalName.Contains("legs_item"))
+                                    cell.Value = GetRandomRowID(legArmorList);
+
+                                if (rand.Next(100) < 25)
+                                {
+                                    if (cell.Def.InternalName.Contains("ring_item_1"))
+                                        cell.Value = GetRandomRowID(ringList);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - BossBattleParam
+        public Regulation Scramble_BossBattleParam(string paramName, bool useGenerateType)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        GenerateValuesForParam(wrapper, param_rows);
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
         #region Util
+        public int GetRandomRowID(List<PARAM.Row> list)
+        {
+            return list[rand.Next(list.Count)].ID;
+        }
+
         public void ShuffleValuesForParam(ParamWrapper wrapper, List<PARAM.Row> param_rows, Dictionary<string, List<string>> dict)
         {
             try

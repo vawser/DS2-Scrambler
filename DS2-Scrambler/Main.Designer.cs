@@ -62,9 +62,12 @@
             this.tab_Player = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tab_Bosses = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tab_Enemies = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.c_Scramble_NpcPlayerStatusParam = new System.Windows.Forms.CheckBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.c_Generate_NpcPlayerStatusParam = new System.Windows.Forms.CheckBox();
+            this.label29 = new System.Windows.Forms.Label();
             this.tab_Projectiles = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tab_Items = new System.Windows.Forms.TabPage();
@@ -74,7 +77,19 @@
             this.c_Generate_ItemParam = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tab_Weapons = new System.Windows.Forms.TabPage();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.c_Scramble_WeaponTypeParam = new System.Windows.Forms.CheckBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.c_Generate_WeaponTypeParam = new System.Windows.Forms.CheckBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.c_Scramble_WeaponReinforceParam = new System.Windows.Forms.CheckBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.c_Generate_WeaponReinforceParam = new System.Windows.Forms.CheckBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.c_IgnoreFists_WeaponParam = new System.Windows.Forms.CheckBox();
             this.c_Scramble_WeaponParam = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
             this.c_Generate_WeaponParam = new System.Windows.Forms.CheckBox();
@@ -88,6 +103,11 @@
             this.c_Generate_ArrowParam = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
             this.tab_Armor = new System.Windows.Forms.TabPage();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.c_Scramble_ArmorReinforceParam = new System.Windows.Forms.CheckBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.c_Generate_ArmorReinforceParam = new System.Windows.Forms.CheckBox();
+            this.label27 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.c_Scramble_ArmorParam = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -100,8 +120,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.b_ToggleOff = new System.Windows.Forms.Button();
             this.b_ToggleRecommended = new System.Windows.Forms.Button();
-            this.c_IgnoreFists_WeaponParam = new System.Windows.Forms.CheckBox();
-            this.label21 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.c_Scramble_BossBattleParam = new System.Windows.Forms.CheckBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.c_Generate_BossBattleParam = new System.Windows.Forms.CheckBox();
+            this.label31 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tag_Treasure.SuspendLayout();
@@ -112,16 +135,21 @@
             this.tab_Player.SuspendLayout();
             this.tab_Bosses.SuspendLayout();
             this.tab_Enemies.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.tab_Projectiles.SuspendLayout();
             this.tab_Items.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tab_Weapons.SuspendLayout();
+            this.groupBox16.SuspendLayout();
+            this.groupBox15.SuspendLayout();
             this.groupBox14.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tab_Armor.SuspendLayout();
+            this.groupBox17.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tab_Spells.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -210,7 +238,7 @@
             this.groupBox12.Controls.Add(this.c_Generate_ItemLotParam2_SvrEvent);
             this.groupBox12.Controls.Add(this.label15);
             this.groupBox12.Controls.Add(this.label16);
-            this.groupBox12.Location = new System.Drawing.Point(9, 284);
+            this.groupBox12.Location = new System.Drawing.Point(6, 284);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(808, 80);
             this.groupBox12.TabIndex = 18;
@@ -263,7 +291,7 @@
             this.groupBox11.Controls.Add(this.label13);
             this.groupBox11.Controls.Add(this.label14);
             this.groupBox11.Controls.Add(this.c_MapLoot_ItemLotParam2_Other);
-            this.groupBox11.Location = new System.Drawing.Point(9, 176);
+            this.groupBox11.Location = new System.Drawing.Point(6, 176);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(808, 102);
             this.groupBox11.TabIndex = 17;
@@ -334,7 +362,7 @@
             this.groupBox10.Controls.Add(this.label8);
             this.groupBox10.Controls.Add(this.c_Treasure_IgnoreTools);
             this.groupBox10.Controls.Add(this.label9);
-            this.groupBox10.Location = new System.Drawing.Point(9, 6);
+            this.groupBox10.Location = new System.Drawing.Point(6, 6);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(808, 78);
             this.groupBox10.TabIndex = 16;
@@ -387,7 +415,7 @@
             this.groupBox2.Controls.Add(this.c_Generate_ItemLotParam2_Chr);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(9, 90);
+            this.groupBox2.Location = new System.Drawing.Point(6, 90);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(808, 80);
             this.groupBox2.TabIndex = 15;
@@ -463,15 +491,6 @@
             this.tab_Bosses.Text = "Bosses";
             this.tab_Bosses.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(814, 539);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Bosses";
-            // 
             // tab_Enemies
             // 
             this.tab_Enemies.Controls.Add(this.groupBox4);
@@ -485,12 +504,55 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Location = new System.Drawing.Point(6, 3);
+            this.groupBox4.Controls.Add(this.c_Scramble_NpcPlayerStatusParam);
+            this.groupBox4.Controls.Add(this.label28);
+            this.groupBox4.Controls.Add(this.c_Generate_NpcPlayerStatusParam);
+            this.groupBox4.Controls.Add(this.label29);
+            this.groupBox4.Location = new System.Drawing.Point(6, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(814, 542);
+            this.groupBox4.Size = new System.Drawing.Size(814, 84);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Enemies";
+            this.groupBox4.Text = "NpcPlayerStatusParam";
+            // 
+            // c_Scramble_NpcPlayerStatusParam
+            // 
+            this.c_Scramble_NpcPlayerStatusParam.AutoSize = true;
+            this.c_Scramble_NpcPlayerStatusParam.Location = new System.Drawing.Point(6, 22);
+            this.c_Scramble_NpcPlayerStatusParam.Name = "c_Scramble_NpcPlayerStatusParam";
+            this.c_Scramble_NpcPlayerStatusParam.Size = new System.Drawing.Size(136, 19);
+            this.c_Scramble_NpcPlayerStatusParam.TabIndex = 11;
+            this.c_Scramble_NpcPlayerStatusParam.Text = "Scramble Equipment";
+            this.c_Scramble_NpcPlayerStatusParam.UseVisualStyleBackColor = true;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(199, 23);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(277, 15);
+            this.label28.TabIndex = 12;
+            this.label28.Text = "Scramble the equipment used NPC player enemies.";
+            // 
+            // c_Generate_NpcPlayerStatusParam
+            // 
+            this.c_Generate_NpcPlayerStatusParam.AutoSize = true;
+            this.c_Generate_NpcPlayerStatusParam.Location = new System.Drawing.Point(6, 47);
+            this.c_Generate_NpcPlayerStatusParam.Name = "c_Generate_NpcPlayerStatusParam";
+            this.c_Generate_NpcPlayerStatusParam.Size = new System.Drawing.Size(138, 19);
+            this.c_Generate_NpcPlayerStatusParam.TabIndex = 9;
+            this.c_Generate_NpcPlayerStatusParam.Text = "Use Generated Values";
+            this.c_Generate_NpcPlayerStatusParam.UseVisualStyleBackColor = true;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(199, 47);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(429, 15);
+            this.label29.TabIndex = 10;
+            this.label29.Text = "Instead of shuffling the attributes, new values will be assigned for each attribu" +
+    "te.";
             // 
             // tab_Projectiles
             // 
@@ -531,10 +593,11 @@
             this.groupBox6.Controls.Add(this.label4);
             this.groupBox6.Location = new System.Drawing.Point(6, 6);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(814, 85);
+            this.groupBox6.Size = new System.Drawing.Size(814, 79);
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "ItemParam";
+            this.groupBox6.Enter += new System.EventHandler(this.groupBox6_Enter);
             // 
             // c_Scramble_ItemParam
             // 
@@ -551,15 +614,15 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(150, 23);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(506, 15);
+            this.label5.Size = new System.Drawing.Size(474, 15);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Scramble some attributes used by items, such as price, hold count and usage anima" +
-    "tion speed.";
+            this.label5.Text = "Scramble attributes used by items, such as price, hold count and usage animation " +
+    "speed.";
             // 
             // c_Generate_ItemParam
             // 
             this.c_Generate_ItemParam.AutoSize = true;
-            this.c_Generate_ItemParam.Location = new System.Drawing.Point(6, 51);
+            this.c_Generate_ItemParam.Location = new System.Drawing.Point(6, 47);
             this.c_Generate_ItemParam.Name = "c_Generate_ItemParam";
             this.c_Generate_ItemParam.Size = new System.Drawing.Size(138, 19);
             this.c_Generate_ItemParam.TabIndex = 1;
@@ -569,7 +632,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(150, 52);
+            this.label4.Location = new System.Drawing.Point(150, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(429, 15);
             this.label4.TabIndex = 2;
@@ -578,6 +641,8 @@
             // 
             // tab_Weapons
             // 
+            this.tab_Weapons.Controls.Add(this.groupBox16);
+            this.tab_Weapons.Controls.Add(this.groupBox15);
             this.tab_Weapons.Controls.Add(this.groupBox14);
             this.tab_Weapons.Controls.Add(this.groupBox13);
             this.tab_Weapons.Controls.Add(this.groupBox7);
@@ -589,6 +654,110 @@
             this.tab_Weapons.Text = "Weapons";
             this.tab_Weapons.UseVisualStyleBackColor = true;
             // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.c_Scramble_WeaponTypeParam);
+            this.groupBox16.Controls.Add(this.label22);
+            this.groupBox16.Controls.Add(this.c_Generate_WeaponTypeParam);
+            this.groupBox16.Controls.Add(this.label25);
+            this.groupBox16.Location = new System.Drawing.Point(6, 350);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(814, 79);
+            this.groupBox16.TabIndex = 14;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "WeaponTypeParam";
+            // 
+            // c_Scramble_WeaponTypeParam
+            // 
+            this.c_Scramble_WeaponTypeParam.AutoSize = true;
+            this.c_Scramble_WeaponTypeParam.Location = new System.Drawing.Point(6, 22);
+            this.c_Scramble_WeaponTypeParam.Name = "c_Scramble_WeaponTypeParam";
+            this.c_Scramble_WeaponTypeParam.Size = new System.Drawing.Size(177, 19);
+            this.c_Scramble_WeaponTypeParam.TabIndex = 7;
+            this.c_Scramble_WeaponTypeParam.Text = "Scramble Weapon Attributes";
+            this.c_Scramble_WeaponTypeParam.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(199, 23);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(306, 15);
+            this.label22.TabIndex = 8;
+            this.label22.Text = "Scramble attributes used by weapons such as cast speed.";
+            // 
+            // c_Generate_WeaponTypeParam
+            // 
+            this.c_Generate_WeaponTypeParam.AutoSize = true;
+            this.c_Generate_WeaponTypeParam.Location = new System.Drawing.Point(6, 47);
+            this.c_Generate_WeaponTypeParam.Name = "c_Generate_WeaponTypeParam";
+            this.c_Generate_WeaponTypeParam.Size = new System.Drawing.Size(138, 19);
+            this.c_Generate_WeaponTypeParam.TabIndex = 5;
+            this.c_Generate_WeaponTypeParam.Text = "Use Generated Values";
+            this.c_Generate_WeaponTypeParam.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(199, 47);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(429, 15);
+            this.label25.TabIndex = 6;
+            this.label25.Text = "Instead of shuffling the attributes, new values will be assigned for each attribu" +
+    "te.";
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.c_Scramble_WeaponReinforceParam);
+            this.groupBox15.Controls.Add(this.label23);
+            this.groupBox15.Controls.Add(this.c_Generate_WeaponReinforceParam);
+            this.groupBox15.Controls.Add(this.label24);
+            this.groupBox15.Location = new System.Drawing.Point(6, 265);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(814, 79);
+            this.groupBox15.TabIndex = 13;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "WeaponReinforceParam";
+            // 
+            // c_Scramble_WeaponReinforceParam
+            // 
+            this.c_Scramble_WeaponReinforceParam.AutoSize = true;
+            this.c_Scramble_WeaponReinforceParam.Location = new System.Drawing.Point(6, 22);
+            this.c_Scramble_WeaponReinforceParam.Name = "c_Scramble_WeaponReinforceParam";
+            this.c_Scramble_WeaponReinforceParam.Size = new System.Drawing.Size(156, 19);
+            this.c_Scramble_WeaponReinforceParam.TabIndex = 7;
+            this.c_Scramble_WeaponReinforceParam.Text = "Scramble Reinforcement";
+            this.c_Scramble_WeaponReinforceParam.UseVisualStyleBackColor = true;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(199, 23);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(279, 15);
+            this.label23.TabIndex = 8;
+            this.label23.Text = "Scramble attributes used by weapon reinforcement.";
+            // 
+            // c_Generate_WeaponReinforceParam
+            // 
+            this.c_Generate_WeaponReinforceParam.AutoSize = true;
+            this.c_Generate_WeaponReinforceParam.Location = new System.Drawing.Point(6, 47);
+            this.c_Generate_WeaponReinforceParam.Name = "c_Generate_WeaponReinforceParam";
+            this.c_Generate_WeaponReinforceParam.Size = new System.Drawing.Size(138, 19);
+            this.c_Generate_WeaponReinforceParam.TabIndex = 5;
+            this.c_Generate_WeaponReinforceParam.Text = "Use Generated Values";
+            this.c_Generate_WeaponReinforceParam.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(199, 47);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(429, 15);
+            this.label24.TabIndex = 6;
+            this.label24.Text = "Instead of shuffling the attributes, new values will be assigned for each attribu" +
+    "te.";
+            // 
             // groupBox14
             // 
             this.groupBox14.Controls.Add(this.label21);
@@ -599,10 +768,29 @@
             this.groupBox14.Controls.Add(this.label20);
             this.groupBox14.Location = new System.Drawing.Point(6, 154);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(814, 120);
+            this.groupBox14.Size = new System.Drawing.Size(814, 105);
             this.groupBox14.TabIndex = 12;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "WeaponParam";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(199, 72);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(134, 15);
+            this.label21.TabIndex = 10;
+            this.label21.Text = "Leave the Fist unaltered.";
+            // 
+            // c_IgnoreFists_WeaponParam
+            // 
+            this.c_IgnoreFists_WeaponParam.AutoSize = true;
+            this.c_IgnoreFists_WeaponParam.Location = new System.Drawing.Point(6, 72);
+            this.c_IgnoreFists_WeaponParam.Name = "c_IgnoreFists_WeaponParam";
+            this.c_IgnoreFists_WeaponParam.Size = new System.Drawing.Size(86, 19);
+            this.c_IgnoreFists_WeaponParam.TabIndex = 9;
+            this.c_IgnoreFists_WeaponParam.Text = "Ignore Fists";
+            this.c_IgnoreFists_WeaponParam.UseVisualStyleBackColor = true;
             // 
             // c_Scramble_WeaponParam
             // 
@@ -619,10 +807,9 @@
             this.label19.AutoSize = true;
             this.label19.Location = new System.Drawing.Point(199, 23);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(456, 15);
+            this.label19.Size = new System.Drawing.Size(424, 15);
             this.label19.TabIndex = 8;
-            this.label19.Text = "Scramble some attributes used by weapons, such as stat requirements, durability, " +
-    "etc.";
+            this.label19.Text = "Scramble attributes used by weapons, such as stat requirements, durability, etc.";
             // 
             // c_Generate_WeaponParam
             // 
@@ -702,9 +889,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(199, 23);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(348, 15);
+            this.label3.Size = new System.Drawing.Size(316, 15);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Scramble some attributes used by ammunition, such as damage.";
+            this.label3.Text = "Scramble attributes used by ammunition, such as damage.";
             // 
             // c_Generate_ArrowParam
             // 
@@ -728,6 +915,7 @@
             // 
             // tab_Armor
             // 
+            this.tab_Armor.Controls.Add(this.groupBox17);
             this.tab_Armor.Controls.Add(this.groupBox8);
             this.tab_Armor.Location = new System.Drawing.Point(4, 24);
             this.tab_Armor.Name = "tab_Armor";
@@ -737,6 +925,58 @@
             this.tab_Armor.Text = "Armor";
             this.tab_Armor.UseVisualStyleBackColor = true;
             // 
+            // groupBox17
+            // 
+            this.groupBox17.Controls.Add(this.c_Scramble_ArmorReinforceParam);
+            this.groupBox17.Controls.Add(this.label26);
+            this.groupBox17.Controls.Add(this.c_Generate_ArmorReinforceParam);
+            this.groupBox17.Controls.Add(this.label27);
+            this.groupBox17.Location = new System.Drawing.Point(6, 91);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(814, 80);
+            this.groupBox17.TabIndex = 10;
+            this.groupBox17.TabStop = false;
+            this.groupBox17.Text = "ArmorReinforceParam";
+            // 
+            // c_Scramble_ArmorReinforceParam
+            // 
+            this.c_Scramble_ArmorReinforceParam.AutoSize = true;
+            this.c_Scramble_ArmorReinforceParam.Location = new System.Drawing.Point(6, 22);
+            this.c_Scramble_ArmorReinforceParam.Name = "c_Scramble_ArmorReinforceParam";
+            this.c_Scramble_ArmorReinforceParam.Size = new System.Drawing.Size(193, 19);
+            this.c_Scramble_ArmorReinforceParam.TabIndex = 7;
+            this.c_Scramble_ArmorReinforceParam.Text = "Scramble Armor Reinforcement";
+            this.c_Scramble_ArmorReinforceParam.UseVisualStyleBackColor = true;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(205, 23);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(269, 15);
+            this.label26.TabIndex = 8;
+            this.label26.Text = "Scramble attributes used by armor reinforcement.\r\n";
+            // 
+            // c_Generate_ArmorReinforceParam
+            // 
+            this.c_Generate_ArmorReinforceParam.AutoSize = true;
+            this.c_Generate_ArmorReinforceParam.Location = new System.Drawing.Point(6, 47);
+            this.c_Generate_ArmorReinforceParam.Name = "c_Generate_ArmorReinforceParam";
+            this.c_Generate_ArmorReinforceParam.Size = new System.Drawing.Size(138, 19);
+            this.c_Generate_ArmorReinforceParam.TabIndex = 5;
+            this.c_Generate_ArmorReinforceParam.Text = "Use Generated Values";
+            this.c_Generate_ArmorReinforceParam.UseVisualStyleBackColor = true;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(205, 48);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(429, 15);
+            this.label27.TabIndex = 6;
+            this.label27.Text = "Instead of shuffling the attributes, new values will be assigned for each attribu" +
+    "te.";
+            // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.c_Scramble_ArmorParam);
@@ -745,7 +985,7 @@
             this.groupBox8.Controls.Add(this.label12);
             this.groupBox8.Location = new System.Drawing.Point(6, 6);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(814, 88);
+            this.groupBox8.Size = new System.Drawing.Size(814, 79);
             this.groupBox8.TabIndex = 9;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "ArmorParam";
@@ -763,12 +1003,12 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(151, 23);
+            this.label11.Location = new System.Drawing.Point(205, 23);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(523, 15);
+            this.label11.Size = new System.Drawing.Size(491, 15);
             this.label11.TabIndex = 8;
-            this.label11.Text = "Scramble some attributes used by armor, such as model, stat requirements, weight," +
-    " durability, etc.";
+            this.label11.Text = "Scramble attributes used by armor, such as model, stat requirements, weight, dura" +
+    "bility, etc.";
             // 
             // c_Generate_ArmorParam
             // 
@@ -783,7 +1023,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(151, 47);
+            this.label12.Location = new System.Drawing.Point(205, 48);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(429, 15);
             this.label12.TabIndex = 6;
@@ -856,24 +1096,57 @@
             this.b_ToggleRecommended.UseVisualStyleBackColor = true;
             this.b_ToggleRecommended.Click += new System.EventHandler(this.b_ToggleRecommended_Click);
             // 
-            // c_IgnoreFists_WeaponParam
+            // groupBox1
             // 
-            this.c_IgnoreFists_WeaponParam.AutoSize = true;
-            this.c_IgnoreFists_WeaponParam.Location = new System.Drawing.Point(6, 72);
-            this.c_IgnoreFists_WeaponParam.Name = "c_IgnoreFists_WeaponParam";
-            this.c_IgnoreFists_WeaponParam.Size = new System.Drawing.Size(86, 19);
-            this.c_IgnoreFists_WeaponParam.TabIndex = 9;
-            this.c_IgnoreFists_WeaponParam.Text = "Ignore Fists";
-            this.c_IgnoreFists_WeaponParam.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.c_Scramble_BossBattleParam);
+            this.groupBox1.Controls.Add(this.label30);
+            this.groupBox1.Controls.Add(this.c_Generate_BossBattleParam);
+            this.groupBox1.Controls.Add(this.label31);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(814, 84);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "BossBattleParam";
             // 
-            // label21
+            // c_Scramble_BossBattleParam
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(199, 72);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(134, 15);
-            this.label21.TabIndex = 10;
-            this.label21.Text = "Leave the Fist unaltered.";
+            this.c_Scramble_BossBattleParam.AutoSize = true;
+            this.c_Scramble_BossBattleParam.Location = new System.Drawing.Point(6, 22);
+            this.c_Scramble_BossBattleParam.Name = "c_Scramble_BossBattleParam";
+            this.c_Scramble_BossBattleParam.Size = new System.Drawing.Size(106, 19);
+            this.c_Scramble_BossBattleParam.TabIndex = 11;
+            this.c_Scramble_BossBattleParam.Text = "Scramble Souls";
+            this.c_Scramble_BossBattleParam.UseVisualStyleBackColor = true;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(199, 23);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(210, 15);
+            this.label30.TabIndex = 12;
+            this.label30.Text = "Scramble the soul reward from bosses.";
+            // 
+            // c_Generate_BossBattleParam
+            // 
+            this.c_Generate_BossBattleParam.AutoSize = true;
+            this.c_Generate_BossBattleParam.Location = new System.Drawing.Point(6, 47);
+            this.c_Generate_BossBattleParam.Name = "c_Generate_BossBattleParam";
+            this.c_Generate_BossBattleParam.Size = new System.Drawing.Size(138, 19);
+            this.c_Generate_BossBattleParam.TabIndex = 9;
+            this.c_Generate_BossBattleParam.Text = "Use Generated Values";
+            this.c_Generate_BossBattleParam.UseVisualStyleBackColor = true;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(199, 47);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(429, 15);
+            this.label31.TabIndex = 10;
+            this.label31.Text = "Instead of shuffling the attributes, new values will be assigned for each attribu" +
+    "te.";
             // 
             // Main
             // 
@@ -908,11 +1181,17 @@
             this.tab_Player.ResumeLayout(false);
             this.tab_Bosses.ResumeLayout(false);
             this.tab_Enemies.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.tab_Projectiles.ResumeLayout(false);
             this.tab_Items.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.tab_Weapons.ResumeLayout(false);
+            this.groupBox16.ResumeLayout(false);
+            this.groupBox16.PerformLayout();
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox15.PerformLayout();
             this.groupBox14.ResumeLayout(false);
             this.groupBox14.PerformLayout();
             this.groupBox13.ResumeLayout(false);
@@ -920,9 +1199,13 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.tab_Armor.ResumeLayout(false);
+            this.groupBox17.ResumeLayout(false);
+            this.groupBox17.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.tab_Spells.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -968,7 +1251,6 @@
         private TabPage tab_Enemies;
         private TabPage tab_Bosses;
         private GroupBox groupBox2;
-        private GroupBox groupBox1;
         private GroupBox groupBox3;
         private GroupBox groupBox4;
         private GroupBox groupBox5;
@@ -1003,5 +1285,29 @@
         private Label label20;
         private Label label21;
         private CheckBox c_IgnoreFists_WeaponParam;
+        private GroupBox groupBox15;
+        private CheckBox c_Scramble_WeaponReinforceParam;
+        private Label label23;
+        private CheckBox c_Generate_WeaponReinforceParam;
+        private Label label24;
+        private GroupBox groupBox16;
+        private CheckBox c_Scramble_WeaponTypeParam;
+        private Label label22;
+        private CheckBox c_Generate_WeaponTypeParam;
+        private Label label25;
+        private GroupBox groupBox17;
+        private CheckBox c_Scramble_ArmorReinforceParam;
+        private Label label26;
+        private CheckBox c_Generate_ArmorReinforceParam;
+        private Label label27;
+        private CheckBox c_Scramble_NpcPlayerStatusParam;
+        private Label label28;
+        private CheckBox c_Generate_NpcPlayerStatusParam;
+        private Label label29;
+        private GroupBox groupBox1;
+        private CheckBox c_Scramble_BossBattleParam;
+        private Label label30;
+        private CheckBox c_Generate_BossBattleParam;
+        private Label label31;
     }
 }

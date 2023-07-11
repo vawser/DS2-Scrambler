@@ -136,6 +136,11 @@ namespace DS2_Scrambler
                     progress.Report("Scramble: Armor");
                     reg = scrambler.Scramble_ArmorParam("ArmorParam", c_Generate_ArmorParam.Checked);
                 }
+                if (c_Scramble_ArmorReinforceParam.Checked)
+                {
+                    progress.Report("Scramble: Armor Reinforcement");
+                    reg = scrambler.Scramble_ArmorReinforceParam("ArmorReinforceParam", c_Generate_ArmorReinforceParam.Checked);
+                }
 
                 // Weapons
                 if (c_Scramble_ArrowParam.Checked)
@@ -153,6 +158,33 @@ namespace DS2_Scrambler
                     progress.Report("Scramble: Weapons");
                     reg = scrambler.Scramble_WeaponParam("WeaponParam", c_Generate_WeaponParam.Checked, c_IgnoreFists_WeaponParam.Checked);
                 }
+                if (c_Scramble_WeaponReinforceParam.Checked)
+                {
+                    progress.Report("Scramble: Weapon Reinforcement");
+                    reg = scrambler.Scramble_WeaponReinforceParam("WeaponReinforceParam", c_Generate_WeaponReinforceParam.Checked);
+                }
+                if (c_Scramble_WeaponTypeParam.Checked)
+                {
+                    progress.Report("Scramble: Weapon Attributes");
+                    reg = scrambler.Scramble_WeaponTypeParam("WeaponTypeParam", c_Generate_WeaponTypeParam.Checked);
+                }
+
+                // Player
+
+                // Bosses
+                if (c_Scramble_BossBattleParam.Checked)
+                {
+                    progress.Report("Scramble: Boss Rewards");
+                    reg = scrambler.Scramble_BossBattleParam("BossBattleParam", c_Generate_BossBattleParam.Checked);
+                }
+
+                // Enemies
+                if (c_Scramble_NpcPlayerStatusParam.Checked)
+                {
+                    progress.Report("Scramble: NPC Equipment");
+                    reg = scrambler.Scramble_NpcPlayerStatusParam("NpcPlayerStatusParam", c_Generate_NpcPlayerStatusParam.Checked);
+                }
+
             }
             catch (Exception ex)
             {
@@ -210,6 +242,11 @@ namespace DS2_Scrambler
             c_Treasure_IgnoreKeyItems.Checked = false;
             c_Treasure_IgnoreTools.Checked = false;
             c_MapLoot_ItemLotParam2_Other.Checked = false;
+        }
+
+        private void groupBox6_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
