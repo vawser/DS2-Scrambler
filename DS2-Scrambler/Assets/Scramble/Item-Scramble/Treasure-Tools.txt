@@ -1,16 +1,9 @@
-62190000;Petrified Egg
-60155000;Estus Flask
-60155010;Estus Flask
-60155020;Estus Flask
-60155030;Estus Flask
-60360000;Darksign
 60355000;Aged Feather
 50940000;Champion's Tablet
 60405000;Dragon Head Stone
 60405010;Dragon Head Stone
 60406000;Dragon Torso Stone
 60406010;Dragon Torso Stone
-50990000;Dull Ember
 60470000;Hello Carving
 60480000;Thank You Carving
 60490000;I'm Sorry Carving

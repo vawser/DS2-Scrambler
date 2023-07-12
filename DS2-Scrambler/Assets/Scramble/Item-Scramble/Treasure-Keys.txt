@@ -22,5 +22,5 @@
 52500000;Garrison Ward Key
 52650000;Dragon Stone
 53100000;Scorching Iron Scepter
-53200000;Smelter Wedge
 53600000;Eye of the Priestess
+50990000;Dull Ember

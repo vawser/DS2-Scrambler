@@ -53,6 +53,7 @@
 60531000;Lloyd's Talisman
 60536000;Pharros' Lockstone
 60537000;Fragrant Branch of Yore
+53200000;Smelter Wedge
 60538000;Fire Seed
 60540000;Throwing Knife
 60550000;Witching Urn

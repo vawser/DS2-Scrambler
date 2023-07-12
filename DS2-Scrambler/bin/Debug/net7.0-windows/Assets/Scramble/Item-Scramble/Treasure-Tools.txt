@@ -1,9 +1,3 @@
-62190000;Petrified Egg
-60155000;Estus Flask
-60155010;Estus Flask
-60155020;Estus Flask
-60155030;Estus Flask
-60360000;Darksign
 60355000;Aged Feather
 50940000;Champion's Tablet
 60405000;Dragon Head Stone

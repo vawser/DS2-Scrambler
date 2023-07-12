@@ -1,2 +1,80 @@
-﻿Soldier Key
--> 
+﻿public List<int> LotRange_Boss = new List<int> { 106000, 862001 };
+public List<int> LotRange_Character = new List<int> { 1307000, 1788030 };
+public List<int> LotRange_Covenant = new List<int> { 2001000, 2009013 };
+public List<int> LotRange_Bird = new List<int> { 50000000, 50000303 };
+public List<int> LotRange_Event = new List<int> { 60001000, 60050000 };
+
+public List<int> LotRange_Things_Betwixt = new List<int> { 10025010, 10027000 };
+public List<int> LotRange_Majula = new List<int> { 10045000, 10046150 };
+public List<int> LotRange_Forest_Of_Fallen_Giants = new List<int> { 10105010, 10106630 };
+public List<int> LotRange_Brightstone_Cove_Tseldora = new List<int> { 10145050, 10146520 };
+public List<int> LotRange_Aldias_Keep = new List<int> { 10155000, 10156200 };
+public List<int> LotRange_Lost_Bastille = new List<int> { 10165000, 10166490 };
+public List<int> LotRange_Earthen_Peak = new List<int> { 10175020, 10176630 };
+public List<int> LotRange_No_Mans_Wharf = new List<int> { 10185000, 10186170 };
+public List<int> LotRange_Iron_Keep = new List<int> { 10195000, 10196220 };
+public List<int> LotRange_Huntmans_Copse = new List<int> { 10235010, 10236270 };
+public List<int> LotRange_Gutter = new List<int> { 10255010, 10256500 };
+public List<int> LotRange_Dragon_Eerie = new List<int> { 10275000, 10276190 };
+public List<int> LotRange_Path_to_Shaded_Woods = new List<int> { 10295000, 10296020 };
+public List<int> LotRange_Unseen_Path_to_Heide = new List<int> { 10305010, 10306030 };
+public List<int> LotRange_Heide_Tower_of_Flame = new List<int> { 10315000, 10316110 };
+public List<int> LotRange_Shaded_Woods = new List<int> { 10325000, 10326280 };
+public List<int> LotRange_Doors_of_Pharros = new List<int> { 10335000, 10336080 };
+public List<int> LotRange_Grave_of_Saints = new List<int> { 10345000, 10346110 };
+public List<int> LotRange_Giants_Memory = new List<int> { 20105000, 20106150 };
+public List<int> LotRange_Shrine_of_Amana = new List<int> { 20115000, 20116220 };
+public List<int> LotRange_Drangleic_Castle = new List<int> { 20215000, 20216140 };
+public List<int> LotRange_Undead_Crypt = new List<int> { 20245000, 20246500 };
+public List<int> LotRange_Dragon_Memories = new List<int> { 20265000, 20266000 };
+public List<int> LotRange_Chasm_of_the_Abyss = new List<int> { 40035000, 40036000 };
+public List<int> LotRange_Shulva = new List<int> { 50355010, 50356670 };
+public List<int> LotRange_Brume_Tower = new List<int> { 50365000, 50368090 };
+public List<int> LotRange_Eleum_Loyce = new List<int> { 50375500, 50376770 };
+
+public List<int> LotRange_Vanilla = new List<int> { 10025010, 40036000 };
+public List<int> LotRange_DLC = new List<int> { 50355010, 50376770 };
+
+// These lots are not suitable for key items, as they require other key items to access.
+public List<int> NoKeyLots_Things_Betwixt = new List<int> { 10026100 };
+public List<int> NoKeyLots_Majula = new List<int> { 10045010, 10045040, 10045050, 10045020, 10045030, 10046100 };
+public List<int> NoKeyLots_Forest_Of_Fallen_Giants = new List<int> { 10105120, 10105050, 10105150, 10105080, 10105090, 10105110, 10106010, 10106070, 10106080, 10106120, 10106290, 10106370, 10106420, 10106430, 10106510, 10106600, 10106610, 10106620, 10106630, 10106350, 10106360, 10106460, 10106470, 10106480 };
+public List<int> NoKeyLots_Brightstone_Cove_Tseldora = new List<int> { 10145070, 10145080 };
+public List<int> NoKeyLots_Aldias_Keep = new List<int> { 10155010, 10155020, 10155000, 10155030, 10156000, 10156010, 10156030, 10156040, 10156050, 10156130, 10156140, 10156150, 10156200, 10156100, 10156110, 10156070, 10156060, 10156160 };
+public List<int> NoKeyLots_Lost_Bastille = new List<int> { 10165010, 10165110, 10165150, 10165000, 10165070, 10165020, 10166050, 10166350, 10166330, 10166440 };
+public List<int> NoKeyLots_Earthen_Peak = new List<int> { 10175130 };
+public List<int> NoKeyLots_No_Mans_Wharf = new List<int> { 10185120 };
+public List<int> NoKeyLots_Iron_Keep = new List<int> { 10196140, 10195100, 10195110 };
+public List<int> NoKeyLots_Huntmans_Copse = new List<int> { };
+public List<int> NoKeyLots_Gutter = new List<int> { 10256000, 10256360 };
+public List<int> NoKeyLots_Dragon_Eerie = new List<int> { };
+public List<int> NoKeyLots_Path_to_Shaded_Woods = new List<int> { };
+public List<int> NoKeyLots_Unseen_Path_to_Heide = new List<int> { 10305010, 10306030, };
+public List<int> NoKeyLots_Heide_Tower_of_Flame = new List<int> { };
+public List<int> NoKeyLots_Shaded_Woods = new List<int> { 10325100, 10326220, 10326260 };
+public List<int> NoKeyLots_Doors_of_Pharros = new List<int> { 10335000, 10335020, 10335040, 10336020 };
+public List<int> NoKeyLots_Grave_of_Saints = new List<int> { 10346100 };
+public List<int> NoKeyLots_Giants_Memory = new List<int> { 20105030, 20105040, };
+public List<int> NoKeyLots_Shrine_of_Amana = new List<int> { 20115070, 20115110, 20115090, 20116200 };
+public List<int> NoKeyLots_Drangleic_Castle = new List<int> { 20215050, 20215130, 20215160, 20216000, 20216010, 20216020 };
+public List<int> NoKeyLots_Undead_Crypt = new List<int> { };
+public List<int> NoKeyLots_Dragon_Memories = new List<int> { };
+public List<int> NoKeyLots_Chasm_of_the_Abyss = new List<int> { };
+public List<int> NoKeyLots_Shulva = new List<int> { 50355150, 50355180, 50355350, 50356150, 50356210, 50356380, 50356400, 50356430, 50356460, 50356470, 50356480, 50356490, 50356500, 50356520, 50356530, 50356540, 50356610, 50356620 };
+public List<int> NoKeyLots_Brume_Tower = new List<int> { 50365550, 50365560, 50365680, 50365690, 50365020, 50365080, 50366020, 50366210, 50366240, 50367130, 50366880, 50366890, 50366250, 50366710, 50366720, 50366740, 50366760, 50366830, 50366850, 50366860, 50366870, 50366910, 50366920, 50366930, 50366940, 50366950, 50366960, 50366970, 50366980, 50366990, 50367000, 50367010, 50367020, 50367030, 50367040, 50367050, 50367060, 50367090, 50367100, 50367110, 50367120 };
+public List<int> NoKeyLots_Eleum_Loyce = new List<int> { 50375740, 50376060, 50376210, 50376220, 50376230, 50376300, 50376450, 50376460, 50376470, 50376570, 50376580, 50376710, 50376730, 50376740, };
+
+
+
+List<PARAM.Row> LotRange_SoldierKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_KeyToKingsPassage = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_BastilleKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_IronKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_ForgottenKey = new List<PARAM.Row>();
+
+
+
+
+
+
+

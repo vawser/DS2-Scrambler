@@ -110,8 +110,7 @@ namespace DS2_Scrambler
                 if (c_Scramble_ItemLotParam2_Other.Checked)
                 {
                     progress.Report("Scramble: Treasure - Map");
-                    reg = scrambler.Scramble_ItemLotParam_Map("ItemLotParam2_Other",      
-                      c_RandomAttribute_ItemLotParam_Other.Checked, 
+                    reg = scrambler.Scramble_ItemLotParam_Map("ItemLotParam2_Other",     
                       c_IgnoreKeys_ItemLotParam_Other.Checked, 
                       c_IgnoreTools_ItemLotParam_Other.Checked,
                       c_IgnoreBossSouls_ItemLotParam_Other.Checked,
@@ -119,8 +118,7 @@ namespace DS2_Scrambler
                       c_IncludeCharacterTreasure_ItemLotParam_Other.Checked,
                       c_IncludeCovenantTreasure_ItemLotParam_Other.Checked,
                       c_IncludeBirdTreasure_ItemLotParam_Other.Checked,
-                      c_IncludEventTreasure_ItemLotParam_Other.Checked,
-                      c_AllowDupes_ItemLotParam_Other.Checked
+                      c_IncludEventTreasure_ItemLotParam_Other.Checked
                     );
                 }
                 /*
@@ -390,9 +388,6 @@ namespace DS2_Scrambler
 
             c_Generate_ArmorParam.Checked = false;
             c_Generate_ArrowParam.Checked = false;
-            c_Generate_ItemLotParam2_Chr.Checked = false;
-            c_RandomAttribute_ItemLotParam_Other.Checked = false;
-            c_Generate_ItemLotParam2_SvrEvent.Checked = false;
             c_Generate_ItemParam.Checked = false;
             c_Generate_WeaponParam.Checked = false;
             c_Generate_BossBattleParam.Checked = false;

@@ -13,6 +13,7 @@ using System.Windows.Documents;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using System.Windows.Media.TextFormatting;
 using System.Windows.Controls;
+using System.Diagnostics.Metrics;
 
 namespace DS2_Scrambler
 {
@@ -262,110 +263,834 @@ namespace DS2_Scrambler
         }
         #endregion
 
-        #region Scramble - ItemLotParam_Map
+        #region Scramble - Treasure
 
-        public Regulation Scramble_ItemLotParam_Map(string paramName, bool randomiseWeapon, bool ignoreKeys, bool ignoreTools, bool ignoreBossSouls, bool includeBossTreasure, bool includeCharacterTreasure, bool includeCovenantTreasure, bool includeBirdTreasure, bool includeEventTreasure, bool allowDuplicates)
+        public bool T_Ignore_Keys = false;
+        public bool T_Ignore_Tools = false;
+        public bool T_Ignore_Boss_Souls = false;
+
+        // These itemlots should not be used in the placement of keys/tools
+        public List<int> T_Forbidden_Item_Lots = new List<int>
         {
+            10026100, 10045010, 10045040, 10045050, 10045020, 10045030, 10046100, 10105120, 10105050, 10105150, 10105080, 10105090, 10105110, 10106010, 10106070, 10106080, 10106120, 10106290, 10106370, 10106420, 10106430, 10106510, 10106600, 10106610, 10106620, 10106630, 10106350, 10106360, 10106460, 10106470, 10106480, 10145070, 10145080, 10155010, 10155020, 10155000, 10155030, 10156000, 10156010, 10156030, 10156040, 10156050, 10156130, 10156140, 10156150, 10156200, 10156100, 10156110, 10156070, 10156060, 10156160, 10165010, 10165110, 10165150, 10165000, 10165070, 10165020, 10166050, 10166350, 10166330, 10166440, 10175130, 10185120, 10196140, 10195100, 10195110, 10256000, 10256360, 10305010, 10306030, 10325100, 10326220, 10326260, 10335000, 10335020, 10335040, 10336020, 10346100, 20105030, 20105040, 20115070, 20115110, 20115090, 20116200, 20215050, 20215130, 20215160, 20216000, 20216010, 20216020, 50355150, 50355180, 50355350, 50356150, 50356210, 50356380, 50356400, 50356430, 50356460, 50356470, 50356480, 50356490, 50356500, 50356520, 50356530, 50356540, 50356610, 50356620, 50365550, 50365560, 50365680, 50365690, 50365020, 50365080, 50366020, 50366210, 50366240, 50367130, 50366880, 50366890, 50366250, 50366710, 50366720, 50366740, 50366760, 50366830, 50366850, 50366860, 50366870, 50366910, 50366920, 50366930, 50366940, 50366950, 50366960, 50366970, 50366980, 50366990, 50367000, 50367010, 50367020, 50367030, 50367040, 50367050, 50367060, 50367090, 50367100, 50367110, 50367120, 50375740, 50376060, 50376210, 50376220, 50376230, 50376300, 50376450, 50376460, 50376470, 50376570, 50376580, 50376710, 50376730, 50376740
+        };
+
+        // These items (and their associated itemlots) should not be changed.
+        public List<int> T_Fixed_Items = new List<int>
+        {
+            60155000, 60155010, 60155020, 60155030, 62190000, 60360000
+        };
+
+        // These rows should be skipped when 
+        public List<int> T_Skipped_Item_Lots = new List<int>
+        {
+            514500, 1705100, 1705300, 1753010, 1757000, 1758000, 1759000, 1777000, 1786000
+        };
+
+        // Bird range
+        public List<int> T_Bird_Item_Lots = new List<int>
+        {
+            50000000, 50000001, 50000002, 50000003, 50000100, 50000101, 50000102, 50000103, 50000200, 50000201, 50000202, 50000203, 50000300, 50000301, 50000302, 50000303, 50001000,
+        };
+
+        public Regulation Scramble_ItemLotParam_Map(string paramName, bool ignoreKeys, bool ignoreTools, bool ignoreBossSouls, bool includeBossTreasure, bool includeCharacterTreasure, bool includeCovenantTreasure, bool includeBirdTreasure, bool includeEventTreasure)
+        {
+            T_Ignore_Keys = ignoreKeys;
+            T_Ignore_Tools = ignoreTools;
+            T_Ignore_Boss_Souls = ignoreBossSouls;
+
             // Treasure: Boss Rewards
-            ScrambleTreasure(paramName, includeBossTreasure, 106000, 862001, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates, new List<int> { 514500 });
+            ScrambleTreasure(paramName, includeBossTreasure, 106000, 862001);
 
             // Treasure: Character Treasure
-            ScrambleTreasure(paramName, includeCharacterTreasure, 1307000, 1788030, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates, new List<int> { 1705100, 1705300, 1753010, 1757000, 1758000, 1759000, 1777000, 1786000 });
+            ScrambleTreasure(paramName, includeCharacterTreasure, 1307000, 1788030);
 
             // Treasure: Covenant Rewards
-            ScrambleTreasure(paramName, includeCovenantTreasure, 2001000, 2009013, randomiseWeapon, true, true, ignoreBossSouls, allowDuplicates);
+            ScrambleTreasure(paramName, includeCovenantTreasure, 2001000, 2009013);
 
             // Treasure: Bird Rewards
-            ScrambleTreasure(paramName, includeBirdTreasure, 50000000, 50000303, randomiseWeapon, true, true, ignoreBossSouls, allowDuplicates);
+            ScrambleTreasure(paramName, includeBirdTreasure, 50000000, 50000303);
 
             // Treasure: Event Rewards
-            ScrambleTreasure(paramName, includeEventTreasure, 60001000, 60050000, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+            ScrambleTreasure(paramName, includeEventTreasure, 60001000, 60050000);
 
-            // Treasure: Things Betwixt
-            ScrambleTreasure(paramName, true, 10025010, 10027000, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+            // Treasure: Vanilla
+            ScrambleTreasure(paramName, true, 10025010, 40036000);
 
-            // Treasure: Majula
-            ScrambleTreasure(paramName, true, 10045000, 10046150, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+            // Treasure: DLC
+            ScrambleTreasure(paramName, true, 50355010, 50376770);
 
-            // Treasure: Forest of Fallen Giants
-            ScrambleTreasure(paramName, true, 10105010, 10106630, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+            // Lot Ranges
+            List<PARAM.Row> LotRange_Things_Betwixt = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Majula = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Forest_Of_Fallen_Giants = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Brightstone_Cove_Tseldora = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Aldias_Keep = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Lost_Bastille = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Earthen_Peak = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_No_Mans_Wharf = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Iron_Keep = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Huntmans_Copse = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Gutter = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Dragon_Aerie = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Path_to_Shaded_Woods = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Unseen_Path_to_Heide = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Heide_Tower_of_Flame = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Shaded_Woods = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Doors_of_Pharros = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Grave_of_Saints = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Giants_Memory = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Shrine_of_Amana = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Drangleic_Castle = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Undead_Crypt = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Dragon_Memories = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Chasm_of_the_Abyss = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Shulva = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Brume_Tower = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_Eleum_Loyce = new List<PARAM.Row>();
 
-            // Treasure: Brightstone Cove Tseldora
-            ScrambleTreasure(paramName, true, 10145050, 10146520, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+            List<PARAM.Row> LotRange_General = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_SoldierKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_KeyToKingsPassage = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_BastilleKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_IronKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_ForgottenKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_BrightstoneKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_AntiquatedKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_FangKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_HouseKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_LenigrastsKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_RotundaLockstone = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_GiantsKinship = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_AshenMistHeart = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_TseldoraDenKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_UndeadLockawayKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_AldiaKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_DragonTalon = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_HeavyIronKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_FrozenFlower = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_EternalSanctumKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_TowerKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_GarrisonWardKey = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_DragonStone = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_ScorchingIronScepter = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_EyeOfThePriestess = new List<PARAM.Row>();
+            List<PARAM.Row> LotRange_DullEmber = new List<PARAM.Row>();
 
-            // Treasure: Aldia's Keep
-            ScrambleTreasure(paramName, true, 10155000, 10156200, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+            // Build the row lot ranges for each Key item
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if(wrapper.Name == paramName)
+                {
+                    foreach(PARAM.Row row in wrapper.Rows)
+                    {
+                        // Exclude the forbidden rows
+                        if (!T_Forbidden_Item_Lots.Contains(row.ID) && !T_Skipped_Item_Lots.Contains(row.ID) && !T_Bird_Item_Lots.Contains(row.ID))
+                        {
+                            if(row.ID > 10025010 && row.ID <= 50376770)
+                                LotRange_General.Add(row);
 
-            // Treasure: Lost Bastille
-            ScrambleTreasure(paramName, true, 10165000, 10166490, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                            // Build each lot range, assigning the maps that the item should be allowed to be scrambled into.
 
-            // Treasure: Earthen Peak
-            ScrambleTreasure(paramName, true, 10175020, 10176630, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                            // Things Betwixt
+                            if (row.ID >= 10025010 && row.ID <= 10027000)
+                            {
+                                LotRange_Things_Betwixt.Add(row);
 
-            // Treasure: No-man's Wharf
-            ScrambleTreasure(paramName, true, 10185000, 10186170, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_LenigrastsKey.Add(row);
+                                LotRange_HouseKey.Add(row);
+                            }
+                            // Majula
+                            if (row.ID >= 10045000 && row.ID <= 10046150)
+                            {
+                                LotRange_Majula.Add(row);
 
-            // Treasure: Iron Keep
-            ScrambleTreasure(paramName, true, 10195000, 10196220, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_LenigrastsKey.Add(row);
+                                LotRange_HouseKey.Add(row);
+                            }
+                            // Forest of Fallen Giants
+                            if (row.ID >= 10105010 && row.ID <= 10106630)
+                            {
+                                LotRange_Forest_Of_Fallen_Giants.Add(row);
 
-            // Treasure: Huntman's Copse
-            ScrambleTreasure(paramName, true, 10235010, 10236270, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_LenigrastsKey.Add(row);
+                                LotRange_HouseKey.Add(row);
+                                LotRange_AntiquatedKey.Add(row);
+                                LotRange_BrightstoneKey.Add(row);
+                                LotRange_BastilleKey.Add(row);
+                                LotRange_SoldierKey.Add(row);
+                            }
+                            // Brightstone Cove Tseldora
+                            if (row.ID >= 10145050 && row.ID <= 10146520)
+                            {
+                                LotRange_Brightstone_Cove_Tseldora.Add(row);
 
-            // Treasure: The Gutter
-            ScrambleTreasure(paramName, true, 10255010, 10256500, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_TseldoraDenKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_FangKey.Add(row);
+                                LotRange_BrightstoneKey.Add(row);
+                                LotRange_IronKey.Add(row);
+                            }
+                            // Aldia's Keep
+                            if (row.ID >= 10155000 && row.ID <= 10156200)
+                            {
+                                LotRange_Aldias_Keep.Add(row);
 
-            // Treasure: Dragon Aerie
-            ScrambleTreasure(paramName, true, 10275000, 10276190, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_LenigrastsKey.Add(row);
+                                LotRange_HouseKey.Add(row);
+                                LotRange_BrightstoneKey.Add(row);
+                            }
+                            // Lost Bastille
+                            if (row.ID >= 10165000 && row.ID <= 10166490)
+                            {
+                                LotRange_Lost_Bastille.Add(row);
 
-            // Treasure: Path to Shaded Woods
-            ScrambleTreasure(paramName, true, 10295000, 10296020, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_LenigrastsKey.Add(row);
+                                LotRange_HouseKey.Add(row);
+                                LotRange_AntiquatedKey.Add(row);
+                                LotRange_BastilleKey.Add(row);
+                                LotRange_SoldierKey.Add(row);
+                            }
+                            // Earthen Peak
+                            if (row.ID >= 10175020 && row.ID <= 10176630)
+                            {
+                                LotRange_Earthen_Peak.Add(row);
 
-            // Treasure: Unseen Path to Heide
-            ScrambleTreasure(paramName, true, 10305010, 10306030, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_LenigrastsKey.Add(row);
+                                LotRange_HouseKey.Add(row);
+                                LotRange_IronKey.Add(row);
+                            }
+                            // No Man's Wharf
+                            if (row.ID >= 10185000 && row.ID <= 10186170)
+                            {
+                                LotRange_No_Mans_Wharf.Add(row);
 
-            // Treasure: Heide's Tower of Flame
-            ScrambleTreasure(paramName, true, 10315000, 10316110, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_LenigrastsKey.Add(row);
+                                LotRange_HouseKey.Add(row);
+                                LotRange_AntiquatedKey.Add(row);
+                                LotRange_BrightstoneKey.Add(row);
+                                LotRange_BastilleKey.Add(row);
+                                LotRange_SoldierKey.Add(row);
+                            }
+                            // Iron Keep
+                            if (row.ID >= 10195000 && row.ID <= 10196220)
+                            {
+                                LotRange_Iron_Keep.Add(row);
 
-            // Treasure: Shaded Woods
-            ScrambleTreasure(paramName, true, 10325000, 10326280, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_ForgottenKey.Add(row);
+                                LotRange_IronKey.Add(row);
+                                LotRange_KeyToKingsPassage.Add(row);
+                            }
+                            // Huntman's Copse
+                            if (row.ID >= 10235010 && row.ID <= 10236270)
+                            {
+                                LotRange_Huntmans_Copse.Add(row);
 
-            // Treasure: Doors of Pharros
-            ScrambleTreasure(paramName, true, 10335000, 10336080, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_UndeadLockawayKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_LenigrastsKey.Add(row);
+                                LotRange_HouseKey.Add(row);
+                            }
+                            // Gutter
+                            if (row.ID >= 10255010 && row.ID <= 10256500)
+                            {
+                                LotRange_Gutter.Add(row);
 
-            // Treasure: Grave of Saints
-            ScrambleTreasure(paramName, true, 10345000, 10346110, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_ForgottenKey.Add(row);
+                                LotRange_IronKey.Add(row);
+                            }
+                            // Dragon Aerie
+                            if (row.ID >= 10275000 && row.ID <= 10276190)
+                            {
+                                LotRange_Dragon_Aerie.Add(row);
 
-            // Treasure: Giants' Memory
-            ScrambleTreasure(paramName, true, 20105000, 20106150, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_KeyToKingsPassage.Add(row);
+                            }
+                            // Path to the Shaded Woods
+                            if (row.ID >= 10295000 && row.ID <= 10296020)
+                            {
+                                LotRange_Path_to_Shaded_Woods.Add(row);
 
-            // Treasure: Shrine of Amana
-            ScrambleTreasure(paramName, true, 20115000, 20116220, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_UndeadLockawayKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_LenigrastsKey.Add(row);
+                                LotRange_HouseKey.Add(row);
+                                LotRange_FangKey.Add(row);
+                                LotRange_BrightstoneKey.Add(row);
+                            }
+                            // Unseen Path to Heide
+                            if (row.ID >= 10305010 && row.ID <= 10306030)
+                            {
+                                LotRange_Unseen_Path_to_Heide.Add(row);
 
-            // Treasure: Drangleic Castle
-            ScrambleTreasure(paramName, true, 20215000, 20216140, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_LenigrastsKey.Add(row);
+                                LotRange_HouseKey.Add(row);
+                                LotRange_BrightstoneKey.Add(row);
+                            }
+                            // Heide Tower of Flame
+                            if (row.ID >= 10315000 && row.ID <= 10316110)
+                            {
+                                LotRange_Heide_Tower_of_Flame.Add(row);
 
-            // Treasure: Undead Crypt
-            ScrambleTreasure(paramName, true, 20245000, 20246500, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_LenigrastsKey.Add(row);
+                                LotRange_HouseKey.Add(row);
+                                LotRange_AntiquatedKey.Add(row);
+                                LotRange_BrightstoneKey.Add(row);
+                            }
+                            // Shaded Woods
+                            if (row.ID >= 10325000 && row.ID <= 10326280)
+                            {
+                                LotRange_Shaded_Woods.Add(row);
 
-            // Treasure: Dragon Memories
-            ScrambleTreasure(paramName, true, 20265000, 20266000, randomiseWeapon, true, true, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_UndeadLockawayKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_FangKey.Add(row);
+                                LotRange_BrightstoneKey.Add(row);
+                            }
+                            // Doors of Pharros
+                            if (row.ID >= 10335000 && row.ID <= 10336080)
+                            {
+                                LotRange_Doors_of_Pharros.Add(row);
 
-            // Treasure: Chasm of the Abyss
-            ScrambleTreasure(paramName, true, 40035000, 40036000, randomiseWeapon, true, true, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_TseldoraDenKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_HouseKey.Add(row);
+                                LotRange_FangKey.Add(row);
+                                LotRange_BrightstoneKey.Add(row);
+                            }
+                            // Grave of Saints
+                            if (row.ID >= 10345000 && row.ID <= 10346110)
+                            {
+                                LotRange_Grave_of_Saints.Add(row);
 
-            // Treasure: Shulva
-            ScrambleTreasure(paramName, true, 50355010, 50356670, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_DullEmber.Add(row);
+                                LotRange_AldiaKey.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_RotundaLockstone.Add(row);
+                                LotRange_HouseKey.Add(row);
+                                LotRange_BrightstoneKey.Add(row);
+                                LotRange_ForgottenKey.Add(row);
+                            }
+                            // Giant's Memory
+                            if (row.ID >= 20105000 && row.ID <= 20106150)
+                            {
+                                LotRange_Giants_Memory.Add(row);
+                            }
+                            // Shrine of Amana
+                            if (row.ID >= 20115000 && row.ID <= 20116220)
+                            {
+                                LotRange_Shrine_of_Amana.Add(row);
 
-            // Treasure: Brume Tower
-            ScrambleTreasure(paramName, true, 50365000, 50368090, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                            }
+                            // Drangleic Castle
+                            if (row.ID >= 20215000 && row.ID <= 20216140)
+                            {
+                                LotRange_Drangleic_Castle.Add(row);
 
-            // Treasure: Eleum Loyce
-            ScrambleTreasure(paramName, true, 50375500, 50376770, randomiseWeapon, ignoreKeys, ignoreTools, ignoreBossSouls, allowDuplicates);
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                                LotRange_KeyToKingsPassage.Add(row);
+                            }
+                            // Undead Crypt
+                            if (row.ID >= 20245000 && row.ID <= 20246500)
+                            {
+                                LotRange_Undead_Crypt.Add(row);
+
+                                LotRange_DragonTalon.Add(row);
+                                LotRange_HeavyIronKey.Add(row);
+                                LotRange_FrozenFlower.Add(row);
+                                LotRange_AshenMistHeart.Add(row);
+                                LotRange_GiantsKinship.Add(row);
+                            }
+                            // Dragon Memories
+                            if (row.ID >= 20265000 && row.ID <= 20266000)
+                            {
+                                LotRange_Dragon_Memories.Add(row);
+                            }
+                            // Chasm of the Abyss
+                            if (row.ID >= 40035000 && row.ID <= 40036000)
+                            {
+                                LotRange_Chasm_of_the_Abyss.Add(row);
+                            }
+                            // Shulva
+                            if (row.ID >= 50355010 && row.ID <= 50356670)
+                            {
+                                LotRange_Shulva.Add(row);
+
+                                LotRange_EternalSanctumKey.Add(row);
+                                LotRange_DragonStone.Add(row);
+                            }
+                            // Brume Tower
+                            if (row.ID >= 50365000 && row.ID <= 50368090)
+                            {
+                                LotRange_Brume_Tower.Add(row);
+
+                                LotRange_ScorchingIronScepter.Add(row);
+                                LotRange_TowerKey.Add(row);
+                            }
+                            // Eleum Loyce
+                            if (row.ID >= 50375500 && row.ID <= 50376770)
+                            {
+                                LotRange_Eleum_Loyce.Add(row);
+
+                                LotRange_EyeOfThePriestess.Add(row);
+                                LotRange_GarrisonWardKey.Add(row);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // If any Key items were not assinged during the random scramble, forcefully add them in.
+            if (!T_Ignore_Keys)
+            {
+                if (Valid_Key_Items.Count > 0)
+                {
+                    Console.WriteLine("Forcefully adding Key Items");
+                    foreach (PARAM.Row row in Valid_Key_Items)
+                    {
+                        // Soldier Key
+                        if (row.ID == 50600000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_SoldierKey, row);
+                        }
+                        // Key to King's Passage
+                        if (row.ID == 50610000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_KeyToKingsPassage, row);
+                        }
+                        // Bastille Key
+                        if (row.ID == 50800000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_BastilleKey, row);
+                        }
+                        // Iron Key
+                        if (row.ID == 50810000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_IronKey, row);
+                        }
+                        // Forgotten Key
+                        if (row.ID == 50820000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_ForgottenKey, row);
+                        }
+                        // Brightstone Key
+                        if (row.ID == 50830000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_BrightstoneKey, row);
+                        }
+                        // Antiquated Key
+                        if (row.ID == 50840000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_AntiquatedKey, row);
+                        }
+                        // Fang Key
+                        if (row.ID == 50850000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_FangKey, row);
+                        }
+                        // House Key
+                        if (row.ID == 50860000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_HouseKey, row);
+                        }
+                        // Lenigrast's Key
+                        if (row.ID == 50870000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_LenigrastsKey, row);
+                        }
+                        // Rotunda Lockstone
+                        if (row.ID == 50890000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_RotundaLockstone, row);
+                        }
+                        // Giant's Kinship
+                        if (row.ID == 50900000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_GiantsKinship, row);
+                        }
+                        // Ashen Mist Heart
+                        if (row.ID == 50910000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_AshenMistHeart, row);
+                        }
+                        // Tseldora Den Key
+                        if (row.ID == 50930000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_TseldoraDenKey, row);
+                        }
+                        // Undead Lockaway Key
+                        if (row.ID == 50970000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_UndeadLockawayKey, row);
+                        }
+                        // Aldia Key
+                        if (row.ID == 51030000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_AldiaKey, row);
+                        }
+                        // Dragon Talon
+                        if (row.ID == 52000000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_DragonTalon, row);
+                        }
+                        // Heavy Iron Key
+                        if (row.ID == 52100000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_HeavyIronKey, row);
+                        }
+                        // Frozen Flower
+                        if (row.ID == 52200000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_FrozenFlower, row);
+                        }
+                        // Eternal Sanctum Key
+                        if (row.ID == 52300000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_EternalSanctumKey, row);
+                        }
+                        // Tower Key
+                        if (row.ID == 52400000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_TowerKey, row);
+                        }
+                        // Garrison Ward Key
+                        if (row.ID == 52500000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_GarrisonWardKey, row);
+                        }
+                        // Dragon Stone
+                        if (row.ID == 52650000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_DragonStone, row);
+                        }
+                        // Scorching Iron Scepter
+                        if (row.ID == 53100000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_ScorchingIronScepter, row);
+                        }
+                        // Eye of the Priestess
+                        if (row.ID == 53600000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_EyeOfThePriestess, row);
+                        }
+                        // Dull Ember
+                        if (row.ID == 50990000)
+                        {
+                            ScrambleTreasure_ForItem(paramName, LotRange_DullEmber, row);
+                        }
+                    }
+                }
+            }
+
+            // If any Tool items were not assinged during the random scramble, forcefully add them in.
+            if (!T_Ignore_Tools)
+            {
+                if (Valid_Tool_Items.Count > 0)
+                {
+                    Console.WriteLine("Forcefully adding Tool Items");
+                    foreach (PARAM.Row row in Valid_Tool_Items)
+                    {
+                        ScrambleTreasure_ForItem(paramName, LotRange_General, row);
+                    }
+                }
+            }
+
+            // If any Boss Soul items were not assinged during the random scramble, forcefully add them in.
+            if (!T_Ignore_Boss_Souls)
+            {
+                if (Valid_Boss_Soul_Items.Count > 0)
+                {
+                    Console.WriteLine("Forcefully adding Boss Soul Items");
+                    foreach (PARAM.Row row in Valid_Boss_Soul_Items)
+                    {
+                        ScrambleTreasure_ForItem(paramName, LotRange_General, row);
+                    }
+                }
+            }
+
+            // Estus Flask Shard
+            EnsureItemAvailability(paramName, LotRange_General, 60525000, 11);
+
+            // Sublime Bone Dust
+            EnsureItemAvailability(paramName, LotRange_General, 60526000, 5);
+
+            // Pharros' Lockstone
+            EnsureItemAvailability(paramName, LotRange_Things_Betwixt, 60536000, 1);
+            EnsureItemAvailability(paramName, LotRange_Majula, 60536000, 1);
+            EnsureItemAvailability(paramName, LotRange_Forest_Of_Fallen_Giants, 60536000, 2);
+            EnsureItemAvailability(paramName, LotRange_Brightstone_Cove_Tseldora, 60536000, 2);
+            EnsureItemAvailability(paramName, LotRange_Aldias_Keep, 60536000, 2);
+            EnsureItemAvailability(paramName, LotRange_Lost_Bastille, 60536000, 2);
+            EnsureItemAvailability(paramName, LotRange_Earthen_Peak, 60536000, 1);
+            EnsureItemAvailability(paramName, LotRange_No_Mans_Wharf, 60536000, 2);
+            EnsureItemAvailability(paramName, LotRange_Iron_Keep, 60536000, 2);
+            EnsureItemAvailability(paramName, LotRange_Huntmans_Copse, 60536000, 1);
+            EnsureItemAvailability(paramName, LotRange_Gutter, 60536000, 1);
+            EnsureItemAvailability(paramName, LotRange_Dragon_Aerie, 60536000, 1);
+            EnsureItemAvailability(paramName, LotRange_Heide_Tower_of_Flame, 60536000, 1);
+            EnsureItemAvailability(paramName, LotRange_Shaded_Woods, 60536000, 1);
+            EnsureItemAvailability(paramName, LotRange_Doors_of_Pharros, 60536000, 3);
+            EnsureItemAvailability(paramName, LotRange_Grave_of_Saints, 60536000, 2);
+            EnsureItemAvailability(paramName, LotRange_Shrine_of_Amana, 60536000, 1);
+            EnsureItemAvailability(paramName, LotRange_Drangleic_Castle, 60536000, 2);
+            EnsureItemAvailability(paramName, LotRange_Undead_Crypt, 60536000, 1);
+            EnsureItemAvailability(paramName, LotRange_Shulva, 60536000, 2);
+            EnsureItemAvailability(paramName, LotRange_Brume_Tower, 60536000, 2);
+            EnsureItemAvailability(paramName, LotRange_Eleum_Loyce, 60536000, 2);
+
+            // Fragrant Branch of Yore
+            EnsureItemAvailability(paramName, LotRange_Things_Betwixt, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Majula, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Forest_Of_Fallen_Giants, 60537000, 2);
+            EnsureItemAvailability(paramName, LotRange_Brightstone_Cove_Tseldora, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Aldias_Keep, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Lost_Bastille, 60537000, 2);
+            EnsureItemAvailability(paramName, LotRange_Earthen_Peak, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_No_Mans_Wharf, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Iron_Keep, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Huntmans_Copse, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Gutter, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Dragon_Aerie, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Heide_Tower_of_Flame, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Shaded_Woods, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Doors_of_Pharros, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Grave_of_Saints, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Shrine_of_Amana, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Drangleic_Castle, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Undead_Crypt, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Shulva, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Brume_Tower, 60537000, 1);
+            EnsureItemAvailability(paramName, LotRange_Eleum_Loyce, 60537000, 1);
+
+            // Smelter Wedge
+            EnsureItemAvailability(paramName, LotRange_Brume_Tower, 53200000, 10);
 
             return regulation;
         }
 
-        public bool ScrambleTreasure(string paramName, bool condition, int start, int end, bool randomiseWeapon, bool ignoreKeys, bool ignoreTools, bool ignoreBossSouls, bool allowDuplicates, List<int> ignore_list = null)
+        public void EnsureItemAvailability(string paramName, List<PARAM.Row> list, int target_id, int target_amount)
+        {
+            int counter = 0;
+
+            Console.WriteLine($"Ensuring {target_id} is available");
+
+            while (counter < target_amount)
+            {
+                Console.WriteLine($"{target_id}");
+
+                int count = 0;
+                foreach (PARAM.Row row in list)
+                {
+                    int item_id = (int)row["item_lot_0"].Value;
+
+                    if (item_id == target_id)
+                        count = count + 1;
+                }
+
+                if (counter < target_amount)
+                {
+                    Console.WriteLine($"{counter}");
+                    ScrambleTreasure_ForItem(paramName, list, ItemParam.Rows.Find(row => row.ID == target_id));
+                }
+
+                counter = count;
+            }
+
+            Console.WriteLine($"Finished ensuring {target_id} is available");
+        }
+
+        public bool ScrambleTreasure_ForItem(string paramName, List<PARAM.Row> list, PARAM.Row new_item)
+        {
+            bool assigned = false;
+
+            int loop = 0;
+
+            // Iterate until it can be assigned
+            while (!assigned || loop <= 1000)
+            {
+                foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+                {
+                    if (wrapper.Name == paramName)
+                    {
+                        PARAM param = wrapper.Param;
+                        var param_rows = list;
+
+                        PARAM.Row row = param_rows[rand.Next(param_rows.Count)];
+
+                        int item_id = (int)row["item_lot_0"].Value;
+
+                        bool replacableRow = false;
+
+                        foreach (PARAM.Row cRow in Valid_Consumable_Items)
+                        {
+                            if (cRow.ID == item_id)
+                                replacableRow = true;
+                        }
+                        foreach (PARAM.Row mRow in Valid_Material_Items)
+                        {
+                            if (mRow.ID == item_id)
+                                replacableRow = true;
+                        }
+
+                        // This row can be replaced
+                        if (replacableRow)
+                        {
+                            PARAM.Row item = MakeItemLot(row);
+
+                            item["item_lot_0"].Value = new_item.ID;
+                            item["amount_lot_0"].Value = 1;
+                            item["chance_lot_0"].Value = 1;
+
+                            assigned = true;
+                        }
+                    }
+
+                    loop = loop + 1;
+                }
+            }
+
+            return true;
+        }
+
+        public bool ScrambleTreasure(string paramName, bool condition, int start, int end)
         {
             if (condition)
             {
@@ -374,14 +1099,9 @@ namespace DS2_Scrambler
                     if (wrapper.Name == paramName)
                     {
                         PARAM param = wrapper.Param;
-                        var param_rows = param.Rows.Where(row => row.ID >= start && row.ID <= end).ToList();
+                        var param_rows = param.Rows.Where(row => row.ID >= start && row.ID <= end && !T_Skipped_Item_Lots.Contains(row.ID)).ToList();
 
-                        if (ignore_list != null)
-                        {
-                            param_rows = param_rows.Where(row => !ignore_list.Contains(row.ID)).ToList();
-                        }
-
-                        RandomiseItemLot(param_rows, ignoreKeys, ignoreTools, ignoreBossSouls, randomiseWeapon, allowDuplicates);
+                        RandomiseItemLot(param_rows);
                     }
                 }
             }
@@ -389,20 +1109,23 @@ namespace DS2_Scrambler
             return true;
         }
 
-        public void RandomiseItemLot(List<PARAM.Row> param_rows, bool ignoreKeys, bool ignoreTools, bool ignoreBossSouls, bool randomiseWeapon, bool allowDuplicates)
+        public void RandomiseItemLot(List<PARAM.Row> param_rows)
         {
             foreach (PARAM.Row row in param_rows)
             {
                 bool editRow = true;
 
                 // Skip row if the ID matches one of these lists
-                if (ignoreKeys && HasMatchingItemLot(row, Treasure_Keys))
+                if(HasMatchingItemLot(row, T_Fixed_Items))
                     editRow = false;
 
-                if (ignoreTools && HasMatchingItemLot(row, Treasure_Tools))
+                if (T_Ignore_Keys && HasMatchingItemLot(row, Treasure_Keys))
                     editRow = false;
 
-                if (ignoreBossSouls && HasMatchingItemLot(row, Treasure_Boss_Souls))
+                if (T_Ignore_Tools && HasMatchingItemLot(row, Treasure_Tools))
+                    editRow = false;
+
+                if (T_Ignore_Boss_Souls && HasMatchingItemLot(row, Treasure_Boss_Souls))
                     editRow = false;
 
                 if (editRow)
@@ -420,14 +1143,18 @@ namespace DS2_Scrambler
                         item["amount_lot_0"].Value = 1;
                         item["chance_lot_0"].Value = 1;
 
-                        if(randomiseWeapon)
+                        if (rand.Next(100) <= 15)
                         {
                             item["reinforcement_lot_0"].Value = rand.Next(9);
                             item["infusion_lot_0"].Value = rand.Next(9);
                         }
+                        else
+                        {
+                            item["reinforcement_lot_0"].Value = 0;
+                            item["infusion_lot_0"].Value = 0;
+                        }
 
-                        if (!allowDuplicates)
-                            Valid_Weapons.Remove(Valid_Weapons[value]);
+                        Valid_Weapons.Remove(Valid_Weapons[value]);
                     }
                     else if (Valid_Weapons.Count == 0)
                     {
@@ -443,12 +1170,11 @@ namespace DS2_Scrambler
                         item["amount_lot_0"].Value = 1;
                         item["chance_lot_0"].Value = 1;
 
-                        if (!allowDuplicates)
-                            Valid_Armor.Remove(Valid_Armor[value]);
+                        Valid_Armor.Remove(Valid_Armor[value]);
 
                         int bonusRoll = rand.Next(100);
 
-                        if(bonusRoll >= 30)
+                        if(bonusRoll >= 50)
                         {
                             value = rand.Next(Valid_Armor.Count);
 
@@ -456,11 +1182,10 @@ namespace DS2_Scrambler
                             item["amount_lot_1"].Value = 1;
                             item["chance_lot_1"].Value = 1;
 
-                            if (!allowDuplicates)
-                                Valid_Armor.Remove(Valid_Armor[value]);
+                            Valid_Armor.Remove(Valid_Armor[value]);
                         }
 
-                        if (bonusRoll >= 60)
+                        if (bonusRoll >= 80)
                         {
                             value = rand.Next(Valid_Armor.Count);
 
@@ -468,11 +1193,10 @@ namespace DS2_Scrambler
                             item["amount_lot_2"].Value = 1;
                             item["chance_lot_2"].Value = 1;
 
-                            if (!allowDuplicates)
-                                Valid_Armor.Remove(Valid_Armor[value]);
+                            Valid_Armor.Remove(Valid_Armor[value]);
                         }
 
-                        if (bonusRoll >= 90)
+                        if (bonusRoll >= 95)
                         {
                             value = rand.Next(Valid_Armor.Count);
 
@@ -480,8 +1204,7 @@ namespace DS2_Scrambler
                             item["amount_lot_3"].Value = 1;
                             item["chance_lot_3"].Value = 1;
 
-                            if (!allowDuplicates)
-                                Valid_Armor.Remove(Valid_Armor[value]);
+                            Valid_Armor.Remove(Valid_Armor[value]);
                         }
                     }
                     else if (Valid_Armor.Count == 0)
@@ -498,8 +1221,7 @@ namespace DS2_Scrambler
                         item["amount_lot_0"].Value = 1;
                         item["chance_lot_0"].Value = 1;
 
-                        if (!allowDuplicates)
-                            Valid_Spells.Remove(Valid_Spells[value]);
+                        Valid_Spells.Remove(Valid_Spells[value]);
 
                     }
                     else if (Valid_Spells.Count == 0)
@@ -516,8 +1238,7 @@ namespace DS2_Scrambler
                         item["amount_lot_0"].Value = 1;
                         item["chance_lot_0"].Value = 1;
 
-                        if (!allowDuplicates)
-                            Valid_Rings.Remove(Valid_Rings[value]);
+                        Valid_Rings.Remove(Valid_Rings[value]);
                     }
                     else if (Valid_Rings.Count == 0)
                     {
@@ -525,7 +1246,9 @@ namespace DS2_Scrambler
                     }
 
                     // Key
-                    if (!ignoreKeys && Valid_Key_Items.Count > 0 && roll >= 40 && roll < 45)
+                    // Do these forcefully always
+                    /*
+                    if (!T_Ignore_Keys && Valid_Key_Items.Count > 0 && roll >= 40 && roll < 45 && !HasMatchingItemLot(row, T_Forbidden_Item_Lots))
                     {
                         int value = rand.Next(Valid_Key_Items.Count);
 
@@ -535,11 +1258,11 @@ namespace DS2_Scrambler
 
                         Valid_Key_Items.Remove(Valid_Key_Items[value]);
                     }
-                    else if (!ignoreKeys && Valid_Key_Items.Count == 0)
+                    else if (!T_Ignore_Keys && (Valid_Key_Items.Count == 0 || HasMatchingItemLot(row, T_Forbidden_Item_Lots)))
                     {
                         roll = roll + 5;
                     }
-                    else if(ignoreKeys && roll >= 40 && roll < 45)
+                    else if(T_Ignore_Keys && roll >= 40 && roll < 45 && !HasMatchingItemLot(row, T_Forbidden_Item_Lots))
                     {
                         int value = rand.Next(Valid_Material_Items.Count);
 
@@ -547,9 +1270,10 @@ namespace DS2_Scrambler
                         item["amount_lot_0"].Value = rand.Next(5);
                         item["chance_lot_0"].Value = 1;
                     }
+                    */
 
                     // Tool
-                    if (!ignoreTools && Valid_Tool_Items.Count > 0 && roll >= 45 && roll < 50)
+                    if (!T_Ignore_Tools && Valid_Tool_Items.Count > 0 && roll >= 40 && roll < 42)
                     {
                         int value = rand.Next(Valid_Tool_Items.Count);
 
@@ -559,11 +1283,11 @@ namespace DS2_Scrambler
 
                         Valid_Tool_Items.Remove(Valid_Tool_Items[value]);
                     }
-                    else if (!ignoreTools && Valid_Tool_Items.Count == 0)
+                    else if (!T_Ignore_Tools && Valid_Tool_Items.Count == 0)
                     {
                         roll = roll + 5;
                     }
-                    else if (ignoreTools && roll >= 45 && roll < 50)
+                    else if (T_Ignore_Tools && roll >= 40 && roll < 42)
                     {
                         int value = rand.Next(Valid_Material_Items.Count);
 
@@ -573,7 +1297,7 @@ namespace DS2_Scrambler
                     }
 
                     // Boss Soul
-                    if (!ignoreBossSouls && Valid_Boss_Soul_Items.Count > 0 && roll >= 50 && roll < 55)
+                    if (!T_Ignore_Boss_Souls && Valid_Boss_Soul_Items.Count > 0 && roll >= 42 && roll < 46)
                     {
                         int value = rand.Next(Valid_Boss_Soul_Items.Count);
 
@@ -583,11 +1307,11 @@ namespace DS2_Scrambler
 
                         Valid_Boss_Soul_Items.Remove(Valid_Boss_Soul_Items[value]);
                     }
-                    else if (!ignoreBossSouls && Valid_Boss_Soul_Items.Count == 0)
+                    else if (!T_Ignore_Boss_Souls && Valid_Boss_Soul_Items.Count == 0)
                     {
                         roll = roll + 5;
                     }
-                    else if (ignoreBossSouls && roll >= 50 && roll < 55)
+                    else if (T_Ignore_Boss_Souls && roll >= 42 && roll < 46)
                     {
                         int value = rand.Next(Valid_Material_Items.Count);
 
@@ -597,7 +1321,7 @@ namespace DS2_Scrambler
                     }
 
                     // Material
-                    if (roll >= 55 && roll < 60)
+                    if (roll >= 46 && roll < 60)
                     {
                         int value = rand.Next(Valid_Material_Items.Count);
 
@@ -678,31 +1402,18 @@ namespace DS2_Scrambler
 
             return match;
         }
-        #endregion
 
-        #region Scramble - Param
-        public Regulation ScrambleParam(string paramName, bool useGenerateType)
+        public bool HasMatchingItemLot(PARAM.Row itemlot, List<int> list)
         {
-            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
-            {
-                if (wrapper.Name == paramName)
-                {
-                    PARAM param = wrapper.Param;
-                    var param_rows = param.Rows;
+            bool match = false;
 
-                    if (!useGenerateType)
-                    {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
-                    }
-                    else if(useGenerateType)
-                    {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
-                        GenerateValuesForParam(wrapper, param_rows);
-                    }
-                }
+            for (int x = 0; x < 9; x++)
+            {
+                if (list.Contains((int)itemlot[$"item_lot_{x}"].Value))
+                    match = true;
             }
 
-            return regulation;
+            return match;
         }
         #endregion
 
