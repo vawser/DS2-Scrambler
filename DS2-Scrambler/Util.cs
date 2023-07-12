@@ -17,7 +17,7 @@ namespace DS2_Scrambler
 
         public static void CopyMod(string basePath, string scrambledPath)
         {
-            if (basePath == "")
+            if (basePath == "" || basePath == null || scrambledPath == "" || scrambledPath == null)
             {
                 return;
             }

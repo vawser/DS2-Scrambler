@@ -529,6 +529,253 @@ namespace DS2_Scrambler
         }
         #endregion
 
+        #region Scramble - RingParam
+        public Regulation Scramble_RingParam(string paramName, bool useGenerateType)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows.Where(row => row.ID >= 40010000).ToList();
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        GenerateValuesForParam(wrapper, param_rows);
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - SpellParam
+        public Regulation Scramble_SpellParam(string paramName, bool useGenerateType, bool ignoreRequirements)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows.Where(row => row.ID >= 31010000 && row.ID <= 35310000).ToList();
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        GenerateValuesForParam(wrapper, param_rows);
+                    }
+
+                    if (ignoreRequirements)
+                    {
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                if (cell.Def.InternalName.Contains("requirement"))
+                                    cell.Value = 0;
+                            }
+                        }
+                    }
+
+                    // Update upper cast tiers based on shuffled base tier
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        byte baseCasts = 1;
+
+                        byte growth = (byte)rand.Next(1, 3);
+
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            if (cell.Def.InternalName == "casts_tier_1")
+                                baseCasts = (byte)cell.Value;
+                        }
+
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            if (cell.Def.InternalName == "casts_tier_2")
+                                cell.Value = (byte)(baseCasts + (growth * 1));
+
+                            if (cell.Def.InternalName == "casts_tier_3")
+                                cell.Value = (byte)(baseCasts + (growth * 2));
+
+                            if (cell.Def.InternalName == "casts_tier_4")
+                                cell.Value = (byte)(baseCasts + (growth * 3));
+
+                            if (cell.Def.InternalName == "casts_tier_5")
+                                cell.Value = (byte)(baseCasts + (growth * 4));
+
+                            if (cell.Def.InternalName == "casts_tier_6")
+                                cell.Value = (byte)(baseCasts + (growth * 5));
+
+                            if (cell.Def.InternalName == "casts_tier_7")
+                                cell.Value = (byte)(baseCasts + (growth * 6));
+
+                            if (cell.Def.InternalName == "casts_tier_8")
+                                cell.Value = (byte)(baseCasts + (growth * 7));
+
+                            if (cell.Def.InternalName == "casts_tier_9")
+                                cell.Value = (byte)(baseCasts + (growth * 8));
+
+                            if (cell.Def.InternalName == "casts_tier_10")
+                                cell.Value = (byte)(baseCasts + (growth * 9));
+                        }
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - BulletParam
+        public Regulation Scramble_BulletParam(string paramName, bool useGenerateType, bool enforceVFX)
+        {
+            // Build a list of usable VFX IDs
+            List<int> vfxIDs = new List<int>();
+
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                // Get VFX IDs from the player/enemy bullets
+                if (wrapper.Name == "BulletParam")
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    if (enforceVFX)
+                    {
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                string cName = cell.Def.InternalName;
+
+                                if (cName == "sfx_id" || cName == "hit_sfx_id" || cName == "expire_sfx_id")
+                                {
+                                    int value = (int)cell.Value;
+
+                                    if (value != 0)
+                                        vfxIDs.Add(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        GenerateValuesForParam(wrapper, param_rows);
+                    }
+
+                    // Force all bullet VFX fields to have a non-empty VFX ID
+                    if (enforceVFX)
+                    {
+                        // Apply VFX IDs randomly
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                string cName = cell.Def.InternalName;
+
+                                if (cName == "sfx_id" || cName == "hit_sfx_id" || cName == "expire_sfx_id")
+                                {
+                                    int value = vfxIDs[rand.Next(vfxIDs.Count)];
+                                    cell.Value = value;
+                                }
+                            }
+                        }
+                    }
+
+                    // Update child bullet attributes if child bullet_id has changed
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        bool hasChildBulletID_1 = false;
+                        bool hasChildBulletID_2 = false;
+                        bool hasChildBulletID_3 = false;
+
+                        int childBulletID_1 = -1;
+                        int childBulletID_2 = -1;
+                        int childBulletID_3 = -1;
+
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            if (cell.Def.InternalName == "child_bullet_1_bullet_id")
+                            {
+                                hasChildBulletID_1 = true;
+                                childBulletID_1 = (int)cell.Value;
+                            }
+                            if (cell.Def.InternalName == "child_bullet_1_damage_id" && hasChildBulletID_1)
+                            {
+                                cell.Value = childBulletID_1;
+                            }
+
+                            if (cell.Def.InternalName == "child_bullet_2_bullet_id")
+                            {
+                                hasChildBulletID_2 = true;
+                                childBulletID_2 = (int)cell.Value;
+                            }
+                            if (cell.Def.InternalName == "child_bullet_2_damage_id" && hasChildBulletID_2)
+                            {
+                                cell.Value = childBulletID_2;
+                            }
+
+                            if (cell.Def.InternalName == "child_bullet_3_bullet_id")
+                            {
+                                hasChildBulletID_3 = true;
+                                childBulletID_3 = (int)cell.Value;
+                            }
+                            if (cell.Def.InternalName == "child_bullet_3_damage_id" && hasChildBulletID_3)
+                            {
+                                cell.Value = childBulletID_3;
+                            }
+
+                            if (hasChildBulletID_1 || hasChildBulletID_2 || hasChildBulletID_3)
+                            {
+                                if (cell.Def.InternalName == "spawn_child_bullet_on_hit")
+                                {
+                                    cell.Value = 1;
+                                }
+                                if (cell.Def.InternalName == "spawn_child_bullet_on_expire")
+                                {
+                                    cell.Value = 1;
+                                }
+                                if (cell.Def.InternalName == "child_bullet_spawn_delay")
+                                {
+                                    if (rand.Next(100) < 25)
+                                        cell.Value = rand.NextDouble();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
         #region Scramble - ArrowParam
         public Regulation Scramble_ArrowParam(string paramName, bool useGenerateType)
         {
@@ -1077,11 +1324,43 @@ namespace DS2_Scrambler
         #endregion
 
         #region Scramble - EnemyBulletParam
-        public Regulation Scramble_EnemyBulletParam(string paramName, bool useGenerateType, bool isBossOnly = false)
+        public Regulation Scramble_EnemyBulletParam(string paramName, bool useGenerateType, bool enforceVFX, bool isBossOnly = false)
         {
             string fieldAppend = "";
             if (isBossOnly)
                 fieldAppend = "_Boss";
+
+            // Build a list of usable VFX IDs
+            List<int> vfxIDs = new List<int>();
+
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                // Get VFX IDs from the player/enemy bullets
+                if (wrapper.Name == "BulletParam" || wrapper.Name == "EnemyBulletParam")
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    if (enforceVFX)
+                    {
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                string cName = cell.Def.InternalName;
+
+                                if (cName == "sfx_id" || cName == "hit_sfx_id" || cName == "expire_sfx_id")
+                                {
+                                    int value = (int)cell.Value;
+
+                                    if (value != 0)
+                                        vfxIDs.Add(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
             {
@@ -1107,6 +1386,25 @@ namespace DS2_Scrambler
                     {
                         ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields, fieldAppend);
                         GenerateValuesForParam(wrapper, param_rows, fieldAppend);
+                    }
+
+                    // Force all bullet VFX fields to have a non-empty VFX ID
+                    if (enforceVFX)
+                    {
+                        // Apply VFX IDs randomly
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                string cName = cell.Def.InternalName;
+
+                                if (cName == "sfx_id" || cName == "hit_sfx_id" || cName == "expire_sfx_id")
+                                {
+                                    int value = vfxIDs[rand.Next(vfxIDs.Count)];
+                                    cell.Value = value;
+                                }
+                            }
+                        }
                     }
 
                     // Adjustments
@@ -1754,6 +2052,148 @@ namespace DS2_Scrambler
 
                                 if (cell.Def.InternalName == "bullet_id_4")
                                     cell.Value = 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - SystemBulletParam
+        public Regulation Scramble_SystemBulletParam(string paramName, bool useGenerateType, bool enforceVFX, bool onlyTraps)
+        {
+            // Build a list of usable VFX IDs
+            List<int> vfxIDs = new List<int>();
+
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                // Get VFX IDs from the player/map bullets
+                if (wrapper.Name == "BulletParam" || wrapper.Name == "SystemBulletParam")
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    if (enforceVFX)
+                    {
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                string cName = cell.Def.InternalName;
+
+                                if (cName == "sfx_id" || cName == "hit_sfx_id" || cName == "expire_sfx_id")
+                                {
+                                    int value = (int)cell.Value;
+
+                                    if (value != 0)
+                                        vfxIDs.Add(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    if (onlyTraps)
+                        param_rows = param.Rows.Where(row => row.ID <= 220100700).ToList();
+
+                    if (!useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                    }
+                    else if (useGenerateType)
+                    {
+                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        GenerateValuesForParam(wrapper, param_rows);
+                    }
+
+                    // Force all bullet VFX fields to have a non-empty VFX ID
+                    if (enforceVFX)
+                    {
+                        // Apply VFX IDs randomly
+                        foreach (PARAM.Row row in param_rows)
+                        {
+                            foreach (PARAM.Cell cell in row.Cells)
+                            {
+                                string cName = cell.Def.InternalName;
+
+                                if (cName == "sfx_id" || cName == "hit_sfx_id" || cName == "expire_sfx_id")
+                                {
+                                    int value = vfxIDs[rand.Next(vfxIDs.Count)];
+                                    cell.Value = value;
+                                }
+                            }
+                        }
+                    }
+
+                    // Update child bullet attributes if child bullet_id has changed
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        bool hasChildBulletID_1 = false;
+                        bool hasChildBulletID_2 = false;
+                        bool hasChildBulletID_3 = false;
+
+                        int childBulletID_1 = -1;
+                        int childBulletID_2 = -1;
+                        int childBulletID_3 = -1;
+
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            if (cell.Def.InternalName == "child_bullet_1_bullet_id")
+                            {
+                                hasChildBulletID_1 = true;
+                                childBulletID_1 = (int)cell.Value;
+                            }
+                            if (cell.Def.InternalName == "child_bullet_1_damage_id" && hasChildBulletID_1)
+                            {
+                                cell.Value = childBulletID_1;
+                            }
+
+                            if (cell.Def.InternalName == "child_bullet_2_bullet_id")
+                            {
+                                hasChildBulletID_2 = true;
+                                childBulletID_2 = (int)cell.Value;
+                            }
+                            if (cell.Def.InternalName == "child_bullet_2_damage_id" && hasChildBulletID_2)
+                            {
+                                cell.Value = childBulletID_2;
+                            }
+
+                            if (cell.Def.InternalName == "child_bullet_3_bullet_id")
+                            {
+                                hasChildBulletID_3 = true;
+                                childBulletID_3 = (int)cell.Value;
+                            }
+                            if (cell.Def.InternalName == "child_bullet_3_damage_id" && hasChildBulletID_3)
+                            {
+                                cell.Value = childBulletID_3;
+                            }
+
+                            if (hasChildBulletID_1 || hasChildBulletID_2 || hasChildBulletID_3)
+                            {
+                                if (cell.Def.InternalName == "spawn_child_bullet_on_hit")
+                                {
+                                    cell.Value = 1;
+                                }
+                                if (cell.Def.InternalName == "spawn_child_bullet_on_expire")
+                                {
+                                    cell.Value = 1;
+                                }
+                                if (cell.Def.InternalName == "child_bullet_spawn_delay")
+                                {
+                                    if (rand.Next(100) < 25)
+                                        cell.Value = rand.NextDouble();
+                                }
                             }
                         }
                     }
