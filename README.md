@@ -2,7 +2,9 @@
 
 Randomizes game params in Dark Souls II: Scholar of the First Sin.
 
-Supports randomisation of various game parameters, such as enemies, treasures, etc.
+Supports randomisation of various game parameters, such as enemies, treasures, etc. 
+
+The scrambler is very configurable, and any number of options may be used to produce a scrambled mod.
 
 # Usage
 1. Run the application.
