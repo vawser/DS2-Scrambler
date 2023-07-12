@@ -4,33 +4,33 @@ public List<int> LotRange_Covenant = new List<int> { 2001000, 2009013 };
 public List<int> LotRange_Bird = new List<int> { 50000000, 50000303 };
 public List<int> LotRange_Event = new List<int> { 60001000, 60050000 };
 
-public List<int> LotRange_Things_Betwixt = new List<int> { 10025010, 10027000 };
-public List<int> LotRange_Majula = new List<int> { 10045000, 10046150 };
-public List<int> LotRange_Forest_Of_Fallen_Giants = new List<int> { 10105010, 10106630 };
-public List<int> LotRange_Brightstone_Cove_Tseldora = new List<int> { 10145050, 10146520 };
-public List<int> LotRange_Aldias_Keep = new List<int> { 10155000, 10156200 };
-public List<int> LotRange_Lost_Bastille = new List<int> { 10165000, 10166490 };
-public List<int> LotRange_Earthen_Peak = new List<int> { 10175020, 10176630 };
-public List<int> LotRange_No_Mans_Wharf = new List<int> { 10185000, 10186170 };
-public List<int> LotRange_Iron_Keep = new List<int> { 10195000, 10196220 };
-public List<int> LotRange_Huntmans_Copse = new List<int> { 10235010, 10236270 };
-public List<int> LotRange_Gutter = new List<int> { 10255010, 10256500 };
-public List<int> LotRange_Dragon_Eerie = new List<int> { 10275000, 10276190 };
-public List<int> LotRange_Path_to_Shaded_Woods = new List<int> { 10295000, 10296020 };
-public List<int> LotRange_Unseen_Path_to_Heide = new List<int> { 10305010, 10306030 };
-public List<int> LotRange_Heide_Tower_of_Flame = new List<int> { 10315000, 10316110 };
-public List<int> LotRange_Shaded_Woods = new List<int> { 10325000, 10326280 };
-public List<int> LotRange_Doors_of_Pharros = new List<int> { 10335000, 10336080 };
-public List<int> LotRange_Grave_of_Saints = new List<int> { 10345000, 10346110 };
-public List<int> LotRange_Giants_Memory = new List<int> { 20105000, 20106150 };
-public List<int> LotRange_Shrine_of_Amana = new List<int> { 20115000, 20116220 };
-public List<int> LotRange_Drangleic_Castle = new List<int> { 20215000, 20216140 };
-public List<int> LotRange_Undead_Crypt = new List<int> { 20245000, 20246500 };
-public List<int> LotRange_Dragon_Memories = new List<int> { 20265000, 20266000 };
-public List<int> LotRange_Chasm_of_the_Abyss = new List<int> { 40035000, 40036000 };
-public List<int> LotRange_Shulva = new List<int> { 50355010, 50356670 };
-public List<int> LotRange_Brume_Tower = new List<int> { 50365000, 50368090 };
-public List<int> LotRange_Eleum_Loyce = new List<int> { 50375500, 50376770 };
+List<PARAM.Row> LotRange_Things_Betwixt = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Majula = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Forest_Of_Fallen_Giants = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Brightstone_Cove_Tseldora = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Aldias_Keep = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Lost_Bastille = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Earthen_Peak = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_No_Mans_Wharf = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Iron_Keep = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Huntmans_Copse = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Gutter = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Dragon_Aerie = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Path_to_Shaded_Woods = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Unseen_Path_to_Heide = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Heide_Tower_of_Flame = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Shaded_Woods = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Doors_of_Pharros = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Grave_of_Saints = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Giants_Memory = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Shrine_of_Amana = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Drangleic_Castle = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Undead_Crypt = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Dragon_Memories = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Chasm_of_the_Abyss = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Shulva = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Brume_Tower = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_Eleum_Loyce = new List<PARAM.Row>();
 
 public List<int> LotRange_Vanilla = new List<int> { 10025010, 40036000 };
 public List<int> LotRange_DLC = new List<int> { 50355010, 50376770 };
@@ -71,10 +71,19 @@ List<PARAM.Row> LotRange_KeyToKingsPassage = new List<PARAM.Row>();
 List<PARAM.Row> LotRange_BastilleKey = new List<PARAM.Row>();
 List<PARAM.Row> LotRange_IronKey = new List<PARAM.Row>();
 List<PARAM.Row> LotRange_ForgottenKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_BrightstoneKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_AntiquatedKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_FangKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_HouseKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_LenigrastsKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_RotundaLockstone = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_GiantsKinship = new List<PARAM.Row>();
+List<PARAM.Row> LotRangeAshenMistHeart = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_TseldoraDenKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_UndeadLockawayKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_AldiaKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_DragonTalon = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_HeavyIronKey = new List<PARAM.Row>();
+List<PARAM.Row> LotRange_FrozenFlower = new List<PARAM.Row>();
 
-
-
-
-
-
-
+List<PARAM.Row> LotRange_DullEmber = new List<PARAM.Row>();

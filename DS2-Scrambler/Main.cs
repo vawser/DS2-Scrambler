@@ -110,7 +110,7 @@ namespace DS2_Scrambler
                 if (c_Scramble_ItemLotParam2_Other.Checked)
                 {
                     progress.Report("Scramble: Treasure - Map");
-                    reg = scrambler.Scramble_ItemLotParam_Map("ItemLotParam2_Other",     
+                    reg = scrambler.Scramble_Treasure("ItemLotParam2_Other",     
                       c_IgnoreKeys_ItemLotParam_Other.Checked, 
                       c_IgnoreTools_ItemLotParam_Other.Checked,
                       c_IgnoreBossSouls_ItemLotParam_Other.Checked,

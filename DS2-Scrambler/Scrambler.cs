@@ -293,7 +293,7 @@ namespace DS2_Scrambler
             50000000, 50000001, 50000002, 50000003, 50000100, 50000101, 50000102, 50000103, 50000200, 50000201, 50000202, 50000203, 50000300, 50000301, 50000302, 50000303, 50001000,
         };
 
-        public Regulation Scramble_ItemLotParam_Map(string paramName, bool ignoreKeys, bool ignoreTools, bool ignoreBossSouls, bool includeBossTreasure, bool includeCharacterTreasure, bool includeCovenantTreasure, bool includeBirdTreasure, bool includeEventTreasure)
+        public Regulation Scramble_Treasure(string paramName, bool ignoreKeys, bool ignoreTools, bool ignoreBossSouls, bool includeBossTreasure, bool includeCharacterTreasure, bool includeCovenantTreasure, bool includeBirdTreasure, bool includeEventTreasure)
         {
             T_Ignore_Keys = ignoreKeys;
             T_Ignore_Tools = ignoreTools;
