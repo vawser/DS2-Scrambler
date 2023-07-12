@@ -24,11 +24,3 @@
 53100000;Scorching Iron Scepter
 53200000;Smelter Wedge
 53600000;Eye of the Priestess
-62170000;Seed of a Tree of Giants
-62190000;Petrified Egg
-60155000;Estus Flask
-60155010;Estus Flask
-60155020;Estus Flask
-60155030;Estus Flask
-60360000;Darksign
-60355000;Aged Feather
