@@ -2,9 +2,7 @@
 
 Randomizes game params in Dark Souls II: Scholar of the First Sin.
 
-Supports randomisation of item loot, enemy location, enemy attributes and equipment, boss attributes and player attributes and equipment.
-
-![scrambler](https://github.com/vawser/DS2-Scrambler/assets/4229194/86c54591-c891-4fed-8a85-5c8c6b8944ba)
+Supports randomisation of various game parameters, such as enemies, treasures, etc.
 
 # Usage
 1. Run the application.
@@ -13,6 +11,11 @@ Supports randomisation of item loot, enemy location, enemy attributes and equipm
 4. Press Scramble. A new mod scalled *MyMod-Scrambled* will be created in the same directory as *MyMod*.
 
 To run the mod, I recommend you use ModEngine.
+
+# Warning
+The scrambler attempts to blend chaos with stability, but some randomisation options such as *Generate Attributes* and *Enforce Visuals* for Projectiles may lead to crashes. 
+
+If a crash occurs, you can re-use the Scrambler to produce a new set of randomised params, disabling any options you suspect caused the crash, and then continue the same playthrough.
 
 # Credits
 * [SoulsFormats](https://github.com/JKAnderson/SoulsFormats) by TKGP.
