@@ -168,13 +168,13 @@
             this.label41 = new System.Windows.Forms.Label();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
             this.c_Enemy_Location_IncludeSpecial = new System.Windows.Forms.CheckBox();
-            this.label60 = new System.Windows.Forms.Label();
             this.c_Enemy_Location_Ordered = new System.Windows.Forms.CheckBox();
+            this.c_Enemy_Location_IncludeCharacters = new System.Windows.Forms.CheckBox();
+            this.label60 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.c_Scramble_Enemy_Location = new System.Windows.Forms.CheckBox();
-            this.c_Enemy_Location_IncludeCharacters = new System.Windows.Forms.CheckBox();
-            this.label42 = new System.Windows.Forms.Label();
             this.groupBox28 = new System.Windows.Forms.GroupBox();
             this.c_Generate_LogicComParam = new System.Windows.Forms.CheckBox();
             this.label56 = new System.Windows.Forms.Label();
@@ -206,6 +206,8 @@
             this.c_Scramble_Enemy_Loot = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.c_Scramble_Shops = new System.Windows.Forms.CheckBox();
             this.c_Scramble_Map_Loot = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
             this.c_IgnoreBossSouls_Treasure_Map = new System.Windows.Forms.CheckBox();
@@ -218,6 +220,13 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.c_Scramble_Enemy_Type_Characters = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.c_Scramble_Enemy_Type_Boss = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.c_Scramble_Enemy_Type_Basic = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -228,13 +237,8 @@
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.c_Scramble_Enemy_Type = new System.Windows.Forms.CheckBox();
-            this.c_Enemy_Type_IncludeBosses = new System.Windows.Forms.CheckBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.c_Enemy_Type_IncludeCharacters = new System.Windows.Forms.CheckBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.c_Scramble_Boss_Trades = new System.Windows.Forms.CheckBox();
             this.groupBox6.SuspendLayout();
             this.groupBox30.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -268,6 +272,7 @@
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox12.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -277,7 +282,6 @@
             this.tabPage9.SuspendLayout();
             this.tabPage10.SuspendLayout();
             this.tabPage11.SuspendLayout();
-            this.groupBox12.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -1723,15 +1727,6 @@
             this.c_Enemy_Location_IncludeSpecial.Text = "Include Special Enemies";
             this.c_Enemy_Location_IncludeSpecial.UseVisualStyleBackColor = true;
             // 
-            // label60
-            // 
-            this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(180, 97);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(398, 15);
-            this.label60.TabIndex = 18;
-            this.label60.Text = "Allows enemies such as those that appear in New Game Plus to be moved.";
-            // 
             // c_Enemy_Location_Ordered
             // 
             this.c_Enemy_Location_Ordered.AutoSize = true;
@@ -1742,6 +1737,25 @@
             this.c_Enemy_Location_Ordered.Text = "Use Ordered Placement";
             this.c_Enemy_Location_Ordered.UseVisualStyleBackColor = true;
             // 
+            // c_Enemy_Location_IncludeCharacters
+            // 
+            this.c_Enemy_Location_IncludeCharacters.AutoSize = true;
+            this.c_Enemy_Location_IncludeCharacters.Location = new System.Drawing.Point(6, 71);
+            this.c_Enemy_Location_IncludeCharacters.Name = "c_Enemy_Location_IncludeCharacters";
+            this.c_Enemy_Location_IncludeCharacters.Size = new System.Drawing.Size(124, 19);
+            this.c_Enemy_Location_IncludeCharacters.TabIndex = 9;
+            this.c_Enemy_Location_IncludeCharacters.Text = "Include Characters";
+            this.c_Enemy_Location_IncludeCharacters.UseVisualStyleBackColor = true;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(180, 97);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(398, 15);
+            this.label60.TabIndex = 18;
+            this.label60.Text = "Allows enemies such as those that appear in New Game Plus to be moved.";
+            // 
             // label59
             // 
             this.label59.AutoSize = true;
@@ -1751,6 +1765,15 @@
             this.label59.TabIndex = 16;
             this.label59.Text = "Enemy locations will not allow stacking. By default the scrambler will allow mult" +
     "iple enemies to use one location.";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(180, 72);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(339, 15);
+            this.label42.TabIndex = 10;
+            this.label42.Text = "Allows key characters such as the Emerald Herald to be moved.";
             // 
             // label44
             // 
@@ -1771,25 +1794,6 @@
             this.c_Scramble_Enemy_Location.TabIndex = 13;
             this.c_Scramble_Enemy_Location.Text = "Scramble Location";
             this.c_Scramble_Enemy_Location.UseVisualStyleBackColor = true;
-            // 
-            // c_Enemy_Location_IncludeCharacters
-            // 
-            this.c_Enemy_Location_IncludeCharacters.AutoSize = true;
-            this.c_Enemy_Location_IncludeCharacters.Location = new System.Drawing.Point(6, 71);
-            this.c_Enemy_Location_IncludeCharacters.Name = "c_Enemy_Location_IncludeCharacters";
-            this.c_Enemy_Location_IncludeCharacters.Size = new System.Drawing.Size(124, 19);
-            this.c_Enemy_Location_IncludeCharacters.TabIndex = 9;
-            this.c_Enemy_Location_IncludeCharacters.Text = "Include Characters";
-            this.c_Enemy_Location_IncludeCharacters.UseVisualStyleBackColor = true;
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(180, 72);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(339, 15);
-            this.label42.TabIndex = 10;
-            this.label42.Text = "Allows key characters such as the Emerald Herald to be moved.";
             // 
             // groupBox28
             // 
@@ -1980,7 +1984,7 @@
             this.groupBox2.Controls.Add(this.label77);
             this.groupBox2.Controls.Add(this.label78);
             this.groupBox2.Controls.Add(this.c_IncludeCharacterTreasure_Treasure_Map);
-            this.groupBox2.Location = new System.Drawing.Point(6, 93);
+            this.groupBox2.Location = new System.Drawing.Point(6, 140);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(841, 152);
             this.groupBox2.TabIndex = 15;
@@ -2108,16 +2112,39 @@
             // 
             // groupBox11
             // 
+            this.groupBox11.Controls.Add(this.label43);
+            this.groupBox11.Controls.Add(this.c_Scramble_Boss_Trades);
+            this.groupBox11.Controls.Add(this.label16);
+            this.groupBox11.Controls.Add(this.c_Scramble_Shops);
             this.groupBox11.Controls.Add(this.c_Scramble_Enemy_Loot);
             this.groupBox11.Controls.Add(this.c_Scramble_Map_Loot);
             this.groupBox11.Controls.Add(this.label6);
             this.groupBox11.Controls.Add(this.label14);
             this.groupBox11.Location = new System.Drawing.Point(6, 6);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(841, 81);
+            this.groupBox11.Size = new System.Drawing.Size(841, 128);
             this.groupBox11.TabIndex = 17;
             this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Map Loot";
+            this.groupBox11.Text = "Loot Sources";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(177, 72);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(146, 30);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "Scramble the shop entries.\r\n\r\n";
+            // 
+            // c_Scramble_Shops
+            // 
+            this.c_Scramble_Shops.AutoSize = true;
+            this.c_Scramble_Shops.Location = new System.Drawing.Point(6, 72);
+            this.c_Scramble_Shops.Name = "c_Scramble_Shops";
+            this.c_Scramble_Shops.Size = new System.Drawing.Size(110, 19);
+            this.c_Scramble_Shops.TabIndex = 9;
+            this.c_Scramble_Shops.Text = "Scramble Shops";
+            this.c_Scramble_Shops.UseVisualStyleBackColor = true;
             // 
             // c_Scramble_Map_Loot
             // 
@@ -2230,7 +2257,7 @@
             this.groupBox3.Controls.Add(this.c_IgnoreTools_Treasure_Map);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label76);
-            this.groupBox3.Location = new System.Drawing.Point(6, 251);
+            this.groupBox3.Location = new System.Drawing.Point(6, 298);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(841, 104);
             this.groupBox3.TabIndex = 18;
@@ -2248,6 +2275,78 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Enemy Scrambler";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.c_Scramble_Enemy_Type_Characters);
+            this.groupBox12.Controls.Add(this.label15);
+            this.groupBox12.Controls.Add(this.c_Scramble_Enemy_Type_Boss);
+            this.groupBox12.Controls.Add(this.label13);
+            this.groupBox12.Controls.Add(this.label7);
+            this.groupBox12.Controls.Add(this.c_Scramble_Enemy_Type_Basic);
+            this.groupBox12.Location = new System.Drawing.Point(6, 142);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(841, 104);
+            this.groupBox12.TabIndex = 19;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Enemy Type";
+            // 
+            // c_Scramble_Enemy_Type_Characters
+            // 
+            this.c_Scramble_Enemy_Type_Characters.AutoSize = true;
+            this.c_Scramble_Enemy_Type_Characters.Location = new System.Drawing.Point(6, 72);
+            this.c_Scramble_Enemy_Type_Characters.Name = "c_Scramble_Enemy_Type_Characters";
+            this.c_Scramble_Enemy_Type_Characters.Size = new System.Drawing.Size(134, 19);
+            this.c_Scramble_Enemy_Type_Characters.TabIndex = 21;
+            this.c_Scramble_Enemy_Type_Characters.Text = "Scramble Characters";
+            this.c_Scramble_Enemy_Type_Characters.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(180, 73);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(292, 15);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "Scramble the character enemy types within each map.";
+            // 
+            // c_Scramble_Enemy_Type_Boss
+            // 
+            this.c_Scramble_Enemy_Type_Boss.AutoSize = true;
+            this.c_Scramble_Enemy_Type_Boss.Location = new System.Drawing.Point(6, 47);
+            this.c_Scramble_Enemy_Type_Boss.Name = "c_Scramble_Enemy_Type_Boss";
+            this.c_Scramble_Enemy_Type_Boss.Size = new System.Drawing.Size(113, 19);
+            this.c_Scramble_Enemy_Type_Boss.TabIndex = 19;
+            this.c_Scramble_Enemy_Type_Boss.Text = "Scramble Bosses";
+            this.c_Scramble_Enemy_Type_Boss.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(180, 47);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(267, 15);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "Scramble the boss enemy types within each map.";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(180, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(270, 15);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Scramble the basic enemy types within each map.";
+            // 
+            // c_Scramble_Enemy_Type_Basic
+            // 
+            this.c_Scramble_Enemy_Type_Basic.AutoSize = true;
+            this.c_Scramble_Enemy_Type_Basic.Location = new System.Drawing.Point(6, 22);
+            this.c_Scramble_Enemy_Type_Basic.Name = "c_Scramble_Enemy_Type_Basic";
+            this.c_Scramble_Enemy_Type_Basic.Size = new System.Drawing.Size(122, 19);
+            this.c_Scramble_Enemy_Type_Basic.TabIndex = 15;
+            this.c_Scramble_Enemy_Type_Basic.Text = "Scramble Enemies";
+            this.c_Scramble_Enemy_Type_Basic.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -2382,77 +2481,24 @@
             this.tabPage11.Text = "Items";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
-            // groupBox12
+            // label43
             // 
-            this.groupBox12.Controls.Add(this.c_Enemy_Type_IncludeCharacters);
-            this.groupBox12.Controls.Add(this.label15);
-            this.groupBox12.Controls.Add(this.c_Enemy_Type_IncludeBosses);
-            this.groupBox12.Controls.Add(this.label13);
-            this.groupBox12.Controls.Add(this.label7);
-            this.groupBox12.Controls.Add(this.c_Scramble_Enemy_Type);
-            this.groupBox12.Location = new System.Drawing.Point(6, 142);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(841, 111);
-            this.groupBox12.TabIndex = 19;
-            this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "Enemy Type";
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(177, 97);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(278, 30);
+            this.label43.TabIndex = 12;
+            this.label43.Text = "Scramble the items give in exchange for boss souls.\r\n\r\n";
             // 
-            // label7
+            // c_Scramble_Boss_Trades
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(180, 22);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(411, 15);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Scramble the enemy types within each map. Beware: this can causes crashes.";
-            // 
-            // c_Scramble_Enemy_Type
-            // 
-            this.c_Scramble_Enemy_Type.AutoSize = true;
-            this.c_Scramble_Enemy_Type.Location = new System.Drawing.Point(6, 22);
-            this.c_Scramble_Enemy_Type.Name = "c_Scramble_Enemy_Type";
-            this.c_Scramble_Enemy_Type.Size = new System.Drawing.Size(141, 19);
-            this.c_Scramble_Enemy_Type.TabIndex = 15;
-            this.c_Scramble_Enemy_Type.Text = "Scramble Enemy Type";
-            this.c_Scramble_Enemy_Type.UseVisualStyleBackColor = true;
-            // 
-            // c_Enemy_Type_IncludeBosses
-            // 
-            this.c_Enemy_Type_IncludeBosses.AutoSize = true;
-            this.c_Enemy_Type_IncludeBosses.Location = new System.Drawing.Point(6, 47);
-            this.c_Enemy_Type_IncludeBosses.Name = "c_Enemy_Type_IncludeBosses";
-            this.c_Enemy_Type_IncludeBosses.Size = new System.Drawing.Size(103, 19);
-            this.c_Enemy_Type_IncludeBosses.TabIndex = 19;
-            this.c_Enemy_Type_IncludeBosses.Text = "Include Bosses";
-            this.c_Enemy_Type_IncludeBosses.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(180, 47);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(162, 15);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "Allows bosses to be changed.";
-            // 
-            // c_Enemy_Type_IncludeCharacters
-            // 
-            this.c_Enemy_Type_IncludeCharacters.AutoSize = true;
-            this.c_Enemy_Type_IncludeCharacters.Location = new System.Drawing.Point(6, 72);
-            this.c_Enemy_Type_IncludeCharacters.Name = "c_Enemy_Type_IncludeCharacters";
-            this.c_Enemy_Type_IncludeCharacters.Size = new System.Drawing.Size(124, 19);
-            this.c_Enemy_Type_IncludeCharacters.TabIndex = 21;
-            this.c_Enemy_Type_IncludeCharacters.Text = "Include Characters";
-            this.c_Enemy_Type_IncludeCharacters.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(180, 73);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(348, 15);
-            this.label15.TabIndex = 22;
-            this.label15.Text = "Allows key characters such as the Emerald Herald to be changed.";
+            this.c_Scramble_Boss_Trades.AutoSize = true;
+            this.c_Scramble_Boss_Trades.Location = new System.Drawing.Point(6, 97);
+            this.c_Scramble_Boss_Trades.Name = "c_Scramble_Boss_Trades";
+            this.c_Scramble_Boss_Trades.Size = new System.Drawing.Size(138, 19);
+            this.c_Scramble_Boss_Trades.TabIndex = 11;
+            this.c_Scramble_Boss_Trades.Text = "Scramble Boss Trades";
+            this.c_Scramble_Boss_Trades.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -2537,6 +2583,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
@@ -2546,8 +2594,6 @@
             this.tabPage9.ResumeLayout(false);
             this.tabPage10.ResumeLayout(false);
             this.tabPage11.ResumeLayout(false);
-            this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2756,10 +2802,14 @@
         private GroupBox groupBox3;
         private GroupBox groupBox12;
         private Label label7;
-        private CheckBox c_Scramble_Enemy_Type;
-        private CheckBox c_Enemy_Type_IncludeBosses;
+        private CheckBox c_Scramble_Enemy_Type_Basic;
+        private CheckBox c_Scramble_Enemy_Type_Boss;
         private Label label13;
-        private CheckBox c_Enemy_Type_IncludeCharacters;
+        private CheckBox c_Scramble_Enemy_Type_Characters;
         private Label label15;
+        private Label label16;
+        private CheckBox c_Scramble_Shops;
+        private Label label43;
+        private CheckBox c_Scramble_Boss_Trades;
     }
 }

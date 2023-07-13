@@ -285,6 +285,8 @@ namespace DS2_Scrambler
                     reg = item_scrambler.Scramble_Loot(
                       c_Scramble_Map_Loot.Checked,
                       c_Scramble_Enemy_Loot.Checked,
+                      c_Scramble_Shops.Checked,
+                      c_Scramble_Boss_Trades.Checked,
                       c_IncludeBossTreasure_Treasure_Map.Checked,
                       c_IncludeCharacterTreasure_Treasure_Map.Checked,
                       c_IncludeCovenantTreasure_Treasure_Map.Checked,
@@ -310,11 +312,11 @@ namespace DS2_Scrambler
             {
                 EnemyScrambler enemy_scrambler = new EnemyScrambler(rand, reg);
 
-                if (c_Scramble_Enemy_Location.Checked || c_Scramble_Enemy_Type.Checked)
+                if (c_Scramble_Enemy_Location.Checked || c_Scramble_Enemy_Type_Basic.Checked)
                 {
                     // This method is decent, but variety is limited and bosses don't mesh with position changes.
                     progress.Report("Scramble: Enemies");
-                    reg = enemy_scrambler.Scramble_Enemies(c_Scramble_Enemy_Location.Checked, c_Scramble_Enemy_Type.Checked, c_Enemy_Location_Ordered.Checked, c_Enemy_Location_IncludeCharacters.Checked, c_Enemy_Location_IncludeSpecial.Checked, c_Enemy_Type_IncludeBosses.Checked, c_Enemy_Type_IncludeCharacters.Checked);
+                    reg = enemy_scrambler.Scramble_Enemies(c_Scramble_Enemy_Location.Checked, c_Scramble_Enemy_Type_Basic.Checked, c_Enemy_Location_Ordered.Checked, c_Enemy_Location_IncludeCharacters.Checked, c_Enemy_Location_IncludeSpecial.Checked, c_Scramble_Enemy_Type_Boss.Checked, c_Scramble_Enemy_Type_Characters.Checked);
                 }
             }
             catch (Exception ex)
@@ -339,6 +341,7 @@ namespace DS2_Scrambler
         {
             c_Scramble_Map_Loot.Checked = true;
             c_Scramble_Enemy_Loot.Checked = true;
+            c_Scramble_Shops.Checked = true;
             c_IgnoreKeys_Treasure_Map.Checked = true;
             c_IgnoreTools_Treasure_Map.Checked = true;
             c_IgnoreBossSouls_Treasure_Map.Checked = true;
@@ -401,6 +404,8 @@ namespace DS2_Scrambler
 
             c_Scramble_Map_Loot.Checked = false;
             c_Scramble_Enemy_Loot.Checked = false;
+            c_Scramble_Shops.Checked = false;
+            c_Scramble_Boss_Trades.Checked = false;
             c_IgnoreKeys_Treasure_Map.Checked = false;
             c_IgnoreTools_Treasure_Map.Checked = false;
             c_IgnoreBossSouls_Treasure_Map.Checked = false;
@@ -411,12 +416,12 @@ namespace DS2_Scrambler
             c_IncludEventTreasure_Treasure_Map.Checked = false;
 
             c_Scramble_Enemy_Location.Checked = false;
-            c_Scramble_Enemy_Type.Checked = false;
+            c_Scramble_Enemy_Type_Basic.Checked = false;
             c_Enemy_Location_Ordered.Checked = false;
             c_Enemy_Location_IncludeCharacters.Checked = false;
             c_Enemy_Location_IncludeSpecial.Checked = false;
-            c_Enemy_Type_IncludeBosses.Checked = false;
-            c_Enemy_Type_IncludeCharacters.Checked = false;
+            c_Scramble_Enemy_Type_Boss.Checked = false;
+            c_Scramble_Enemy_Type_Characters.Checked = false;
         }
 
         private void groupBox6_Enter(object sender, EventArgs e)

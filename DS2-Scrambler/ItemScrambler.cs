@@ -215,22 +215,80 @@ namespace DS2_Scrambler
 
         public int LOOP_LIMIT = 10000;
 
+        // Shop
+        public int SHOP_WEAPON_USAGE = 0;
+        public int SHOP_WEAPON_LIMIT = 100;
+
+        public int SHOP_ARMOR_USAGE = 0;
+        public int SHOP_ARMOR_LIMIT = 100;
+
+        public int SHOP_SPELL_USAGE = 0;
+        public int SHOP_SPELL_LIMIT = 20;
+
+        public int SHOP_RING_USAGE = 0;
+        public int SHOP_RING_LIMIT = 10;
+
         #region Loot
-        public Regulation Scramble_Loot(bool scrambleMapLoot, bool scrambleEnemyDrops, bool includeBossTreasure, bool includeCharacterTreasure, bool includeCovenantTreasure, bool includeBirdTreasure, bool includeEventTreasure, bool ignoreKeys, bool ignoreTools, bool ignoreBossSouls)
+        public Regulation Scramble_Loot(bool scrambleMapLoot, bool scrambleEnemyDrops, bool scrambleShops, bool scrambleBossTrades, bool includeBossTreasure, bool includeCharacterTreasure, bool includeCovenantTreasure, bool includeBirdTreasure, bool includeEventTreasure, bool ignoreKeys, bool ignoreTools, bool ignoreBossSouls)
         {
             Console.WriteLine($"Map Loot Randomisation");
-
-            string paramName = "ItemLotParam2_Other";
 
             T_Ignore_Keys = ignoreKeys;
             T_Ignore_Tools = ignoreTools;
             T_Ignore_Boss_Souls = ignoreBossSouls;
 
+            SHOP_WEAPON_USAGE = 0;
+            SHOP_ARMOR_USAGE = 0;
+            SHOP_SPELL_USAGE = 0;
+            SHOP_RING_USAGE = 0;
+
             BuildLotRanges();
 
+            #region Shop Loot Randomisation
+            string paramName = "ShopLineupParam";
+
+            if (scrambleBossTrades)
+            {
+                Console.WriteLine($"Scramble - Boss Soul Trades");
+                ScrambleBossTrade(paramName, 76801000, 76801306); // Straid of Olaphis
+                ScrambleBossTrade(paramName, 77601000, 77602121); // Weaponsmith Ornifex
+            }
+
             GetListCounts();
+            if (scrambleShops)
+            {
+                Console.WriteLine($"Scramble - Shops");
+                ScrambleShop(paramName, 30700000, 30700602); // Head of Vengarl
+                ScrambleShop(paramName, 50600300, 50600603); // Grave Warden Agdayne
+                ScrambleShop(paramName, 70400000, 70400605); // Laddersmith Gilligan
+                ScrambleShop(paramName, 72110000, 72110607); // Chancellor Wellager
+                ScrambleShop(paramName, 72500300, 72500601); // Darkdiver Grandahl
+                ScrambleShop(paramName, 72600400, 72600607); // Lonesome Gavlan
+                ScrambleShop(paramName, 75400000, 75400615); // Merchant Hag Melentia
+                ScrambleShop(paramName, 75600600, 75600604); // The Rat King
+                ScrambleShop(paramName, 76100000, 76100266); // Maughlin the Armourer
+                ScrambleShop(paramName, 76200300, 76200618); // Stone Trader Chloanne
+                ScrambleShop(paramName, 76300300, 76300603); // Rosabeth of Melfia
+                ScrambleShop(paramName, 76400000, 76400605); // Blacksmith Lenigrast
+                ScrambleShop(paramName, 76430000, 76430606); // Steady Hand McDuff
+                ScrambleShop(paramName, 76600000, 76600602); // Carhillion of the Fold
+                ScrambleShop(paramName, 76800000, 76800600); // Straid of Olaphis
+                ScrambleShop(paramName, 76900000, 76900400); // Licia of Lindeldt
+                ScrambleShop(paramName, 77000000, 77000600); // Felkin the Outcast
+                ScrambleShop(paramName, 77100200, 77100604); // Royal Sorcerer Navlaan
+                ScrambleShop(paramName, 77200200, 77200606); // Magerold of Lanafir
+                ScrambleShop(paramName, 77600000, 77600604); // Weaponsmith Ornifex
+                ScrambleShop(paramName, 77700200, 77700607); // Sweet Shalquoir
+                ScrambleShop(paramName, 78300000, 78300604); // Titchy Gren
+                ScrambleShop(paramName, 78400200, 78400600); // Cromwell the Pardoner
+                ScrambleShop(paramName, 78500000, 78500603); // Blue Sentinel Targray
+            }
+
+            #endregion
 
             #region Map Loot Randomisation
+            paramName = "ItemLotParam2_Other";
+
             if (scrambleMapLoot)
             {
                 Console.WriteLine($"Scramble - Boss Rewards");
@@ -318,7 +376,6 @@ namespace DS2_Scrambler
                 ForceAddTreasure(paramName, LotRange_Brume_Tower, 53200000, 10);
             }
 
-            GetListCounts();
             #endregion
 
             #region Enemy Drop Randomisation
@@ -332,8 +389,6 @@ namespace DS2_Scrambler
                 ScrambleEnemyDrop(paramName, 10000000, 89800000);
             }
 
-            GetListCounts();
-
             #endregion
 
             #region Final Adjustments
@@ -341,27 +396,56 @@ namespace DS2_Scrambler
 
             paramName = "ItemLotParam2_Other";
 
-            // These do not appear to remove the unassigned entries from the list, TODO fix it
             Console.WriteLine($"Scramble - Adding Boss Souls");
             AddBossSoulItems(paramName);
 
             Console.WriteLine($"Scramble - Adding Weapons");
-            AddLeftoverItems(Unassigned_Weapons, paramName);
+            AddLeftoverItems(Unassigned_Weapons, paramName, "Unassigned_Weapons");
 
             Console.WriteLine($"Scramble - Adding Armor");
-            AddLeftoverItems(Unassigned_Armor, paramName);
+            AddLeftoverItems(Unassigned_Armor, paramName, "Unassigned_Armor");
 
             Console.WriteLine($"Scramble - Adding Spells");
-            AddLeftoverItems(Unassigned_Spells, paramName);
+            AddLeftoverItems(Unassigned_Spells, paramName, "Unassigned_Spells");
 
             Console.WriteLine($"Scramble - Adding Rings");
-            AddLeftoverItems(Unassigned_Rings, paramName);
+            AddLeftoverItems(Unassigned_Rings, paramName, "Unassigned_Rings");
 
             #endregion
 
-            GetListCounts();
-
             return regulation;
+        }
+
+        public bool ScrambleBossTrade(string paramName, int start, int end)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows.Where(row => row.ID >= start && row.ID <= end).ToList();
+
+                    RandomiseBossTrade(param_rows);
+                }
+            }
+
+            return true;
+        }
+
+        public bool ScrambleShop(string paramName, int start, int end)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows.Where(row => row.ID >= start && row.ID <= end).ToList();
+
+                    RandomiseShopLot(param_rows);
+                }
+            }
+
+            return true;
         }
 
         public bool ScrambleTreasure(string paramName, bool condition, int start, int end)
@@ -396,6 +480,216 @@ namespace DS2_Scrambler
             }
 
             return true;
+        }
+
+        public void RandomiseBossTrade(List<PARAM.Row> param_rows)
+        {
+            foreach (PARAM.Row row in param_rows)
+            {
+                bool editRow = true;
+
+                // Skip row if the ID matches one of these lists
+                if (HasMatchingShopLot(row, T_Fixed_Items))
+                    editRow = false;
+
+                if (T_Ignore_Keys && HasMatchingShopLot(row, Treasure_Keys))
+                    editRow = false;
+
+                if (T_Ignore_Tools && HasMatchingShopLot(row, Treasure_Tools))
+                    editRow = false;
+
+                if (T_Ignore_Boss_Souls && HasMatchingShopLot(row, Treasure_Boss_Souls))
+                    editRow = false;
+
+                if (editRow)
+                {
+                    PARAM.Row item = row;
+
+                    int roll = rand.Next(100);
+
+                    // Spells
+                    if (Unassigned_Spells.Count > 0 && roll >= 0 && roll < 15)
+                    {
+                        int value = rand.Next(Unassigned_Spells.Count);
+
+                        item["equip_id"].Value = Unassigned_Spells[value].ID;
+
+                        Unassigned_Spells.Remove(Unassigned_Spells[value]);
+
+                        Console.WriteLine($"Unassigned_Spells reduced: {Unassigned_Spells.Count}");
+                    }
+                    // Rings
+                    else if (Unassigned_Rings.Count > 0 && roll >= 15 && roll <= 30)
+                    {
+                        int value = rand.Next(Unassigned_Rings.Count);
+
+                        item["equip_id"].Value = Unassigned_Rings[value].ID;
+
+                        Unassigned_Rings.Remove(Unassigned_Rings[value]);
+
+                        Console.WriteLine($"Unassigned_Rings reduced: {Unassigned_Rings.Count}");
+                    }
+                    // Weapon
+                    else if (Unassigned_Weapons.Count > 0 && roll >= 30 && roll < 65)
+                    {
+                        int value = rand.Next(Unassigned_Weapons.Count);
+
+                        item["equip_id"].Value = Unassigned_Weapons[value].ID;
+
+                        Unassigned_Weapons.Remove(Unassigned_Weapons[value]);
+
+                        Console.WriteLine($"Unassigned_Weapons reduced: {Unassigned_Weapons.Count}");
+                    }
+                    // Armor
+                    else if (Unassigned_Armor.Count > 0 && roll >= 65)
+                    {
+                        int value = rand.Next(Unassigned_Armor.Count);
+
+                        item["equip_id"].Value = Unassigned_Armor[value].ID;
+
+                        Unassigned_Armor.Remove(Unassigned_Armor[value]);
+
+                        Console.WriteLine($"Unassigned_Armor reduced: {Unassigned_Armor.Count}");
+                    }
+                    // Armor
+                    else
+                    {
+                        int value = rand.Next(Material_Item_List.Count);
+
+                        item["equip_id"].Value = Material_Item_List[value].ID;
+                    }
+                }
+            }
+        }
+
+        public void RandomiseShopLot(List<PARAM.Row> param_rows)
+        {
+            foreach (PARAM.Row row in param_rows)
+            {
+                bool editRow = true;
+
+                // Skip row if the ID matches one of these lists
+                if (HasMatchingShopLot(row, T_Fixed_Items))
+                    editRow = false;
+
+                if (T_Ignore_Keys && HasMatchingShopLot(row, Treasure_Keys))
+                    editRow = false;
+
+                if (T_Ignore_Tools && HasMatchingShopLot(row, Treasure_Tools))
+                    editRow = false;
+
+                if (T_Ignore_Boss_Souls && HasMatchingShopLot(row, Treasure_Boss_Souls))
+                    editRow = false;
+
+                if (editRow)
+                {
+                    PARAM.Row item = row;
+
+                    int roll = rand.Next(100);
+
+                    // Weapon
+                    if (Unassigned_Weapons.Count > 0 && roll >= 0 && roll < 15 && SHOP_WEAPON_USAGE < SHOP_WEAPON_LIMIT)
+                    {
+                        int value = rand.Next(Unassigned_Weapons.Count);
+
+                        item["equip_id"].Value = Unassigned_Weapons[value].ID;
+
+                        Unassigned_Weapons.Remove(Unassigned_Weapons[value]);
+                        SHOP_WEAPON_USAGE = SHOP_WEAPON_USAGE + 1;
+
+                        Console.WriteLine($"Unassigned_Weapons reduced: {Unassigned_Weapons.Count}");
+                    }
+                    else if (Unassigned_Weapons.Count == 0 || SHOP_WEAPON_USAGE >= SHOP_WEAPON_LIMIT)
+                    {
+                        roll = roll + 15;
+                    }
+
+                    // Armor
+                    if (Unassigned_Armor.Count > 0 && roll >= 15 && roll < 30 && SHOP_ARMOR_USAGE < SHOP_ARMOR_LIMIT)
+                    {
+                        int value = rand.Next(Unassigned_Armor.Count);
+
+                        item["equip_id"].Value = Unassigned_Armor[value].ID;
+                       
+                        Unassigned_Armor.Remove(Unassigned_Armor[value]);
+                        SHOP_ARMOR_USAGE = SHOP_ARMOR_USAGE + 1;
+
+                        Console.WriteLine($"Unassigned_Armor reduced: {Unassigned_Armor.Count}");
+                    }
+                    else if (Unassigned_Armor.Count == 0 || SHOP_ARMOR_USAGE >= SHOP_ARMOR_LIMIT)
+                    {
+                        roll = roll + 15;
+                    }
+
+                    // Spell
+                    if (Unassigned_Spells.Count > 0 && roll >= 30 && roll < 45 && SHOP_SPELL_USAGE < SHOP_SPELL_LIMIT)
+                    {
+                        int value = rand.Next(Unassigned_Spells.Count);
+
+                        item["equip_id"].Value = Unassigned_Spells[value].ID;
+
+                        Unassigned_Spells.Remove(Unassigned_Spells[value]);
+                        SHOP_SPELL_USAGE = SHOP_SPELL_USAGE + 1;
+
+                        Console.WriteLine($"Unassigned_Spells reduced: {Unassigned_Spells.Count}");
+
+                    }
+                    else if (Unassigned_Spells.Count == 0 || SHOP_SPELL_USAGE >= SHOP_SPELL_LIMIT)
+                    {
+                        roll = roll + 15;
+                    }
+
+                    // Ring
+                    if (Unassigned_Rings.Count > 0 && roll >= 45 && roll < 60 && SHOP_RING_USAGE < SHOP_RING_LIMIT)
+                    {
+                        int value = rand.Next(Unassigned_Rings.Count);
+
+                        item["equip_id"].Value = Unassigned_Rings[value].ID;
+
+                        Unassigned_Rings.Remove(Unassigned_Rings[value]);
+                        SHOP_RING_USAGE = SHOP_RING_USAGE + 1;
+
+                        Console.WriteLine($"Unassigned_Rings reduced: {Unassigned_Rings.Count}");
+                    }
+                    else if (Unassigned_Rings.Count == 0 || SHOP_RING_USAGE >= SHOP_RING_LIMIT)
+                    {
+                        roll = roll + 15;
+                    }
+
+                    // Material
+                    if (roll >= 60 && roll < 75)
+                    {
+                        int value = rand.Next(Material_Item_List.Count);
+
+                        item["equip_id"].Value = Material_Item_List[value].ID;
+
+                        // Randomly set limited quantity, otherwise inherit original value
+                        if(rand.Next(100) > 50)
+                            item["quantity"].Value = rand.Next(5);
+                    }
+
+                    // Ammo
+                    if (roll >= 75 && roll < 85)
+                    {
+                        int value = rand.Next(Ammo_List.Count);
+
+                        item["equip_id"].Value = Ammo_List[value].ID;
+                        item["quantity"].Value = 255;
+                    }
+
+                    // Consumables
+                    if (roll >= 85)
+                    {
+                        int value = rand.Next(Consumable_Item_List.Count);
+
+                        item["equip_id"].Value = Consumable_Item_List[value].ID;
+
+                        // Randomly set limited quantity, otherwise inherit original value
+                        if (rand.Next(100) > 50)
+                            item["quantity"].Value = rand.Next(5);
+                    }
+                }
+            }
         }
 
         public void RandomiseItemLot(List<PARAM.Row> param_rows)
@@ -444,10 +738,12 @@ namespace DS2_Scrambler
                         }
 
                         Unassigned_Weapons.Remove(Unassigned_Weapons[value]);
+
+                        Console.WriteLine($"Unassigned_Weapons reduced: {Unassigned_Weapons.Count}");
                     }
                     else if (Unassigned_Weapons.Count == 0)
                     {
-                        roll = roll + 10;
+                        roll = roll + 20;
                     }
 
                     // Armor
@@ -460,10 +756,11 @@ namespace DS2_Scrambler
                         item["chance_lot_0"].Value = 1;
 
                         Unassigned_Armor.Remove(Unassigned_Armor[value]);
+                        Console.WriteLine($"Unassigned_Armor reduced: {Unassigned_Armor.Count}");
 
                         int bonusRoll = rand.Next(100);
 
-                        if (bonusRoll >= 50)
+                        if (bonusRoll >= 50 && Unassigned_Armor.Count > 0)
                         {
                             value = rand.Next(Unassigned_Armor.Count);
 
@@ -472,9 +769,10 @@ namespace DS2_Scrambler
                             item["chance_lot_1"].Value = 1;
 
                             Unassigned_Armor.Remove(Unassigned_Armor[value]);
+                            Console.WriteLine($"Unassigned_Armor reduced: {Unassigned_Armor.Count}");
                         }
 
-                        if (bonusRoll >= 80)
+                        if (bonusRoll >= 80 && Unassigned_Armor.Count > 0)
                         {
                             value = rand.Next(Unassigned_Armor.Count);
 
@@ -483,9 +781,10 @@ namespace DS2_Scrambler
                             item["chance_lot_2"].Value = 1;
 
                             Unassigned_Armor.Remove(Unassigned_Armor[value]);
+                            Console.WriteLine($"Unassigned_Armor reduced: {Unassigned_Armor.Count}");
                         }
 
-                        if (bonusRoll >= 95)
+                        if (bonusRoll >= 95 && Unassigned_Armor.Count > 0)
                         {
                             value = rand.Next(Unassigned_Armor.Count);
 
@@ -494,11 +793,12 @@ namespace DS2_Scrambler
                             item["chance_lot_3"].Value = 1;
 
                             Unassigned_Armor.Remove(Unassigned_Armor[value]);
+                            Console.WriteLine($"Unassigned_Armor reduced: {Unassigned_Armor.Count}");
                         }
                     }
                     else if (Unassigned_Armor.Count == 0)
                     {
-                        roll = roll + 10;
+                        roll = roll + 20;
                     }
 
                     // Spell
@@ -511,6 +811,7 @@ namespace DS2_Scrambler
                         item["chance_lot_0"].Value = 1;
 
                         Unassigned_Spells.Remove(Unassigned_Spells[value]);
+                        Console.WriteLine($"Unassigned_Spells reduced: {Unassigned_Spells.Count}");
 
                     }
                     else if (Unassigned_Spells.Count == 0)
@@ -528,6 +829,7 @@ namespace DS2_Scrambler
                         item["chance_lot_0"].Value = 1;
 
                         Unassigned_Rings.Remove(Unassigned_Rings[value]);
+                        Console.WriteLine($"Unassigned_Rings reduced: {Unassigned_Rings.Count}");
                     }
                     else if (Unassigned_Rings.Count == 0)
                     {
@@ -544,6 +846,7 @@ namespace DS2_Scrambler
                         item["chance_lot_0"].Value = 1;
 
                         Unassigned_Tool_Items.Remove(Unassigned_Tool_Items[value]);
+                        Console.WriteLine($"Unassigned_Tool_Items reduced: {Unassigned_Tool_Items.Count}");
                     }
                     else if (!T_Ignore_Tools && Unassigned_Tool_Items.Count == 0)
                     {
@@ -568,6 +871,7 @@ namespace DS2_Scrambler
                         item["chance_lot_0"].Value = 1;
 
                         Unassigned_Boss_Soul_List.Remove(Unassigned_Boss_Soul_List[value]);
+                        Console.WriteLine($"Unassigned_Boss_Soul_List reduced: {Unassigned_Boss_Soul_List.Count}");
                     }
                     else if (!T_Ignore_Boss_Souls && Unassigned_Boss_Soul_List.Count == 0)
                     {
@@ -634,8 +938,6 @@ namespace DS2_Scrambler
                 {
                     PARAM.Row item = row;
 
-                    bool useBackup = false;
-
                     for (int x = 0; x < 10; x++)
                     {
                         int item_id = (int)row[$"item_lot_{x}"].Value;
@@ -649,85 +951,57 @@ namespace DS2_Scrambler
                             // Weapon
                             if (roll >= 50 && Weapon_List.Any(row => row.ID == item_id))
                             {
-                                if(Unassigned_Weapons.Count > 0)
+                                int value = rand.Next(Weapon_List.Count);
+
+                                item[$"item_lot_{x}"].Value = Weapon_List[value].ID;
+                                item[$"amount_lot_{x}"].Value = 1;
+
+                                if (rand.Next(100) <= 15)
                                 {
-                                    int value = rand.Next(Unassigned_Weapons.Count);
-
-                                    item[$"item_lot_{x}"].Value = Unassigned_Weapons[value].ID;
-                                    item[$"amount_lot_{x}"].Value = 1;
-
-                                    if (rand.Next(100) <= 15)
-                                    {
-                                        item[$"reinforcement_lot_{x}"].Value = rand.Next(9);
-                                        item[$"infusion_lot_{x}"].Value = rand.Next(9);
-                                    }
-                                    else
-                                    {
-                                        item[$"reinforcement_lot_{x}"].Value = 0;
-                                        item[$"infusion_lot_{x}"].Value = 0;
-                                    }
-
-                                    Unassigned_Weapons.Remove(Unassigned_Weapons[value]);
+                                    item[$"reinforcement_lot_{x}"].Value = rand.Next(9);
+                                    item[$"infusion_lot_{x}"].Value = rand.Next(9);
                                 }
                                 else
                                 {
-                                    useBackup = true;
+                                    item[$"reinforcement_lot_{x}"].Value = 0;
+                                    item[$"infusion_lot_{x}"].Value = 0;
                                 }
+
+                                Weapon_List.Remove(Weapon_List[value]);
                             }
                             // Armor
                             if (roll >= 50 && Armor_List.Any(row => row.ID == item_id))
                             {
-                                if (Unassigned_Armor.Count > 0)
-                                {
-                                    int value = rand.Next(Unassigned_Armor.Count);
+                                int value = rand.Next(Armor_List.Count);
 
-                                    item[$"item_lot_{x}"].Value = Unassigned_Armor[value].ID;
-                                    item[$"amount_lot_{x}"].Value = 1;
+                                item[$"item_lot_{x}"].Value = Armor_List[value].ID;
+                                item[$"amount_lot_{x}"].Value = 1;
 
-                                    Unassigned_Armor.Remove(Unassigned_Armor[value]);
-                                }
-                                else
-                                {
-                                    useBackup = true;
-                                }
+                                Armor_List.Remove(Armor_List[value]);
                             }
                             // Spell
                             if (roll >= 50 && Spell_List.Any(row => row.ID == item_id))
                             {
-                                if (Unassigned_Spells.Count > 0)
-                                {
-                                    int value = rand.Next(Unassigned_Spells.Count);
+                                int value = rand.Next(Spell_List.Count);
 
-                                    item[$"item_lot_{x}"].Value = Unassigned_Spells[value].ID;
-                                    item[$"amount_lot_{x}"].Value = 1;
+                                item[$"item_lot_{x}"].Value = Spell_List[value].ID;
+                                item[$"amount_lot_{x}"].Value = 1;
 
-                                    Unassigned_Spells.Remove(Unassigned_Spells[value]);
-                                }
-                                else
-                                {
-                                    useBackup = true;
-                                }
+                                Spell_List.Remove(Spell_List[value]);
                             }
                             // Ring
                             if (roll >= 50 && Ring_List.Any(row => row.ID == item_id))
                             {
-                                if (Unassigned_Rings.Count > 0)
-                                {
-                                    int value = rand.Next(Unassigned_Rings.Count);
+                                int value = rand.Next(Ring_List.Count);
 
-                                    item[$"item_lot_{x}"].Value = Unassigned_Rings[value].ID;
-                                    item[$"amount_lot_{x}"].Value = 1;
+                                item[$"item_lot_{x}"].Value = Ring_List[value].ID;
+                                item[$"amount_lot_{x}"].Value = 1;
 
-                                    Unassigned_Rings.Remove(Unassigned_Rings[value]);
-                                }
-                                else
-                                {
-                                    useBackup = true;
-                                }
+                                Ring_List.Remove(Ring_List[value]);
                             }
 
                             // Good
-                            if (Item_List.Any(row => row.ID == item_id) || useBackup || roll < 50)
+                            if (Item_List.Any(row => row.ID == item_id) ||roll < 50)
                             {
                                 roll = rand.Next(100);
 
@@ -758,13 +1032,13 @@ namespace DS2_Scrambler
                 }
             }
         }
-        public bool AddLeftoverItems(List<PARAM.Row> list, string paramName)
+        public bool AddLeftoverItems(List<PARAM.Row> list, string paramName, string sourceListName)
         {
             if (list.Count > 0)
             {
                 foreach (PARAM.Row row in list)
                 {
-                    AddTreasureToValidLot(paramName, LotRange_General, row, list);
+                    AddTreasureToValidLot(paramName, LotRange_General, row, sourceListName);
                 }
             }
 
@@ -779,7 +1053,7 @@ namespace DS2_Scrambler
                 {
                     foreach (PARAM.Row row in Unassigned_Boss_Soul_List)
                     {
-                        AddTreasureToValidLot(paramName, LotRange_General, row, Unassigned_Boss_Soul_List);
+                        AddTreasureToValidLot(paramName, LotRange_General, row, "Unassigned_Boss_Soul_List");
                     }
                 }
             }
@@ -795,7 +1069,7 @@ namespace DS2_Scrambler
                 {
                     foreach (PARAM.Row row in Unassigned_Tool_Items)
                     {
-                        AddTreasureToValidLot(paramName, LotRange_General, row, Unassigned_Tool_Items);
+                        AddTreasureToValidLot(paramName, LotRange_General, row, "Unassigned_Tool_Items");
                     }
                 }
             }
@@ -815,135 +1089,135 @@ namespace DS2_Scrambler
                         // Soldier Key
                         if (row.ID == 50600000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_SoldierKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_SoldierKey, row, "Unassigned_Key_Items");
                         }
                         // Key to King's Passage
                         if (row.ID == 50610000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_KeyToKingsPassage, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_KeyToKingsPassage, row, "Unassigned_Key_Items");
                         }
                         // Bastille Key
                         if (row.ID == 50800000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_BastilleKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_BastilleKey, row, "Unassigned_Key_Items");
                         }
                         // Iron Key
                         if (row.ID == 50810000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_IronKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_IronKey, row, "Unassigned_Key_Items");
                         }
                         // Forgotten Key
                         if (row.ID == 50820000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_ForgottenKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_ForgottenKey, row, "Unassigned_Key_Items");
                         }
                         // Brightstone Key
                         if (row.ID == 50830000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_BrightstoneKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_BrightstoneKey, row, "Unassigned_Key_Items");
                         }
                         // Antiquated Key
                         if (row.ID == 50840000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_AntiquatedKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_AntiquatedKey, row, "Unassigned_Key_Items");
                         }
                         // Fang Key
                         if (row.ID == 50850000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_FangKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_FangKey, row, "Unassigned_Key_Items");
                         }
                         // House Key
                         if (row.ID == 50860000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_HouseKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_HouseKey, row, "Unassigned_Key_Items");
                         }
                         // Lenigrast's Key
                         if (row.ID == 50870000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_LenigrastsKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_LenigrastsKey, row, "Unassigned_Key_Items");
                         }
                         // Rotunda Lockstone
                         if (row.ID == 50890000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_RotundaLockstone, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_RotundaLockstone, row, "Unassigned_Key_Items");
                         }
                         // Giant's Kinship
                         if (row.ID == 50900000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_GiantsKinship, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_GiantsKinship, row, "Unassigned_Key_Items");
                         }
                         // Ashen Mist Heart
                         if (row.ID == 50910000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_AshenMistHeart, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_AshenMistHeart, row, "Unassigned_Key_Items");
                         }
                         // Tseldora Den Key
                         if (row.ID == 50930000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_TseldoraDenKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_TseldoraDenKey, row, "Unassigned_Key_Items");
                         }
                         // Undead Lockaway Key
                         if (row.ID == 50970000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_UndeadLockawayKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_UndeadLockawayKey, row, "Unassigned_Key_Items");
                         }
                         // Aldia Key
                         if (row.ID == 51030000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_AldiaKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_AldiaKey, row, "Unassigned_Key_Items");
                         }
                         // Dragon Talon
                         if (row.ID == 52000000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_DragonTalon, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_DragonTalon, row, "Unassigned_Key_Items");
                         }
                         // Heavy Iron Key
                         if (row.ID == 52100000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_HeavyIronKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_HeavyIronKey, row, "Unassigned_Key_Items");
                         }
                         // Frozen Flower
                         if (row.ID == 52200000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_FrozenFlower, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_FrozenFlower, row, "Unassigned_Key_Items");
                         }
                         // Eternal Sanctum Key
                         if (row.ID == 52300000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_EternalSanctumKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_EternalSanctumKey, row, "Unassigned_Key_Items");
                         }
                         // Tower Key
                         if (row.ID == 52400000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_TowerKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_TowerKey, row, "Unassigned_Key_Items");
                         }
                         // Garrison Ward Key
                         if (row.ID == 52500000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_GarrisonWardKey, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_GarrisonWardKey, row, "Unassigned_Key_Items");
                         }
                         // Dragon Stone
                         if (row.ID == 52650000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_DragonStone, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_DragonStone, row, "Unassigned_Key_Items");
                         }
                         // Scorching Iron Scepter
                         if (row.ID == 53100000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_ScorchingIronScepter, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_ScorchingIronScepter, row, "Unassigned_Key_Items");
                         }
                         // Eye of the Priestess
                         // The pickup location for this needs to remain vanilla as the uncloaking effect only occurs when picked up at the vanilla location.
                         /*
                         if (row.ID == 53600000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_EyeOfThePriestess, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_EyeOfThePriestess, row, "Unassigned_Key_Items");
                         }
                         */
                         // Dull Ember
                         if (row.ID == 50990000)
                         {
-                            AddTreasureToValidLot(paramName, LotRange_DullEmber, row, Unassigned_Key_Items);
+                            AddTreasureToValidLot(paramName, LotRange_DullEmber, row, "Unassigned_Key_Items");
                         }
                     }
                 }
@@ -974,7 +1248,7 @@ namespace DS2_Scrambler
 
                 if (placementCount < target_amount)
                 {
-                    AddTreasureToValidLot(paramName, list, ItemParam.Rows.Find(row => row.ID == target_id), null);
+                    AddTreasureToValidLot(paramName, list, ItemParam.Rows.Find(row => row.ID == target_id), "None");
                 }
 
                 placementCount = count;
@@ -985,7 +1259,7 @@ namespace DS2_Scrambler
                 Console.WriteLine("Failed to place item in ForceAddTreasure, exited function due to loop limit.");
         }
 
-        public bool AddTreasureToValidLot(string paramName, List<PARAM.Row> list, PARAM.Row new_item, List<PARAM.Row> sourceList)
+        public void AddTreasureToValidLot(string paramName, List<PARAM.Row> list, PARAM.Row new_item, string sourceListName)
         {
             bool assigned = false;
 
@@ -1033,8 +1307,42 @@ namespace DS2_Scrambler
 
                                 assigned = true;
 
-                                if (sourceList != null)
-                                    sourceList.Remove(row);
+                                // Stupid hack
+                                if (sourceListName == "Unassigned_Weapons")
+                                {
+                                    Unassigned_Weapons.Remove(item);
+                                    Console.WriteLine($"{sourceListName} reduced: {Unassigned_Weapons.Count}");
+                                }
+                                if (sourceListName == "Unassigned_Armor")
+                                {
+                                    Unassigned_Armor.Remove(item);
+                                    Console.WriteLine($"{sourceListName} reduced: {Unassigned_Armor.Count}");
+                                }
+                                if (sourceListName == "Unassigned_Spells")
+                                {
+                                    Unassigned_Spells.Remove(item);
+                                    Console.WriteLine($"{sourceListName} reduced: {Unassigned_Spells.Count}");
+                                }
+                                if (sourceListName == "Unassigned_Rings")
+                                {
+                                    Unassigned_Rings.Remove(item);
+                                    Console.WriteLine($"{sourceListName} reduced: {Unassigned_Rings.Count}");
+                                }
+                                if (sourceListName == "Unassigned_Key_Items")
+                                {
+                                    Unassigned_Key_Items.Remove(item);
+                                    Console.WriteLine($"{sourceListName} reduced: {Unassigned_Key_Items.Count}");
+                                }
+                                if (sourceListName == "Unassigned_Tool_Items")
+                                {
+                                    Unassigned_Tool_Items.Remove(item);
+                                    Console.WriteLine($"{sourceListName} reduced: {Unassigned_Tool_Items.Count}");
+                                }
+                                if (sourceListName == "Unassigned_Boss_Soul_List")
+                                {
+                                    Unassigned_Boss_Soul_List.Remove(item);
+                                    Console.WriteLine($"{sourceListName} reduced: {Unassigned_Boss_Soul_List.Count}");
+                                }
                             }
                         }
                     }
@@ -1045,8 +1353,6 @@ namespace DS2_Scrambler
 
             if (loopCounter >= loopLimit)
                 Console.WriteLine("Failed to place item in AddTreasureToValidLot, exited function due to loop limit.");
-
-            return true;
         }
 
         public PARAM.Row ClearItemLot(PARAM.Row itemlot)
@@ -1097,6 +1403,16 @@ namespace DS2_Scrambler
             return match;
         }
 
+        public bool HasMatchingShopLot(PARAM.Row itemlot, List<string> list)
+        {
+            bool match = false;
+
+            if (list.Contains(itemlot[$"equip_id"].Value.ToString()))
+                match = true;
+
+            return match;
+        }
+
         public bool HasMatchingItemLot(PARAM.Row itemlot, List<int> list)
         {
             bool match = false;
@@ -1106,6 +1422,15 @@ namespace DS2_Scrambler
                 if (list.Contains((int)itemlot[$"item_lot_{x}"].Value))
                     match = true;
             }
+
+            return match;
+        }
+        public bool HasMatchingShopLot(PARAM.Row itemlot, List<int> list)
+        {
+            bool match = false;
+
+            if (list.Contains((int)itemlot[$"equip_id"].Value))
+                match = true;
 
             return match;
         }
