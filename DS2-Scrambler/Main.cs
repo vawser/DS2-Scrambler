@@ -37,10 +37,10 @@ namespace DS2_Scrambler
 
             t_ModPath.Text = "";
 
-            c_IgnoreKeys_ItemLotParam_Other.Checked = true;
-            c_IgnoreTools_ItemLotParam_Other.Checked = true;
-            c_Scramble_ItemLotParam2_Chr.Checked = true;
-            c_Scramble_ItemLotParam2_Other.Checked = true;
+            c_IgnoreKeys_Treasure_Map.Checked = true;
+            c_IgnoreTools_Treasure_Map.Checked = true;
+            c_Scramble_Enemy_Drops.Checked = true;
+            c_Scramble_Treasure_Map.Checked = true;
         }
 
         private void b_SelectModPath_Click(object sender, EventArgs e)
@@ -107,32 +107,25 @@ namespace DS2_Scrambler
                 Scrambler scrambler = new Scrambler(t_seed.Text, reg);
 
                 // Treasure
-                if (c_Scramble_ItemLotParam2_Other.Checked)
+                if (c_Scramble_Treasure_Map.Checked)
                 {
                     progress.Report("Scramble: Treasure - Map");
                     reg = scrambler.Scramble_Treasure("ItemLotParam2_Other",     
-                      c_IgnoreKeys_ItemLotParam_Other.Checked, 
-                      c_IgnoreTools_ItemLotParam_Other.Checked,
-                      c_IgnoreBossSouls_ItemLotParam_Other.Checked,
-                      c_IncludeBossTreasure_ItemLotParam_Other.Checked,
-                      c_IncludeCharacterTreasure_ItemLotParam_Other.Checked,
-                      c_IncludeCovenantTreasure_ItemLotParam_Other.Checked,
-                      c_IncludeBirdTreasure_ItemLotParam_Other.Checked,
-                      c_IncludEventTreasure_ItemLotParam_Other.Checked
+                      c_IgnoreKeys_Treasure_Map.Checked, 
+                      c_IgnoreTools_Treasure_Map.Checked,
+                      c_IgnoreBossSouls_Treasure_Map.Checked,
+                      c_IncludeBossTreasure_Treasure_Map.Checked,
+                      c_IncludeCharacterTreasure_Treasure_Map.Checked,
+                      c_IncludeCovenantTreasure_Treasure_Map.Checked,
+                      c_IncludeBirdTreasure_Treasure_Map.Checked,
+                      c_IncludEventTreasure_Treasure_Map.Checked
                     );
                 }
-                /*
-                if (c_Scramble_ItemLotParam2_Chr.Checked)
+                if (c_Scramble_Enemy_Drops.Checked)
                 {
                     progress.Report("Scramble: Treasure - Enemies");
-                    reg = scrambler.Scramble_ItemLotParam("ItemLotParam2_Chr", c_Generate_ItemLotParam2_Chr.Checked, c_IgnoreKeys_ItemLotParam_Chr.Checked, c_IgnoreTools_ItemLotParam_Chr.Checked);
+                    reg = scrambler.Scramble_Treasure_Enemies("ItemLotParam2_Chr", c_MaintainItemType_Enemy_Drops.Checked);
                 }
-                if (c_Scramble_ItemLotParam2_SvrEvent.Checked)
-                {
-                    progress.Report("Scramble: Treasure - Enemies");
-                    reg = scrambler.Scramble_ItemLotParam("ItemLotParam2_SvrEvent", c_Generate_ItemLotParam2_SvrEvent.Checked, c_IgnoreKeys_ItemLotParam_Chr.Checked, c_IgnoreTools_ItemLotParam_Chr.Checked);
-                }
-                */
 
                 // Items
                 if (c_Scramble_ItemParam.Checked)
@@ -317,10 +310,10 @@ namespace DS2_Scrambler
         {
             c_Scramble_ArmorParam.Checked = true;
             c_Scramble_ArrowParam.Checked = true;
-            c_Scramble_ItemLotParam2_Other.Checked = true;
+            c_Scramble_Treasure_Map.Checked = true;
             c_Scramble_ItemParam.Checked = true;
 
-            c_IgnoreKeys_ItemLotParam_Other.Checked = true;
+            c_IgnoreKeys_Treasure_Map.Checked = true;
 
             c_Scramble_EnemyPlacement.Checked = true;
             c_EnemyPlacement_IgnoreKeyCharacters.Checked = true;
@@ -361,11 +354,10 @@ namespace DS2_Scrambler
         {
             c_Scramble_ArmorParam.Checked = false;
             c_Scramble_ArrowParam.Checked = false;
-            c_Scramble_ItemLotParam2_Other.Checked = false;
+            c_Scramble_Treasure_Map.Checked = false;
             c_Scramble_ItemParam.Checked = false;
             c_Scramble_WeaponActionCategoryParam.Checked = false;
-            c_Scramble_ItemLotParam2_Chr.Checked = false;
-            c_Scramble_ItemLotParam2_SvrEvent.Checked = false;
+            c_Scramble_Enemy_Drops.Checked = false;
             c_Scramble_WeaponParam.Checked = false;
             c_Scramble_BossBattleParam.Checked = false;
             c_Scramble_NpcPlayerStatusParam.Checked = false;
@@ -407,8 +399,8 @@ namespace DS2_Scrambler
             c_Generate_SystemBulletParam.Checked = false;
             c_Generate_BulletParam.Checked = false;
 
-            c_IgnoreKeys_ItemLotParam_Other.Checked = false;
-            c_IgnoreTools_ItemLotParam_Other.Checked = false;
+            c_IgnoreKeys_Treasure_Map.Checked = false;
+            c_IgnoreTools_Treasure_Map.Checked = false;
             c_IgnoreRequirements_WeaponParam.Checked = false;
             c_IgnoreRequirements_ArmorParam.Checked = false;
             c_IgnoreRequirements_SpellParam.Checked = false;

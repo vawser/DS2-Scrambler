@@ -263,7 +263,7 @@ namespace DS2_Scrambler
         }
         #endregion
 
-        #region Scramble - Treasure
+        #region Scramble - Treasure - Map Loot
 
         public bool T_Ignore_Keys = false;
         public bool T_Ignore_Tools = false;
@@ -1415,6 +1415,200 @@ namespace DS2_Scrambler
 
             return match;
         }
+        #endregion
+
+        #region Scramble - Treasure - Enemy Drops
+
+        public bool T_Maintain_Item_Type = false;
+
+        public Regulation Scramble_Treasure_Enemies(string paramName, bool maintainItemType)
+        {
+            T_Maintain_Item_Type = maintainItemType;
+
+            ScrambleEnemyDrop(paramName, 10000000, 89800000);
+
+            return regulation;
+        }
+        public bool ScrambleEnemyDrop(string paramName,int start, int end)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows.Where(row => row.ID >= start && row.ID <= end).ToList();
+
+                    RandomiseEnemyDrop(param_rows);
+                }
+            }
+
+            return true;
+        }
+
+        public void RandomiseEnemyDrop(List<PARAM.Row> param_rows)
+        {
+            foreach (PARAM.Row row in param_rows)
+            {
+                bool editRow = true;
+
+                if (editRow)
+                {
+                    PARAM.Row item = MakeItemLot(row);
+
+
+                    if (T_Maintain_Item_Type)
+                    {
+
+                    }
+                    else
+                    {
+                        int roll = rand.Next(100);
+
+                        // Weapon
+                        if (Valid_Weapons.Count > 0 && roll >= 0 && roll < 10)
+                        {
+                            int value = rand.Next(Valid_Weapons.Count);
+
+                            item["item_lot_0"].Value = Valid_Weapons[value].ID;
+                            item["amount_lot_0"].Value = 1;
+                            item["chance_lot_0"].Value = 1;
+
+                            if (rand.Next(100) <= 15)
+                            {
+                                item["reinforcement_lot_0"].Value = rand.Next(9);
+                                item["infusion_lot_0"].Value = rand.Next(9);
+                            }
+                            else
+                            {
+                                item["reinforcement_lot_0"].Value = 0;
+                                item["infusion_lot_0"].Value = 0;
+                            }
+
+                            Valid_Weapons.Remove(Valid_Weapons[value]);
+                        }
+                        else if (Valid_Weapons.Count == 0)
+                        {
+                            roll = roll + 10;
+                        }
+
+                        // Armor
+                        if (Valid_Armor.Count > 0 && roll >= 10 && roll < 20)
+                        {
+                            int value = rand.Next(Valid_Armor.Count);
+
+                            item["item_lot_0"].Value = Valid_Armor[value].ID;
+                            item["amount_lot_0"].Value = 1;
+                            item["chance_lot_0"].Value = 1;
+
+                            Valid_Armor.Remove(Valid_Armor[value]);
+
+                            int bonusRoll = rand.Next(100);
+
+                            if (bonusRoll >= 50)
+                            {
+                                value = rand.Next(Valid_Armor.Count);
+
+                                item["item_lot_1"].Value = Valid_Armor[value].ID;
+                                item["amount_lot_1"].Value = 1;
+                                item["chance_lot_1"].Value = 1;
+
+                                Valid_Armor.Remove(Valid_Armor[value]);
+                            }
+
+                            if (bonusRoll >= 80)
+                            {
+                                value = rand.Next(Valid_Armor.Count);
+
+                                item["item_lot_2"].Value = Valid_Armor[value].ID;
+                                item["amount_lot_2"].Value = 1;
+                                item["chance_lot_2"].Value = 1;
+
+                                Valid_Armor.Remove(Valid_Armor[value]);
+                            }
+
+                            if (bonusRoll >= 95)
+                            {
+                                value = rand.Next(Valid_Armor.Count);
+
+                                item["item_lot_3"].Value = Valid_Armor[value].ID;
+                                item["amount_lot_3"].Value = 1;
+                                item["chance_lot_3"].Value = 1;
+
+                                Valid_Armor.Remove(Valid_Armor[value]);
+                            }
+                        }
+                        else if (Valid_Armor.Count == 0)
+                        {
+                            roll = roll + 10;
+                        }
+
+                        // Spell
+                        if (Valid_Spells.Count > 0 && roll >= 20 && roll < 30)
+                        {
+                            int value = rand.Next(Valid_Spells.Count);
+
+                            item["item_lot_0"].Value = Valid_Spells[value].ID;
+                            item["amount_lot_0"].Value = 1;
+                            item["chance_lot_0"].Value = 1;
+
+                            Valid_Spells.Remove(Valid_Spells[value]);
+
+                        }
+                        else if (Valid_Spells.Count == 0)
+                        {
+                            roll = roll + 10;
+                        }
+
+                        // Ring
+                        if (Valid_Rings.Count > 0 && roll >= 30 && roll < 40)
+                        {
+                            int value = rand.Next(Valid_Rings.Count);
+
+                            item["item_lot_0"].Value = Valid_Rings[value].ID;
+                            item["amount_lot_0"].Value = 1;
+                            item["chance_lot_0"].Value = 1;
+
+                            Valid_Rings.Remove(Valid_Rings[value]);
+                        }
+                        else if (Valid_Rings.Count == 0)
+                        {
+                            roll = roll + 10;
+                        }
+
+                        // Material
+                        if (roll >= 46 && roll < 60)
+                        {
+                            int value = rand.Next(Valid_Material_Items.Count);
+
+                            item["item_lot_0"].Value = Valid_Material_Items[value].ID;
+                            item["amount_lot_0"].Value = rand.Next(5);
+                            item["chance_lot_0"].Value = 1;
+                        }
+
+                        // Ammo
+                        if (roll >= 60 && roll < 70)
+                        {
+                            int value = rand.Next(Valid_Ammunition.Count);
+
+                            item["item_lot_0"].Value = Valid_Ammunition[value].ID;
+                            item["amount_lot_0"].Value = rand.Next(5, 25);
+                            item["chance_lot_0"].Value = 1;
+                        }
+
+                        // Consumables
+                        if (roll >= 70)
+                        {
+                            int value = rand.Next(Valid_Consumable_Items.Count);
+
+                            item["item_lot_0"].Value = Valid_Consumable_Items[value].ID;
+                            item["amount_lot_0"].Value = rand.Next(1, 10);
+                            item["chance_lot_0"].Value = 1;
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region Scramble - ArmorParam
