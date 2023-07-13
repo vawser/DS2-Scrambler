@@ -112,7 +112,7 @@ namespace DS2_Scrambler
             //********************
             try
             {
-                ParamScrambler scrambler = new ParamScrambler(rand, reg);
+                ParamScrambler scrambler = new ParamScrambler(rand, reg, scrambledModPath);
 
                 // Items
                 if (c_Scramble_ItemParam.Checked)
@@ -277,7 +277,7 @@ namespace DS2_Scrambler
             //********************
             try
             {
-                ItemScrambler item_scrambler = new ItemScrambler(rand, reg);
+                ItemScrambler item_scrambler = new ItemScrambler(rand, reg, scrambledModPath);
 
                 if (c_Scramble_Map_Loot.Checked)
                 {
@@ -310,13 +310,22 @@ namespace DS2_Scrambler
             //********************
             try
             {
-                EnemyScrambler enemy_scrambler = new EnemyScrambler(rand, reg);
+                EnemyScrambler enemy_scrambler = new EnemyScrambler(rand, reg, scrambledModPath);
 
-                if (c_Scramble_Enemy_Location.Checked || c_Scramble_Enemy_Type_Basic.Checked)
+                if (c_Scramble_Enemy_Location.Checked || c_Scramble_Enemy_Type_Basic.Checked || c_FuriousEnemies.Checked)
                 {
                     // This method is decent, but variety is limited and bosses don't mesh with position changes.
                     progress.Report("Scramble: Enemies");
-                    reg = enemy_scrambler.Scramble_Enemies(c_Scramble_Enemy_Location.Checked, c_Scramble_Enemy_Type_Basic.Checked, c_Enemy_Location_Ordered.Checked, c_Enemy_Location_IncludeCharacters.Checked, c_Enemy_Location_IncludeSpecial.Checked, c_Scramble_Enemy_Type_Boss.Checked, c_Scramble_Enemy_Type_Characters.Checked);
+                    reg = enemy_scrambler.Scramble_Enemies(
+                        c_Scramble_Enemy_Location.Checked, 
+                        c_Scramble_Enemy_Type_Basic.Checked, 
+                        c_Enemy_Location_Ordered.Checked, 
+                        c_Enemy_Location_IncludeCharacters.Checked, 
+                        c_Enemy_Location_IncludeSpecial.Checked, 
+                        c_Scramble_Enemy_Type_Boss.Checked, 
+                        c_Scramble_Enemy_Type_Characters.Checked,
+                        c_FuriousEnemies.Checked
+                    );
                 }
             }
             catch (Exception ex)
@@ -414,6 +423,7 @@ namespace DS2_Scrambler
             c_IncludeCovenantTreasure_Treasure_Map.Checked = false;
             c_IncludeBirdTreasure_Treasure_Map.Checked = false;
             c_IncludEventTreasure_Treasure_Map.Checked = false;
+            c_FuriousEnemies.Checked = false;
 
             c_Scramble_Enemy_Location.Checked = false;
             c_Scramble_Enemy_Type_Basic.Checked = false;

@@ -206,6 +206,8 @@
             this.c_Scramble_Enemy_Loot = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.c_Scramble_Boss_Trades = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
             this.c_Scramble_Shops = new System.Windows.Forms.CheckBox();
             this.c_Scramble_Map_Loot = new System.Windows.Forms.CheckBox();
@@ -220,6 +222,9 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label81 = new System.Windows.Forms.Label();
+            this.c_FuriousEnemies = new System.Windows.Forms.CheckBox();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.c_Scramble_Enemy_Type_Characters = new System.Windows.Forms.CheckBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -237,8 +242,6 @@
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.label43 = new System.Windows.Forms.Label();
-            this.c_Scramble_Boss_Trades = new System.Windows.Forms.CheckBox();
             this.groupBox6.SuspendLayout();
             this.groupBox30.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -272,6 +275,7 @@
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabControl3.SuspendLayout();
@@ -2127,6 +2131,25 @@
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Loot Sources";
             // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(177, 97);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(278, 30);
+            this.label43.TabIndex = 12;
+            this.label43.Text = "Scramble the items give in exchange for boss souls.\r\n\r\n";
+            // 
+            // c_Scramble_Boss_Trades
+            // 
+            this.c_Scramble_Boss_Trades.AutoSize = true;
+            this.c_Scramble_Boss_Trades.Location = new System.Drawing.Point(6, 97);
+            this.c_Scramble_Boss_Trades.Name = "c_Scramble_Boss_Trades";
+            this.c_Scramble_Boss_Trades.Size = new System.Drawing.Size(138, 19);
+            this.c_Scramble_Boss_Trades.TabIndex = 11;
+            this.c_Scramble_Boss_Trades.Text = "Scramble Boss Trades";
+            this.c_Scramble_Boss_Trades.UseVisualStyleBackColor = true;
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -2266,6 +2289,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox10);
             this.tabPage2.Controls.Add(this.groupBox12);
             this.tabPage2.Controls.Add(this.groupBox22);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
@@ -2275,6 +2299,36 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Enemy Scrambler";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.label81);
+            this.groupBox10.Controls.Add(this.c_FuriousEnemies);
+            this.groupBox10.Location = new System.Drawing.Point(6, 252);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(841, 54);
+            this.groupBox10.TabIndex = 20;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Enemy Tweaks";
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(182, 22);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(429, 15);
+            this.label81.TabIndex = 18;
+            this.label81.Text = "All enemies share the same aggression group (excluding bosses and characters).";
+            // 
+            // c_FuriousEnemies
+            // 
+            this.c_FuriousEnemies.AutoSize = true;
+            this.c_FuriousEnemies.Location = new System.Drawing.Point(8, 22);
+            this.c_FuriousEnemies.Name = "c_FuriousEnemies";
+            this.c_FuriousEnemies.Size = new System.Drawing.Size(112, 19);
+            this.c_FuriousEnemies.TabIndex = 17;
+            this.c_FuriousEnemies.Text = "Furious Enemies";
+            this.c_FuriousEnemies.UseVisualStyleBackColor = true;
             // 
             // groupBox12
             // 
@@ -2481,25 +2535,6 @@
             this.tabPage11.Text = "Items";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(177, 97);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(278, 30);
-            this.label43.TabIndex = 12;
-            this.label43.Text = "Scramble the items give in exchange for boss souls.\r\n\r\n";
-            // 
-            // c_Scramble_Boss_Trades
-            // 
-            this.c_Scramble_Boss_Trades.AutoSize = true;
-            this.c_Scramble_Boss_Trades.Location = new System.Drawing.Point(6, 97);
-            this.c_Scramble_Boss_Trades.Name = "c_Scramble_Boss_Trades";
-            this.c_Scramble_Boss_Trades.Size = new System.Drawing.Size(138, 19);
-            this.c_Scramble_Boss_Trades.TabIndex = 11;
-            this.c_Scramble_Boss_Trades.Text = "Scramble Boss Trades";
-            this.c_Scramble_Boss_Trades.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2583,6 +2618,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -2811,5 +2848,8 @@
         private CheckBox c_Scramble_Shops;
         private Label label43;
         private CheckBox c_Scramble_Boss_Trades;
+        private GroupBox groupBox10;
+        private Label label81;
+        private CheckBox c_FuriousEnemies;
     }
 }

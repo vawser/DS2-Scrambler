@@ -13,6 +13,8 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using System.Windows.Media.TextFormatting;
 using System.Windows.Controls;
 using System.Diagnostics.Metrics;
+using System.Reflection;
+using Org.BouncyCastle.Crypto;
 
 namespace DS2_Scrambler
 {
@@ -24,14 +26,17 @@ namespace DS2_Scrambler
         public List<string> Boss_ID_List = new List<string>();
         public List<string> Character_ID_List = new List<string>();
         public List<string> Enemy_ID_List = new List<string>();
+        public List<string> Skip_ID_List = new List<string> { "837400" };
 
         public Dictionary<string, List<int>> Character_Dict = new Dictionary<string, List<int>>();
         public Dictionary<string, List<int>> Boss_Dict = new Dictionary<string, List<int>>();
         public Dictionary<string, List<int>> NGP_Dict = new Dictionary<string, List<int>>();
+        public Dictionary<string, List<int>> Skip_Dict = new Dictionary<string, List<int>>();
 
         public List<int> Character_Row_ID_List = new List<int>();
         public List<int> Boss_Row_ID_List = new List<int>();
         public List<int> NGP_Row_ID_List = new List<int>();
+        public List<int> Skip_Row_ID_List = new List<int>();
 
         public bool Change_Enemy_Location = false;
         public bool Change_Enemy_Type_Basic = false;
@@ -43,10 +48,13 @@ namespace DS2_Scrambler
 
         public string EnemyScramblePath = AppContext.BaseDirectory + "\\Assets\\Scramble\\Enemy-Scramble\\";
 
-        public EnemyScrambler(Random random, Regulation reg)
+        public string OutputPath;
+
+        public EnemyScrambler(Random random, Regulation reg, string output_path)
         {
             rand = random;
             regulation = reg;
+            OutputPath = output_path;
 
             Boss_ID_List = Util.BuildIDList(EnemyScramblePath + "Boss-IDs");
             Character_ID_List = Util.BuildIDList(EnemyScramblePath + "Character-IDs");
@@ -299,7 +307,7 @@ namespace DS2_Scrambler
         #endregion
 
         #region Enemy Location
-        public Regulation Scramble_Enemies(bool scrambleLocation, bool scrambleTypeBasic, bool location_OrderedPlacement, bool location_IncludeCharacters, bool location_NGP, bool scrambleTypeBoss, bool scrambleTypeCharacter)
+        public Regulation Scramble_Enemies(bool scrambleLocation, bool scrambleTypeBasic, bool location_OrderedPlacement, bool location_IncludeCharacters, bool location_NGP, bool scrambleTypeBoss, bool scrambleTypeCharacter, bool enableFuriousEnemies)
         {
             Change_Enemy_Location = scrambleLocation;
             Change_Enemy_Type_Basic = scrambleTypeBasic;
@@ -310,8 +318,15 @@ namespace DS2_Scrambler
             Location_Include_NGP = location_NGP; // New Game Plus
 
             BuildReferenceLists();
-            ScrambleEnemyLocations();
-            ScrambleEnemyTypes();
+
+            if(scrambleLocation)
+                ScrambleEnemyLocations();
+
+            if(scrambleTypeBasic)
+                ScrambleEnemyTypes();
+
+            if (enableFuriousEnemies)
+                ApplyEnemyAggressionMod();
 
             return regulation;
         }
@@ -390,12 +405,105 @@ namespace DS2_Scrambler
 
         public void ScrambleEnemyTypes()
         {
+            List<PARAM.Row> GeneratorRegisters = new List<PARAM.Row>();
 
+            // Build generator register
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                PARAM param = wrapper.Param;
+                List<PARAM.Row> param_rows = param.Rows;
+
+                if (wrapper.Name.Contains("generatorregistparam"))
+                {
+                    string map_id = wrapper.Name.Replace("generatorregistparam", "");
+
+                    // Ignore skip rows
+                    foreach (int row_id in Skip_Dict[map_id])
+                    {
+                        param_rows = param_rows.Where(row => row.ID != row_id).ToList();
+                    }
+
+                    // Ignore boss rows
+                    foreach (int row_id in Boss_Dict[map_id])
+                    {
+                        param_rows = param_rows.Where(row => row.ID != row_id).ToList();
+                    }
+
+                    // Ignore character
+                    foreach (int row_id in Character_Dict[map_id])
+                    {
+                        param_rows = param_rows.Where(row => row.ID != row_id).ToList();
+                    }
+
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        
+                    }
+                }
+            }
+
+            // Apply the scrambled registers to the generators
+        }
+
+        public void ApplyEnemyAggressionMod()
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                PARAM param = wrapper.Param;
+                List<PARAM.Row> param_rows = param.Rows;
+
+                if (wrapper.Name.Contains("generatorparam"))
+                {
+                    string map_id = wrapper.Name.Replace("generatorparam_", "");
+
+                    // Ignore boss rows
+                    foreach (int row_id in Boss_Dict[map_id])
+                    {
+                        param_rows = param_rows.Where(row => row.ID != row_id).ToList();
+                    }
+
+                    // Ignore character
+                    foreach (int row_id in Character_Dict[map_id])
+                    {
+                        param_rows = param_rows.Where(row => row.ID != row_id).ToList();
+                    }
+
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        row["AggroGroup"].Value = 2;
+                        row["Leash Distance"].Value = 10000;
+                    }
+                }
+            }
         }
 
         #endregion
 
         #region Util
+        public void GetAIInfo()
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                PARAM param = wrapper.Param;
+                List<PARAM.Row> param_rows = param.Rows;
+
+                if (wrapper.Name.Contains("generatorparam"))
+                {
+                    string map_id = wrapper.Name.Replace("generatorparam_", "");
+
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        string chr_id = row["GeneratorRegistParam"].Value.ToString();
+                        chr_id = chr_id.Remove(chr_id.Length - 4, 4);
+
+                        string think_id = row["AIThinkID"].Value.ToString();
+
+                        Console.WriteLine($"{chr_id};{think_id}");
+                    }
+                }
+            }
+        }
+
         private void RandomizeTriple<T1, T2, T3>(IEnumerable<PARAM.Row> rows, string param1, string param2, string param3)
         {
             List<(T1, T2, T3)> options = rows.Select(row => ((T1)row[param1].Value, (T2)row[param2].Value, (T3)row[param3].Value)).ToList();
@@ -510,6 +618,40 @@ namespace DS2_Scrambler
                     }
 
                     Boss_Dict.Add(map_id, Boss_Row_ID_List);
+
+                    // Skip List
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        bool isSkipRow = false;
+                        uint EnemyID = 0;
+
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            if (cell.Def.InternalName == "GeneratorRegistParam")
+                                EnemyID = (uint)cell.Value;
+                        }
+
+                        if (EnemyID > 0)
+                        {
+                            foreach (string entry in Skip_ID_List)
+                            {
+                                int target_id = int.Parse(entry.Remove(entry.Length - 2, 2));
+                                string r = EnemyID.ToString();
+                                r = r.Remove(r.Length - 4, 4);
+                                int short_row_id = int.Parse(r);
+
+                                if (short_row_id == target_id)
+                                    isSkipRow = true;
+                            }
+                        }
+
+                        if (isSkipRow)
+                        {
+                            Skip_Row_ID_List.Add(row.ID);
+                        }
+                    }
+
+                    Skip_Dict.Add(map_id, Skip_Row_ID_List);
                 }
             }
         }

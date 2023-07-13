@@ -63,10 +63,13 @@ namespace DS2_Scrambler
 
         public string ItemScramblePath = AppContext.BaseDirectory + "\\Assets\\Scramble\\Item-Scramble\\";
 
-        public ItemScrambler(Random random, Regulation reg)
+        public string OutputPath;
+
+        public ItemScrambler(Random random, Regulation reg, string output_path)
         {
             rand = random;
             regulation = reg;
+            OutputPath = output_path;
 
             Excluded_Weapons = Util.BuildIDList(ItemScramblePath + "Treasure-Excluded-Weapons");
             Excluded_Armor = Util.BuildIDList(ItemScramblePath + "Treasure-Excluded-Armor");

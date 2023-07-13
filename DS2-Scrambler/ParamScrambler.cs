@@ -68,10 +68,13 @@ namespace DS2_Scrambler
         public string ParamScramblePath = AppContext.BaseDirectory + "\\Assets\\Scramble\\";
         public string EnemyScramblePath = AppContext.BaseDirectory + "\\Assets\\Scramble\\Enemy-Scramble\\";
 
-        public ParamScrambler(Random random, Regulation reg)
+        public string OutputPath;
+
+        public ParamScrambler(Random random, Regulation reg, string output_path)
         {
             rand = random;
             regulation = reg;
+            OutputPath = output_path;
 
             BossIDs = Util.BuildIDList(EnemyScramblePath + "Boss-IDs");
             CharacterIDs = Util.BuildIDList(EnemyScramblePath + "Character-IDs");
