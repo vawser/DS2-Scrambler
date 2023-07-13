@@ -39,8 +39,8 @@ namespace DS2_Scrambler
 
             c_IgnoreKeys_Treasure_Map.Checked = true;
             c_IgnoreTools_Treasure_Map.Checked = true;
-            c_Scramble_Enemy_Drops.Checked = true;
-            c_Scramble_Treasure_Map.Checked = true;
+            c_Scramble_Enemy_Loot.Checked = true;
+            c_Scramble_Map_Loot.Checked = true;
         }
 
         private void b_SelectModPath_Click(object sender, EventArgs e)
@@ -100,32 +100,19 @@ namespace DS2_Scrambler
 
         public Regulation ScrambleParams(IProgress<string> progress, Regulation reg)
         {
+            Random rand = new Random();
+
+            if (t_seed.Text != string.Empty)
+                rand = new Random(t_seed.Text.GetHashCode());
+
             progress.Report("Scramble started.");
 
+            //********************
+            // Param Randomisation
+            //********************
             try
             {
-                Scrambler scrambler = new Scrambler(t_seed.Text, reg);
-
-                // Treasure
-                if (c_Scramble_Treasure_Map.Checked)
-                {
-                    progress.Report("Scramble: Treasure - Map");
-                    reg = scrambler.Scramble_Treasure("ItemLotParam2_Other",     
-                      c_IgnoreKeys_Treasure_Map.Checked, 
-                      c_IgnoreTools_Treasure_Map.Checked,
-                      c_IgnoreBossSouls_Treasure_Map.Checked,
-                      c_IncludeBossTreasure_Treasure_Map.Checked,
-                      c_IncludeCharacterTreasure_Treasure_Map.Checked,
-                      c_IncludeCovenantTreasure_Treasure_Map.Checked,
-                      c_IncludeBirdTreasure_Treasure_Map.Checked,
-                      c_IncludEventTreasure_Treasure_Map.Checked
-                    );
-                }
-                if (c_Scramble_Enemy_Drops.Checked)
-                {
-                    progress.Report("Scramble: Treasure - Enemies");
-                    reg = scrambler.Scramble_Treasure_Enemies("ItemLotParam2_Chr", c_MaintainItemType_Enemy_Drops.Checked);
-                }
+                ParamScrambler scrambler = new ParamScrambler(rand, reg);
 
                 // Items
                 if (c_Scramble_ItemParam.Checked)
@@ -261,16 +248,6 @@ namespace DS2_Scrambler
                 }
 
                 // Map
-                if (c_Scramble_EnemyPlacement.Checked)
-                {
-                    // This method is decent, but variety is limited and bosses don't mesh with position changes.
-                    progress.Report("Scramble: Enemy Locations");
-                    reg = scrambler.Scramble_EnemyGeneratorLocation(c_EnemyPlacement_OrderedPlacement.Checked, c_EnemyPlacement_IgnoreKeyCharacters.Checked, c_EnemyPlacement_IgnoreBosses.Checked, c_EnemyPlacement_IgnoreNGPlus.Checked);
-
-                    // This method doesn't seem to work well in-game, causes enemies to lose AI and crash occured.
-                    //progress.Report("Scramble: Enemy Generator Regist");
-                    //reg = scrambler.Scramble_EnemyGeneratorRegist(c_AnyEnemy_EnemyPlacement.Checked, c_EnemyPlacement_IgnoreKeyCharacters.Checked, c_EnemyPlacement_IgnoreBosses.Checked);
-                }
                 if (c_Scramble_TreasureBoxParam.Checked)
                 {
                     progress.Report("Scramble: Chest Traps");
@@ -295,6 +272,58 @@ namespace DS2_Scrambler
                 return reg;
             }
 
+            //********************
+            // Item Randomisation
+            //********************
+            try
+            {
+                ItemScrambler item_scrambler = new ItemScrambler(rand, reg);
+
+                if (c_Scramble_Map_Loot.Checked)
+                {
+                    progress.Report("Scramble: Loot");
+                    reg = item_scrambler.Scramble_Loot(
+                      c_Scramble_Map_Loot.Checked,
+                      c_Scramble_Enemy_Loot.Checked,
+                      c_IncludeBossTreasure_Treasure_Map.Checked,
+                      c_IncludeCharacterTreasure_Treasure_Map.Checked,
+                      c_IncludeCovenantTreasure_Treasure_Map.Checked,
+                      c_IncludeBirdTreasure_Treasure_Map.Checked,
+                      c_IncludEventTreasure_Treasure_Map.Checked,
+                      c_IgnoreKeys_Treasure_Map.Checked,
+                      c_IgnoreTools_Treasure_Map.Checked,
+                      c_IgnoreBossSouls_Treasure_Map.Checked
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                progress.Report("Aborted.");
+                Util.ShowError($"Failed to scramble items:\n{reg.regulationPath}\n\n{ex}");
+                return reg;
+            }
+
+            //********************
+            // Enemy Randomisation
+            //********************
+            try
+            {
+                EnemyScrambler enemy_scrambler = new EnemyScrambler(rand, reg);
+
+                if (c_Scramble_Enemy_Location.Checked || c_Scramble_Enemy_Type.Checked)
+                {
+                    // This method is decent, but variety is limited and bosses don't mesh with position changes.
+                    progress.Report("Scramble: Enemies");
+                    reg = enemy_scrambler.Scramble_Enemies(c_Scramble_Enemy_Location.Checked, c_Scramble_Enemy_Type.Checked, c_Enemy_Location_Ordered.Checked, c_Enemy_Location_IncludeCharacters.Checked, c_Enemy_Location_IncludeSpecial.Checked, c_Enemy_Type_IncludeBosses.Checked, c_Enemy_Type_IncludeCharacters.Checked);
+                }
+            }
+            catch (Exception ex)
+            {
+                progress.Report("Aborted.");
+                Util.ShowError($"Failed to scramble enemies:\n{reg.regulationPath}\n\n{ex}");
+                return reg;
+            }
+
             progress.Report("Scramble finished.");
 
             return reg;
@@ -308,56 +337,19 @@ namespace DS2_Scrambler
 
         private void b_ToggleRecommended_Click(object sender, EventArgs e)
         {
-            c_Scramble_ArmorParam.Checked = true;
-            c_Scramble_ArrowParam.Checked = true;
-            c_Scramble_Treasure_Map.Checked = true;
-            c_Scramble_ItemParam.Checked = true;
-
+            c_Scramble_Map_Loot.Checked = true;
+            c_Scramble_Enemy_Loot.Checked = true;
             c_IgnoreKeys_Treasure_Map.Checked = true;
-
-            c_Scramble_EnemyPlacement.Checked = true;
-            c_EnemyPlacement_IgnoreKeyCharacters.Checked = true;
-            c_EnemyPlacement_OrderedPlacement.Checked = true;
-
-            c_Scramble_ItemParam.Checked = true;
-            c_Scramble_WeaponParam.Checked = true;
-            c_Scramble_RingParam.Checked = true;
-            c_Scramble_SpellParam.Checked = true;
-
-            c_Scramble_NpcPlayerStatusParam.Checked = true;
-            c_Scramble_EnemyBehaviorParam.Checked = true;
-            c_Scramble_EnemyBehaviorParam_Boss.Checked = true;
-            c_Scramble_EnemyBulletParam.Checked = true;
-            c_Scramble_EnemyBulletParam_Boss.Checked = true;
-            c_Scramble_EnemyDamageParam.Checked = true;
-            c_Scramble_EnemyDamageParam_Boss.Checked = true;
-            c_Scramble_EnemyMoveParam.Checked = true;
-            c_Scramble_EnemyMoveParam_Boss.Checked = true;
-            c_Scramble_EnemyParam.Checked = true;
-            c_Scramble_EnemyParam_Boss.Checked = true;
-
-            c_Scramble_SystemBulletParam.Checked = true;
-            c_LimitToTraps_SystemBulletParam.Checked = true;
-
-            c_Scramble_TreasureBoxParam.Checked = true;
-
-            c_Scramble_BulletParam.Checked = true;
-            c_ForceVisuals_BulletParam.Checked = true;
-            c_ForceVisuals_EnemyBulletParam.Checked = true;
-            c_ForceVisuals_EnemyBulletParam_Boss.Checked = true;
-            c_ForceVisuals_SystemBulletParam.Checked = true;
-
-            c_IgnoreFists_WeaponParam.Checked = true;
+            c_IgnoreTools_Treasure_Map.Checked = true;
+            c_IgnoreBossSouls_Treasure_Map.Checked = true;
         }
 
         private void b_ToggleOff_Click(object sender, EventArgs e)
         {
             c_Scramble_ArmorParam.Checked = false;
             c_Scramble_ArrowParam.Checked = false;
-            c_Scramble_Treasure_Map.Checked = false;
             c_Scramble_ItemParam.Checked = false;
             c_Scramble_WeaponActionCategoryParam.Checked = false;
-            c_Scramble_Enemy_Drops.Checked = false;
             c_Scramble_WeaponParam.Checked = false;
             c_Scramble_BossBattleParam.Checked = false;
             c_Scramble_NpcPlayerStatusParam.Checked = false;
@@ -374,10 +366,8 @@ namespace DS2_Scrambler
             c_Scramble_RingParam.Checked = false;
             c_Scramble_SpellParam.Checked = false;
             c_Scramble_BulletParam.Checked = false;
-
             c_Scramble_TreasureBoxParam.Checked = false;
             c_Scramble_SystemBulletParam.Checked = false;
-
             c_Generate_ArmorParam.Checked = false;
             c_Generate_ArrowParam.Checked = false;
             c_Generate_ItemParam.Checked = false;
@@ -398,26 +388,35 @@ namespace DS2_Scrambler
             c_Generate_SpellParam.Checked = false;
             c_Generate_SystemBulletParam.Checked = false;
             c_Generate_BulletParam.Checked = false;
-
-            c_IgnoreKeys_Treasure_Map.Checked = false;
-            c_IgnoreTools_Treasure_Map.Checked = false;
             c_IgnoreRequirements_WeaponParam.Checked = false;
             c_IgnoreRequirements_ArmorParam.Checked = false;
             c_IgnoreRequirements_SpellParam.Checked = false;
-
-            c_Scramble_EnemyPlacement.Checked = false;
             c_Scramble_LogicComParam.Checked = false;
-            c_EnemyPlacement_IgnoreBosses.Checked = false;
-            c_EnemyPlacement_IgnoreKeyCharacters.Checked = false;
-            c_EnemyPlacement_IgnoreNGPlus.Checked = false;
-
+            c_LimitToTraps_SystemBulletParam.Checked = false;
+            c_IgnoreFists_WeaponParam.Checked = false;
             c_ForceVisuals_BulletParam.Checked = false;
             c_ForceVisuals_EnemyBulletParam.Checked = false;
             c_ForceVisuals_EnemyBulletParam_Boss.Checked = false;
             c_ForceVisuals_SystemBulletParam.Checked = false;
 
-            c_LimitToTraps_SystemBulletParam.Checked = false;
-            c_IgnoreFists_WeaponParam.Checked = false;
+            c_Scramble_Map_Loot.Checked = false;
+            c_Scramble_Enemy_Loot.Checked = false;
+            c_IgnoreKeys_Treasure_Map.Checked = false;
+            c_IgnoreTools_Treasure_Map.Checked = false;
+            c_IgnoreBossSouls_Treasure_Map.Checked = false;
+            c_IncludeBossTreasure_Treasure_Map.Checked = false;
+            c_IncludeCharacterTreasure_Treasure_Map.Checked = false;
+            c_IncludeCovenantTreasure_Treasure_Map.Checked = false;
+            c_IncludeBirdTreasure_Treasure_Map.Checked = false;
+            c_IncludEventTreasure_Treasure_Map.Checked = false;
+
+            c_Scramble_Enemy_Location.Checked = false;
+            c_Scramble_Enemy_Type.Checked = false;
+            c_Enemy_Location_Ordered.Checked = false;
+            c_Enemy_Location_IncludeCharacters.Checked = false;
+            c_Enemy_Location_IncludeSpecial.Checked = false;
+            c_Enemy_Type_IncludeBosses.Checked = false;
+            c_Enemy_Type_IncludeCharacters.Checked = false;
         }
 
         private void groupBox6_Enter(object sender, EventArgs e)
