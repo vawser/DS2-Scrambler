@@ -3,7 +3,7 @@ Unk11;0.1;1.0;RANDOM
 Unk12;0.1;1.0;RANDOM
 Unk13;0.1;1.0;RANDOM
 strength_requirement;0;20;WEIGHTED
-dexteroty_requirement;0;20;WEIGHTED
+dexterity_requirement;0;20;WEIGHTED
 intelligence_requirement;0;20;WEIGHTED
 faith_requirement;0;20;WEIGHTED
 weight;0.1;20;RANDOM
