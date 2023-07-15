@@ -1,0 +1,11 @@
+﻿51000000;Crushed Eye Orb
+62160000;Black Separation Crystal
+62030000;White Sign Soapstone
+62040000;Small White Sign Soapstone
+62045000;Red Sign Soapstone
+62020000;Bone of Order
+62000000;Dried Fingers
+62050000;Cracked Blue Eye Orb
+62060000;Cracked Red Eye Orb
+62160000;Black Separation Crystal
+62170000;Seed of a Tree of Giants

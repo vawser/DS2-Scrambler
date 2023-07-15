@@ -4,22 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SoulsFormats;
-using System.Text.RegularExpressions;
-using static SoulsFormats.PARAM;
-using System.Windows.Shapes;
-using System.Windows;
-using System.Windows.Documents;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
-using System.Windows.Media.TextFormatting;
-using System.Windows.Controls;
-using System.Diagnostics.Metrics;
-using static SoulsFormats.MSBE.Event;
-using System.Reflection;
-using Org.BouncyCastle.Crypto;
-using static SoulsFormats.LUAINFO;
-using System.Diagnostics;
-using System.Numerics;
-using System.Security.Cryptography;
 
 namespace DS2_Scrambler
 {
@@ -36,6 +20,8 @@ namespace DS2_Scrambler
         public bool T_Include_Covenant_Treasure = false;
         public bool T_Include_Bird_Treasure = false;
         public bool T_Include_Event_Treasure = false;
+        public bool T_Ensure_Lifegems = false;
+        public bool T_Retain_Shop_Spread = false;
 
         public List<PARAM.Row> Unassigned_Weapons;
         public List<PARAM.Row> Unassigned_Armor;
@@ -63,7 +49,7 @@ namespace DS2_Scrambler
             Assigned_Itemlots = new List<PARAM.Row>();
         }
 
-        public Regulation Scramble_Loot(bool scrambleLoot, bool scrambleEnemyDrops, bool scrambleShops, bool scrambleBossTrades, bool includeBossTreasure, bool includeCharacterTreasure, bool includeCovenantTreasure, bool includeBirdTreasure, bool includeEventTreasure, bool ignoreKeys, bool ignoreTools)
+        public Regulation Scramble_Loot(bool scrambleLoot, bool scrambleEnemyDrops, bool scrambleShops, bool scrambleBossTrades, bool includeBossTreasure, bool includeCharacterTreasure, bool includeCovenantTreasure, bool includeBirdTreasure, bool includeEventTreasure, bool ignoreKeys, bool ignoreTools, bool ensureLifegems, bool retainShopSpread)
         {
             T_Ignore_Keys = ignoreKeys;
             T_Ignore_Tools = ignoreTools;
@@ -72,6 +58,8 @@ namespace DS2_Scrambler
             T_Include_Covenant_Treasure = includeCovenantTreasure;
             T_Include_Bird_Treasure = includeBirdTreasure;
             T_Include_Event_Treasure = includeEventTreasure;
+            T_Ensure_Lifegems = ensureLifegems;
+            T_Retain_Shop_Spread = retainShopSpread;
 
             if (scrambleLoot)
             {
@@ -809,7 +797,54 @@ namespace DS2_Scrambler
 
         public void ScrambleShops()
         {
+            AssignShopItemlot(Data.Shoplot_List_Vengarl);
+            AssignShopItemlot(Data.Shoplot_List_Agdayne);
+            AssignShopItemlot(Data.Shoplot_List_Gilligan);
+            AssignShopItemlot(Data.Shoplot_List_Wellager);
+            AssignShopItemlot(Data.Shoplot_List_Grandahl);
+            AssignShopItemlot(Data.Shoplot_List_Gavlan);
+            AssignShopItemlot(Data.Shoplot_List_Melentia);
+            AssignShopItemlot(Data.Shoplot_List_Rat_King);
+            AssignShopItemlot(Data.Shoplot_List_Maughlin);
+            AssignShopItemlot(Data.Shoplot_List_Chloanne);
+            AssignShopItemlot(Data.Shoplot_List_Rosabeth);
+            AssignShopItemlot(Data.Shoplot_List_Lenigrast);
+            AssignShopItemlot(Data.Shoplot_List_McDuff);
+            AssignShopItemlot(Data.Shoplot_List_Carhillion);
+            AssignShopItemlot(Data.Shoplot_List_Straid);
+            AssignShopItemlot(Data.Shoplot_List_Licia);
+            AssignShopItemlot(Data.Shoplot_List_Felkin);
+            AssignShopItemlot(Data.Shoplot_List_Navlaan);
+            AssignShopItemlot(Data.Shoplot_List_Magerold);
+            AssignShopItemlot(Data.Shoplot_List_Ornifex);
+            AssignShopItemlot(Data.Shoplot_List_Shalquoir);
+            AssignShopItemlot(Data.Shoplot_List_Gren);
+            AssignShopItemlot(Data.Shoplot_List_Cromwell);
+            AssignShopItemlot(Data.Shoplot_List_Targray);
 
+            if(T_Ensure_Lifegems)
+            {
+                // Melentia - 75400600
+
+                // Felkin - 77000600
+
+                // Shalquior - 77700402 
+            }
+        }
+
+        public void AssignShopItemlot(List<PARAM.Row> rows)
+        {
+            Random rand = new Random();
+            
+            foreach(PARAM.Row row in rows)
+            {
+                if(!HasMatchingShopLot(Data.Itemlot_Info_Never_Change, row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingShopLot(Data.ID_List_Keys, row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingShopLot(Data.ID_List_Tools, row)))
+                {
+                    SelectItemForShoplot(row);
+                }
+            }
         }
 
         public void ScrambleBossSoulTrades()
@@ -870,7 +905,7 @@ namespace DS2_Scrambler
                 if (item_lot_value != EmptyItemID)
                 {
                     // Weapon
-                    if (roll >= 0 && roll <= 20)
+                    if (roll >= 0 && roll <= 10)
                     {
                         AddItemToItemlot(row, slot, Unassigned_Weapons, Data.Row_List_Weapons, applyEnemyChanceReduction);
                     }
@@ -989,6 +1024,185 @@ namespace DS2_Scrambler
             }
 
             return match;
+        }
+
+        public bool HasMatchingShopLot(List<int> list, PARAM.Row row)
+        {
+            bool match = false;
+
+            for (int slot = 0; slot <= 9; slot++)
+            {
+                if (list.Contains((int)row[$"equip_id"].Value))
+                    match = true;
+            }
+
+            return match;
+        }
+
+        public void SelectItemForShoplot(PARAM.Row row)
+        {
+            Random rand = new Random();
+
+            int roll = rand.Next(100);
+            int inf_roll = rand.Next(100);
+
+            int item_lot_value = (int)row[$"equip_id"].Value;
+
+            // If Retain Shop Spread in on, fix the rolls so the current item is swapped for the same type
+            if (T_Retain_Shop_Spread)
+            {
+                if (Data.Row_List_Weapons.Any(r => r.ID == item_lot_value))
+                    roll = 0;
+
+                if (Data.Row_List_Armor.Any(r => r.ID == item_lot_value))
+                    roll = 10;
+
+                if (Data.Row_List_Spells.Any(r => r.ID == item_lot_value))
+                    roll = 20;
+
+                if (Data.Row_List_Rings.Any(r => r.ID == item_lot_value))
+                    roll = 30;
+
+                if (Data.Row_List_Ammunition.Any(r => r.ID == item_lot_value))
+                    roll = 40;
+
+                if (Data.Row_List_Materials.Any(r => r.ID == item_lot_value))
+                    roll = 45;
+
+                if (Data.Row_List_Soul_Consumables.Any(r => r.ID == item_lot_value))
+                    roll = 55;
+
+                if (Data.Row_List_Throwable_Consumable.Any(r => r.ID == item_lot_value))
+                    roll = 60;
+
+                if (Data.Row_List_Bird_Consumables.Any(r => r.ID == item_lot_value))
+                    roll = 65;
+
+                if (Data.Row_List_Spell_Upgrades.Any(r => r.ID == item_lot_value))
+                    roll = 70;
+
+                if (Data.Row_List_HP_Consumables.Any(r => r.ID == item_lot_value))
+                    roll = 75;
+
+                if (Data.Row_List_Cast_Consumables.Any(r => r.ID == item_lot_value))
+                    roll = 85;
+
+                if (Data.Row_List_Flask_Upgrades.Any(r => r.ID == item_lot_value))
+                    roll = 90;
+
+                if (Data.Row_List_Misc_Consumable.Any(r => r.ID == item_lot_value))
+                    roll = 95;
+            }
+
+            // Weapon
+            if (roll >= 0 && roll < 10)
+            {
+                AddItemToShoplot(row, Data.Row_List_Weapons, 255, 255);
+            }
+            // Armor
+            else if (roll >= 10 && roll < 20)
+            {
+                AddItemToShoplot(row, Data.Row_List_Armor, 255, 255);
+            }
+            // Spells
+            else if (roll >= 20 && roll < 30)
+            {
+                AddItemToShoplot(row, Data.Row_List_Spells, 1, 3);
+            }
+            // Rings
+            else if (roll >= 30 && roll < 40)
+            {
+                AddItemToShoplot(row, Data.Row_List_Rings, 1, 1);
+            }
+            // Item: Ammunition
+            else if (roll >= 40 && roll < 45)
+            {
+                AddItemToShoplot(row, Data.Row_List_Ammunition, 255, 255);
+            }
+            // Item: Material
+            else if (roll >= 45 && roll < 55)
+            {
+                if (inf_roll >= 80)
+                    AddItemToShoplot(row, Data.Row_List_Materials, 255, 255);
+                else
+                    AddItemToShoplot(row, Data.Row_List_Materials, 5, 10);
+            }
+            // Item: Soul
+            else if (roll >= 55 && roll < 60)
+            {
+                AddItemToShoplot(row, Data.Row_List_Soul_Consumables, 3, 5);
+            }
+            // Item: Throwable
+            else if (roll >= 60 && roll < 65)
+            {
+                if (inf_roll >= 80)
+                    AddItemToShoplot(row, Data.Row_List_Throwable_Consumable, 255, 255);
+                else
+                    AddItemToShoplot(row, Data.Row_List_Throwable_Consumable, 25, 100);
+            }
+            // Item: Bird
+            else if (roll >= 65 && roll < 70)
+            {
+                if (inf_roll >= 80)
+                    AddItemToShoplot(row, Data.Row_List_Bird_Consumables, 255, 255);
+                else
+                    AddItemToShoplot(row, Data.Row_List_Bird_Consumables, 1, 3);
+            }
+            // Item: Spice
+            else if (roll >= 70 && roll < 75)
+            {
+                if (inf_roll >= 80)
+                    AddItemToShoplot(row, Data.Row_List_Spell_Upgrades, 255, 255);
+                else
+                    AddItemToShoplot(row, Data.Row_List_Spell_Upgrades, 1, 3);
+            }
+            // Item: HP
+            else if (roll >= 75 && roll < 85)
+            {
+                if (inf_roll >= 80)
+                    AddItemToShoplot(row, Data.Row_List_HP_Consumables, 255, 255);
+                else
+                    AddItemToShoplot(row, Data.Row_List_HP_Consumables, 3, 10);
+            }
+            // Item: Cast
+            else if (roll >= 85 && roll < 90)
+            {
+                if (inf_roll >= 80)
+                    AddItemToShoplot(row, Data.Row_List_Cast_Consumables, 255, 255);
+                else
+                    AddItemToShoplot(row, Data.Row_List_Cast_Consumables, 3, 10);
+            }
+            // Item: Flask
+            else if (roll >= 90 && roll < 95)
+            {
+                AddItemToShoplot(row, Data.Row_List_Flask_Upgrades, 1, 1);
+            }
+            // Item: Misc
+            else if (roll >= 95)
+            {
+                if (inf_roll >= 80)
+                    AddItemToShoplot(row, Data.Row_List_Misc_Consumable, 255, 255);
+                else
+                    AddItemToShoplot(row, Data.Row_List_Flask_Upgrades, 1, 1);
+            }
+        }
+
+        public void AddItemToShoplot(PARAM.Row row, List<PARAM.Row> itemlist, int min, int max)
+        {
+            Random rand = new Random();
+
+            PARAM.Row value = null;
+
+            value = itemlist[rand.Next(itemlist.Count)];
+
+            row[$"equip_id"].Value = value.ID;
+
+            if (min > 0 && max > 0)
+                row[$"quantity"].Value = rand.Next(min, max);
+            else if (min == 255 && max == 255)
+                row[$"quantity"].Value = 255;
+            else
+                row[$"quantity"].Value = 1;
         }
     }
 }

@@ -1,0 +1,9 @@
+40700000;Crest of the Rat
+40710000;Bell Keeper's Seal
+40720000;Guardian's Seal
+40730000;Crest of Blood
+40740000;Blue Seal
+40750000;Abyss Seal
+40760000;Vanquisher's Seal
+40770000;Sun Seal
+40780000;Ancient Dragon Seal

@@ -1,0 +1,2 @@
+C:\Users\Xylozi\Documents\C# Projects\DS2-Scrambler\DS2-Scrambler\bin\Release\net7.0-windows\win-x64\publish\DS2-Scrambler.pdb
+C:\Users\Xylozi\Documents\C# Projects\DS2-Scrambler\DS2-Scrambler\bin\Release\net7.0-windows\win-x64\publish\DS2-Scrambler.exe

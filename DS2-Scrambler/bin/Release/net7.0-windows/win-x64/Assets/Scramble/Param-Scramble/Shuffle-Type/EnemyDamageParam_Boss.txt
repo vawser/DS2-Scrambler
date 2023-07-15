@@ -1,0 +1,8 @@
+damage_0
+damage_1
+damage_2
+damage_mult
+counter_damage_mult
+stamina_damage_mult
+knockback_amount
+knockback_speed

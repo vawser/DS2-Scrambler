@@ -1,0 +1,4 @@
+weight
+durability
+repair_cost
+item_discovery

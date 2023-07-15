@@ -10,11 +10,11 @@ namespace DS2_Scrambler
 {
     public class Regulation
     {
-        public string regulationPath;
-        public string paramFolderPath;
-        public string paramDefPath;
+        public string Path_Regulation;
+        public string Path_Param_Folder;
+        public string Path_PARAMDEF = AppContext.BaseDirectory + "\\Assets\\Paramdex\\DS2S\\Defs\\";
 
-        public List<PARAMDEF> paramDefList = new List<PARAMDEF>();
+        public List<PARAMDEF> PARAMDEF_List = new List<PARAMDEF>();
 
         public IBinder? regulationBinder { get; set; }
         public bool isRegulationEncrypted { get; set; }
@@ -25,15 +25,14 @@ namespace DS2_Scrambler
         {
             regulationParamWrappers = new List<ParamWrapper>();
 
-            paramDefPath = $@"Assets\\Paramdex\\DS2S\\Defs";
-            regulationPath = Path.Combine(path, "enc_regulation.bnd.dcx");
-            paramFolderPath = Path.Combine(path, "Param");
+            Path_Regulation = Path.Combine(path, "enc_regulation.bnd.dcx");
+            Path_Param_Folder = Path.Combine(path, "Param");
 
             usingRegulation = true;
 
-            if (!File.Exists(regulationPath))
+            if (!File.Exists(Path_Regulation))
             {
-                Util.ShowError($"Regulation not found:\r\n{regulationPath}");
+                Util.ShowError($"Regulation not found:\r\n{Path_Regulation}");
                 usingRegulation = false;
             }
 
@@ -42,10 +41,10 @@ namespace DS2_Scrambler
 
         public void BuildParamDefs()
         {
-            paramDefList.Clear();
+            PARAMDEF_List.Clear();
             var paramdef_dir = $@"Assets\\Paramdex\\DS2S\\Defs";
 
-            foreach (string path in Directory.GetFiles(paramDefPath, "*.xml"))
+            foreach (string path in Directory.GetFiles(Path_PARAMDEF, "*.xml"))
             {
                 string paramID = Path.GetFileNameWithoutExtension(path);
 
@@ -53,7 +52,7 @@ namespace DS2_Scrambler
                 {
                     var paramdef = PARAMDEF.XmlDeserialize(path);
 
-                    paramDefList.Add(paramdef);
+                    PARAMDEF_List.Add(paramdef);
                 }
                 catch (Exception ex)
                 {
@@ -69,12 +68,12 @@ namespace DS2_Scrambler
             {
                 try
                 {
-                    regulationBinder = SFUtil.DecryptDS2Regulation(regulationPath);
+                    regulationBinder = SFUtil.DecryptDS2Regulation(Path_Regulation);
                     isRegulationEncrypted = true;
                 }
                 catch (Exception ex)
                 {
-                    Util.ShowError($"Failed to load regulation:\r\n{regulationPath}\r\n\r\n{ex}");
+                    Util.ShowError($"Failed to load regulation:\r\n{Path_Regulation}\r\n\r\n{ex}");
 
                     return false;
                 }
@@ -87,7 +86,7 @@ namespace DS2_Scrambler
                     {
                         PARAM param = PARAM.Read(file.Bytes);
 
-                        foreach (PARAMDEF paramdef in paramDefList)
+                        foreach (PARAMDEF paramdef in PARAMDEF_List)
                         {
                             if (param.ParamType == paramdef.ParamType)
                                 param.ApplyParamdef(paramdef);
@@ -112,7 +111,7 @@ namespace DS2_Scrambler
 
         public bool LoadLooseParams()
         {
-            string[] paramFiles = Directory.GetFileSystemEntries(paramFolderPath, @"*.param");
+            string[] paramFiles = Directory.GetFileSystemEntries(Path_Param_Folder, @"*.param");
             foreach(string filename in paramFiles)
             {
                 string name = Path.GetFileNameWithoutExtension(filename);
@@ -122,7 +121,7 @@ namespace DS2_Scrambler
                 {
                     PARAM param = PARAM.Read(paramBytes);
 
-                    foreach (PARAMDEF paramdef in paramDefList)
+                    foreach (PARAMDEF paramdef in PARAMDEF_List)
                     {
                         if (param.ParamType == paramdef.ParamType)
                             param.ApplyParamdef(paramdef);
@@ -177,14 +176,14 @@ namespace DS2_Scrambler
                 }
                 catch (Exception ex)
                 {
-                    Util.ShowError($"Failed to save regulation file:\n{regulationPath}\n\n{ex}");
+                    Util.ShowError($"Failed to save regulation file:\n{Path_Regulation}\n\n{ex}");
                     return false;
                 }
             }
 
             if (regulationBinder is BND4 bnd4)
             {
-                bnd4.Write(regulationPath);
+                bnd4.Write(Path_Regulation);
             }
 
             return true;
@@ -192,7 +191,7 @@ namespace DS2_Scrambler
 
         public bool SaveLooseParams()
         {
-            string[] paramFiles = Directory.GetFileSystemEntries(paramFolderPath, @"*.param");
+            string[] paramFiles = Directory.GetFileSystemEntries(Path_Param_Folder, @"*.param");
             foreach (string filename in paramFiles)
             {
                 string name = Path.GetFileNameWithoutExtension(filename);
@@ -243,7 +242,7 @@ namespace DS2_Scrambler
                     {
                         try
                         {
-                            var param_path = Path.Combine(paramFolderPath, file.Name);
+                            var param_path = Path.Combine(Path_Param_Folder, file.Name);
                             var paramBytes = paramFile.Param.Write();
                             File.WriteAllBytes(param_path, paramBytes);
                         }
@@ -257,7 +256,7 @@ namespace DS2_Scrambler
             }
 
             // Save loose params
-            string[] paramFiles = Directory.GetFileSystemEntries(paramFolderPath, @"*.param");
+            string[] paramFiles = Directory.GetFileSystemEntries(Path_Param_Folder, @"*.param");
             foreach (string filename in paramFiles)
             {
                 string name = Path.GetFileNameWithoutExtension(filename);
@@ -270,7 +269,7 @@ namespace DS2_Scrambler
                     {
                         try
                         {
-                            var param_path = Path.Combine(paramFolderPath, filename);
+                            var param_path = Path.Combine(Path_Param_Folder, filename);
                             var paramBytes = paramFile.Param.Write();
                             File.WriteAllBytes(param_path, paramBytes);
                         }
@@ -296,7 +295,7 @@ namespace DS2_Scrambler
 
             if (regulationBinder is BND4 bnd4)
             {
-                bnd4.Write(regulationPath);
+                bnd4.Write(Path_Regulation);
             }
 
             return true;

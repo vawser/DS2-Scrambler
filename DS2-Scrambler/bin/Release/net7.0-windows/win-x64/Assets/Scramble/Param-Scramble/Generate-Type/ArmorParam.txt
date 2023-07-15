@@ -1,0 +1,13 @@
+physical_defence_scaling;0.1;1.0;RANDOM
+Unk11;0.1;1.0;RANDOM
+Unk12;0.1;1.0;RANDOM
+Unk13;0.1;1.0;RANDOM
+strength_requirement;0;20;WEIGHTED
+dexterity_requirement;0;20;WEIGHTED
+intelligence_requirement;0;20;WEIGHTED
+faith_requirement;0;20;WEIGHTED
+weight;0.1;20;RANDOM
+durability;10;200;RANDOM
+repair_cost;10;2000;RANDOM
+poise;1;20;RANDOM
+item_discovery;0;100;RANDOM

@@ -219,8 +219,10 @@
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox38 = new System.Windows.Forms.GroupBox();
+            this.label90 = new System.Windows.Forms.Label();
+            this.c_RetainShopSpread = new System.Windows.Forms.CheckBox();
             this.label76 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.c_EnsureLifegems = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -2028,7 +2030,7 @@
             this.groupBox2.Controls.Add(this.c_IncludeCharacterTreasure_Treasure_Map);
             this.groupBox2.Location = new System.Drawing.Point(6, 69);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(841, 233);
+            this.groupBox2.Size = new System.Drawing.Size(841, 230);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Inclusions";
@@ -2036,21 +2038,20 @@
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(180, 197);
+            this.label43.Location = new System.Drawing.Point(177, 197);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(189, 15);
+            this.label43.Size = new System.Drawing.Size(405, 15);
             this.label43.TabIndex = 12;
-            this.label43.Text = "Include the boss soul trade entries.";
+            this.label43.Text = "Scramble the items available when trading boss souls with Straid or Ornifex.";
             // 
             // label80
             // 
             this.label80.AutoSize = true;
             this.label80.Location = new System.Drawing.Point(177, 122);
             this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(546, 15);
+            this.label80.Size = new System.Drawing.Size(364, 15);
             this.label80.TabIndex = 24;
-            this.label80.Text = "Include event treasure entries. These are items awarded in special circumstances," +
-    " such as the Fang Key.";
+            this.label80.Text = "Scramble the rewards given by unique events, such as the Fang Key.";
             // 
             // c_Include_Boss_Trades
             // 
@@ -2067,34 +2068,34 @@
             this.c_IncludEventTreasure_Treasure_Map.AutoSize = true;
             this.c_IncludEventTreasure_Treasure_Map.Location = new System.Drawing.Point(6, 122);
             this.c_IncludEventTreasure_Treasure_Map.Name = "c_IncludEventTreasure_Treasure_Map";
-            this.c_IncludEventTreasure_Treasure_Map.Size = new System.Drawing.Size(143, 19);
+            this.c_IncludEventTreasure_Treasure_Map.Size = new System.Drawing.Size(144, 19);
             this.c_IncludEventTreasure_Treasure_Map.TabIndex = 23;
-            this.c_IncludEventTreasure_Treasure_Map.Text = "Include Event Treasure";
+            this.c_IncludEventTreasure_Treasure_Map.Text = "Include Event Rewards";
             this.c_IncludEventTreasure_Treasure_Map.UseVisualStyleBackColor = true;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(180, 172);
+            this.label16.Location = new System.Drawing.Point(176, 23);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(136, 30);
+            this.label16.Size = new System.Drawing.Size(218, 15);
             this.label16.TabIndex = 10;
-            this.label16.Text = "Include the shop entries.\r\n\r\n";
+            this.label16.Text = "Scramble the items available at vendors.";
             // 
             // c_IncludeBirdTreasure_Treasure_Map
             // 
             this.c_IncludeBirdTreasure_Treasure_Map.AutoSize = true;
             this.c_IncludeBirdTreasure_Treasure_Map.Location = new System.Drawing.Point(6, 97);
             this.c_IncludeBirdTreasure_Treasure_Map.Name = "c_IncludeBirdTreasure_Treasure_Map";
-            this.c_IncludeBirdTreasure_Treasure_Map.Size = new System.Drawing.Size(135, 19);
+            this.c_IncludeBirdTreasure_Treasure_Map.Size = new System.Drawing.Size(136, 19);
             this.c_IncludeBirdTreasure_Treasure_Map.TabIndex = 21;
-            this.c_IncludeBirdTreasure_Treasure_Map.Text = "Include Bird Treasure";
+            this.c_IncludeBirdTreasure_Treasure_Map.Text = "Include Bird Rewards";
             this.c_IncludeBirdTreasure_Treasure_Map.UseVisualStyleBackColor = true;
             // 
             // c_Include_Shops
             // 
             this.c_Include_Shops.AutoSize = true;
-            this.c_Include_Shops.Location = new System.Drawing.Point(6, 172);
+            this.c_Include_Shops.Location = new System.Drawing.Point(6, 22);
             this.c_Include_Shops.Name = "c_Include_Shops";
             this.c_Include_Shops.Size = new System.Drawing.Size(100, 19);
             this.c_Include_Shops.TabIndex = 9;
@@ -2104,11 +2105,11 @@
             // c_IncludeBossTreasure_Treasure_Map
             // 
             this.c_IncludeBossTreasure_Treasure_Map.AutoSize = true;
-            this.c_IncludeBossTreasure_Treasure_Map.Location = new System.Drawing.Point(6, 22);
+            this.c_IncludeBossTreasure_Treasure_Map.Location = new System.Drawing.Point(6, 172);
             this.c_IncludeBossTreasure_Treasure_Map.Name = "c_IncludeBossTreasure_Treasure_Map";
-            this.c_IncludeBossTreasure_Treasure_Map.Size = new System.Drawing.Size(138, 19);
+            this.c_IncludeBossTreasure_Treasure_Map.Size = new System.Drawing.Size(126, 19);
             this.c_IncludeBossTreasure_Treasure_Map.TabIndex = 15;
-            this.c_IncludeBossTreasure_Treasure_Map.Text = "Include Boss Treasure";
+            this.c_IncludeBossTreasure_Treasure_Map.Text = "Include Boss Drops";
             this.c_IncludeBossTreasure_Treasure_Map.UseVisualStyleBackColor = true;
             // 
             // c_Include_Enemy_Loot
@@ -2126,38 +2127,36 @@
             this.label79.AutoSize = true;
             this.label79.Location = new System.Drawing.Point(177, 97);
             this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(608, 15);
+            this.label79.Size = new System.Drawing.Size(381, 15);
             this.label79.TabIndex = 22;
-            this.label79.Text = "Include the Dyna and Tillo treasure entries. These contain items that are awarded" +
-    " to the player for dropping stones.";
+            this.label79.Text = "Scramble the rewards given by Dyna and Tillo, the Things Betwixt birds.";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(180, 147);
+            this.label6.Location = new System.Drawing.Point(176, 148);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(174, 15);
+            this.label6.Size = new System.Drawing.Size(222, 15);
             this.label6.TabIndex = 8;
-            this.label6.Text = "Include the enemy drop entries.";
+            this.label6.Text = "Scramble the items dropped by enemies.";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(177, 22);
+            this.label10.Location = new System.Drawing.Point(177, 172);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(529, 15);
+            this.label10.Size = new System.Drawing.Size(280, 15);
             this.label10.TabIndex = 16;
-            this.label10.Text = "Include the boss treasure entries. These contain the items that are dropped when " +
-    "a boss is defeated.";
+            this.label10.Text = "Scramble the items dropped by bosses upon defeat.";
             // 
             // c_IncludeCovenantTreasure_Treasure_Map
             // 
             this.c_IncludeCovenantTreasure_Treasure_Map.AutoSize = true;
             this.c_IncludeCovenantTreasure_Treasure_Map.Location = new System.Drawing.Point(6, 72);
             this.c_IncludeCovenantTreasure_Treasure_Map.Name = "c_IncludeCovenantTreasure_Treasure_Map";
-            this.c_IncludeCovenantTreasure_Treasure_Map.Size = new System.Drawing.Size(165, 19);
+            this.c_IncludeCovenantTreasure_Treasure_Map.Size = new System.Drawing.Size(166, 19);
             this.c_IncludeCovenantTreasure_Treasure_Map.TabIndex = 19;
-            this.c_IncludeCovenantTreasure_Treasure_Map.Text = "Include Covenant Treasure";
+            this.c_IncludeCovenantTreasure_Treasure_Map.Text = "Include Covenant Rewards";
             this.c_IncludeCovenantTreasure_Treasure_Map.UseVisualStyleBackColor = true;
             // 
             // label77
@@ -2165,29 +2164,27 @@
             this.label77.AutoSize = true;
             this.label77.Location = new System.Drawing.Point(177, 47);
             this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(568, 15);
+            this.label77.Size = new System.Drawing.Size(249, 15);
             this.label77.TabIndex = 18;
-            this.label77.Text = "Include the character treasure entries. These contain the items that are awarded " +
-    "by characters to the player.";
+            this.label77.Text = "Scramble the rewards given out by characters.";
             // 
             // label78
             // 
             this.label78.AutoSize = true;
             this.label78.Location = new System.Drawing.Point(177, 72);
             this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(568, 15);
+            this.label78.Size = new System.Drawing.Size(268, 15);
             this.label78.TabIndex = 20;
-            this.label78.Text = "Include the covenant treasure entries. These contain the items that are awarded b" +
-    "y covenants to the player.";
+            this.label78.Text = "Scramble the rewards given by covenant turn-ins.";
             // 
             // c_IncludeCharacterTreasure_Treasure_Map
             // 
             this.c_IncludeCharacterTreasure_Treasure_Map.AutoSize = true;
             this.c_IncludeCharacterTreasure_Treasure_Map.Location = new System.Drawing.Point(6, 47);
             this.c_IncludeCharacterTreasure_Treasure_Map.Name = "c_IncludeCharacterTreasure_Treasure_Map";
-            this.c_IncludeCharacterTreasure_Treasure_Map.Size = new System.Drawing.Size(165, 19);
+            this.c_IncludeCharacterTreasure_Treasure_Map.Size = new System.Drawing.Size(166, 19);
             this.c_IncludeCharacterTreasure_Treasure_Map.TabIndex = 17;
-            this.c_IncludeCharacterTreasure_Treasure_Map.Text = "Include Character Treasure";
+            this.c_IncludeCharacterTreasure_Treasure_Map.Text = "Include Character Rewards";
             this.c_IncludeCharacterTreasure_Treasure_Map.UseVisualStyleBackColor = true;
             // 
             // groupBox11
@@ -2225,9 +2222,9 @@
             this.c_IgnoreKeys_Treasure_Map.AutoSize = true;
             this.c_IgnoreKeys_Treasure_Map.Location = new System.Drawing.Point(6, 22);
             this.c_IgnoreKeys_Treasure_Map.Name = "c_IgnoreKeys_Treasure_Map";
-            this.c_IgnoreKeys_Treasure_Map.Size = new System.Drawing.Size(87, 19);
+            this.c_IgnoreKeys_Treasure_Map.Size = new System.Drawing.Size(94, 19);
             this.c_IgnoreKeys_Treasure_Map.TabIndex = 9;
-            this.c_IgnoreKeys_Treasure_Map.Text = "Ignore Keys";
+            this.c_IgnoreKeys_Treasure_Map.Text = "Exclude Keys";
             this.c_IgnoreKeys_Treasure_Map.UseVisualStyleBackColor = true;
             // 
             // label8
@@ -2235,19 +2232,18 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(177, 23);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(467, 15);
+            this.label8.Size = new System.Drawing.Size(419, 15);
             this.label8.TabIndex = 10;
-            this.label8.Text = "Stops the scrambler from changing item locations for keys, for instance the Soldi" +
-    "er Key.";
+            this.label8.Text = "Exclude keys from the scrambler, forcing them to retain their original location.";
             // 
             // c_IgnoreTools_Treasure_Map
             // 
             this.c_IgnoreTools_Treasure_Map.AutoSize = true;
             this.c_IgnoreTools_Treasure_Map.Location = new System.Drawing.Point(6, 47);
             this.c_IgnoreTools_Treasure_Map.Name = "c_IgnoreTools_Treasure_Map";
-            this.c_IgnoreTools_Treasure_Map.Size = new System.Drawing.Size(90, 19);
+            this.c_IgnoreTools_Treasure_Map.Size = new System.Drawing.Size(97, 19);
             this.c_IgnoreTools_Treasure_Map.TabIndex = 11;
-            this.c_IgnoreTools_Treasure_Map.Text = "Ignore Tools";
+            this.c_IgnoreTools_Treasure_Map.Text = "Exclude Tools";
             this.c_IgnoreTools_Treasure_Map.UseVisualStyleBackColor = true;
             // 
             // label9
@@ -2255,10 +2251,10 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(177, 47);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(624, 15);
+            this.label9.Size = new System.Drawing.Size(615, 15);
             this.label9.TabIndex = 12;
-            this.label9.Text = "Stops the scrambler from changing tool item locations, for instance Estus Flask S" +
-    "hards and Fragrant Branches of Yore.";
+            this.label9.Text = "Exclude tools from the scrambler. This covers items such as the Fragrant Branches" +
+    " of Yore and the Estus Flask Shard.";
             // 
             // tabControl2
             // 
@@ -2287,34 +2283,56 @@
             // 
             // groupBox38
             // 
+            this.groupBox38.Controls.Add(this.label90);
+            this.groupBox38.Controls.Add(this.c_RetainShopSpread);
             this.groupBox38.Controls.Add(this.label76);
-            this.groupBox38.Controls.Add(this.checkBox1);
-            this.groupBox38.Location = new System.Drawing.Point(6, 395);
+            this.groupBox38.Controls.Add(this.c_EnsureLifegems);
+            this.groupBox38.Location = new System.Drawing.Point(6, 392);
             this.groupBox38.Name = "groupBox38";
-            this.groupBox38.Size = new System.Drawing.Size(841, 61);
+            this.groupBox38.Size = new System.Drawing.Size(841, 80);
             this.groupBox38.TabIndex = 19;
             this.groupBox38.TabStop = false;
             this.groupBox38.Text = "Tweaks";
+            // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.Location = new System.Drawing.Point(177, 47);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(646, 15);
+            this.label90.TabIndex = 15;
+            this.label90.Text = "When scrambled items in shops will retain their category, for instance a weapon w" +
+    "ill become another weapon, not a spell.";
+            // 
+            // c_RetainShopSpread
+            // 
+            this.c_RetainShopSpread.AutoSize = true;
+            this.c_RetainShopSpread.Location = new System.Drawing.Point(6, 47);
+            this.c_RetainShopSpread.Name = "c_RetainShopSpread";
+            this.c_RetainShopSpread.Size = new System.Drawing.Size(128, 19);
+            this.c_RetainShopSpread.TabIndex = 14;
+            this.c_RetainShopSpread.Text = "Retain Shop Spread";
+            this.c_RetainShopSpread.UseVisualStyleBackColor = true;
             // 
             // label76
             // 
             this.label76.AutoSize = true;
             this.label76.Location = new System.Drawing.Point(177, 22);
             this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(548, 15);
+            this.label76.Size = new System.Drawing.Size(448, 15);
             this.label76.TabIndex = 13;
-            this.label76.Text = "Ensures at least one of the early-game shops has infinite Lifegems for sale (if i" +
-    "ncluded in the scramble).";
+            this.label76.Text = "Forces an early-game shop to have infinite Lifegems for sale (if shops are scramb" +
+    "le).";
             // 
-            // checkBox1
+            // c_EnsureLifegems
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 22);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(146, 19);
-            this.checkBox1.TabIndex = 12;
-            this.checkBox1.Text = "Ensure Lifegem Access";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.c_EnsureLifegems.AutoSize = true;
+            this.c_EnsureLifegems.Location = new System.Drawing.Point(6, 22);
+            this.c_EnsureLifegems.Name = "c_EnsureLifegems";
+            this.c_EnsureLifegems.Size = new System.Drawing.Size(146, 19);
+            this.c_EnsureLifegems.TabIndex = 12;
+            this.c_EnsureLifegems.Text = "Ensure Lifegem Access";
+            this.c_EnsureLifegems.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -2322,7 +2340,7 @@
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.c_IgnoreTools_Treasure_Map);
             this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Location = new System.Drawing.Point(6, 308);
+            this.groupBox3.Location = new System.Drawing.Point(6, 305);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(841, 81);
             this.groupBox3.TabIndex = 18;
@@ -3174,6 +3192,8 @@
         private NumericUpDown t_StatSkew;
         private GroupBox groupBox38;
         private Label label76;
-        private CheckBox checkBox1;
+        private CheckBox c_EnsureLifegems;
+        private Label label90;
+        private CheckBox c_RetainShopSpread;
     }
 }

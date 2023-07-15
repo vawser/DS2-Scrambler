@@ -1,0 +1,10 @@
+amount_lot_0;1;10;
+amount_lot_1;1;10;
+amount_lot_2;1;10;
+amount_lot_3;1;10;
+amount_lot_4;1;10;
+amount_lot_5;1;10;
+amount_lot_6;1;10;
+amount_lot_7;1;10;
+amount_lot_8;1;10;
+amount_lot_9;1;10;

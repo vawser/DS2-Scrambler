@@ -1,0 +1,7 @@
+damage_physical;1;254;RANDOM
+damage_magic;1;254;RANDOM
+damage_lightning;1;254;RANDOM
+damage_fire;1;254;RANDOM
+damage_dark;1;254;RANDOM
+damage_poison;1;254;RANDOM
+damage_bleed;1;254;RANDOM

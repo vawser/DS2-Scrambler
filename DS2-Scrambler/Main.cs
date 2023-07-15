@@ -14,12 +14,12 @@ namespace DS2_Scrambler
     public partial class Main : Form
     {
         // Mod Path
-        public CommonOpenFileDialog modPathDialog;
-        public string baseModPath;
-        public string scrambledModPath;
+        public CommonOpenFileDialog ModPath_Dialog;
+        public string Path_BaseMod;
+        public string Path_ScrambledMod;
 
         // Interface
-        private Progress<string> progress;
+        private Progress<string> ProgressText;
 
         public ScramblerData scramblerData;
         public Regulation reg;
@@ -28,15 +28,15 @@ namespace DS2_Scrambler
         {
             InitializeComponent();
 
-            progress = new Progress<string>(status => l_status.Text = status);
+            ProgressText = new Progress<string>(status => l_status.Text = status);
         }
 
         #region Interface
         private async void Main_Load(object sender, EventArgs e)
         {
-            modPathDialog = new CommonOpenFileDialog();
-            modPathDialog.InitialDirectory = "";
-            modPathDialog.IsFolderPicker = true;
+            ModPath_Dialog = new CommonOpenFileDialog();
+            ModPath_Dialog.InitialDirectory = "";
+            ModPath_Dialog.IsFolderPicker = true;
 
             t_ModPath.Text = "";
 
@@ -45,22 +45,22 @@ namespace DS2_Scrambler
 
         private void b_SelectModPath_Click(object sender, EventArgs e)
         {
-            if (modPathDialog.ShowDialog() == CommonFileDialogResult.Ok && !string.IsNullOrEmpty(modPathDialog.FileName))
+            if (ModPath_Dialog.ShowDialog() == CommonFileDialogResult.Ok && !string.IsNullOrEmpty(ModPath_Dialog.FileName))
             {
-                baseModPath = modPathDialog.FileName;
-                scrambledModPath = baseModPath + $"-Scrambled";
-                t_ModPath.Text = baseModPath;
+                Path_BaseMod = ModPath_Dialog.FileName;
+                Path_ScrambledMod = Path_BaseMod + $"-Scrambled";
+                t_ModPath.Text = Path_BaseMod;
             }
         }
 
         private async void b_Scramble_Click(object sender, EventArgs e)
         {
             // If Copy Mod fails, do not attempt to scramble.
-            if (Util.CopyMod(baseModPath, scrambledModPath))
+            if (Util.CopyMod(Path_BaseMod, Path_ScrambledMod))
             {
                 ToggleControls(false);
 
-                await Task.Run(() => Scramble(progress));
+                await Task.Run(() => Scramble(ProgressText));
 
                 ToggleControls(true);
             }
@@ -73,7 +73,7 @@ namespace DS2_Scrambler
             progress.Report("Loading regulation.");
 
             // Return if scrambled path is empty
-            if (baseModPath == "" || baseModPath == null || scrambledModPath == "" || scrambledModPath == null)
+            if (Path_BaseMod == "" || Path_BaseMod == null || Path_ScrambledMod == "" || Path_ScrambledMod == null)
             {
                 progress.Report("Aborted.");
                 MessageBox.Show("No base path specified.");
@@ -81,13 +81,13 @@ namespace DS2_Scrambler
             }
 
             // Load regulation params
-            reg = new Regulation(scrambledModPath);
+            reg = new Regulation(Path_ScrambledMod);
 
             if (reg.LoadParams() && reg.LoadLooseParams())
             {
                 progress.Report("Params loaded.");
 
-                scramblerData = new ScramblerData(reg, scrambledModPath);
+                scramblerData = new ScramblerData(reg, Path_ScrambledMod);
                 progress.Report("Scrambler data built.");
 
                 // Scramble
@@ -300,7 +300,7 @@ namespace DS2_Scrambler
             catch (Exception ex)
             {
                 progress.Report("Aborted.");
-                Util.ShowError($"Failed to scramble params:\n{reg.regulationPath}\n\n{ex}");
+                Util.ShowError($"Failed to scramble params:\n{reg.Path_Regulation}\n\n{ex}");
                 return reg;
             }
 
@@ -325,14 +325,16 @@ namespace DS2_Scrambler
                       c_IncludeBirdTreasure_Treasure_Map.Checked,
                       c_IncludEventTreasure_Treasure_Map.Checked,
                       c_IgnoreKeys_Treasure_Map.Checked,
-                      c_IgnoreTools_Treasure_Map.Checked
+                      c_IgnoreTools_Treasure_Map.Checked,
+                      c_EnsureLifegems.Checked,
+                      c_RetainShopSpread.Checked
                     );
                 }
             }
             catch (Exception ex)
             {
                 progress.Report("Aborted.");
-                Util.ShowError($"Failed to scramble items:\n{reg.regulationPath}\n\n{ex}");
+                Util.ShowError($"Failed to scramble items:\n{reg.Path_Regulation}\n\n{ex}");
                 return reg;
             }
 
@@ -362,7 +364,7 @@ namespace DS2_Scrambler
             catch (Exception ex)
             {
                 progress.Report("Aborted.");
-                Util.ShowError($"Failed to scramble enemies:\n{reg.regulationPath}\n\n{ex}");
+                Util.ShowError($"Failed to scramble enemies:\n{reg.Path_Regulation}\n\n{ex}");
                 return reg;
             }
 
