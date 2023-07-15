@@ -824,11 +824,32 @@ namespace DS2_Scrambler
 
             if(T_Ensure_Lifegems)
             {
-                // Melentia - 75400600
+                Random rand = new Random();
+                int roll = rand.Next(100);
 
-                // Felkin - 77000600
+                // Melentia
+                if (roll >= 0 && roll < 33)
+                {
+                    List<PARAM.Row> rows = Data.Shoplot_List_Melentia.Where(row => row.ID == 75400600).ToList();
+                    rows[0]["equip_id"].Value = 60010000;
+                    rows[0]["quantity"].Value = 255;
+                }
 
-                // Shalquior - 77700402 
+                // Felkin
+                if (roll >= 33 && roll < 66)
+                {
+                    List<PARAM.Row> rows = Data.Shoplot_List_Felkin.Where(row => row.ID == 77000600).ToList();
+                    rows[0]["equip_id"].Value = 60010000;
+                    rows[0]["quantity"].Value = 255;
+                }
+
+                // Shalquior
+                if (roll >= 66)
+                {
+                    List<PARAM.Row> rows = Data.Shoplot_List_Shalquoir.Where(row => row.ID == 77700402).ToList();
+                    rows[0]["equip_id"].Value = 60010000;
+                    rows[0]["quantity"].Value = 255;
+                }
             }
         }
 
@@ -848,8 +869,41 @@ namespace DS2_Scrambler
         }
 
         public void ScrambleBossSoulTrades()
-        { 
+        {
+            AssignBossTradeItemlot(Data.Shoplot_List_Straid_Boss);
+            AssignBossTradeItemlot(Data.Shoplot_List_Ornifex_Boss);
 
+            // Duplicate Ornifex's assignments to the free rows, but se the price_rate to 0.
+            for(int i = 0; i < Data.Shoplot_List_Ornifex_Boss.Count; i++)
+            {
+                PARAM.Row original_row = Data.Shoplot_List_Ornifex_Boss[i];
+                PARAM.Row free_row = Data.Shoplot_List_Ornifex_Boss_Free[i];
+
+                free_row["equip_id"].Value = original_row["equip_id"].Value;
+                free_row["Unk00"].Value = original_row["Unk00"].Value;
+                free_row["enable_flag"].Value = original_row["enable_flag"].Value;
+                free_row["disable_flag"].Value = original_row["disable_flag"].Value;
+                free_row["material_id"].Value = original_row["material_id"].Value;
+                free_row["duplicate_item_id"].Value = original_row["duplicate_item_id"].Value;
+                free_row["Unk01"].Value = original_row["Unk01"].Value;
+                free_row["price_rate"].Value = 0;
+                free_row["quantity"].Value = original_row["quantity"].Value;
+            }
+        }
+
+        public void AssignBossTradeItemlot(List<PARAM.Row> rows)
+        {
+            Random rand = new Random();
+
+            foreach (PARAM.Row row in rows)
+            {
+                if (!HasMatchingShopLot(Data.Itemlot_Info_Never_Change, row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingShopLot(Data.ID_List_Keys, row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingShopLot(Data.ID_List_Tools, row)))
+                {
+                    SelectUniqueItemForShoplot(row);
+                }
+            }
         }
 
         public void SelectUniqueItemForItemlot(PARAM.Row row, int EmptyItemID, bool applyEnemyChanceReduction)
@@ -1037,6 +1091,44 @@ namespace DS2_Scrambler
             }
 
             return match;
+        }
+
+        public void SelectUniqueItemForShoplot(PARAM.Row row)
+        {
+            Random rand = new Random();
+
+            int roll = rand.Next(100);
+
+            int item_lot_value = (int)row[$"equip_id"].Value;
+
+            // If Retain Shop Spread in on, fix the rolls so the current item is swapped for the same type
+            if (T_Retain_Shop_Spread)
+            {
+                if (Data.Row_List_Weapons.Any(r => r.ID == item_lot_value))
+                    roll = 0;
+
+                if (Data.Row_List_Spells.Any(r => r.ID == item_lot_value))
+                    roll = 50;
+
+                if (Data.Row_List_Rings.Any(r => r.ID == item_lot_value))
+                    roll = 75;
+            }
+
+            // Weapon
+            if (roll >= 0 && roll < 50)
+            {
+                AddItemToShoplot(row, Data.Row_List_Weapons, 255, 255);
+            }
+            // Spells
+            else if (roll >= 50 && roll < 75)
+            {
+                AddItemToShoplot(row, Data.Row_List_Spells, 255, 255);
+            }
+            // Rings
+            else if (roll >= 75)
+            {
+                AddItemToShoplot(row, Data.Row_List_Rings, 255, 255);
+            }
         }
 
         public void SelectItemForShoplot(PARAM.Row row)
