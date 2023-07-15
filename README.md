@@ -8,7 +8,7 @@ Supports various options for each of the three core randomisers, allowing for th
 1. Run the application.
 2. Select the mod folder you wish to scramble. For example: *C:\Users\Name\Documents\Fromsoft\MyMod*
 3. Toggle the scramble settings as you wish, each type of scrambling can be toggled on or off.
-4. Press Scramble. A new mod scalled *MyMod-Scrambled* will be created in the same directory as *MyMod*.
+4. Press Scramble. A new mod called *MyMod-Scrambled* will be created in the same directory as *MyMod*.
 
 To run the mod, I recommend you use ModEngine.
 
