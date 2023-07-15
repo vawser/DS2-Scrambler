@@ -14,6 +14,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using System.Windows.Media.TextFormatting;
 using System.Windows.Controls;
 using System.Diagnostics.Metrics;
+using Org.BouncyCastle.Crypto;
+using System.IO;
+using System.DirectoryServices;
 
 namespace DS2_Scrambler
 {
@@ -50,105 +53,13 @@ namespace DS2_Scrambler
     {
         public Random rand;
         public Regulation regulation;
+        public ScramblerData Data;
 
-        Dictionary<string, List<string>> ShuffleParamFields = new Dictionary<string, List<string>>();
-        Dictionary<string, List<string>> GenerateParamFields = new Dictionary<string, List<string>>();
-        Dictionary<string, Dictionary<string, List<string>>> GenerateParamValues = new Dictionary<string, Dictionary<string, List<string>>>();
-
-        List<string> BossIDs = new List<string>();
-        List<string> CharacterIDs = new List<string>();
-        List<string> EnemyIDs = new List<string>();
-
-        public ParamWrapper ItemParam;
-        public ParamWrapper SpellParam;
-        public ParamWrapper RingParam;
-        public ParamWrapper WeaponParam;
-        public ParamWrapper ArmorParam;
-
-        public string ParamScramblePath = AppContext.BaseDirectory + "\\Assets\\Scramble\\";
-        public string EnemyScramblePath = AppContext.BaseDirectory + "\\Assets\\Scramble\\Enemy-Scramble\\";
-
-        public string OutputPath;
-
-        public ParamScrambler(Random random, Regulation reg, string output_path)
+        public ParamScrambler(Random random, Regulation reg, ScramblerData scramblerData)
         {
+            Data = scramblerData;
             rand = random;
             regulation = reg;
-            OutputPath = output_path;
-
-            BossIDs = Util.BuildIDList(EnemyScramblePath + "Boss-IDs");
-            CharacterIDs = Util.BuildIDList(EnemyScramblePath + "Character-IDs");
-            EnemyIDs = Util.BuildIDList(EnemyScramblePath + "Enemy-IDs");
-
-            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
-            {
-                if (wrapper.Name == "ItemParam")
-                {
-                    ItemParam = wrapper;
-                }
-                if (wrapper.Name == "SpellParam")
-                {
-                    SpellParam = wrapper;
-                }
-                if (wrapper.Name == "RingParam")
-                {
-                    RingParam = wrapper;
-                }
-                if (wrapper.Name == "WeaponParam")
-                {
-                    WeaponParam = wrapper;
-                }
-                if (wrapper.Name == "ArmorParam")
-                {
-                    ArmorParam = wrapper;
-                }
-            }
-
-            // Build ShuffleParamFields dictionary
-            foreach (string filepath in Directory.GetFiles(ParamScramblePath + "Param-Scramble\\Shuffle-Type"))
-            {
-                var name = System.IO.Path.GetFileNameWithoutExtension(filepath);
-                var list = new List<string>();
-
-                foreach (string line in File.ReadLines(filepath, Encoding.UTF8))
-                {
-                    list.Add(line);
-                }
-
-                ShuffleParamFields.Add(name, list);
-            }
-
-            // Build GenerateParamFields dictionary
-            foreach (string filepath in Directory.GetFiles(ParamScramblePath + "Param-Scramble\\Generate-Shuffle-Type"))
-            {
-                var name = System.IO.Path.GetFileNameWithoutExtension(filepath);
-                var list = new List<string>();
-
-                foreach (string line in File.ReadLines(filepath, Encoding.UTF8))
-                {
-                    list.Add(line);
-                }
-
-                GenerateParamFields.Add(name, list);
-            }
-
-            // Build GenerateParamValues dictionary
-            foreach (string filepath in Directory.GetFiles(ParamScramblePath + "Param-Scramble\\Generate-Type"))
-            {
-                var name = System.IO.Path.GetFileNameWithoutExtension(filepath);
-                var dict = new Dictionary<string, List<string>>();
-
-                foreach (string line in File.ReadLines(filepath, Encoding.UTF8))
-                {
-                    var list = line.Split(";");
-
-                    var value_list = new List<string> { list[1], list[2], list[3] };
-
-                    dict.Add(list[0], value_list);
-                }
-
-                GenerateParamValues.Add(name, dict);
-            }
         }
 
         #region Scramble - ArmorParam
@@ -165,11 +76,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
 
@@ -205,11 +116,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
                 }
@@ -231,11 +142,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
                 }
@@ -257,11 +168,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
                 }
@@ -283,11 +194,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
 
@@ -397,11 +308,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
 
@@ -506,11 +417,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
 
@@ -570,7 +481,7 @@ namespace DS2_Scrambler
                     PARAM param = wrapper.Param;
                     var param_rows = param.Rows;
 
-                    ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                    ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                 }
             }
 
@@ -609,11 +520,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
 
@@ -660,11 +571,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
                 }
@@ -686,11 +597,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
 
@@ -731,118 +642,91 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
-
-                        List<PARAM.Row> weaponList = new List<PARAM.Row>();
-                        List<PARAM.Row> shieldList = new List<PARAM.Row>();
-                        List<PARAM.Row> npcSpellList = new List<PARAM.Row>();
-                        List<PARAM.Row> headArmorList = new List<PARAM.Row>();
-                        List<PARAM.Row> chestArmorList = new List<PARAM.Row>();
-                        List<PARAM.Row> armArmorList = new List<PARAM.Row>();
-                        List<PARAM.Row> legArmorList = new List<PARAM.Row>();
-                        List<PARAM.Row> ringList = new List<PARAM.Row>();
-
-                        // Armor
-                        foreach (PARAM.Row aRow in ArmorParam.Rows)
-                        {
-                            var last_digit = (aRow.ID % 10);
-
-                            if (aRow.ID >= 11010100 && aRow.ID <= 17950103)
-                            {
-                                if (last_digit == 0)
-                                    headArmorList.Add(aRow);
-
-                                if (last_digit == 1)
-                                    chestArmorList.Add(aRow);
-
-                                if (last_digit == 2)
-                                    armArmorList.Add(aRow);
-
-                                if (last_digit == 3)
-                                    legArmorList.Add(aRow);
-                             }
-                        }
-
-                        // Rings
-                        foreach (PARAM.Row rRow in RingParam.Rows)
-                        {
-                            if (rRow.ID >= 40010000 && rRow.ID <= 41130000)
-                                ringList.Add(rRow);
-                        }
-
-                        // NPC Spells
-                        foreach (PARAM.Row sRow in SpellParam.Rows)
-                        {
-                            if (sRow.ID >= 71010000)
-                                npcSpellList.Add(sRow);
-                        }
-
-                        // Weapons/Shields
-                        foreach (PARAM.Row wRow in WeaponParam.Rows)
-                        {
-                            if (wRow.ID >= 1000000 && wRow.ID <= 5660000)
-                                weaponList.Add(wRow);
-
-                            if (wRow.ID >= 11000000 && wRow.ID <= 11840000)
-                                shieldList.Add(wRow);
-                        }
 
                         // Generate from lists
                         foreach (PARAM.Row row in param_rows)
                         {
-                            foreach (PARAM.Cell cell in row.Cells)
+                            Util.SetRandomItem(row, "spell_item_1", Data.Row_List_Spells_NPC);
+                            Util.SetRandomItem(row, "spell_item_2", Data.Row_List_Spells_NPC);
+                            Util.SetRandomItem(row, "spell_item_3", Data.Row_List_Spells_NPC);
+                            Util.SetRandomItem(row, "spell_item_4", Data.Row_List_Spells_NPC);
+                            Util.SetRandomItem(row, "spell_item_5", Data.Row_List_Spells_NPC);
+                            Util.SetRandomItem(row, "spell_item_6", Data.Row_List_Spells_NPC);
+                            Util.SetRandomItem(row, "spell_item_7", Data.Row_List_Spells_NPC);
+                            Util.SetRandomItem(row, "spell_item_8", Data.Row_List_Spells_NPC);
+                            Util.SetRandomItem(row, "spell_item_9", Data.Row_List_Spells_NPC);
+                            Util.SetRandomItem(row, "spell_item_10", Data.Row_List_Spells_NPC);
+
+                            Util.SetRandomItem(row, "right_weapon_item_1", Data.Row_List_Weapons);
+                            Util.SetRandomItem(row, "right_weapon_item_2", Data.Row_List_Weapons);
+
+                            if (rand.Next(100) <= 50)
+                                Util.SetRandomItem(row, "right_weapon_item_3", Data.Row_List_Weapons);
+                            else
+                                row["right_weapon_item_3"].Value = -1;
+
+                            int roll = rand.Next(100);
+
+                            if (roll <= 20)
+                                Util.SetRandomItem(row, "left_weapon_item_1", Data.Row_List_Weapons_Catalyst_Sorcery);
+                            else if (roll > 20 && roll <= 30)
+                                Util.SetRandomItem(row, "left_weapon_item_1", Data.Row_List_Weapons_Catalyst_Miracles);
+                            else if (roll > 30 && roll <= 40)
+                                Util.SetRandomItem(row, "left_weapon_item_1", Data.Row_List_Weapons_Catalyst_Pyromancy);
+                            else if (roll > 40 && roll <= 50)
+                                Util.SetRandomItem(row, "left_weapon_item_1", Data.Row_List_Weapons_Catalyst_Hex);
+                            else if (roll > 50 && roll <= 75)
+                                Util.SetRandomItem(row, "left_weapon_item_1", Data.Row_List_Weapons_Shield);
+                            else
+                                Util.SetRandomItem(row, "left_weapon_item_1", Data.Row_List_Weapons);
+
+                            roll = rand.Next(100);
+
+                            if (roll <= 20)
+                                Util.SetRandomItem(row, "left_weapon_item_2", Data.Row_List_Weapons_Catalyst_Sorcery);
+                            else if (roll > 20 && roll <= 30)
+                                Util.SetRandomItem(row, "left_weapon_item_2", Data.Row_List_Weapons_Catalyst_Miracles);
+                            else if (roll > 30 && roll <= 40)
+                                Util.SetRandomItem(row, "left_weapon_item_2", Data.Row_List_Weapons_Catalyst_Pyromancy);
+                            else if (roll > 40 && roll <= 50)
+                                Util.SetRandomItem(row, "left_weapon_item_2", Data.Row_List_Weapons_Catalyst_Hex);
+                            else if (roll > 50 && roll <= 75)
+                                Util.SetRandomItem(row, "left_weapon_item_2", Data.Row_List_Weapons_Shield);
+                            else
+                                Util.SetRandomItem(row, "left_weapon_item_2", Data.Row_List_Weapons);
+
+                            if(rand.Next(100) < 50)
                             {
-                                if (cell.Def.InternalName.Contains("spell_item"))
-                                    cell.Value = GetRandomRowID(npcSpellList);
-
-                                if (cell.Def.InternalName.Contains("right_weapon_item_1"))
-                                    cell.Value = GetRandomRowID(weaponList);
-
-                                if (cell.Def.InternalName.Contains("right_weapon_item_2"))
-                                    cell.Value = GetRandomRowID(weaponList);
-
-                                if (cell.Def.InternalName.Contains("right_weapon_item_3"))
-                                    cell.Value = GetRandomRowID(weaponList);
-
-                                if (rand.Next(100) < 50)
-                                {
-                                    if (cell.Def.InternalName.Contains("left_weapon_item_1"))
-                                        cell.Value = GetRandomRowID(shieldList);
-                                }
+                                if (roll <= 20)
+                                    Util.SetRandomItem(row, "left_weapon_item_3", Data.Row_List_Weapons_Catalyst_Sorcery);
+                                else if (roll > 20 && roll <= 30)
+                                    Util.SetRandomItem(row, "left_weapon_item_3", Data.Row_List_Weapons_Catalyst_Miracles);
+                                else if (roll > 30 && roll <= 40)
+                                    Util.SetRandomItem(row, "left_weapon_item_3", Data.Row_List_Weapons_Catalyst_Pyromancy);
+                                else if (roll > 40 && roll <= 50)
+                                    Util.SetRandomItem(row, "left_weapon_item_3", Data.Row_List_Weapons_Catalyst_Hex);
+                                else if (roll > 50 && roll <= 75)
+                                    Util.SetRandomItem(row, "left_weapon_item_3", Data.Row_List_Weapons_Shield);
                                 else
-                                {
-                                    if (cell.Def.InternalName.Contains("left_weapon_item_1"))
-                                        cell.Value = GetRandomRowID(weaponList);
-                                }
+                                    Util.SetRandomItem(row, "left_weapon_item_3", Data.Row_List_Weapons);
+                            }
 
-                                if (cell.Def.InternalName.Contains("right_weapon_item_2"))
-                                    cell.Value = GetRandomRowID(weaponList);
+                            // Armor
+                            Util.SetRandomItem(row, "head_item", Data.Row_List_Armor_Head);
+                            Util.SetRandomItem(row, "chest_item", Data.Row_List_Armor_Chest);
+                            Util.SetRandomItem(row, "hands_item", Data.Row_List_Armor_Arms);
+                            Util.SetRandomItem(row, "legs_item", Data.Row_List_Armor_Legs);
 
-                                if (cell.Def.InternalName.Contains("right_weapon_item_3"))
-                                    cell.Value = GetRandomRowID(weaponList);
-
-                                if (cell.Def.InternalName.Contains("head_item"))
-                                    cell.Value = GetRandomRowID(headArmorList);
-
-                                if (cell.Def.InternalName.Contains("chest_item"))
-                                    cell.Value = GetRandomRowID(chestArmorList);
-
-                                if (cell.Def.InternalName.Contains("hands_item"))
-                                    cell.Value = GetRandomRowID(armArmorList);
-
-                                if (cell.Def.InternalName.Contains("legs_item"))
-                                    cell.Value = GetRandomRowID(legArmorList);
-
-                                if (rand.Next(100) < 25)
-                                {
-                                    if (cell.Def.InternalName.Contains("ring_item_1"))
-                                        cell.Value = GetRandomRowID(ringList);
-                                }
+                            // Rings
+                            if (rand.Next(100) < 25)
+                            {
+                                Util.SetRandomItem(row, "ring_item_1", Data.Row_List_Rings);
                             }
                         }
                     }
@@ -865,11 +749,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
                 }
@@ -895,20 +779,20 @@ namespace DS2_Scrambler
 
                     if (isBossOnly)
                     {
-                        param_rows = param_rows.Where(row => BossIDs.Contains(row.ID.ToString())).ToList();
+                        param_rows = param_rows.Where(row => Data.ID_List_Bosses.Contains(row.ID)).ToList();
                     }
                     else
                     {
-                        param_rows = param_rows.Where(row => !BossIDs.Contains(row.ID.ToString())).ToList();
+                        param_rows = param_rows.Where(row => !Data.ID_List_Bosses.Contains(row.ID)).ToList();
                     }
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields, fieldAppend);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict, fieldAppend);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields, fieldAppend);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict, fieldAppend);
                         GenerateValuesForParam(wrapper, param_rows, fieldAppend);
                     }
 
@@ -977,20 +861,20 @@ namespace DS2_Scrambler
 
                     if (isBossOnly)
                     {
-                        param_rows = param_rows.Where(row => BossIDs.Contains(row.ID.ToString())).ToList();
+                        param_rows = param_rows.Where(row => Data.ID_List_Bosses.Contains(row.ID)).ToList();
                     }
                     else
                     {
-                        param_rows = param_rows.Where(row => !BossIDs.Contains(row.ID.ToString())).ToList();
+                        param_rows = param_rows.Where(row => !Data.ID_List_Bosses.Contains(row.ID)).ToList();
                     }
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields, fieldAppend);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict, fieldAppend);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields, fieldAppend);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict, fieldAppend);
                         GenerateValuesForParam(wrapper, param_rows, fieldAppend);
                     }
                 }
@@ -1016,20 +900,20 @@ namespace DS2_Scrambler
 
                     if (isBossOnly)
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param_rows, BossIDs, 2, 4, "1");
+                        param_rows = Util.GetRowsFromSubMatch(param_rows, Data.ID_List_Bosses, 2, 4, "1");
                     }
                     else
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param_rows, BossIDs, 2, 4, "1", true);
+                        param_rows = Util.GetRowsFromSubMatch(param_rows, Data.ID_List_Bosses, 2, 4, "1", true);
                     }
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields, fieldAppend);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict, fieldAppend);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields, fieldAppend);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict, fieldAppend);
                         GenerateValuesForParam(wrapper, param_rows, fieldAppend);
                     }
                 }
@@ -1087,20 +971,20 @@ namespace DS2_Scrambler
 
                     if (isBossOnly)
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param.Rows, BossIDs, 2, 4, "1");
+                        param_rows = Util.GetRowsFromSubMatch(param.Rows, Data.ID_List_Bosses, 2, 4, "1");
                     }
                     else
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param.Rows, BossIDs, 2, 4, "1", true);
+                        param_rows = Util.GetRowsFromSubMatch(param.Rows, Data.ID_List_Bosses, 2, 4, "1", true);
                     }
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields, fieldAppend);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict, fieldAppend);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields, fieldAppend);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict, fieldAppend);
                         GenerateValuesForParam(wrapper, param_rows, fieldAppend);
                     }
 
@@ -1207,20 +1091,20 @@ namespace DS2_Scrambler
 
                     if (isBossOnly)
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param_rows, BossIDs, 2, 2, "");
+                        param_rows = Util.GetRowsFromSubMatch(param_rows, Data.ID_List_Bosses, 2, 2, "");
                     }
                     else
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param_rows, BossIDs, 2, 2, "", true);
+                        param_rows = Util.GetRowsFromSubMatch(param_rows, Data.ID_List_Bosses, 2, 2, "", true);
                     }
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields, fieldAppend);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict, fieldAppend);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields, fieldAppend);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict, fieldAppend);
                         GenerateValuesForParam(wrapper, param_rows, fieldAppend);
                     }
                 }
@@ -1242,11 +1126,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
                 }
@@ -1367,11 +1251,11 @@ namespace DS2_Scrambler
 
                     if (!useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, ShuffleParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Shuffle_Field_Dict);
                     }
                     else if (useGenerateType)
                     {
-                        ShuffleValuesForParam(wrapper, param_rows, GenerateParamFields);
+                        ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict);
                         GenerateValuesForParam(wrapper, param_rows);
                     }
 
@@ -1462,6 +1346,646 @@ namespace DS2_Scrambler
         }
         #endregion
 
+        #region Scramble - ChrMoveParam
+        public Regulation Scramble_ChrMoveParam(string paramName)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    ShuffleValuesForParam(wrapper, param_rows, Data.Scramble_Type_Generate_Field_Dict, "");
+                    GenerateValuesForParam(wrapper, param_rows, "");
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - EventCommonParam
+        public Regulation Scramble_EventCommonParam(string paramName)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                PARAM param = wrapper.Param;
+                List<PARAM.Row> param_rows = param.Rows;
+
+                if (wrapper.Name == paramName)
+                {
+                    param_rows = param_rows.Where(row => row.ID == 14).ToList();
+
+                    GenerateValuesForParam(wrapper, param_rows, "");
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - LockOnParam
+        public Regulation Scramble_LockOnParam(string paramName, bool adjustDistance, bool adjustFOV)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                PARAM param = wrapper.Param;
+                List<PARAM.Row> param_rows = param.Rows;
+
+                if (wrapper.Name == paramName)
+                {
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        if(adjustDistance)
+                            row["max_dist_behind_player"].Value = (1 + rand.NextDouble() * rand.Next(5, 20));
+
+                        if (adjustFOV)
+                        {
+                            row["fov_0"].Value = rand.Next(30, 150);
+                            row["fov_1"].Value = rand.Next(10, 100);
+                        }
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - PlayerLevelUpSoulsParam
+        public Regulation Scramble_PlayerLevelUpSoulsParam(string paramName)
+        {
+            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+            {
+                if (wrapper.Name == paramName)
+                {
+                    PARAM param = wrapper.Param;
+                    var param_rows = param.Rows;
+
+                    var dict = Data.Scramble_Type_Generate_Field_And_Values_Dict[wrapper.Name];
+                    int min = 0;
+                    int max = 1;
+
+                    // Get the min and max
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        foreach (PARAM.Cell cell in row.Cells)
+                        {
+                            // Field is within the dictionary
+                            if (dict.ContainsKey(cell.Def.InternalName))
+                            {
+                                var list = dict[cell.Def.InternalName];
+                                min = int.Parse(list[0]);
+                                max = int.Parse(list[1]);
+                            }
+                        }
+                    }
+
+                    // Apply in a controlled way so the level-up cost isn't stupidly high in the early levels
+                    foreach (PARAM.Row row in param_rows)
+                    {
+                        var current_min = min;
+                        var current_max = max;
+
+                        if(row.ID <= 50)
+                        {
+                            if(current_max > 10000)
+                                current_max = 10000;
+                        }
+
+                        if (row.ID > 50 && row.ID <= 100)
+                        {
+                            if (current_max > 20000)
+                                current_max = 20000;
+                        }
+
+                        if (row.ID > 100 && row.ID <= 200)
+                        {
+                            if (current_max > 60000)
+                                current_max = 60000;
+                        }
+
+                        if (row.ID > 200 && row.ID <= 300)
+                        {
+                            if (current_max > 300000)
+                                current_max = 30000;
+                        }
+
+                        if (row.ID > 300 && row.ID <= 400)
+                        {
+                            if (current_max > 600000)
+                                current_max = 60000;
+                        }
+
+                        row["soul_level_cost"].Value = rand.Next(current_min, current_max);
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        #endregion
+
+        #region Scramble - PlayerStatusParam
+        public Regulation Scramble_PlayerStatusParam(string paramName, bool scrambleClasses, bool scrambleGifts, int statSkew)
+        {
+            if (scrambleClasses)
+            {
+                foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+                {
+                    PARAM param = wrapper.Param;
+                    List<PARAM.Row> param_rows = param.Rows;
+
+                    if (wrapper.Name == paramName)
+                    {
+                        param_rows = param_rows.Where(row => row.ID >= 20 && row.ID <= 100).ToList();
+
+                        RandomiseClassStats(param_rows, statSkew);
+                        RandomiseClassEquipment(param_rows);
+
+                        // Support for mod added ones
+                        param_rows = param_rows.Where(row => row.ID > 110 && row.ID < 500).ToList();
+
+                        RandomiseClassStats(param_rows, statSkew);
+                        RandomiseClassEquipment(param_rows);
+                    }
+                }
+            }
+
+            if (scrambleGifts)
+            {
+                foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
+                {
+                    PARAM param = wrapper.Param;
+                    List<PARAM.Row> param_rows = param.Rows;
+
+                    if (wrapper.Name == paramName)
+                    {
+                        param_rows = param_rows.Where(row => row.ID >= 510 && row.ID <= 570).ToList();
+
+                        // TODO: add fmg support so the gift text can be changed to the right items
+                        RandomiseGifts(param_rows);
+                    }
+                }
+            }
+
+            return regulation;
+        }
+        public void RandomiseGifts(List<PARAM.Row> rows)
+        {
+            foreach (PARAM.Row row in rows)
+            {
+                int roll = rand.Next(100);
+
+                // Clean up current values
+                row["ring_item_1"].Value = -1;
+
+                for (int x = 1; x < 10; x++)
+                {
+                    row[$"item_{x}"].Value = -1;
+                    row[$"item_amount_{x}"].Value = 0;
+                }
+
+                // Ring
+                if (roll <= 25)
+                {
+                    Util.SetRandomItem(row, "ring_item_1", Data.Row_List_Rings);
+                }
+                // Good
+                else
+                {
+                    int endChance = 20;
+
+                    if (row.ID == 530)
+                        endChance = 0;
+
+                    for (int x = 1; x < 10; x++)
+                    {
+                        Util.SetRandomGood(row, $"item_{x}", Data, $"item_amount_{x}");
+
+                        endChance = endChance + rand.Next(1, x * 10);
+                        if (endChance > 25)
+                            break;
+                    }
+                }
+            }
+        }
+
+        public void RandomiseClassStats(List<PARAM.Row> rows, int statSkew)
+        {
+            foreach (PARAM.Row row in rows)
+            {
+                ushort vigor = GetRandomStat(row, "vigor", statSkew);
+                ushort endurance = GetRandomStat(row, "endurance", statSkew);
+                ushort attunement = GetRandomStat(row, "attunement", statSkew);
+                ushort vitality = GetRandomStat(row, "vitality", statSkew);
+                ushort strength = GetRandomStat(row, "strength", statSkew);
+                ushort dexterity = GetRandomStat(row, "dexterity", statSkew);
+                ushort intelligence = GetRandomStat(row, "intelligence", statSkew);
+                ushort faith = GetRandomStat(row, "faith", statSkew);
+                ushort adaptability = GetRandomStat(row, "adaptability", statSkew);
+
+                ushort total = (ushort)((vigor + endurance + attunement + vitality + strength + dexterity + intelligence + faith + adaptability) - 54);
+
+                if (total < 1)
+                    total = 1;
+
+                row["soul_level"].Value = total;
+                row["vigor"].Value = vigor;
+                row["endurance"].Value = endurance;
+                row["attunement"].Value = attunement;
+                row["vitality"].Value = vitality;
+                row["strength"].Value = strength;
+                row["dexterity"].Value = dexterity;
+                row["intelligence"].Value = intelligence;
+                row["faith"].Value = faith;
+                row["adaptability"].Value = adaptability;
+            }
+        }
+
+        public ushort GetRandomStat(PARAM.Row row, string stat, int statSkew)
+        {
+            ushort adjust = (ushort)statSkew;
+
+            ushort stat_value = (ushort)row[stat].Value;
+
+            ushort lower = (ushort)(stat_value - adjust);
+            ushort upper = (ushort)(stat_value + adjust);
+
+
+            if (lower > upper)
+                lower = (ushort)(upper - 1);
+
+            if (lower < 1)
+                lower = 1;
+
+            if (upper < lower)
+                upper = (ushort)(lower + 1);
+
+            return (ushort)rand.Next(lower, upper);
+        }
+
+        List<PARAM.Row> valid_melee_weapons = new List<PARAM.Row>();
+        List<PARAM.Row> valid_sorcery_catalyst = new List<PARAM.Row>();
+        List<PARAM.Row> valid_miracle_catalyst = new List<PARAM.Row>();
+        List<PARAM.Row> valid_pyromancy_catalyst = new List<PARAM.Row>();
+        List<PARAM.Row> valid_hex_catalyst = new List<PARAM.Row>();
+        List<PARAM.Row> valid_bows = new List<PARAM.Row>();
+        List<PARAM.Row> valid_greatbows = new List<PARAM.Row>();
+        List<PARAM.Row> valid_crossbows = new List<PARAM.Row>();
+        List<PARAM.Row> valid_shields = new List<PARAM.Row>();
+        List<PARAM.Row> valid_head_armor = new List<PARAM.Row>();
+        List<PARAM.Row> valid_chest_armor = new List<PARAM.Row>();
+        List<PARAM.Row> valid_arm_armor = new List<PARAM.Row>();
+        List<PARAM.Row> valid_leg_armor = new List<PARAM.Row>();
+        List<PARAM.Row> valid_sorceries = new List<PARAM.Row>();
+        List<PARAM.Row> valid_miracles = new List<PARAM.Row>();
+        List<PARAM.Row> valid_pyromancies = new List<PARAM.Row>();
+        List<PARAM.Row> valid_hexes = new List<PARAM.Row>();
+
+        List<PARAM.Row> valid_arrows = new List<PARAM.Row>();
+        List<PARAM.Row> valid_greatarrows = new List<PARAM.Row>();
+        List<PARAM.Row> valid_bolts = new List<PARAM.Row>();
+
+        public bool usesSorceries = false;
+        public bool usesMiracles = false;
+        public bool usesPyromancies = false;
+        public bool usesHexes = false;
+        public bool usesArrows = false;
+        public bool usesGreatarrows = false;
+        public bool usesBolts = false;
+        public bool setFirstSpell = false;
+
+        public void RandomiseClassEquipment(List<PARAM.Row> rows)
+        {
+
+            foreach (PARAM.Row row in rows)
+            {
+                ushort attunement = (ushort)row["attunement"].Value;
+                ushort vitality = (ushort)row["vitality"].Value;
+                ushort strength = (ushort)row["strength"].Value;
+                ushort dexterity = (ushort)row["dexterity"].Value;
+                ushort intelligence = (ushort)row["intelligence"].Value;
+                ushort faith = (ushort)row["faith"].Value;
+
+                usesSorceries = false;
+                usesMiracles = false;
+                usesPyromancies = false;
+                usesHexes = false;
+                usesArrows = false;
+                usesGreatarrows = false;
+                usesBolts = false;
+                setFirstSpell = false;
+
+                UpdateSelectionListsForClass((int)attunement, (int)vitality, (int)strength, (int)dexterity, (int)intelligence, (int)faith);
+
+                // Weapons
+                AssignWeaponSlot(row, "right_weapon_item_1", false);
+
+                if(rand.Next(100) >= 50)
+                    AssignWeaponSlot(row, "right_weapon_item_2", false);
+
+                if (rand.Next(100) >= 75)
+                    AssignWeaponSlot(row, "right_weapon_item_3", false);
+
+                AssignWeaponSlot(row, "left_weapon_item_1", true);
+
+                if (rand.Next(100) >= 50)
+                    AssignWeaponSlot(row, "left_weapon_item_2", true);
+
+                if (rand.Next(100) >= 75)
+                    AssignWeaponSlot(row, "left_weapon_item_3", true);
+
+                // Spells
+                AssignSpell(row, "spell_item_1");
+
+                if (rand.Next(100) >= 50)
+                    AssignSpell(row, "spell_item_2");
+
+                if (rand.Next(100) >= 75)
+                    AssignSpell(row, "spell_item_3");
+
+                // Armor
+                Util.SetRandomItem(row, "head_item", Data.Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 1).ToList());
+                Util.SetRandomItem(row, "chest_item", Data.Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 2).ToList());
+                Util.SetRandomItem(row, "hands_item", Data.Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 3).ToList());
+                Util.SetRandomItem(row, "legs_item", Data.Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 4).ToList());
+
+                // Rings
+                if (rand.Next(100) >= 50)
+                    Util.SetRandomItem(row, "ring_item_1", Data.Row_List_Rings);
+
+                // Ammo
+                if(usesArrows)
+                    Util.SetRandomItemWithAmount(row, "arrow_item_1", Data.Row_List_Ammunition_Arrow, "arrow_amount_1", 25, 50);
+
+                if (usesGreatarrows)
+                    Util.SetRandomItemWithAmount(row, "arrow_item_1", Data.Row_List_Ammunition_Greatarrow, "arrow_amount_1", 25, 50);
+
+                if (usesBolts)
+                    Util.SetRandomItemWithAmount(row, "bolt_item_1", Data.Row_List_Ammunition_Bolt, "bolt_amount_1", 25, 50);
+
+                // Starting Item
+                for(int x = 0; x <= 7; x++)
+                {
+                    if(rand.Next(100) > 50 || row.ID == 90)
+                        Util.SetRandomGood(row, $"item_{x}", Data, $"item_amount_{x}");
+                }
+            }
+        }
+
+        public void AssignSpell(PARAM.Row row, string slot)
+        {
+            int roll = rand.Next(100);
+
+            if (!setFirstSpell)
+            {
+                roll = 25;
+                setFirstSpell = true;
+            }
+
+            // Sorceries
+            if (usesSorceries && valid_sorceries.Count > 0)
+            {
+                if (roll >= 25)
+                {
+                    row[slot].Value = valid_sorceries[rand.Next(valid_sorceries.Count)].ID;
+                    usesSorceries = true;
+                }
+            }
+            // Miracles
+            if (usesMiracles && valid_miracles.Count > 0)
+            {
+                if (roll >= 25)
+                {
+                    row[slot].Value = valid_miracles[rand.Next(valid_miracles.Count)].ID;
+                    usesSorceries = true;
+                }
+            }
+            // Pyromancies
+            if (usesPyromancies && valid_pyromancies.Count > 0)
+            {
+                if (roll >= 25)
+                {
+                    row[slot].Value = valid_pyromancies[rand.Next(valid_pyromancies.Count)].ID;
+                    usesSorceries = true;
+                }
+            }
+            // Hexes
+            if (usesHexes && valid_hexes.Count > 0)
+            {
+                if (roll >= 25)
+                {
+                    row[slot].Value = valid_hexes[rand.Next(valid_hexes.Count)].ID;
+                    usesSorceries = true;
+                }
+            }
+        }
+
+        public void AssignWeaponSlot(PARAM.Row row, string slot, bool allowShields)
+        {
+            // Right Weapon 1
+            int roll = rand.Next(100);
+
+            // Caster
+            if (roll >= 66 && !usesSorceries && !usesMiracles && !usesPyromancies && !usesHexes)
+            {
+                roll = rand.Next(100);
+
+                // Sorceries
+                if (roll >= 75 && valid_sorceries.Count > 0 && valid_sorcery_catalyst.Count > 0)
+                {
+                    row[slot].Value = valid_sorcery_catalyst[rand.Next(valid_sorcery_catalyst.Count)].ID;
+                    usesSorceries = true;
+                }
+                // Miracles
+                else if (roll >= 50 && roll < 75 && valid_miracles.Count > 0 && valid_miracle_catalyst.Count > 0)
+                {
+                    row[slot].Value = valid_miracle_catalyst[rand.Next(valid_miracle_catalyst.Count)].ID;
+                    usesMiracles = true;
+                }
+                // Pyromancies
+                else if (roll >= 25 && roll < 50 && valid_pyromancies.Count > 0 && valid_pyromancy_catalyst.Count > 0)
+                {
+                    row[slot].Value = valid_pyromancy_catalyst[rand.Next(valid_pyromancy_catalyst.Count)].ID;
+                    usesPyromancies = true;
+                }
+                // Hexes
+                else if(roll < 25 && valid_hexes.Count > 0 && valid_hex_catalyst.Count > 0)
+                {
+                    row[slot].Value = valid_hex_catalyst[rand.Next(valid_hex_catalyst.Count)].ID;
+                    usesHexes = true;
+                }
+                // Fallback
+                else
+                {
+                    row[slot].Value = valid_melee_weapons[rand.Next(valid_melee_weapons.Count)].ID;
+                }
+            }
+            // Ranged
+            else if (roll >= 33 && roll < 66 && !usesArrows && !usesGreatarrows && !usesArrows)
+            {
+                roll = rand.Next(100);
+
+                // Crossbow
+                if (roll >= 66 && valid_crossbows.Count > 0)
+                {
+                    row[slot].Value = valid_crossbows[rand.Next(valid_crossbows.Count)].ID;
+                    usesArrows = true;
+                }
+                // Greatbow
+                else if (roll >= 33 && roll < 66 && valid_greatbows.Count > 0)
+                {
+                    row[slot].Value = valid_greatbows[rand.Next(valid_greatbows.Count)].ID;
+                    usesGreatarrows = true;
+                }
+                // Bow
+                else if(roll < 33 && valid_bows.Count > 0)
+                {
+                    row[slot].Value = valid_bows[rand.Next(valid_bows.Count)].ID;
+                    usesArrows = true;
+                }
+                // Fallback
+                else
+                {
+                    row[slot].Value = valid_melee_weapons[rand.Next(valid_melee_weapons.Count)].ID;
+                }
+            }
+            // Melee
+            else
+            {
+                if (allowShields)
+                {
+                    roll = rand.Next(100);
+
+                    if(roll >= 50 && valid_shields.Count > 0)
+                    {
+                        row[slot].Value = valid_shields[rand.Next(valid_shields.Count)].ID;
+                    }
+                    else
+                    {
+                        row[slot].Value = valid_melee_weapons[rand.Next(valid_melee_weapons.Count)].ID;
+                    }
+                }
+                else
+                {
+                    row[slot].Value = valid_melee_weapons[rand.Next(valid_melee_weapons.Count)].ID;
+                }
+            }
+        }
+
+        public void UpdateSelectionListsForClass(int attunement, int vitality, int strength, int dexterity, int intelligence, int faith)
+        {
+            valid_melee_weapons = Data.Row_List_Weapons_Melee.Where(row =>
+            (short)row["str_requirement"].Value <= strength && 
+            (short)row["dex_requirement"].Value <= dexterity && 
+            (short)row["int_requirement"].Value <= intelligence && 
+            (short)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_sorcery_catalyst = Data.Row_List_Weapons_Catalyst_Sorcery.Where(row =>
+            (short)row["str_requirement"].Value <= strength &&
+            (short)row["dex_requirement"].Value <= dexterity && 
+            (short)row["int_requirement"].Value <= intelligence && 
+            (short)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_miracle_catalyst = Data.Row_List_Weapons_Catalyst_Miracles.Where(row =>
+            (short)row["str_requirement"].Value <= strength && 
+            (short)row["dex_requirement"].Value <= dexterity && 
+            (short)row["int_requirement"].Value <= intelligence && 
+            (short)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_pyromancy_catalyst = Data.Row_List_Weapons_Catalyst_Pyromancy.Where(row =>
+            (short)row["str_requirement"].Value <= strength && 
+            (short)row["dex_requirement"].Value <= dexterity && 
+            (short)row["int_requirement"].Value <= intelligence && 
+            (short)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_hex_catalyst = Data.Row_List_Weapons_Catalyst_Hex.Where(row =>
+            (short)row["str_requirement"].Value <= strength && 
+            (short)row["dex_requirement"].Value <= dexterity && 
+            (short)row["int_requirement"].Value <= intelligence && 
+            (short)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_bows = Data.Row_List_Weapons_Bow.Where(row =>
+            (short)row["str_requirement"].Value <= strength && 
+            (short)row["dex_requirement"].Value <= dexterity && 
+            (short)row["int_requirement"].Value <= intelligence && 
+            (short)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_greatbows = Data.Row_List_Weapons_Greatbow.Where(row =>
+            (short)row["str_requirement"].Value <= strength && 
+            (short)row["dex_requirement"].Value <= dexterity && 
+            (short)row["int_requirement"].Value <= intelligence && 
+            (short)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_crossbows = Data.Row_List_Weapons_Crossbow.Where(row =>
+            (short)row["str_requirement"].Value <= strength && 
+            (short)row["dex_requirement"].Value <= dexterity && 
+            (short)row["int_requirement"].Value <= intelligence && 
+            (short)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_shields = Data.Row_List_Weapons_Shield.Where(row =>
+            (short)row["str_requirement"].Value <= strength && 
+            (short)row["dex_requirement"].Value <= dexterity && 
+            (short)row["int_requirement"].Value <= intelligence && 
+            (short)row["fth_requirement"].Value <= faith).ToList();
+
+            // TODO: fix, this keeps saying it is null
+            /*
+            valid_head_armor = ArmorParam.Rows.Where(row => row.ID >= 11010100 && row.ID <= 17950103 && !Excluded_Armor.Contains(row.ID.ToString()) &&
+            (byte)row["slot_category"].Value == 1 && 
+            (ushort)row["strength_requirement"].Value <= strength && 
+            (ushort)row["dexterity_requirement "].Value <= dexterity && 
+            (ushort)row["intelligence_requirement"].Value <= intelligence && 
+            (ushort)row["faith_requirement"].Value <= faith).ToList();
+
+            valid_chest_armor = ArmorParam.Rows.Where(row => row.ID >= 11010100 && row.ID <= 17950103 && !Excluded_Armor.Contains(row.ID.ToString()) &&
+            (byte)row["slot_category"].Value == 2 &&
+            (ushort)row["strength_requirement"].Value <= strength &&
+            (ushort)row["dexterity_requirement "].Value <= dexterity &&
+            (ushort)row["intelligence_requirement"].Value <= intelligence &&
+            (ushort)row["faith_requirement"].Value <= faith).ToList();
+
+            valid_arm_armor = ArmorParam.Rows.Where(row => row.ID >= 11010100 && row.ID <= 17950103 && !Excluded_Armor.Contains(row.ID.ToString()) &&
+            (byte)row["slot_category"].Value == 3 &&
+            (ushort)row["strength_requirement"].Value <= strength &&
+            (ushort)row["dexterity_requirement "].Value <= dexterity &&
+            (ushort)row["intelligence_requirement"].Value <= intelligence &&
+            (ushort)row["faith_requirement"].Value <= faith).ToList();
+
+            valid_leg_armor = ArmorParam.Rows.Where(row => row.ID >= 11010100 && row.ID <= 17950103 && !Excluded_Armor.Contains(row.ID.ToString()) &&
+            (byte)row["slot_category"].Value == 4 &&
+            (ushort)row["strength_requirement"].Value <= strength &&
+            (ushort)row["dexterity_requirement "].Value <= dexterity &&
+            (ushort)row["intelligence_requirement"].Value <= intelligence &&
+            (ushort)row["faith_requirement"].Value <= faith).ToList();
+            */
+
+            valid_sorceries = Data.Row_List_Spell_Sorceries.Where(row =>
+            (ushort)row["int_requirement"].Value <= intelligence && 
+            (ushort)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_miracles = Data.Row_List_Spell_Miracles.Where(row => 
+            (ushort)row["int_requirement"].Value <= intelligence && 
+            (ushort)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_pyromancies = Data.Row_List_Spell_Pyromancies.Where(row => 
+            (ushort)row["int_requirement"].Value <= intelligence && 
+            (ushort)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_hexes = Data.Row_List_Spell_Hexes.Where(row => 
+            (ushort)row["int_requirement"].Value <= intelligence && 
+            (ushort)row["fth_requirement"].Value <= faith).ToList();
+
+            valid_arrows = Data.Row_List_Ammunition_Arrow;
+
+            valid_greatarrows = Data.Row_List_Ammunition_Greatarrow;
+
+            valid_bolts = Data.Row_List_Ammunition_Bolt;
+        }
+        #endregion
+
         #region Util
         public int GetRandomRowID(List<PARAM.Row> list)
         {
@@ -1488,7 +2012,7 @@ namespace DS2_Scrambler
             
             try
             {
-                var dict = GenerateParamValues[wrapper.Name + wrapperAppend];
+                var dict = Data.Scramble_Type_Generate_Field_And_Values_Dict[wrapper.Name + wrapperAppend];
 
                 foreach (PARAM.Row row in param_rows)
                 {

@@ -42,5 +42,4 @@
 64560000;Soul of Sir Alonne
 64580000;Soul of the Ivory King
 64590000;Soul of Zallen- the King's Pet
-64600000;Loyce Soul
 64610000;Soul of Lud- the King's Pet

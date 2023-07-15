@@ -36,6 +36,7 @@ stability_7;10;100;RANDOM
 stability_8;10;100;RANDOM
 stability_9;10;100;RANDOM
 stability_10;10;100;RANDOM
+damage_mult_physical;0;100;RANDOM
 damage_mult_magic;0;100;RANDOM
 damage_mult_lightning;0;100;RANDOM
 damage_mult_fire;0;100;RANDOM
@@ -52,4 +53,4 @@ infusion_mult_poison;0;100;RANDOM
 infusion_mult_bleed;0;100;RANDOM
 infusion_mult_raw;0;100;RANDOM
 infusion_mult_enchanted;0;100;RANDOM
-infusion_mult_mundane;0;100;RANDOM
+infusion_mult_mundance;0;100;RANDOM

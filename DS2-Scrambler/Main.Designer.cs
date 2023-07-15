@@ -193,33 +193,34 @@
             this.c_Generate_SystemBulletParam = new System.Windows.Forms.CheckBox();
             this.label74 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label43 = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
+            this.c_Include_Boss_Trades = new System.Windows.Forms.CheckBox();
             this.c_IncludEventTreasure_Treasure_Map = new System.Windows.Forms.CheckBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.c_IncludeBirdTreasure_Treasure_Map = new System.Windows.Forms.CheckBox();
+            this.c_Include_Shops = new System.Windows.Forms.CheckBox();
             this.c_IncludeBossTreasure_Treasure_Map = new System.Windows.Forms.CheckBox();
+            this.c_Include_Enemy_Loot = new System.Windows.Forms.CheckBox();
             this.label79 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.c_IncludeCovenantTreasure_Treasure_Map = new System.Windows.Forms.CheckBox();
             this.label77 = new System.Windows.Forms.Label();
             this.label78 = new System.Windows.Forms.Label();
             this.c_IncludeCharacterTreasure_Treasure_Map = new System.Windows.Forms.CheckBox();
-            this.c_Scramble_Enemy_Loot = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.label43 = new System.Windows.Forms.Label();
-            this.c_Scramble_Boss_Trades = new System.Windows.Forms.CheckBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.c_Scramble_Shops = new System.Windows.Forms.CheckBox();
             this.c_Scramble_Map_Loot = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.c_IgnoreBossSouls_Treasure_Map = new System.Windows.Forms.CheckBox();
-            this.label76 = new System.Windows.Forms.Label();
             this.c_IgnoreKeys_Treasure_Map = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.c_IgnoreTools_Treasure_Map = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox38 = new System.Windows.Forms.GroupBox();
+            this.label76 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -235,9 +236,31 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.groupBox37 = new System.Windows.Forms.GroupBox();
+            this.t_StatSkew = new System.Windows.Forms.NumericUpDown();
+            this.label89 = new System.Windows.Forms.Label();
+            this.c_Scramble_PlayerStatusParam_Gifts = new System.Windows.Forms.CheckBox();
+            this.label88 = new System.Windows.Forms.Label();
+            this.c_Scramble_PlayerStatusParam_Classes = new System.Windows.Forms.CheckBox();
+            this.label87 = new System.Windows.Forms.Label();
+            this.groupBox35 = new System.Windows.Forms.GroupBox();
+            this.c_Scramble_PlayerLevelUpSoulsParam = new System.Windows.Forms.CheckBox();
+            this.label85 = new System.Windows.Forms.Label();
+            this.groupBox36 = new System.Windows.Forms.GroupBox();
+            this.c_Scramble_LockOnParam_FOV = new System.Windows.Forms.CheckBox();
+            this.label83 = new System.Windows.Forms.Label();
+            this.c_Scramble_LockOnParam_Distance = new System.Windows.Forms.CheckBox();
+            this.label86 = new System.Windows.Forms.Label();
+            this.groupBox33 = new System.Windows.Forms.GroupBox();
+            this.c_Scramble_EventCommonParam = new System.Windows.Forms.CheckBox();
+            this.label82 = new System.Windows.Forms.Label();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.groupBox34 = new System.Windows.Forms.GroupBox();
+            this.c_Scramble_ChrMoveParam = new System.Windows.Forms.CheckBox();
+            this.label84 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
@@ -273,6 +296,7 @@
             this.groupBox11.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox38.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -280,6 +304,14 @@
             this.tabPage3.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.groupBox37.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.t_StatSkew)).BeginInit();
+            this.groupBox35.SuspendLayout();
+            this.groupBox36.SuspendLayout();
+            this.groupBox33.SuspendLayout();
+            this.tabPage12.SuspendLayout();
+            this.groupBox34.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage8.SuspendLayout();
@@ -1042,7 +1074,7 @@
             this.groupBox4.Controls.Add(this.label28);
             this.groupBox4.Controls.Add(this.c_Generate_NpcPlayerStatusParam);
             this.groupBox4.Controls.Add(this.label29);
-            this.groupBox4.Location = new System.Drawing.Point(6, 6);
+            this.groupBox4.Location = new System.Drawing.Point(6, 70);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(814, 84);
             this.groupBox4.TabIndex = 1;
@@ -1064,9 +1096,9 @@
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(178, 22);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(277, 15);
+            this.label28.Size = new System.Drawing.Size(283, 15);
             this.label28.TabIndex = 12;
-            this.label28.Text = "Scramble the equipment used NPC player enemies.";
+            this.label28.Text = "Scramble the equipment used player-like characters.";
             // 
             // c_Generate_NpcPlayerStatusParam
             // 
@@ -1094,7 +1126,7 @@
             this.groupBox27.Controls.Add(this.label53);
             this.groupBox27.Controls.Add(this.c_Generate_EnemyParam);
             this.groupBox27.Controls.Add(this.label54);
-            this.groupBox27.Location = new System.Drawing.Point(6, 96);
+            this.groupBox27.Location = new System.Drawing.Point(6, 6);
             this.groupBox27.Name = "groupBox27";
             this.groupBox27.Size = new System.Drawing.Size(814, 84);
             this.groupBox27.TabIndex = 8;
@@ -1146,7 +1178,7 @@
             this.groupBox26.Controls.Add(this.label51);
             this.groupBox26.Controls.Add(this.c_Generate_EnemyMoveParam);
             this.groupBox26.Controls.Add(this.label52);
-            this.groupBox26.Location = new System.Drawing.Point(6, 186);
+            this.groupBox26.Location = new System.Drawing.Point(6, 96);
             this.groupBox26.Name = "groupBox26";
             this.groupBox26.Size = new System.Drawing.Size(814, 84);
             this.groupBox26.TabIndex = 9;
@@ -1198,7 +1230,7 @@
             this.groupBox25.Controls.Add(this.label49);
             this.groupBox25.Controls.Add(this.c_Generate_EnemyDamageParam);
             this.groupBox25.Controls.Add(this.label50);
-            this.groupBox25.Location = new System.Drawing.Point(6, 276);
+            this.groupBox25.Location = new System.Drawing.Point(6, 186);
             this.groupBox25.Name = "groupBox25";
             this.groupBox25.Size = new System.Drawing.Size(814, 84);
             this.groupBox25.TabIndex = 10;
@@ -1252,7 +1284,7 @@
             this.groupBox24.Controls.Add(this.label47);
             this.groupBox24.Controls.Add(this.c_Generate_EnemyBulletParam);
             this.groupBox24.Controls.Add(this.label48);
-            this.groupBox24.Location = new System.Drawing.Point(6, 366);
+            this.groupBox24.Location = new System.Drawing.Point(6, 276);
             this.groupBox24.Name = "groupBox24";
             this.groupBox24.Size = new System.Drawing.Size(814, 101);
             this.groupBox24.TabIndex = 11;
@@ -1324,7 +1356,7 @@
             this.groupBox23.Controls.Add(this.label45);
             this.groupBox23.Controls.Add(this.c_Generate_EnemyBehaviorParam);
             this.groupBox23.Controls.Add(this.label46);
-            this.groupBox23.Location = new System.Drawing.Point(6, 473);
+            this.groupBox23.Location = new System.Drawing.Point(6, 383);
             this.groupBox23.Name = "groupBox23";
             this.groupBox23.Size = new System.Drawing.Size(814, 84);
             this.groupBox23.TabIndex = 12;
@@ -1805,7 +1837,7 @@
             this.groupBox28.Controls.Add(this.label56);
             this.groupBox28.Controls.Add(this.label55);
             this.groupBox28.Controls.Add(this.c_Scramble_LogicComParam);
-            this.groupBox28.Location = new System.Drawing.Point(6, 201);
+            this.groupBox28.Location = new System.Drawing.Point(6, 141);
             this.groupBox28.Name = "groupBox28";
             this.groupBox28.Size = new System.Drawing.Size(812, 81);
             this.groupBox28.TabIndex = 18;
@@ -1855,7 +1887,7 @@
             // 
             this.groupBox29.Controls.Add(this.label61);
             this.groupBox29.Controls.Add(this.c_Scramble_TreasureBoxParam);
-            this.groupBox29.Location = new System.Drawing.Point(6, 6);
+            this.groupBox29.Location = new System.Drawing.Point(6, 228);
             this.groupBox29.Name = "groupBox29";
             this.groupBox29.Size = new System.Drawing.Size(812, 54);
             this.groupBox29.TabIndex = 19;
@@ -1891,7 +1923,7 @@
             this.groupBox32.Controls.Add(this.label73);
             this.groupBox32.Controls.Add(this.c_Generate_SystemBulletParam);
             this.groupBox32.Controls.Add(this.label74);
-            this.groupBox32.Location = new System.Drawing.Point(6, 66);
+            this.groupBox32.Location = new System.Drawing.Point(6, 6);
             this.groupBox32.Name = "groupBox32";
             this.groupBox32.Size = new System.Drawing.Size(812, 129);
             this.groupBox32.TabIndex = 20;
@@ -1978,22 +2010,37 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label43);
             this.groupBox2.Controls.Add(this.label80);
+            this.groupBox2.Controls.Add(this.c_Include_Boss_Trades);
             this.groupBox2.Controls.Add(this.c_IncludEventTreasure_Treasure_Map);
+            this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.c_IncludeBirdTreasure_Treasure_Map);
+            this.groupBox2.Controls.Add(this.c_Include_Shops);
             this.groupBox2.Controls.Add(this.c_IncludeBossTreasure_Treasure_Map);
+            this.groupBox2.Controls.Add(this.c_Include_Enemy_Loot);
             this.groupBox2.Controls.Add(this.label79);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.c_IncludeCovenantTreasure_Treasure_Map);
             this.groupBox2.Controls.Add(this.label77);
             this.groupBox2.Controls.Add(this.label78);
             this.groupBox2.Controls.Add(this.c_IncludeCharacterTreasure_Treasure_Map);
-            this.groupBox2.Location = new System.Drawing.Point(6, 140);
+            this.groupBox2.Location = new System.Drawing.Point(6, 69);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(841, 152);
+            this.groupBox2.Size = new System.Drawing.Size(841, 233);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Inclusions";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(180, 197);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(189, 15);
+            this.label43.TabIndex = 12;
+            this.label43.Text = "Include the boss soul trade entries.";
             // 
             // label80
             // 
@@ -2005,6 +2052,16 @@
             this.label80.Text = "Include event treasure entries. These are items awarded in special circumstances," +
     " such as the Fang Key.";
             // 
+            // c_Include_Boss_Trades
+            // 
+            this.c_Include_Boss_Trades.AutoSize = true;
+            this.c_Include_Boss_Trades.Location = new System.Drawing.Point(6, 197);
+            this.c_Include_Boss_Trades.Name = "c_Include_Boss_Trades";
+            this.c_Include_Boss_Trades.Size = new System.Drawing.Size(128, 19);
+            this.c_Include_Boss_Trades.TabIndex = 11;
+            this.c_Include_Boss_Trades.Text = "Include Boss Trades";
+            this.c_Include_Boss_Trades.UseVisualStyleBackColor = true;
+            // 
             // c_IncludEventTreasure_Treasure_Map
             // 
             this.c_IncludEventTreasure_Treasure_Map.AutoSize = true;
@@ -2014,6 +2071,15 @@
             this.c_IncludEventTreasure_Treasure_Map.TabIndex = 23;
             this.c_IncludEventTreasure_Treasure_Map.Text = "Include Event Treasure";
             this.c_IncludEventTreasure_Treasure_Map.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(180, 172);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(136, 30);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "Include the shop entries.\r\n\r\n";
             // 
             // c_IncludeBirdTreasure_Treasure_Map
             // 
@@ -2025,6 +2091,16 @@
             this.c_IncludeBirdTreasure_Treasure_Map.Text = "Include Bird Treasure";
             this.c_IncludeBirdTreasure_Treasure_Map.UseVisualStyleBackColor = true;
             // 
+            // c_Include_Shops
+            // 
+            this.c_Include_Shops.AutoSize = true;
+            this.c_Include_Shops.Location = new System.Drawing.Point(6, 172);
+            this.c_Include_Shops.Name = "c_Include_Shops";
+            this.c_Include_Shops.Size = new System.Drawing.Size(100, 19);
+            this.c_Include_Shops.TabIndex = 9;
+            this.c_Include_Shops.Text = "Include Shops";
+            this.c_Include_Shops.UseVisualStyleBackColor = true;
+            // 
             // c_IncludeBossTreasure_Treasure_Map
             // 
             this.c_IncludeBossTreasure_Treasure_Map.AutoSize = true;
@@ -2035,6 +2111,16 @@
             this.c_IncludeBossTreasure_Treasure_Map.Text = "Include Boss Treasure";
             this.c_IncludeBossTreasure_Treasure_Map.UseVisualStyleBackColor = true;
             // 
+            // c_Include_Enemy_Loot
+            // 
+            this.c_Include_Enemy_Loot.AutoSize = true;
+            this.c_Include_Enemy_Loot.Location = new System.Drawing.Point(6, 147);
+            this.c_Include_Enemy_Loot.Name = "c_Include_Enemy_Loot";
+            this.c_Include_Enemy_Loot.Size = new System.Drawing.Size(138, 19);
+            this.c_Include_Enemy_Loot.TabIndex = 7;
+            this.c_Include_Enemy_Loot.Text = "Include Enemy Drops";
+            this.c_Include_Enemy_Loot.UseVisualStyleBackColor = true;
+            // 
             // label79
             // 
             this.label79.AutoSize = true;
@@ -2044,6 +2130,15 @@
             this.label79.TabIndex = 22;
             this.label79.Text = "Include the Dyna and Tillo treasure entries. These contain items that are awarded" +
     " to the player for dropping stones.";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(180, 147);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(174, 15);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Include the enemy drop entries.";
             // 
             // label10
             // 
@@ -2095,88 +2190,25 @@
             this.c_IncludeCharacterTreasure_Treasure_Map.Text = "Include Character Treasure";
             this.c_IncludeCharacterTreasure_Treasure_Map.UseVisualStyleBackColor = true;
             // 
-            // c_Scramble_Enemy_Loot
-            // 
-            this.c_Scramble_Enemy_Loot.AutoSize = true;
-            this.c_Scramble_Enemy_Loot.Location = new System.Drawing.Point(6, 47);
-            this.c_Scramble_Enemy_Loot.Name = "c_Scramble_Enemy_Loot";
-            this.c_Scramble_Enemy_Loot.Size = new System.Drawing.Size(148, 19);
-            this.c_Scramble_Enemy_Loot.TabIndex = 7;
-            this.c_Scramble_Enemy_Loot.Text = "Scramble Enemy Drops";
-            this.c_Scramble_Enemy_Loot.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(177, 48);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(280, 30);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Scramble the treasure entries used for enemy drops.\r\n\r\n";
-            // 
             // groupBox11
             // 
-            this.groupBox11.Controls.Add(this.label43);
-            this.groupBox11.Controls.Add(this.c_Scramble_Boss_Trades);
-            this.groupBox11.Controls.Add(this.label16);
-            this.groupBox11.Controls.Add(this.c_Scramble_Shops);
-            this.groupBox11.Controls.Add(this.c_Scramble_Enemy_Loot);
             this.groupBox11.Controls.Add(this.c_Scramble_Map_Loot);
-            this.groupBox11.Controls.Add(this.label6);
             this.groupBox11.Controls.Add(this.label14);
             this.groupBox11.Location = new System.Drawing.Point(6, 6);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(841, 128);
+            this.groupBox11.Size = new System.Drawing.Size(841, 57);
             this.groupBox11.TabIndex = 17;
             this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Loot Sources";
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(177, 97);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(278, 30);
-            this.label43.TabIndex = 12;
-            this.label43.Text = "Scramble the items give in exchange for boss souls.\r\n\r\n";
-            // 
-            // c_Scramble_Boss_Trades
-            // 
-            this.c_Scramble_Boss_Trades.AutoSize = true;
-            this.c_Scramble_Boss_Trades.Location = new System.Drawing.Point(6, 97);
-            this.c_Scramble_Boss_Trades.Name = "c_Scramble_Boss_Trades";
-            this.c_Scramble_Boss_Trades.Size = new System.Drawing.Size(138, 19);
-            this.c_Scramble_Boss_Trades.TabIndex = 11;
-            this.c_Scramble_Boss_Trades.Text = "Scramble Boss Trades";
-            this.c_Scramble_Boss_Trades.UseVisualStyleBackColor = true;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(177, 72);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(146, 30);
-            this.label16.TabIndex = 10;
-            this.label16.Text = "Scramble the shop entries.\r\n\r\n";
-            // 
-            // c_Scramble_Shops
-            // 
-            this.c_Scramble_Shops.AutoSize = true;
-            this.c_Scramble_Shops.Location = new System.Drawing.Point(6, 72);
-            this.c_Scramble_Shops.Name = "c_Scramble_Shops";
-            this.c_Scramble_Shops.Size = new System.Drawing.Size(110, 19);
-            this.c_Scramble_Shops.TabIndex = 9;
-            this.c_Scramble_Shops.Text = "Scramble Shops";
-            this.c_Scramble_Shops.UseVisualStyleBackColor = true;
+            this.groupBox11.Text = "Core";
             // 
             // c_Scramble_Map_Loot
             // 
             this.c_Scramble_Map_Loot.AutoSize = true;
             this.c_Scramble_Map_Loot.Location = new System.Drawing.Point(6, 22);
             this.c_Scramble_Map_Loot.Name = "c_Scramble_Map_Loot";
-            this.c_Scramble_Map_Loot.Size = new System.Drawing.Size(129, 19);
+            this.c_Scramble_Map_Loot.Size = new System.Drawing.Size(102, 19);
             this.c_Scramble_Map_Loot.TabIndex = 7;
-            this.c_Scramble_Map_Loot.Text = "Scramble Map Loot";
+            this.c_Scramble_Map_Loot.Text = "Scramble Loot";
             this.c_Scramble_Map_Loot.UseVisualStyleBackColor = true;
             // 
             // label14
@@ -2187,26 +2219,6 @@
             this.label14.Size = new System.Drawing.Size(420, 15);
             this.label14.TabIndex = 8;
             this.label14.Text = "Scramble the treasure entries used for map loot and other map-based rewards.";
-            // 
-            // c_IgnoreBossSouls_Treasure_Map
-            // 
-            this.c_IgnoreBossSouls_Treasure_Map.AutoSize = true;
-            this.c_IgnoreBossSouls_Treasure_Map.Location = new System.Drawing.Point(6, 72);
-            this.c_IgnoreBossSouls_Treasure_Map.Name = "c_IgnoreBossSouls_Treasure_Map";
-            this.c_IgnoreBossSouls_Treasure_Map.Size = new System.Drawing.Size(118, 19);
-            this.c_IgnoreBossSouls_Treasure_Map.TabIndex = 13;
-            this.c_IgnoreBossSouls_Treasure_Map.Text = "Ignore Boss Souls";
-            this.c_IgnoreBossSouls_Treasure_Map.UseVisualStyleBackColor = true;
-            // 
-            // label76
-            // 
-            this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(177, 72);
-            this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(480, 15);
-            this.label76.TabIndex = 14;
-            this.label76.Text = "Stops the scrambler from changing boss soul item locations such as the Dragonride" +
-    "r Soul.";
             // 
             // c_IgnoreKeys_Treasure_Map
             // 
@@ -2243,10 +2255,10 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(177, 47);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(494, 15);
+            this.label9.Size = new System.Drawing.Size(624, 15);
             this.label9.TabIndex = 12;
-            this.label9.Text = "Stops the scrambler from changing tool item locations such as the Dull Ember or E" +
-    "stus Flask.";
+            this.label9.Text = "Stops the scrambler from changing tool item locations, for instance Estus Flask S" +
+    "hards and Fragrant Branches of Yore.";
             // 
             // tabControl2
             // 
@@ -2261,6 +2273,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox38);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox11);
@@ -2272,17 +2285,46 @@
             this.tabPage1.Text = "Item Scrambler";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // groupBox38
+            // 
+            this.groupBox38.Controls.Add(this.label76);
+            this.groupBox38.Controls.Add(this.checkBox1);
+            this.groupBox38.Location = new System.Drawing.Point(6, 395);
+            this.groupBox38.Name = "groupBox38";
+            this.groupBox38.Size = new System.Drawing.Size(841, 61);
+            this.groupBox38.TabIndex = 19;
+            this.groupBox38.TabStop = false;
+            this.groupBox38.Text = "Tweaks";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(177, 22);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(548, 15);
+            this.label76.TabIndex = 13;
+            this.label76.Text = "Ensures at least one of the early-game shops has infinite Lifegems for sale (if i" +
+    "ncluded in the scramble).";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(6, 22);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(146, 19);
+            this.checkBox1.TabIndex = 12;
+            this.checkBox1.Text = "Ensure Lifegem Access";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.c_IgnoreBossSouls_Treasure_Map);
             this.groupBox3.Controls.Add(this.c_IgnoreKeys_Treasure_Map);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.c_IgnoreTools_Treasure_Map);
             this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label76);
-            this.groupBox3.Location = new System.Drawing.Point(6, 298);
+            this.groupBox3.Location = new System.Drawing.Point(6, 308);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(841, 104);
+            this.groupBox3.Size = new System.Drawing.Size(841, 81);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Exclusions";
@@ -2325,9 +2367,9 @@
             this.c_FuriousEnemies.AutoSize = true;
             this.c_FuriousEnemies.Location = new System.Drawing.Point(8, 22);
             this.c_FuriousEnemies.Name = "c_FuriousEnemies";
-            this.c_FuriousEnemies.Size = new System.Drawing.Size(112, 19);
+            this.c_FuriousEnemies.Size = new System.Drawing.Size(138, 19);
             this.c_FuriousEnemies.TabIndex = 17;
-            this.c_FuriousEnemies.Text = "Furious Enemies";
+            this.c_FuriousEnemies.Text = "Enemies Share Aggro";
             this.c_FuriousEnemies.UseVisualStyleBackColor = true;
             // 
             // groupBox12
@@ -2416,9 +2458,10 @@
             // tabControl3
             // 
             this.tabControl3.Controls.Add(this.tabPage4);
+            this.tabControl3.Controls.Add(this.tabPage7);
+            this.tabControl3.Controls.Add(this.tabPage12);
             this.tabControl3.Controls.Add(this.tabPage5);
             this.tabControl3.Controls.Add(this.tabPage6);
-            this.tabControl3.Controls.Add(this.tabPage7);
             this.tabControl3.Controls.Add(this.tabPage8);
             this.tabControl3.Controls.Add(this.tabPage9);
             this.tabControl3.Controls.Add(this.tabPage10);
@@ -2442,10 +2485,263 @@
             this.tabPage4.Text = "Map";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.groupBox37);
+            this.tabPage7.Controls.Add(this.groupBox35);
+            this.tabPage7.Controls.Add(this.groupBox36);
+            this.tabPage7.Controls.Add(this.groupBox33);
+            this.tabPage7.Location = new System.Drawing.Point(4, 24);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(833, 648);
+            this.tabPage7.TabIndex = 3;
+            this.tabPage7.Text = "Player";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // groupBox37
+            // 
+            this.groupBox37.Controls.Add(this.t_StatSkew);
+            this.groupBox37.Controls.Add(this.label89);
+            this.groupBox37.Controls.Add(this.c_Scramble_PlayerStatusParam_Gifts);
+            this.groupBox37.Controls.Add(this.label88);
+            this.groupBox37.Controls.Add(this.c_Scramble_PlayerStatusParam_Classes);
+            this.groupBox37.Controls.Add(this.label87);
+            this.groupBox37.Location = new System.Drawing.Point(6, 216);
+            this.groupBox37.Name = "groupBox37";
+            this.groupBox37.Size = new System.Drawing.Size(814, 125);
+            this.groupBox37.TabIndex = 16;
+            this.groupBox37.TabStop = false;
+            this.groupBox37.Text = "PlayerStatusParam";
+            // 
+            // t_StatSkew
+            // 
+            this.t_StatSkew.Location = new System.Drawing.Point(6, 73);
+            this.t_StatSkew.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.t_StatSkew.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.t_StatSkew.Name = "t_StatSkew";
+            this.t_StatSkew.Size = new System.Drawing.Size(160, 23);
+            this.t_StatSkew.TabIndex = 17;
+            this.t_StatSkew.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.Location = new System.Drawing.Point(178, 75);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(256, 15);
+            this.label89.TabIndex = 16;
+            this.label89.Text = "The amount of skew on the stat randomisation.";
+            // 
+            // c_Scramble_PlayerStatusParam_Gifts
+            // 
+            this.c_Scramble_PlayerStatusParam_Gifts.AutoSize = true;
+            this.c_Scramble_PlayerStatusParam_Gifts.Location = new System.Drawing.Point(6, 47);
+            this.c_Scramble_PlayerStatusParam_Gifts.Name = "c_Scramble_PlayerStatusParam_Gifts";
+            this.c_Scramble_PlayerStatusParam_Gifts.Size = new System.Drawing.Size(146, 19);
+            this.c_Scramble_PlayerStatusParam_Gifts.TabIndex = 13;
+            this.c_Scramble_PlayerStatusParam_Gifts.Text = "Scramble Starting Gifts";
+            this.c_Scramble_PlayerStatusParam_Gifts.UseVisualStyleBackColor = true;
+            // 
+            // label88
+            // 
+            this.label88.AutoSize = true;
+            this.label88.Location = new System.Drawing.Point(178, 51);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(148, 15);
+            this.label88.TabIndex = 14;
+            this.label88.Text = "Scramble the starting gifts.";
+            // 
+            // c_Scramble_PlayerStatusParam_Classes
+            // 
+            this.c_Scramble_PlayerStatusParam_Classes.AutoSize = true;
+            this.c_Scramble_PlayerStatusParam_Classes.Location = new System.Drawing.Point(6, 22);
+            this.c_Scramble_PlayerStatusParam_Classes.Name = "c_Scramble_PlayerStatusParam_Classes";
+            this.c_Scramble_PlayerStatusParam_Classes.Size = new System.Drawing.Size(160, 19);
+            this.c_Scramble_PlayerStatusParam_Classes.TabIndex = 11;
+            this.c_Scramble_PlayerStatusParam_Classes.Text = "Scramble Starting Classes";
+            this.c_Scramble_PlayerStatusParam_Classes.UseVisualStyleBackColor = true;
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.Location = new System.Drawing.Point(178, 22);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(287, 15);
+            this.label87.TabIndex = 12;
+            this.label87.Text = "Scramble the starting class attributes and equipment.";
+            // 
+            // groupBox35
+            // 
+            this.groupBox35.Controls.Add(this.c_Scramble_PlayerLevelUpSoulsParam);
+            this.groupBox35.Controls.Add(this.label85);
+            this.groupBox35.Location = new System.Drawing.Point(6, 153);
+            this.groupBox35.Name = "groupBox35";
+            this.groupBox35.Size = new System.Drawing.Size(814, 57);
+            this.groupBox35.TabIndex = 15;
+            this.groupBox35.TabStop = false;
+            this.groupBox35.Text = "PlayerLevelUpSoulsParam";
+            // 
+            // c_Scramble_PlayerLevelUpSoulsParam
+            // 
+            this.c_Scramble_PlayerLevelUpSoulsParam.AutoSize = true;
+            this.c_Scramble_PlayerLevelUpSoulsParam.Location = new System.Drawing.Point(6, 22);
+            this.c_Scramble_PlayerLevelUpSoulsParam.Name = "c_Scramble_PlayerLevelUpSoulsParam";
+            this.c_Scramble_PlayerLevelUpSoulsParam.Size = new System.Drawing.Size(132, 19);
+            this.c_Scramble_PlayerLevelUpSoulsParam.TabIndex = 11;
+            this.c_Scramble_PlayerLevelUpSoulsParam.Text = "Scramble Level Cost";
+            this.c_Scramble_PlayerLevelUpSoulsParam.UseVisualStyleBackColor = true;
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.Location = new System.Drawing.Point(178, 22);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(575, 15);
+            this.label85.TabIndex = 12;
+            this.label85.Text = "Scramble the soul cost per level. This means the leveling cost will no longer fol" +
+    "low a linear increase per level.";
+            // 
+            // groupBox36
+            // 
+            this.groupBox36.Controls.Add(this.c_Scramble_LockOnParam_FOV);
+            this.groupBox36.Controls.Add(this.label83);
+            this.groupBox36.Controls.Add(this.c_Scramble_LockOnParam_Distance);
+            this.groupBox36.Controls.Add(this.label86);
+            this.groupBox36.Location = new System.Drawing.Point(6, 69);
+            this.groupBox36.Name = "groupBox36";
+            this.groupBox36.Size = new System.Drawing.Size(814, 78);
+            this.groupBox36.TabIndex = 14;
+            this.groupBox36.TabStop = false;
+            this.groupBox36.Text = "LockOnParam";
+            // 
+            // c_Scramble_LockOnParam_FOV
+            // 
+            this.c_Scramble_LockOnParam_FOV.AutoSize = true;
+            this.c_Scramble_LockOnParam_FOV.Location = new System.Drawing.Point(6, 47);
+            this.c_Scramble_LockOnParam_FOV.Name = "c_Scramble_LockOnParam_FOV";
+            this.c_Scramble_LockOnParam_FOV.Size = new System.Drawing.Size(100, 19);
+            this.c_Scramble_LockOnParam_FOV.TabIndex = 13;
+            this.c_Scramble_LockOnParam_FOV.Text = "Scramble FOV";
+            this.c_Scramble_LockOnParam_FOV.UseVisualStyleBackColor = true;
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(178, 47);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(227, 15);
+            this.label83.TabIndex = 14;
+            this.label83.Text = "Scramble the FOV the player camera uses.";
+            // 
+            // c_Scramble_LockOnParam_Distance
+            // 
+            this.c_Scramble_LockOnParam_Distance.AutoSize = true;
+            this.c_Scramble_LockOnParam_Distance.Location = new System.Drawing.Point(6, 22);
+            this.c_Scramble_LockOnParam_Distance.Name = "c_Scramble_LockOnParam_Distance";
+            this.c_Scramble_LockOnParam_Distance.Size = new System.Drawing.Size(123, 19);
+            this.c_Scramble_LockOnParam_Distance.TabIndex = 11;
+            this.c_Scramble_LockOnParam_Distance.Text = "Scramble Distance";
+            this.c_Scramble_LockOnParam_Distance.UseVisualStyleBackColor = true;
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.Location = new System.Drawing.Point(178, 22);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(256, 15);
+            this.label86.TabIndex = 12;
+            this.label86.Text = "Scramble the distance the player camera sits at.";
+            // 
+            // groupBox33
+            // 
+            this.groupBox33.Controls.Add(this.c_Scramble_EventCommonParam);
+            this.groupBox33.Controls.Add(this.label82);
+            this.groupBox33.Location = new System.Drawing.Point(6, 6);
+            this.groupBox33.Name = "groupBox33";
+            this.groupBox33.Size = new System.Drawing.Size(814, 57);
+            this.groupBox33.TabIndex = 12;
+            this.groupBox33.TabStop = false;
+            this.groupBox33.Text = "EventCommonParam";
+            // 
+            // c_Scramble_EventCommonParam
+            // 
+            this.c_Scramble_EventCommonParam.AutoSize = true;
+            this.c_Scramble_EventCommonParam.Location = new System.Drawing.Point(6, 22);
+            this.c_Scramble_EventCommonParam.Name = "c_Scramble_EventCommonParam";
+            this.c_Scramble_EventCommonParam.Size = new System.Drawing.Size(143, 19);
+            this.c_Scramble_EventCommonParam.TabIndex = 11;
+            this.c_Scramble_EventCommonParam.Text = "Scramble Event Values";
+            this.c_Scramble_EventCommonParam.UseVisualStyleBackColor = true;
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(178, 22);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(480, 15);
+            this.label82.TabIndex = 12;
+            this.label82.Text = "Scramble the soul requirement for the Shrine of Winter to open up without the bos" +
+    "s souls.";
+            // 
+            // tabPage12
+            // 
+            this.tabPage12.Controls.Add(this.groupBox34);
+            this.tabPage12.Controls.Add(this.groupBox4);
+            this.tabPage12.Location = new System.Drawing.Point(4, 24);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage12.Size = new System.Drawing.Size(833, 648);
+            this.tabPage12.TabIndex = 8;
+            this.tabPage12.Text = "Character";
+            this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // groupBox34
+            // 
+            this.groupBox34.Controls.Add(this.c_Scramble_ChrMoveParam);
+            this.groupBox34.Controls.Add(this.label84);
+            this.groupBox34.Location = new System.Drawing.Point(6, 6);
+            this.groupBox34.Name = "groupBox34";
+            this.groupBox34.Size = new System.Drawing.Size(814, 58);
+            this.groupBox34.TabIndex = 11;
+            this.groupBox34.TabStop = false;
+            this.groupBox34.Text = "ChrMoveParam";
+            // 
+            // c_Scramble_ChrMoveParam
+            // 
+            this.c_Scramble_ChrMoveParam.AutoSize = true;
+            this.c_Scramble_ChrMoveParam.Location = new System.Drawing.Point(6, 22);
+            this.c_Scramble_ChrMoveParam.Name = "c_Scramble_ChrMoveParam";
+            this.c_Scramble_ChrMoveParam.Size = new System.Drawing.Size(130, 19);
+            this.c_Scramble_ChrMoveParam.TabIndex = 11;
+            this.c_Scramble_ChrMoveParam.Text = "Scramble Attributes";
+            this.c_Scramble_ChrMoveParam.UseVisualStyleBackColor = true;
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(178, 26);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(555, 15);
+            this.label84.TabIndex = 12;
+            this.label84.Text = "Scramble movement attributes used by the player and player-type enemies, such as " +
+    "walk and run speed.";
+            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.groupBox23);
-            this.tabPage5.Controls.Add(this.groupBox4);
             this.tabPage5.Controls.Add(this.groupBox24);
             this.tabPage5.Controls.Add(this.groupBox27);
             this.tabPage5.Controls.Add(this.groupBox25);
@@ -2473,16 +2769,6 @@
             this.tabPage6.TabIndex = 2;
             this.tabPage6.Text = "Boss";
             this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Location = new System.Drawing.Point(4, 24);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(833, 648);
-            this.tabPage7.TabIndex = 3;
-            this.tabPage7.Text = "Player";
-            this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // tabPage8
             // 
@@ -2540,7 +2826,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(878, 797);
+            this.ClientSize = new System.Drawing.Size(882, 797);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.b_ToggleRecommended);
             this.Controls.Add(this.b_ToggleOff);
@@ -2615,6 +2901,8 @@
             this.groupBox11.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox38.ResumeLayout(false);
+            this.groupBox38.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -2625,6 +2913,19 @@
             this.tabPage3.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
+            this.groupBox37.ResumeLayout(false);
+            this.groupBox37.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.t_StatSkew)).EndInit();
+            this.groupBox35.ResumeLayout(false);
+            this.groupBox35.PerformLayout();
+            this.groupBox36.ResumeLayout(false);
+            this.groupBox36.PerformLayout();
+            this.groupBox33.ResumeLayout(false);
+            this.groupBox33.PerformLayout();
+            this.tabPage12.ResumeLayout(false);
+            this.groupBox34.ResumeLayout(false);
+            this.groupBox34.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             this.tabPage8.ResumeLayout(false);
@@ -2802,7 +3103,7 @@
         private CheckBox c_Generate_SystemBulletParam;
         private Label label74;
         private GroupBox groupBox2;
-        private CheckBox c_Scramble_Enemy_Loot;
+        private CheckBox c_Include_Enemy_Loot;
         private Label label6;
         private GroupBox groupBox11;
         private Label label80;
@@ -2815,9 +3116,7 @@
         private Label label77;
         private CheckBox c_IncludeBossTreasure_Treasure_Map;
         private Label label10;
-        private CheckBox c_IgnoreBossSouls_Treasure_Map;
         private CheckBox c_Scramble_Map_Loot;
-        private Label label76;
         private CheckBox c_IgnoreKeys_Treasure_Map;
         private Label label8;
         private CheckBox c_IgnoreTools_Treasure_Map;
@@ -2845,11 +3144,36 @@
         private CheckBox c_Scramble_Enemy_Type_Characters;
         private Label label15;
         private Label label16;
-        private CheckBox c_Scramble_Shops;
+        private CheckBox c_Include_Shops;
         private Label label43;
-        private CheckBox c_Scramble_Boss_Trades;
+        private CheckBox c_Include_Boss_Trades;
         private GroupBox groupBox10;
         private Label label81;
         private CheckBox c_FuriousEnemies;
+        private GroupBox groupBox34;
+        private CheckBox c_Scramble_ChrMoveParam;
+        private Label label84;
+        private GroupBox groupBox33;
+        private CheckBox c_Scramble_EventCommonParam;
+        private Label label82;
+        private GroupBox groupBox36;
+        private CheckBox c_Scramble_LockOnParam_Distance;
+        private Label label86;
+        private TabPage tabPage12;
+        private CheckBox c_Scramble_LockOnParam_FOV;
+        private Label label83;
+        private GroupBox groupBox35;
+        private CheckBox c_Scramble_PlayerLevelUpSoulsParam;
+        private Label label85;
+        private GroupBox groupBox37;
+        private CheckBox c_Scramble_PlayerStatusParam_Gifts;
+        private Label label88;
+        private CheckBox c_Scramble_PlayerStatusParam_Classes;
+        private Label label87;
+        private Label label89;
+        private NumericUpDown t_StatSkew;
+        private GroupBox groupBox38;
+        private Label label76;
+        private CheckBox checkBox1;
     }
 }

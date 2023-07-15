@@ -21,6 +21,9 @@ namespace DS2_Scrambler
         // Interface
         private Progress<string> progress;
 
+        public ScramblerData scramblerData;
+        public Regulation reg;
+
         public Main()
         {
             InitializeComponent();
@@ -37,10 +40,7 @@ namespace DS2_Scrambler
 
             t_ModPath.Text = "";
 
-            c_IgnoreKeys_Treasure_Map.Checked = true;
-            c_IgnoreTools_Treasure_Map.Checked = true;
-            c_Scramble_Enemy_Loot.Checked = true;
-            c_Scramble_Map_Loot.Checked = true;
+            t_StatSkew.Value = 6;
         }
 
         private void b_SelectModPath_Click(object sender, EventArgs e)
@@ -55,13 +55,15 @@ namespace DS2_Scrambler
 
         private async void b_Scramble_Click(object sender, EventArgs e)
         {
-            Util.CopyMod(baseModPath, scrambledModPath);
+            // If Copy Mod fails, do not attempt to scramble.
+            if (Util.CopyMod(baseModPath, scrambledModPath))
+            {
+                ToggleControls(false);
 
-            ToggleControls(false);
+                await Task.Run(() => Scramble(progress));
 
-            await Task.Run(() => Scramble(progress));
-
-            ToggleControls(true);
+                ToggleControls(true);
+            }
         }
 
         
@@ -79,11 +81,14 @@ namespace DS2_Scrambler
             }
 
             // Load regulation params
-            Regulation reg = new Regulation(scrambledModPath);
+            reg = new Regulation(scrambledModPath);
 
             if (reg.LoadParams() && reg.LoadLooseParams())
             {
                 progress.Report("Params loaded.");
+
+                scramblerData = new ScramblerData(reg, scrambledModPath);
+                progress.Report("Scrambler data built.");
 
                 // Scramble
                 reg = ScrambleParams(progress, reg);
@@ -112,7 +117,7 @@ namespace DS2_Scrambler
             //********************
             try
             {
-                ParamScrambler scrambler = new ParamScrambler(rand, reg, scrambledModPath);
+                ParamScrambler scrambler = new ParamScrambler(rand, reg, scramblerData);
 
                 // Items
                 if (c_Scramble_ItemParam.Checked)
@@ -178,6 +183,33 @@ namespace DS2_Scrambler
                 }
 
                 // Player
+                if (c_Scramble_EventCommonParam.Checked)
+                {
+                    progress.Report("Scramble: Event Common");
+                    reg = scrambler.Scramble_EventCommonParam("EventCommonParam");
+                }
+                if (c_Scramble_LockOnParam_Distance.Checked || c_Scramble_LockOnParam_FOV.Checked)
+                {
+                    progress.Report("Scramble: Camera Attributes");
+                    reg = scrambler.Scramble_LockOnParam("LockOnParam", c_Scramble_LockOnParam_Distance.Checked, c_Scramble_LockOnParam_FOV.Checked);
+                }
+                if (c_Scramble_PlayerLevelUpSoulsParam.Checked)
+                {
+                    progress.Report("Scramble: Level Up Costs");
+                    reg = scrambler.Scramble_PlayerLevelUpSoulsParam("PlayerLevelUpSoulsParam");
+                }
+                if (c_Scramble_PlayerStatusParam_Classes.Checked || c_Scramble_PlayerStatusParam_Gifts.Checked)
+                {
+                    progress.Report("Scramble: Player Starting Setup");
+                    reg = scrambler.Scramble_PlayerStatusParam("PlayerStatusParam", c_Scramble_PlayerStatusParam_Classes.Checked, c_Scramble_PlayerStatusParam_Gifts.Checked, (int)t_StatSkew.Value);
+                }
+
+                // Character
+                if (c_Scramble_ChrMoveParam.Checked)
+                {
+                    progress.Report("Scramble: Character Movement Attributes");
+                    reg = scrambler.Scramble_ChrMoveParam("ChrMoveParam");
+                }
 
                 // Bosses
                 if (c_Scramble_BossBattleParam.Checked)
@@ -277,24 +309,23 @@ namespace DS2_Scrambler
             //********************
             try
             {
-                ItemScrambler item_scrambler = new ItemScrambler(rand, reg, scrambledModPath);
+                ItemScrambler item_scrambler = new ItemScrambler(rand, reg, scramblerData);
 
                 if (c_Scramble_Map_Loot.Checked)
                 {
                     progress.Report("Scramble: Loot");
                     reg = item_scrambler.Scramble_Loot(
                       c_Scramble_Map_Loot.Checked,
-                      c_Scramble_Enemy_Loot.Checked,
-                      c_Scramble_Shops.Checked,
-                      c_Scramble_Boss_Trades.Checked,
+                      c_Include_Enemy_Loot.Checked,
+                      c_Include_Shops.Checked,
+                      c_Include_Boss_Trades.Checked,
                       c_IncludeBossTreasure_Treasure_Map.Checked,
                       c_IncludeCharacterTreasure_Treasure_Map.Checked,
                       c_IncludeCovenantTreasure_Treasure_Map.Checked,
                       c_IncludeBirdTreasure_Treasure_Map.Checked,
                       c_IncludEventTreasure_Treasure_Map.Checked,
                       c_IgnoreKeys_Treasure_Map.Checked,
-                      c_IgnoreTools_Treasure_Map.Checked,
-                      c_IgnoreBossSouls_Treasure_Map.Checked
+                      c_IgnoreTools_Treasure_Map.Checked
                     );
                 }
             }
@@ -310,7 +341,7 @@ namespace DS2_Scrambler
             //********************
             try
             {
-                EnemyScrambler enemy_scrambler = new EnemyScrambler(rand, reg, scrambledModPath);
+                EnemyScrambler enemy_scrambler = new EnemyScrambler(rand, reg, scramblerData);
 
                 if (c_Scramble_Enemy_Location.Checked || c_Scramble_Enemy_Type_Basic.Checked || c_FuriousEnemies.Checked)
                 {
@@ -349,11 +380,10 @@ namespace DS2_Scrambler
         private void b_ToggleRecommended_Click(object sender, EventArgs e)
         {
             c_Scramble_Map_Loot.Checked = true;
-            c_Scramble_Enemy_Loot.Checked = true;
-            c_Scramble_Shops.Checked = true;
+            c_Include_Enemy_Loot.Checked = true;
+            c_Include_Shops.Checked = true;
             c_IgnoreKeys_Treasure_Map.Checked = true;
             c_IgnoreTools_Treasure_Map.Checked = true;
-            c_IgnoreBossSouls_Treasure_Map.Checked = true;
         }
 
         private void b_ToggleOff_Click(object sender, EventArgs e)
@@ -412,12 +442,11 @@ namespace DS2_Scrambler
             c_ForceVisuals_SystemBulletParam.Checked = false;
 
             c_Scramble_Map_Loot.Checked = false;
-            c_Scramble_Enemy_Loot.Checked = false;
-            c_Scramble_Shops.Checked = false;
-            c_Scramble_Boss_Trades.Checked = false;
+            c_Include_Enemy_Loot.Checked = false;
+            c_Include_Shops.Checked = false;
+            c_Include_Boss_Trades.Checked = false;
             c_IgnoreKeys_Treasure_Map.Checked = false;
             c_IgnoreTools_Treasure_Map.Checked = false;
-            c_IgnoreBossSouls_Treasure_Map.Checked = false;
             c_IncludeBossTreasure_Treasure_Map.Checked = false;
             c_IncludeCharacterTreasure_Treasure_Map.Checked = false;
             c_IncludeCovenantTreasure_Treasure_Map.Checked = false;

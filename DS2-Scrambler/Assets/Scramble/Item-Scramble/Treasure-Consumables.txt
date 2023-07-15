@@ -46,14 +46,9 @@
 60450000;Prism Stone
 60510000;Rubbish
 60511000;Petrified Something
-60525000;Estus Flask Shard
-60526000;Sublime Bone Dust
 60527000;Bonfire Ascetic
 60530000;Alluring Skull
 60531000;Lloyd's Talisman
-60536000;Pharros' Lockstone
-60537000;Fragrant Branch of Yore
-53200000;Smelter Wedge
 60538000;Fire Seed
 60540000;Throwing Knife
 60550000;Witching Urn

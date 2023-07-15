@@ -36,6 +36,7 @@ stability_7
 stability_8
 stability_9
 stability_10
+damage_mult_physical
 damage_mult_magic
 damage_mult_lightning
 damage_mult_fire
@@ -52,4 +53,4 @@ infusion_mult_poison
 infusion_mult_bleed
 infusion_mult_raw
 infusion_mult_enchanted
-infusion_mult_mundane
+infusion_mult_mundance

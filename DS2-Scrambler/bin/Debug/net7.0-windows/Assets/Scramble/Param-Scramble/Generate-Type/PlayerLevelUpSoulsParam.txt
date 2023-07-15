@@ -1,0 +1,1 @@
+soul_level_cost;100;1500000;RANDOM
