@@ -41,6 +41,10 @@ namespace DS2_Scrambler
             t_ModPath.Text = "";
 
             t_StatSkew.Value = 6;
+
+            c_Scramble_Enemy_Type_Basic.Enabled = false;
+            c_Scramble_Enemy_Type_Boss.Enabled = false;
+            c_Scramble_Enemy_Type_Characters.Enabled = false;
         }
 
         private void b_SelectModPath_Click(object sender, EventArgs e)
