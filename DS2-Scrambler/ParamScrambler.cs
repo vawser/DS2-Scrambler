@@ -1488,7 +1488,7 @@ namespace DS2_Scrambler
         #endregion
 
         #region Scramble - PlayerStatusParam
-        public Regulation Scramble_PlayerStatusParam(string paramName, bool scrambleClasses, bool scrambleGifts, int statSkew)
+        public Regulation Scramble_PlayerStatusParam(string paramName, bool scrambleClasses, bool scrambleGifts, int statSkew, bool limitEquipment)
         {
             if (scrambleClasses)
             {
@@ -1502,13 +1502,13 @@ namespace DS2_Scrambler
                         param_rows = param_rows.Where(row => row.ID >= 20 && row.ID <= 100).ToList();
 
                         RandomiseClassStats(param_rows, statSkew);
-                        RandomiseClassEquipment(param_rows);
+                        RandomiseClassEquipment(param_rows, limitEquipment);
 
                         // Support for mod added ones
                         param_rows = param_rows.Where(row => row.ID > 110 && row.ID < 500).ToList();
 
                         RandomiseClassStats(param_rows, statSkew);
-                        RandomiseClassEquipment(param_rows);
+                        RandomiseClassEquipment(param_rows, limitEquipment);
                     }
                 }
             }
@@ -1591,6 +1591,8 @@ namespace DS2_Scrambler
                 if (total < 1)
                     total = 1;
 
+                Console.WriteLine($"Total Stats: {total}");
+
                 row["soul_level"].Value = total;
                 row["vigor"].Value = vigor;
                 row["endurance"].Value = endurance;
@@ -1644,10 +1646,6 @@ namespace DS2_Scrambler
         List<PARAM.Row> valid_pyromancies = new List<PARAM.Row>();
         List<PARAM.Row> valid_hexes = new List<PARAM.Row>();
 
-        List<PARAM.Row> valid_arrows = new List<PARAM.Row>();
-        List<PARAM.Row> valid_greatarrows = new List<PARAM.Row>();
-        List<PARAM.Row> valid_bolts = new List<PARAM.Row>();
-
         public bool usesSorceries = false;
         public bool usesMiracles = false;
         public bool usesPyromancies = false;
@@ -1657,7 +1655,7 @@ namespace DS2_Scrambler
         public bool usesBolts = false;
         public bool setFirstSpell = false;
 
-        public void RandomiseClassEquipment(List<PARAM.Row> rows)
+        public void RandomiseClassEquipment(List<PARAM.Row> rows, bool limitEquipment)
         {
 
             foreach (PARAM.Row row in rows)
@@ -1678,7 +1676,7 @@ namespace DS2_Scrambler
                 usesBolts = false;
                 setFirstSpell = false;
 
-                UpdateSelectionListsForClass((int)attunement, (int)vitality, (int)strength, (int)dexterity, (int)intelligence, (int)faith);
+                UpdateSelectionListsForClass((int)attunement, (int)vitality, (int)strength, (int)dexterity, (int)intelligence, (int)faith, limitEquipment);
 
                 // Weapons
                 AssignWeaponSlot(row, "right_weapon_item_1", false);
@@ -1707,10 +1705,10 @@ namespace DS2_Scrambler
                     AssignSpell(row, "spell_item_3");
 
                 // Armor
-                Util.SetRandomItem(row, "head_item", Data.Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 1).ToList());
-                Util.SetRandomItem(row, "chest_item", Data.Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 2).ToList());
-                Util.SetRandomItem(row, "hands_item", Data.Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 3).ToList());
-                Util.SetRandomItem(row, "legs_item", Data.Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 4).ToList());
+                AssignArmor(row, "head_item", valid_head_armor);
+                AssignArmor(row, "chest_item", valid_chest_armor);
+                AssignArmor(row, "hands_item", valid_arm_armor);
+                AssignArmor(row, "legs_item", valid_leg_armor);
 
                 // Rings
                 if (rand.Next(100) >= 50)
@@ -1727,7 +1725,7 @@ namespace DS2_Scrambler
                     Util.SetRandomItemWithAmount(row, "bolt_item_1", Data.Row_List_Ammunition_Bolt, "bolt_amount_1", 25, 50);
 
                 // Starting Item
-                for(int x = 0; x <= 7; x++)
+                for(int x = 1; x <= 7; x++)
                 {
                     if(rand.Next(100) > 50 || row.ID == 90)
                         Util.SetRandomGood(row, $"item_{x}", Data, $"item_amount_{x}");
@@ -1735,8 +1733,23 @@ namespace DS2_Scrambler
             }
         }
 
+        public void AssignArmor(PARAM.Row row, string slot, List<PARAM.Row> armorList)
+        {
+            Random rand = new Random();
+
+            if (armorList.Count > 0)
+            {
+                // The armor ID in the param seems to be the actual ID but with a 2 instead of 1 at the start.
+                string armor_id = "2" + armorList[rand.Next(armorList.Count)].ID.ToString().Substring(1);
+
+                row[slot].Value = int.Parse(armor_id);
+            }
+        }
+
         public void AssignSpell(PARAM.Row row, string slot)
         {
+            Random rand = new Random();
+
             int roll = rand.Next(100);
 
             if (!setFirstSpell)
@@ -1785,6 +1798,8 @@ namespace DS2_Scrambler
 
         public void AssignWeaponSlot(PARAM.Row row, string slot, bool allowShields)
         {
+            Random rand = new Random();
+
             // Right Weapon 1
             int roll = rand.Next(100);
 
@@ -1875,114 +1890,227 @@ namespace DS2_Scrambler
             }
         }
 
-        public void UpdateSelectionListsForClass(int attunement, int vitality, int strength, int dexterity, int intelligence, int faith)
+        public void UpdateSelectionListsForClass(int attunement, int vitality, int strength, int dexterity, int intelligence, int faith, bool limitEquipment)
         {
-            valid_melee_weapons = Data.Row_List_Weapons_Melee.Where(row =>
-            (short)row["str_requirement"].Value <= strength && 
-            (short)row["dex_requirement"].Value <= dexterity && 
-            (short)row["int_requirement"].Value <= intelligence && 
-            (short)row["fth_requirement"].Value <= faith).ToList();
+            strength = (int)(strength * 1.5);
 
-            valid_sorcery_catalyst = Data.Row_List_Weapons_Catalyst_Sorcery.Where(row =>
-            (short)row["str_requirement"].Value <= strength &&
-            (short)row["dex_requirement"].Value <= dexterity && 
-            (short)row["int_requirement"].Value <= intelligence && 
-            (short)row["fth_requirement"].Value <= faith).ToList();
+            if (limitEquipment)
+            {
+                valid_melee_weapons = Data.Row_List_Weapons_Melee.Where(row =>
+                strength >= (short)row["str_requirement"].Value &&
+                dexterity >= (short)row["dex_requirement"].Value &&
+                intelligence >= (short)row["int_requirement"].Value &&
+                faith >= (short)row["fth_requirement"].Value
+                ).ToList();
 
-            valid_miracle_catalyst = Data.Row_List_Weapons_Catalyst_Miracles.Where(row =>
-            (short)row["str_requirement"].Value <= strength && 
-            (short)row["dex_requirement"].Value <= dexterity && 
-            (short)row["int_requirement"].Value <= intelligence && 
-            (short)row["fth_requirement"].Value <= faith).ToList();
+                Console.WriteLine($"valid_melee_weapons: {valid_melee_weapons.Count}");
 
-            valid_pyromancy_catalyst = Data.Row_List_Weapons_Catalyst_Pyromancy.Where(row =>
-            (short)row["str_requirement"].Value <= strength && 
-            (short)row["dex_requirement"].Value <= dexterity && 
-            (short)row["int_requirement"].Value <= intelligence && 
-            (short)row["fth_requirement"].Value <= faith).ToList();
+                valid_sorcery_catalyst = Data.Row_List_Weapons_Catalyst_Sorcery.Where(row =>
+                strength >= (short)row["str_requirement"].Value &&
+                dexterity >= (short)row["dex_requirement"].Value &&
+                intelligence >= (short)row["int_requirement"].Value &&
+                faith >= (short)row["fth_requirement"].Value
+                ).ToList();
 
-            valid_hex_catalyst = Data.Row_List_Weapons_Catalyst_Hex.Where(row =>
-            (short)row["str_requirement"].Value <= strength && 
-            (short)row["dex_requirement"].Value <= dexterity && 
-            (short)row["int_requirement"].Value <= intelligence && 
-            (short)row["fth_requirement"].Value <= faith).ToList();
+                Console.WriteLine($"valid_sorcery_catalyst: {valid_sorcery_catalyst.Count}");
 
-            valid_bows = Data.Row_List_Weapons_Bow.Where(row =>
-            (short)row["str_requirement"].Value <= strength && 
-            (short)row["dex_requirement"].Value <= dexterity && 
-            (short)row["int_requirement"].Value <= intelligence && 
-            (short)row["fth_requirement"].Value <= faith).ToList();
+                valid_miracle_catalyst = Data.Row_List_Weapons_Catalyst_Miracles.Where(row =>
+                strength >= (short)row["str_requirement"].Value &&
+                dexterity >= (short)row["dex_requirement"].Value &&
+                intelligence >= (short)row["int_requirement"].Value &&
+                faith >= (short)row["fth_requirement"].Value
+                ).ToList();
 
-            valid_greatbows = Data.Row_List_Weapons_Greatbow.Where(row =>
-            (short)row["str_requirement"].Value <= strength && 
-            (short)row["dex_requirement"].Value <= dexterity && 
-            (short)row["int_requirement"].Value <= intelligence && 
-            (short)row["fth_requirement"].Value <= faith).ToList();
+                Console.WriteLine($"valid_miracle_catalyst: {valid_miracle_catalyst.Count}");
 
-            valid_crossbows = Data.Row_List_Weapons_Crossbow.Where(row =>
-            (short)row["str_requirement"].Value <= strength && 
-            (short)row["dex_requirement"].Value <= dexterity && 
-            (short)row["int_requirement"].Value <= intelligence && 
-            (short)row["fth_requirement"].Value <= faith).ToList();
+                valid_pyromancy_catalyst = Data.Row_List_Weapons_Catalyst_Pyromancy.Where(row =>
+                strength >= (short)row["str_requirement"].Value &&
+                dexterity >= (short)row["dex_requirement"].Value &&
+                intelligence >= (short)row["int_requirement"].Value &&
+                faith >= (short)row["fth_requirement"].Value
+                ).ToList();
 
-            valid_shields = Data.Row_List_Weapons_Shield.Where(row =>
-            (short)row["str_requirement"].Value <= strength && 
-            (short)row["dex_requirement"].Value <= dexterity && 
-            (short)row["int_requirement"].Value <= intelligence && 
-            (short)row["fth_requirement"].Value <= faith).ToList();
+                Console.WriteLine($"valid_pyromancy_catalyst: {valid_pyromancy_catalyst.Count}");
 
-            // TODO: fix, this keeps saying it is null
-            /*
-            valid_head_armor = ArmorParam.Rows.Where(row => row.ID >= 11010100 && row.ID <= 17950103 && !Excluded_Armor.Contains(row.ID.ToString()) &&
-            (byte)row["slot_category"].Value == 1 && 
-            (ushort)row["strength_requirement"].Value <= strength && 
-            (ushort)row["dexterity_requirement "].Value <= dexterity && 
-            (ushort)row["intelligence_requirement"].Value <= intelligence && 
-            (ushort)row["faith_requirement"].Value <= faith).ToList();
+                valid_hex_catalyst = Data.Row_List_Weapons_Catalyst_Hex.Where(row =>
+                strength >= (short)row["str_requirement"].Value &&
+                dexterity >= (short)row["dex_requirement"].Value &&
+                intelligence >= (short)row["int_requirement"].Value &&
+                faith >= (short)row["fth_requirement"].Value
+                ).ToList();
 
-            valid_chest_armor = ArmorParam.Rows.Where(row => row.ID >= 11010100 && row.ID <= 17950103 && !Excluded_Armor.Contains(row.ID.ToString()) &&
-            (byte)row["slot_category"].Value == 2 &&
-            (ushort)row["strength_requirement"].Value <= strength &&
-            (ushort)row["dexterity_requirement "].Value <= dexterity &&
-            (ushort)row["intelligence_requirement"].Value <= intelligence &&
-            (ushort)row["faith_requirement"].Value <= faith).ToList();
+                Console.WriteLine($"valid_hex_catalyst: {valid_hex_catalyst.Count}");
 
-            valid_arm_armor = ArmorParam.Rows.Where(row => row.ID >= 11010100 && row.ID <= 17950103 && !Excluded_Armor.Contains(row.ID.ToString()) &&
-            (byte)row["slot_category"].Value == 3 &&
-            (ushort)row["strength_requirement"].Value <= strength &&
-            (ushort)row["dexterity_requirement "].Value <= dexterity &&
-            (ushort)row["intelligence_requirement"].Value <= intelligence &&
-            (ushort)row["faith_requirement"].Value <= faith).ToList();
+                valid_bows = Data.Row_List_Weapons_Bow.Where(row =>
+                strength >= (short)row["str_requirement"].Value &&
+                dexterity >= (short)row["dex_requirement"].Value &&
+                intelligence >= (short)row["int_requirement"].Value &&
+                faith >= (short)row["fth_requirement"].Value
+                ).ToList();
 
-            valid_leg_armor = ArmorParam.Rows.Where(row => row.ID >= 11010100 && row.ID <= 17950103 && !Excluded_Armor.Contains(row.ID.ToString()) &&
-            (byte)row["slot_category"].Value == 4 &&
-            (ushort)row["strength_requirement"].Value <= strength &&
-            (ushort)row["dexterity_requirement "].Value <= dexterity &&
-            (ushort)row["intelligence_requirement"].Value <= intelligence &&
-            (ushort)row["faith_requirement"].Value <= faith).ToList();
-            */
+                Console.WriteLine($"valid_bows: {valid_bows.Count}");
 
-            valid_sorceries = Data.Row_List_Spell_Sorceries.Where(row =>
-            (ushort)row["int_requirement"].Value <= intelligence && 
-            (ushort)row["fth_requirement"].Value <= faith).ToList();
+                valid_greatbows = Data.Row_List_Weapons_Greatbow.Where(row =>
+                strength >= (short)row["str_requirement"].Value &&
+                dexterity >= (short)row["dex_requirement"].Value &&
+                intelligence >= (short)row["int_requirement"].Value &&
+                faith >= (short)row["fth_requirement"].Value
+                ).ToList();
 
-            valid_miracles = Data.Row_List_Spell_Miracles.Where(row => 
-            (ushort)row["int_requirement"].Value <= intelligence && 
-            (ushort)row["fth_requirement"].Value <= faith).ToList();
+                Console.WriteLine($"valid_greatbows: {valid_greatbows.Count}");
 
-            valid_pyromancies = Data.Row_List_Spell_Pyromancies.Where(row => 
-            (ushort)row["int_requirement"].Value <= intelligence && 
-            (ushort)row["fth_requirement"].Value <= faith).ToList();
+                valid_crossbows = Data.Row_List_Weapons_Crossbow.Where(row =>
+                strength >= (short)row["str_requirement"].Value &&
+                dexterity >= (short)row["dex_requirement"].Value &&
+                intelligence >= (short)row["int_requirement"].Value &&
+                faith >= (short)row["fth_requirement"].Value
+                ).ToList();
 
-            valid_hexes = Data.Row_List_Spell_Hexes.Where(row => 
-            (ushort)row["int_requirement"].Value <= intelligence && 
-            (ushort)row["fth_requirement"].Value <= faith).ToList();
+                Console.WriteLine($"valid_crossbows: {valid_crossbows.Count}");
 
-            valid_arrows = Data.Row_List_Ammunition_Arrow;
+                valid_shields = Data.Row_List_Weapons_Shield.Where(row =>
+                strength >= (short)row["str_requirement"].Value &&
+                dexterity >= (short)row["dex_requirement"].Value &&
+                intelligence >= (short)row["int_requirement"].Value &&
+                faith >= (short)row["fth_requirement"].Value
+                ).ToList();
 
-            valid_greatarrows = Data.Row_List_Ammunition_Greatarrow;
+                Console.WriteLine($"valid_shields: {valid_shields.Count}");
 
-            valid_bolts = Data.Row_List_Ammunition_Bolt;
+                valid_head_armor = Data.Row_List_Armor_Head.Where(row =>
+                strength >= (ushort)row["strength_requirement"].Value &&
+                dexterity >= (ushort)row["dexterity_requirement"].Value &&
+                intelligence >= (ushort)row["intelligence_requirement"].Value &&
+                faith >= (ushort)row["faith_requirement"].Value
+                ).ToList();
+
+                Console.WriteLine($"valid_head_armor: {valid_head_armor.Count}");
+
+                valid_chest_armor = Data.Row_List_Armor_Chest.Where(row =>
+                strength >= (ushort)row["strength_requirement"].Value &&
+                dexterity >= (ushort)row["dexterity_requirement"].Value &&
+                intelligence >= (ushort)row["intelligence_requirement"].Value &&
+                faith >= (ushort)row["faith_requirement"].Value
+                ).ToList();
+
+                Console.WriteLine($"valid_chest_armor: {valid_chest_armor.Count}");
+
+                valid_arm_armor = Data.Row_List_Armor_Arms.Where(row =>
+                strength >= (ushort)row["strength_requirement"].Value &&
+                dexterity >= (ushort)row["dexterity_requirement"].Value &&
+                intelligence >= (ushort)row["intelligence_requirement"].Value &&
+                faith >= (ushort)row["faith_requirement"].Value
+                ).ToList();
+
+                Console.WriteLine($"valid_arm_armor: {valid_arm_armor.Count}");
+
+                valid_leg_armor = Data.Row_List_Armor_Legs.Where(row =>
+                strength >= (ushort)row["strength_requirement"].Value &&
+                dexterity >= (ushort)row["dexterity_requirement"].Value &&
+                intelligence >= (ushort)row["intelligence_requirement"].Value &&
+                faith >= (ushort)row["faith_requirement"].Value
+                ).ToList();
+
+                Console.WriteLine($"valid_leg_armor: {valid_leg_armor.Count}");
+
+                valid_sorceries = Data.Row_List_Spell_Sorceries.Where(row =>
+                intelligence >= (ushort)row["int_requirement"].Value &&
+                faith >= (ushort)row["fth_requirement"].Value
+                ).ToList();
+
+                Console.WriteLine($"valid_sorceries: {valid_sorceries.Count}");
+
+                valid_miracles = Data.Row_List_Spell_Miracles.Where(row =>
+                intelligence >= (ushort)row["int_requirement"].Value &&
+                faith >= (ushort)row["fth_requirement"].Value
+                ).ToList();
+
+                Console.WriteLine($"valid_miracles: {valid_miracles.Count}");
+
+                valid_pyromancies = Data.Row_List_Spell_Pyromancies.Where(row =>
+                intelligence >= (ushort)row["int_requirement"].Value &&
+                faith >= (ushort)row["fth_requirement"].Value
+                ).ToList();
+
+                Console.WriteLine($"valid_pyromancies: {valid_pyromancies.Count}");
+
+                valid_hexes = Data.Row_List_Spell_Hexes.Where(row =>
+                intelligence >= (ushort)row["int_requirement"].Value &&
+                faith >= (ushort)row["fth_requirement"].Value
+                ).ToList();
+
+                Console.WriteLine($"valid_hexes: {valid_hexes.Count}");
+            }
+            else
+            {
+                valid_melee_weapons = Data.Row_List_Weapons_Melee;
+
+                Console.WriteLine($"valid_melee_weapons: {valid_melee_weapons.Count}");
+
+                valid_sorcery_catalyst = Data.Row_List_Weapons_Catalyst_Sorcery;
+
+                Console.WriteLine($"valid_sorcery_catalyst: {valid_sorcery_catalyst.Count}");
+
+                valid_miracle_catalyst = Data.Row_List_Weapons_Catalyst_Miracles;
+
+                Console.WriteLine($"valid_miracle_catalyst: {valid_miracle_catalyst.Count}");
+
+                valid_pyromancy_catalyst = Data.Row_List_Weapons_Catalyst_Pyromancy;
+
+                Console.WriteLine($"valid_pyromancy_catalyst: {valid_pyromancy_catalyst.Count}");
+
+                valid_hex_catalyst = Data.Row_List_Weapons_Catalyst_Hex;
+
+                Console.WriteLine($"valid_hex_catalyst: {valid_hex_catalyst.Count}");
+
+                valid_bows = Data.Row_List_Weapons_Bow;
+
+                Console.WriteLine($"valid_bows: {valid_bows.Count}");
+
+                valid_greatbows = Data.Row_List_Weapons_Greatbow;
+
+                Console.WriteLine($"valid_greatbows: {valid_greatbows.Count}");
+
+                valid_crossbows = Data.Row_List_Weapons_Crossbow;
+
+                Console.WriteLine($"valid_crossbows: {valid_crossbows.Count}");
+
+                valid_shields = Data.Row_List_Weapons_Shield;
+
+                Console.WriteLine($"valid_shields: {valid_shields.Count}");
+
+                valid_head_armor = Data.Row_List_Armor_Head;
+
+                Console.WriteLine($"valid_head_armor: {valid_head_armor.Count}");
+
+                valid_chest_armor = Data.Row_List_Armor_Chest;
+
+                Console.WriteLine($"valid_chest_armor: {valid_chest_armor.Count}");
+
+                valid_arm_armor = Data.Row_List_Armor_Arms;
+
+                Console.WriteLine($"valid_arm_armor: {valid_arm_armor.Count}");
+
+                valid_leg_armor = Data.Row_List_Armor_Legs;
+
+                Console.WriteLine($"valid_leg_armor: {valid_leg_armor.Count}");
+
+                valid_sorceries = Data.Row_List_Spell_Sorceries;
+
+                Console.WriteLine($"valid_sorceries: {valid_sorceries.Count}");
+
+                valid_miracles = Data.Row_List_Spell_Miracles;
+
+                Console.WriteLine($"valid_miracles: {valid_miracles.Count}");
+
+                valid_pyromancies = Data.Row_List_Spell_Pyromancies;
+
+                Console.WriteLine($"valid_pyromancies: {valid_pyromancies.Count}");
+
+                valid_hexes = Data.Row_List_Spell_Hexes;
+
+                Console.WriteLine($"valid_hexes: {valid_hexes.Count}");
+            }
         }
         #endregion
 

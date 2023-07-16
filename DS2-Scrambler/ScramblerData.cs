@@ -305,38 +305,38 @@ namespace DS2_Scrambler
 
             // *** PARAM.Rows
             // Items
-            Row_List_Weapons = ItemParam.Param.Rows.Where(row => 
+            Row_List_Weapons = WeaponParam.Param.Rows.Where(row => 
                 row.ID >= 1000000 && 
                 row.ID <= 19999999 && 
                 !ID_List_Excluded_Weapons.Contains(row.ID)
                 ).ToList();
 
-            Row_List_Armor = ItemParam.Param.Rows.Where(row => 
-                row.ID >= 21010100 && 
-                row.ID <= 29999999 && 
+            Row_List_Armor = ArmorParam.Param.Rows.Where(row => 
+                row.ID >= 11010100 && 
+                row.ID <= 17999999 && 
                 !ID_List_Excluded_Armor.Contains(row.ID)
                 ).ToList();
 
             Console.WriteLine($"Row_List_Weapons - {Row_List_Weapons.Count}");
             Console.WriteLine($"Row_List_Armor - {Row_List_Armor.Count}");
 
-            Row_List_Armor_Head = ArmorParam.Rows.Where(row => (byte)row["slot_category"].Value == 1).ToList();
-            Row_List_Armor_Chest = ArmorParam.Rows.Where(row => (byte)row["slot_category"].Value == 2).ToList();
-            Row_List_Armor_Arms = ArmorParam.Rows.Where(row => (byte)row["slot_category"].Value == 3).ToList();
-            Row_List_Armor_Legs = ArmorParam.Rows.Where(row => (byte)row["slot_category"].Value == 4).ToList();
+            Row_List_Armor_Head = Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 1).ToList();
+            Row_List_Armor_Chest = Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 2).ToList();
+            Row_List_Armor_Arms = Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 3).ToList();
+            Row_List_Armor_Legs = Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 4).ToList();
 
             Console.WriteLine($"Row_List_Armor_Head - {Row_List_Armor_Head.Count}");
             Console.WriteLine($"Row_List_Armor_Chest - {Row_List_Armor_Chest.Count}");
             Console.WriteLine($"Row_List_Armor_Arms - {Row_List_Armor_Arms.Count}");
             Console.WriteLine($"Row_List_Armor_Legs - {Row_List_Armor_Legs.Count}");
 
-            Row_List_Spells = ItemParam.Param.Rows.Where(row =>
+            Row_List_Spells = SpellParam.Param.Rows.Where(row =>
                 row.ID >= 31010000 && 
                 row.ID <= 39999999 && 
                 !ID_List_Excluded_Spells.Contains(row.ID)
                 ).ToList();
 
-            Row_List_Rings = ItemParam.Param.Rows.Where(row => 
+            Row_List_Rings = RingParam.Param.Rows.Where(row => 
                 row.ID >= 40010000 && 
                 row.ID <= 49999999 && 
                 !ID_List_Excluded_Rings.Contains(row.ID)
@@ -395,20 +395,20 @@ namespace DS2_Scrambler
             Console.WriteLine($"Row_List_Ammunition_Greatarrow - {Row_List_Ammunition_Greatarrow.Count}");
             Console.WriteLine($"Row_List_Ammunition_Bolt - {Row_List_Ammunition_Bolt.Count}");
 
-            Row_List_Weapons_Bow = ItemParam.Param.Rows.Where(row => row.ID >= 4200000 && row.ID <= 4290000).ToList();
-            Row_List_Weapons_Greatbow = ItemParam.Param.Rows.Where(row => row.ID >= 4400000 && row.ID <= 4440000).ToList();
-            Row_List_Weapons_Crossbow = ItemParam.Param.Rows.Where(row => row.ID >= 4600000 && row.ID <= 4680000).ToList();
-            Row_List_Weapons_Shield = ItemParam.Param.Rows.Where(row => row.ID >= 11000000 && row.ID <= 11840000).ToList();
+            Row_List_Weapons_Bow = WeaponParam.Param.Rows.Where(row => row.ID >= 4200000 && row.ID <= 4290000).ToList();
+            Row_List_Weapons_Greatbow = WeaponParam.Param.Rows.Where(row => row.ID >= 4400000 && row.ID <= 4440000).ToList();
+            Row_List_Weapons_Crossbow = WeaponParam.Param.Rows.Where(row => row.ID >= 4600000 && row.ID <= 4680000).ToList();
+            Row_List_Weapons_Shield = WeaponParam.Param.Rows.Where(row => row.ID >= 11000000 && row.ID <= 11840000).ToList();
 
             Console.WriteLine($"Row_List_Weapons_Bow - {Row_List_Weapons_Bow.Count}");
             Console.WriteLine($"Row_List_Weapons_Greatbow - {Row_List_Weapons_Greatbow.Count}");
             Console.WriteLine($"Row_List_Weapons_Crossbow - {Row_List_Weapons_Crossbow.Count}");
             Console.WriteLine($"Row_List_Weapons_Shield - {Row_List_Weapons_Shield.Count}");
 
-            Row_List_Spell_Sorceries = ItemParam.Param.Rows.Where(row => row.ID >= 31010000 && row.ID <= 31310000).ToList();
-            Row_List_Spell_Miracles = ItemParam.Param.Rows.Where(row => row.ID >= 32010000 && row.ID <= 32310000).ToList();
-            Row_List_Spell_Pyromancies = ItemParam.Param.Rows.Where(row => row.ID >= 33010000 && row.ID <= 33320000).ToList();
-            Row_List_Spell_Hexes = ItemParam.Param.Rows.Where(row => row.ID >= 34010000 && row.ID <= 35310000).ToList();
+            Row_List_Spell_Sorceries = SpellParam.Param.Rows.Where(row => row.ID >= 31010000 && row.ID <= 31310000).ToList();
+            Row_List_Spell_Miracles = SpellParam.Param.Rows.Where(row => row.ID >= 32010000 && row.ID <= 32310000).ToList();
+            Row_List_Spell_Pyromancies = SpellParam.Param.Rows.Where(row => row.ID >= 33010000 && row.ID <= 33320000).ToList();
+            Row_List_Spell_Hexes = SpellParam.Param.Rows.Where(row => row.ID >= 34010000 && row.ID <= 35310000).ToList();
 
             Console.WriteLine($"Row_List_Spell_Sorceries - {Row_List_Spell_Sorceries.Count}");
             Console.WriteLine($"Row_List_Spell_Miracles - {Row_List_Spell_Miracles.Count}");

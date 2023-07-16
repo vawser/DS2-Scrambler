@@ -205,7 +205,7 @@ namespace DS2_Scrambler
                 if (c_Scramble_PlayerStatusParam_Classes.Checked || c_Scramble_PlayerStatusParam_Gifts.Checked)
                 {
                     progress.Report("Scramble: Player Starting Setup");
-                    reg = scrambler.Scramble_PlayerStatusParam("PlayerStatusParam", c_Scramble_PlayerStatusParam_Classes.Checked, c_Scramble_PlayerStatusParam_Gifts.Checked, (int)t_StatSkew.Value);
+                    reg = scrambler.Scramble_PlayerStatusParam("PlayerStatusParam", c_Scramble_PlayerStatusParam_Classes.Checked, c_Scramble_PlayerStatusParam_Gifts.Checked, (int)t_StatSkew.Value, c_ClassScramble_LimitEquipment.Checked);
                 }
 
                 // Character
@@ -394,79 +394,164 @@ namespace DS2_Scrambler
 
         private void b_ToggleOff_Click(object sender, EventArgs e)
         {
-            c_Scramble_ArmorParam.Checked = false;
-            c_Scramble_ArrowParam.Checked = false;
-            c_Scramble_ItemParam.Checked = false;
-            c_Scramble_WeaponActionCategoryParam.Checked = false;
-            c_Scramble_WeaponParam.Checked = false;
-            c_Scramble_BossBattleParam.Checked = false;
-            c_Scramble_NpcPlayerStatusParam.Checked = false;
-            c_Scramble_EnemyBehaviorParam.Checked = false;
-            c_Scramble_EnemyBehaviorParam_Boss.Checked = false;
-            c_Scramble_EnemyBulletParam.Checked = false;
-            c_Scramble_EnemyBulletParam_Boss.Checked = false;
-            c_Scramble_EnemyDamageParam.Checked = false;
-            c_Scramble_EnemyDamageParam_Boss.Checked = false;
-            c_Scramble_EnemyMoveParam.Checked = false;
-            c_Scramble_EnemyMoveParam_Boss.Checked = false;
-            c_Scramble_EnemyParam.Checked = false;
-            c_Scramble_EnemyParam_Boss.Checked = false;
-            c_Scramble_RingParam.Checked = false;
-            c_Scramble_SpellParam.Checked = false;
-            c_Scramble_BulletParam.Checked = false;
-            c_Scramble_TreasureBoxParam.Checked = false;
-            c_Scramble_SystemBulletParam.Checked = false;
-            c_Generate_ArmorParam.Checked = false;
-            c_Generate_ArrowParam.Checked = false;
-            c_Generate_ItemParam.Checked = false;
-            c_Generate_WeaponParam.Checked = false;
-            c_Generate_BossBattleParam.Checked = false;
-            c_Generate_EnemyBehaviorParam.Checked = false;
-            c_Generate_EnemyBehaviorParam_Boss.Checked = false;
-            c_Generate_EnemyBulletParam.Checked = false;
-            c_Generate_EnemyBulletParam_Boss.Checked = false;
-            c_Generate_EnemyDamageParam.Checked = false;
-            c_Generate_EnemyDamageParam_Boss.Checked = false;
-            c_Generate_EnemyMoveParam.Checked = false;
-            c_Generate_EnemyMoveParam_Boss.Checked = false;
-            c_Generate_EnemyParam.Checked = false;
-            c_Generate_EnemyParam_Boss.Checked = false;
-            c_Generate_NpcPlayerStatusParam.Checked = false;
-            c_Generate_RingParam.Checked = false;
-            c_Generate_SpellParam.Checked = false;
-            c_Generate_SystemBulletParam.Checked = false;
-            c_Generate_BulletParam.Checked = false;
-            c_IgnoreRequirements_WeaponParam.Checked = false;
-            c_IgnoreRequirements_ArmorParam.Checked = false;
-            c_IgnoreRequirements_SpellParam.Checked = false;
-            c_Scramble_LogicComParam.Checked = false;
-            c_LimitToTraps_SystemBulletParam.Checked = false;
-            c_IgnoreFists_WeaponParam.Checked = false;
-            c_ForceVisuals_BulletParam.Checked = false;
-            c_ForceVisuals_EnemyBulletParam.Checked = false;
-            c_ForceVisuals_EnemyBulletParam_Boss.Checked = false;
-            c_ForceVisuals_SystemBulletParam.Checked = false;
-
+            // *** Item Scrambler ***
+            // Core
             c_Scramble_Map_Loot.Checked = false;
-            c_Include_Enemy_Loot.Checked = false;
+
+            // Inclusions
             c_Include_Shops.Checked = false;
-            c_Include_Boss_Trades.Checked = false;
-            c_IgnoreKeys_Treasure_Map.Checked = false;
-            c_IgnoreTools_Treasure_Map.Checked = false;
-            c_IncludeBossTreasure_Treasure_Map.Checked = false;
             c_IncludeCharacterTreasure_Treasure_Map.Checked = false;
             c_IncludeCovenantTreasure_Treasure_Map.Checked = false;
             c_IncludeBirdTreasure_Treasure_Map.Checked = false;
             c_IncludEventTreasure_Treasure_Map.Checked = false;
-            c_FuriousEnemies.Checked = false;
+            c_Include_Enemy_Loot.Checked = false;
+            c_IncludeBossTreasure_Treasure_Map.Checked = false;
+            c_Include_Boss_Trades.Checked = false;
 
+            // Exlcusions
+            c_IgnoreKeys_Treasure_Map.Checked = false;
+            c_IgnoreTools_Treasure_Map.Checked = false;
+
+            // Tweaks
+            c_EnsureLifegems.Checked = false;
+            c_RetainShopSpread.Checked = false;
+
+            // ** Enemy Scrambler ***
+            // Enemy Location
             c_Scramble_Enemy_Location.Checked = false;
-            c_Scramble_Enemy_Type_Basic.Checked = false;
             c_Enemy_Location_Ordered.Checked = false;
             c_Enemy_Location_IncludeCharacters.Checked = false;
             c_Enemy_Location_IncludeSpecial.Checked = false;
+
+            // Enemy Type
+            c_Scramble_Enemy_Type_Basic.Checked = false;
             c_Scramble_Enemy_Type_Boss.Checked = false;
             c_Scramble_Enemy_Type_Characters.Checked = false;
+
+            // Tweaks
+            c_FuriousEnemies.Checked = false;
+
+            // *** Param Scrambler ***
+            // SystemBulletParam
+            c_Scramble_SystemBulletParam.Checked = false;
+            c_Generate_SystemBulletParam.Checked = false;
+            c_ForceVisuals_SystemBulletParam.Checked = false;
+            c_LimitToTraps_SystemBulletParam.Checked = false;
+
+            // LogicComParam
+            c_Scramble_LogicComParam.Checked = false;
+            c_Generate_LogicComParam.Checked = false;
+
+            // TreasureBoxParam
+            c_Scramble_TreasureBoxParam.Checked = false;
+
+            // EventCommonParam
+            c_Scramble_EventCommonParam.Checked = false;
+
+            // LockOnParam
+            c_Scramble_LockOnParam_Distance.Checked = false;
+            c_Scramble_LockOnParam_FOV.Checked = false;
+
+            // PlayerLevelUpSoulsParam
+            c_Scramble_PlayerLevelUpSoulsParam.Checked = false;
+
+            // PlayerStatusParam
+            c_Scramble_PlayerStatusParam_Classes.Checked = false;
+            c_Scramble_PlayerStatusParam_Gifts.Checked = false;
+            c_ClassScramble_LimitEquipment.Checked = false;
+            t_StatSkew.Value = 6;
+
+            // ChrMoveParam
+            c_Scramble_ChrMoveParam.Checked = false;
+
+            // NpcPlayerStatusParam
+            c_Scramble_NpcPlayerStatusParam.Checked = false;
+            c_Generate_NpcPlayerStatusParam.Checked = false;
+
+            // BossBattleParam
+            c_Scramble_BossBattleParam.Checked = false;
+            c_Generate_BossBattleParam.Checked = false;
+
+            // EnemyParam
+            c_Scramble_EnemyParam.Checked = false;
+            c_Scramble_EnemyParam_Boss.Checked = false;
+            c_Generate_EnemyParam.Checked = false;
+            c_Generate_EnemyParam_Boss.Checked = false;
+
+            // EnemyMoveParam
+            c_Scramble_EnemyMoveParam.Checked = false;
+            c_Scramble_EnemyMoveParam_Boss.Checked = false;
+            c_Generate_EnemyMoveParam.Checked = false;
+            c_Generate_EnemyMoveParam_Boss.Checked = false;
+
+            // EnemyDamageParam 
+            c_Scramble_EnemyDamageParam.Checked = false;
+            c_Scramble_EnemyDamageParam_Boss.Checked = false;
+            c_Generate_EnemyDamageParam.Checked = false;
+            c_Generate_EnemyDamageParam_Boss.Checked = false;
+
+            // EnemyBulletParam
+            c_Scramble_EnemyBulletParam.Checked = false;
+            c_Scramble_EnemyBulletParam_Boss.Checked = false;
+            c_Generate_EnemyBulletParam.Checked = false;
+            c_Generate_EnemyBulletParam_Boss.Checked = false;
+            c_ForceVisuals_EnemyBulletParam.Checked = false;
+            c_ForceVisuals_EnemyBulletParam_Boss.Checked = false;
+
+            // EnemyBehaviorParam
+            c_Scramble_EnemyBehaviorParam.Checked = false;
+            c_Scramble_EnemyBehaviorParam_Boss.Checked = false;
+            c_Generate_EnemyBehaviorParam.Checked = false;
+            c_Generate_EnemyBehaviorParam_Boss.Checked = false;
+
+            // ArrowParam
+            c_Scramble_ArrowParam.Checked = false;
+            c_Generate_ArrowParam.Checked = false;
+
+            // WeaponActionCategoryParam
+            c_Scramble_WeaponActionCategoryParam.Checked = false;
+
+            // WeaponParam
+            c_Scramble_WeaponParam.Checked = false;
+            c_Generate_WeaponParam.Checked = false;
+            c_IgnoreFists_WeaponParam.Checked = false;
+            c_IgnoreRequirements_WeaponParam.Checked = false;
+
+            // WeaponReinforceParam
+            c_Scramble_WeaponReinforceParam.Checked = false;
+            c_Generate_WeaponReinforceParam.Checked = false;
+
+            // WeaponTypeParam
+            c_Scramble_WeaponTypeParam.Checked = false;
+            c_Generate_WeaponTypeParam.Checked = false;
+
+            // ArmorParam
+            c_Scramble_ArmorParam.Checked = false;
+            c_Generate_ArmorParam.Checked = false;
+            c_IgnoreRequirements_ArmorParam.Checked = false;
+
+            // ArmorReinforceParam
+            c_Scramble_ArmorReinforceParam.Checked = false;
+            c_Generate_ArmorReinforceParam.Checked = false;
+
+            // SpellParam
+            c_Scramble_SpellParam.Checked = false;
+            c_Generate_SpellParam.Checked = false;
+            c_IgnoreRequirements_SpellParam.Checked = false;
+
+            // BulletParam
+            c_Scramble_BulletParam.Checked = false;
+            c_Generate_BulletParam.Checked = false;
+            c_ForceVisuals_BulletParam.Checked = false;
+
+            // ItemParam
+            c_Scramble_ItemParam.Checked = false;
+            c_Generate_ItemParam.Checked = false;
+
+            // RingParam
+            c_Scramble_RingParam.Checked = false;
+            c_Generate_RingParam.Checked = false;
+
         }
 
         private void groupBox6_Enter(object sender, EventArgs e)
@@ -475,6 +560,11 @@ namespace DS2_Scrambler
         }
 
         private void groupBox14_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void t_StatSkew_ValueChanged(object sender, EventArgs e)
         {
 
         }

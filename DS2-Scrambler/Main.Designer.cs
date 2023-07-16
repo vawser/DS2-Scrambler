@@ -38,7 +38,6 @@
             this.t_seed = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.b_ToggleOff = new System.Windows.Forms.Button();
-            this.b_ToggleRecommended = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.c_Scramble_ItemParam = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -240,6 +239,8 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.groupBox37 = new System.Windows.Forms.GroupBox();
+            this.label91 = new System.Windows.Forms.Label();
+            this.c_ClassScramble_LimitEquipment = new System.Windows.Forms.CheckBox();
             this.t_StatSkew = new System.Windows.Forms.NumericUpDown();
             this.label89 = new System.Windows.Forms.Label();
             this.c_Scramble_PlayerStatusParam_Gifts = new System.Windows.Forms.CheckBox();
@@ -391,23 +392,13 @@
             // 
             // b_ToggleOff
             // 
-            this.b_ToggleOff.Location = new System.Drawing.Point(714, 41);
+            this.b_ToggleOff.Location = new System.Drawing.Point(766, 46);
             this.b_ToggleOff.Name = "b_ToggleOff";
-            this.b_ToggleOff.Size = new System.Drawing.Size(152, 23);
+            this.b_ToggleOff.Size = new System.Drawing.Size(103, 23);
             this.b_ToggleOff.TabIndex = 8;
             this.b_ToggleOff.Text = "Toggle Off";
             this.b_ToggleOff.UseVisualStyleBackColor = true;
             this.b_ToggleOff.Click += new System.EventHandler(this.b_ToggleOff_Click);
-            // 
-            // b_ToggleRecommended
-            // 
-            this.b_ToggleRecommended.Location = new System.Drawing.Point(714, 12);
-            this.b_ToggleRecommended.Name = "b_ToggleRecommended";
-            this.b_ToggleRecommended.Size = new System.Drawing.Size(152, 23);
-            this.b_ToggleRecommended.TabIndex = 9;
-            this.b_ToggleRecommended.Text = "Toggle Recommended";
-            this.b_ToggleRecommended.UseVisualStyleBackColor = true;
-            this.b_ToggleRecommended.Click += new System.EventHandler(this.b_ToggleRecommended_Click);
             // 
             // groupBox6
             // 
@@ -2519,6 +2510,8 @@
             // 
             // groupBox37
             // 
+            this.groupBox37.Controls.Add(this.label91);
+            this.groupBox37.Controls.Add(this.c_ClassScramble_LimitEquipment);
             this.groupBox37.Controls.Add(this.t_StatSkew);
             this.groupBox37.Controls.Add(this.label89);
             this.groupBox37.Controls.Add(this.c_Scramble_PlayerStatusParam_Gifts);
@@ -2527,14 +2520,34 @@
             this.groupBox37.Controls.Add(this.label87);
             this.groupBox37.Location = new System.Drawing.Point(6, 216);
             this.groupBox37.Name = "groupBox37";
-            this.groupBox37.Size = new System.Drawing.Size(814, 125);
+            this.groupBox37.Size = new System.Drawing.Size(814, 135);
             this.groupBox37.TabIndex = 16;
             this.groupBox37.TabStop = false;
             this.groupBox37.Text = "PlayerStatusParam";
             // 
+            // label91
+            // 
+            this.label91.AutoSize = true;
+            this.label91.Location = new System.Drawing.Point(178, 72);
+            this.label91.Name = "label91";
+            this.label91.Size = new System.Drawing.Size(440, 15);
+            this.label91.TabIndex = 19;
+            this.label91.Text = "Scrambled equipment will be limited to those that fit the classes randomised stat" +
+    "s.";
+            // 
+            // c_ClassScramble_LimitEquipment
+            // 
+            this.c_ClassScramble_LimitEquipment.AutoSize = true;
+            this.c_ClassScramble_LimitEquipment.Location = new System.Drawing.Point(6, 72);
+            this.c_ClassScramble_LimitEquipment.Name = "c_ClassScramble_LimitEquipment";
+            this.c_ClassScramble_LimitEquipment.Size = new System.Drawing.Size(156, 19);
+            this.c_ClassScramble_LimitEquipment.TabIndex = 18;
+            this.c_ClassScramble_LimitEquipment.Text = "Limit Equipment to Stats";
+            this.c_ClassScramble_LimitEquipment.UseVisualStyleBackColor = true;
+            // 
             // t_StatSkew
             // 
-            this.t_StatSkew.Location = new System.Drawing.Point(6, 73);
+            this.t_StatSkew.Location = new System.Drawing.Point(6, 97);
             this.t_StatSkew.Maximum = new decimal(new int[] {
             20,
             0,
@@ -2553,11 +2566,12 @@
             0,
             0,
             0});
+            this.t_StatSkew.ValueChanged += new System.EventHandler(this.t_StatSkew_ValueChanged);
             // 
             // label89
             // 
             this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(178, 75);
+            this.label89.Location = new System.Drawing.Point(178, 99);
             this.label89.Name = "label89";
             this.label89.Size = new System.Drawing.Size(256, 15);
             this.label89.TabIndex = 16;
@@ -2576,7 +2590,7 @@
             // label88
             // 
             this.label88.AutoSize = true;
-            this.label88.Location = new System.Drawing.Point(178, 51);
+            this.label88.Location = new System.Drawing.Point(178, 47);
             this.label88.Name = "label88";
             this.label88.Size = new System.Drawing.Size(148, 15);
             this.label88.TabIndex = 14;
@@ -2846,7 +2860,6 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(882, 797);
             this.Controls.Add(this.tabControl2);
-            this.Controls.Add(this.b_ToggleRecommended);
             this.Controls.Add(this.b_ToggleOff);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.t_seed);
@@ -2966,7 +2979,6 @@
         private TextBox t_seed;
         private Label label2;
         private Button b_ToggleOff;
-        private Button b_ToggleRecommended;
         private GroupBox groupBox6;
         private CheckBox c_Scramble_ItemParam;
         private Label label5;
@@ -3195,5 +3207,7 @@
         private CheckBox c_EnsureLifegems;
         private Label label90;
         private CheckBox c_RetainShopSpread;
+        private Label label91;
+        private CheckBox c_ClassScramble_LimitEquipment;
     }
 }
