@@ -17,6 +17,7 @@ using System.Diagnostics.Metrics;
 using Org.BouncyCastle.Crypto;
 using System.IO;
 using System.DirectoryServices;
+using System.Globalization;
 
 namespace DS2_Scrambler
 {
@@ -1436,8 +1437,8 @@ namespace DS2_Scrambler
                             if (dict.ContainsKey(cell.Def.InternalName))
                             {
                                 var list = dict[cell.Def.InternalName];
-                                min = int.Parse(list[0]);
-                                max = int.Parse(list[1]);
+                                min = int.Parse(list[0], CultureInfo.InvariantCulture);
+                                max = int.Parse(list[1], CultureInfo.InvariantCulture);
                             }
                         }
                     }
@@ -1742,7 +1743,7 @@ namespace DS2_Scrambler
                 // The armor ID in the param seems to be the actual ID but with a 2 instead of 1 at the start.
                 string armor_id = "2" + armorList[rand.Next(armorList.Count)].ID.ToString().Substring(1);
 
-                row[slot].Value = int.Parse(armor_id);
+                row[slot].Value = int.Parse(armor_id, CultureInfo.InvariantCulture);
             }
         }
 
@@ -2157,14 +2158,14 @@ namespace DS2_Scrambler
                             bool isWeighted = list[2] == "WEIGHTED" ? true : false;
 
                             // Int32
-                            if (cell.Def.InternalType == "s32" || cell.Def.InternalType == "u32")
+                            if (cell.Def.InternalType == "s32")
                             {
-                                var min = int.Parse(list[0]);
-                                var max = int.Parse(list[1]);
+                                int min = int.Parse(list[0], CultureInfo.InvariantCulture);
+                                int max = int.Parse(list[1], CultureInfo.InvariantCulture);
 
                                 if (min != -1 || max != -1)
                                 {
-                                    var value = rand.Next(min, max);
+                                    int value = rand.Next(min, max);
 
                                     if (isWeighted && rand.Next(100) < 50)
                                         value = 0;
@@ -2172,39 +2173,84 @@ namespace DS2_Scrambler
                                     cell.Value = value;
                                 }
                             }
+                            // UInt32
+                            if (cell.Def.InternalType == "u32")
+                            {
+                                int min = int.Parse(list[0], CultureInfo.InvariantCulture);
+                                int max = int.Parse(list[1], CultureInfo.InvariantCulture);
+
+                                if (min != -1 || max != -1)
+                                {
+                                    uint value = (uint)rand.Next(min, max);
+
+                                    if (isWeighted && rand.Next(100) < 50)
+                                        value = 0;
+
+                                    cell.Value = value;
+                                }
+                            }
+
                             // Int16
-                            if (cell.Def.InternalType == "s16" || cell.Def.InternalType == "u16")
+                            if (cell.Def.InternalType == "s16")
                             {
-                                var min = short.Parse(list[0]);
-                                var max = short.Parse(list[1]);
+                                int min = int.Parse(list[0], CultureInfo.InvariantCulture);
+                                int max = int.Parse(list[1], CultureInfo.InvariantCulture);
 
-                                var value = rand.Next(min, max);
+                                short value = (short)rand.Next(min, max);
 
                                 if (isWeighted && rand.Next(100) < 50)
                                     value = 0;
 
                                 cell.Value = value;
                             }
+                            // UInt16
+                            if (cell.Def.InternalType == "u16")
+                            {
+                                int min = int.Parse(list[0], CultureInfo.InvariantCulture);
+                                int max = int.Parse(list[1], CultureInfo.InvariantCulture);
+
+                                ushort value = (ushort)rand.Next(min, max);
+
+                                if (isWeighted && rand.Next(100) < 50)
+                                    value = 0;
+
+                                cell.Value = value;
+                            }
+
                             // Int8
-                            if (cell.Def.InternalType == "s8" || cell.Def.InternalType == "u8")
+                            if (cell.Def.InternalType == "s8")
                             {
-                                var min = byte.Parse(list[0]);
-                                var max = byte.Parse(list[1]);
+                                int min = int.Parse(list[0], CultureInfo.InvariantCulture);
+                                int max = int.Parse(list[1], CultureInfo.InvariantCulture);
 
-                                var value = rand.Next(min, max);
+                                sbyte value = (sbyte)rand.Next(min, max);
 
                                 if (isWeighted && rand.Next(100) < 50)
                                     value = 0;
 
                                 cell.Value = value;
                             }
+                            // UInt8
+                            if (cell.Def.InternalType == "u8")
+                            {
+                                int min = byte.Parse(list[0], CultureInfo.InvariantCulture);
+                                int max = byte.Parse(list[1], CultureInfo.InvariantCulture);
+
+                                byte value = (byte)rand.Next(min, max);
+
+                                if (isWeighted && rand.Next(100) < 50)
+                                    value = 0;
+
+                                cell.Value = value;
+                            }
+
                             // Float
                             if (cell.Def.InternalType == "f32")
                             {
-                                var min = double.Parse(list[0]);
-                                var max = double.Parse(list[1]);
+                                double min = double.Parse(list[0], CultureInfo.InvariantCulture);
+                                double max = double.Parse(list[1], CultureInfo.InvariantCulture);
 
-                                var value = rand.NextDouble() * (max - min) + min;
+                                float value = (float)(rand.NextDouble() * (max - min) + min);
 
                                 if (isWeighted && rand.Next(100) < 50)
                                     value = 0;

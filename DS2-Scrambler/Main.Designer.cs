@@ -268,6 +268,7 @@
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.b_ChaosMode = new System.Windows.Forms.Button();
             this.groupBox6.SuspendLayout();
             this.groupBox30.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -392,11 +393,11 @@
             // 
             // b_ToggleOff
             // 
-            this.b_ToggleOff.Location = new System.Drawing.Point(766, 46);
+            this.b_ToggleOff.Location = new System.Drawing.Point(706, 46);
             this.b_ToggleOff.Name = "b_ToggleOff";
-            this.b_ToggleOff.Size = new System.Drawing.Size(103, 23);
+            this.b_ToggleOff.Size = new System.Drawing.Size(163, 23);
             this.b_ToggleOff.TabIndex = 8;
-            this.b_ToggleOff.Text = "Toggle Off";
+            this.b_ToggleOff.Text = "Toggle All Off";
             this.b_ToggleOff.UseVisualStyleBackColor = true;
             this.b_ToggleOff.Click += new System.EventHandler(this.b_ToggleOff_Click);
             // 
@@ -2853,12 +2854,23 @@
             this.tabPage11.Text = "Items";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
+            // b_ChaosMode
+            // 
+            this.b_ChaosMode.Location = new System.Drawing.Point(706, 17);
+            this.b_ChaosMode.Name = "b_ChaosMode";
+            this.b_ChaosMode.Size = new System.Drawing.Size(163, 23);
+            this.b_ChaosMode.TabIndex = 11;
+            this.b_ChaosMode.Text = "Chaos Mode";
+            this.b_ChaosMode.UseVisualStyleBackColor = true;
+            this.b_ChaosMode.Click += new System.EventHandler(this.b_ChaosMode_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(882, 797);
+            this.Controls.Add(this.b_ChaosMode);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.b_ToggleOff);
             this.Controls.Add(this.label2);
@@ -3209,5 +3221,6 @@
         private CheckBox c_RetainShopSpread;
         private Label label91;
         private CheckBox c_ClassScramble_LimitEquipment;
+        private Button b_ChaosMode;
     }
 }
