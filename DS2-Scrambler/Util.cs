@@ -11,8 +11,10 @@ namespace DS2_Scrambler
 {
     public class Util
     {
-        // *** Itemlots
-
+        public static void PrintLine(string line)
+        {
+            Console.WriteLine($"{line}");
+        }
 
         // *** Random Items
         public static void SetRandomGood(PARAM.Row row, string field_1, ScramblerData Data, string field_2)

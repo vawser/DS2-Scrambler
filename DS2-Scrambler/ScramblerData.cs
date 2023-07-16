@@ -72,10 +72,10 @@ namespace DS2_Scrambler
         public List<PARAM.Row> Row_List_Consumables;
         public List<PARAM.Row> Row_List_Materials;
 
-        public List<PARAM.Row> Row_List_Armor_Head;
-        public List<PARAM.Row> Row_List_Armor_Chest;
-        public List<PARAM.Row> Row_List_Armor_Arms;
-        public List<PARAM.Row> Row_List_Armor_Legs;
+        public List<PARAM.Row> Row_List_Armor_Head = new List<PARAM.Row>();
+        public List<PARAM.Row> Row_List_Armor_Chest = new List<PARAM.Row>();
+        public List<PARAM.Row> Row_List_Armor_Arms = new List<PARAM.Row>();
+        public List<PARAM.Row> Row_List_Armor_Legs = new List<PARAM.Row>();
 
         public List<PARAM.Row> Row_List_Weapons_Melee;
         public List<PARAM.Row> Row_List_Weapons_Shield;
@@ -229,10 +229,10 @@ namespace DS2_Scrambler
             ID_List_Enemies = ConstructIntegerDataList($"{EnemyScramblePath}\\Enemy-IDs");
             ID_List_Skipped_Enemies.Add(837400);
 
-            Console.WriteLine($"ID_List_Bosses - {ID_List_Bosses.Count}");
-            Console.WriteLine($"ID_List_Characters - {ID_List_Characters.Count}");
-            Console.WriteLine($"ID_List_Enemies - {ID_List_Enemies.Count}");
-            Console.WriteLine($"ID_List_Skipped_Enemies - {ID_List_Skipped_Enemies.Count}");
+            Util.PrintLine($"ID_List_Bosses - {ID_List_Bosses.Count}");
+            Util.PrintLine($"ID_List_Characters - {ID_List_Characters.Count}");
+            Util.PrintLine($"ID_List_Enemies - {ID_List_Enemies.Count}");
+            Util.PrintLine($"ID_List_Skipped_Enemies - {ID_List_Skipped_Enemies.Count}");
 
             ConstructPerMapDicts();
 
@@ -243,11 +243,11 @@ namespace DS2_Scrambler
             ID_List_Excluded_Rings = ConstructIntegerDataList($"{ItemScramblePath}\\Treasure-Excluded-Rings");
             ID_List_Excluded_Items = ConstructIntegerDataList($"{ItemScramblePath}\\Treasure-Excluded-Items");
 
-            Console.WriteLine($"ID_List_Excluded_Weapons - {ID_List_Excluded_Weapons.Count}");
-            Console.WriteLine($"ID_List_Excluded_Armor - {ID_List_Excluded_Armor.Count}");
-            Console.WriteLine($"ID_List_Excluded_Spells - {ID_List_Excluded_Spells.Count}");
-            Console.WriteLine($"ID_List_Excluded_Rings - {ID_List_Excluded_Rings.Count}");
-            Console.WriteLine($"ID_List_Excluded_Items - {ID_List_Excluded_Items.Count}");
+            Util.PrintLine($"ID_List_Excluded_Weapons - {ID_List_Excluded_Weapons.Count}");
+            Util.PrintLine($"ID_List_Excluded_Armor - {ID_List_Excluded_Armor.Count}");
+            Util.PrintLine($"ID_List_Excluded_Spells - {ID_List_Excluded_Spells.Count}");
+            Util.PrintLine($"ID_List_Excluded_Rings - {ID_List_Excluded_Rings.Count}");
+            Util.PrintLine($"ID_List_Excluded_Items - {ID_List_Excluded_Items.Count}");
 
             ID_List_Keys = ConstructIntegerDataList($"{ItemScramblePath}\\Treasure-Keys");
             ID_List_Tools = ConstructIntegerDataList($"{ItemScramblePath}\\Treasure-Tools");
@@ -256,12 +256,12 @@ namespace DS2_Scrambler
             ID_List_Consumables = ConstructIntegerDataList($"{ItemScramblePath}\\Treasure-Consumables");
             ID_List_Materials = ConstructIntegerDataList($"{ItemScramblePath}\\Treasure-Materials");
 
-            Console.WriteLine($"ID_List_Keys - {ID_List_Keys.Count}");
-            Console.WriteLine($"ID_List_Tools - {ID_List_Tools.Count}");
-            Console.WriteLine($"ID_List_Ammo - {ID_List_Ammo.Count}");
-            Console.WriteLine($"ID_List_Consumables - {ID_List_Consumables.Count}");
-            Console.WriteLine($"ID_List_Materials - {ID_List_Materials.Count}");
-            Console.WriteLine($"ID_List_Boss_Souls - {ID_List_Boss_Souls.Count}");
+            Util.PrintLine($"ID_List_Keys - {ID_List_Keys.Count}");
+            Util.PrintLine($"ID_List_Tools - {ID_List_Tools.Count}");
+            Util.PrintLine($"ID_List_Ammo - {ID_List_Ammo.Count}");
+            Util.PrintLine($"ID_List_Consumables - {ID_List_Consumables.Count}");
+            Util.PrintLine($"ID_List_Materials - {ID_List_Materials.Count}");
+            Util.PrintLine($"ID_List_Boss_Souls - {ID_List_Boss_Souls.Count}");
 
             // *** Params
             ConstructScramblerFieldDicts();
@@ -294,14 +294,14 @@ namespace DS2_Scrambler
                     ShopLineupParam = wrapper;
             }
 
-            Console.WriteLine($"WeaponParam - {WeaponParam.Rows.Count}");
-            Console.WriteLine($"ArmorParam - {ArmorParam.Rows.Count}");
-            Console.WriteLine($"SpellParam - {SpellParam.Rows.Count}");
-            Console.WriteLine($"RingParam - {RingParam.Rows.Count}");
-            Console.WriteLine($"ItemParam - {ItemParam.Rows.Count}");
-            Console.WriteLine($"ItemlotParam_Map - {ItemlotParam_Map.Rows.Count}");
-            Console.WriteLine($"ItemlotParam_Chr - {ItemlotParam_Chr.Rows.Count}");
-            Console.WriteLine($"ShopLineupParam - {ShopLineupParam.Rows.Count}");
+            Util.PrintLine($"WeaponParam - {WeaponParam.Rows.Count}");
+            Util.PrintLine($"ArmorParam - {ArmorParam.Rows.Count}");
+            Util.PrintLine($"SpellParam - {SpellParam.Rows.Count}");
+            Util.PrintLine($"RingParam - {RingParam.Rows.Count}");
+            Util.PrintLine($"ItemParam - {ItemParam.Rows.Count}");
+            Util.PrintLine($"ItemlotParam_Map - {ItemlotParam_Map.Rows.Count}");
+            Util.PrintLine($"ItemlotParam_Chr - {ItemlotParam_Chr.Rows.Count}");
+            Util.PrintLine($"ShopLineupParam - {ShopLineupParam.Rows.Count}");
 
             // *** PARAM.Rows
             // Items
@@ -311,24 +311,38 @@ namespace DS2_Scrambler
                 !ID_List_Excluded_Weapons.Contains(row.ID)
                 ).ToList();
 
-            Row_List_Armor = ArmorParam.Param.Rows.Where(row => 
-                row.ID >= 11010100 && 
-                row.ID <= 17999999 && 
+            Row_List_Armor = ItemParam.Param.Rows.Where(row => 
+                row.ID >= 21010100 && 
+                row.ID <= 27950103 && 
                 !ID_List_Excluded_Armor.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Row_List_Weapons - {Row_List_Weapons.Count}");
-            Console.WriteLine($"Row_List_Armor - {Row_List_Armor.Count}");
+            Util.PrintLine($"Row_List_Weapons - {Row_List_Weapons.Count}");
+            Util.PrintLine($"Row_List_Armor - {Row_List_Armor.Count}");
 
-            Row_List_Armor_Head = Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 1).ToList();
-            Row_List_Armor_Chest = Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 2).ToList();
-            Row_List_Armor_Arms = Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 3).ToList();
-            Row_List_Armor_Legs = Row_List_Armor.Where(row => (byte)row["slot_category"].Value == 4).ToList();
+            foreach(PARAM.Row row in Row_List_Armor)
+            {
+                string armor_id_string = "1" + row.ID.ToString().Substring(1);
+                int armor_id = int.Parse(armor_id_string);
+                List<PARAM.Row> armor_rows = ArmorParam.Rows.Where(r => r.ID == armor_id).ToList();
 
-            Console.WriteLine($"Row_List_Armor_Head - {Row_List_Armor_Head.Count}");
-            Console.WriteLine($"Row_List_Armor_Chest - {Row_List_Armor_Chest.Count}");
-            Console.WriteLine($"Row_List_Armor_Arms - {Row_List_Armor_Arms.Count}");
-            Console.WriteLine($"Row_List_Armor_Legs - {Row_List_Armor_Legs.Count}");
+                if ((byte)armor_rows[0]["slot_category"].Value == 1)
+                    Row_List_Armor_Head.Add(row);
+
+                if ((byte)armor_rows[0]["slot_category"].Value == 2)
+                    Row_List_Armor_Chest.Add(row);
+
+                if ((byte)armor_rows[0]["slot_category"].Value == 3)
+                    Row_List_Armor_Arms.Add(row);
+
+                if ((byte)armor_rows[0]["slot_category"].Value == 4)
+                    Row_List_Armor_Legs.Add(row);
+            }
+
+            Util.PrintLine($"Row_List_Armor_Head - {Row_List_Armor_Head.Count}");
+            Util.PrintLine($"Row_List_Armor_Chest - {Row_List_Armor_Chest.Count}");
+            Util.PrintLine($"Row_List_Armor_Arms - {Row_List_Armor_Arms.Count}");
+            Util.PrintLine($"Row_List_Armor_Legs - {Row_List_Armor_Legs.Count}");
 
             Row_List_Spells = SpellParam.Param.Rows.Where(row =>
                 row.ID >= 31010000 && 
@@ -353,10 +367,10 @@ namespace DS2_Scrambler
                 row.ID <= 75310000
                 ).ToList();
 
-            Console.WriteLine($"Row_List_Spells - {Row_List_Spells.Count}");
-            Console.WriteLine($"Row_List_Rings - {Row_List_Rings.Count}");
-            Console.WriteLine($"Row_List_Items - {Row_List_Items.Count}");
-            Console.WriteLine($"Row_List_Spells_NPC - {Row_List_Spells_NPC.Count}");
+            Util.PrintLine($"Row_List_Spells - {Row_List_Spells.Count}");
+            Util.PrintLine($"Row_List_Rings - {Row_List_Rings.Count}");
+            Util.PrintLine($"Row_List_Items - {Row_List_Items.Count}");
+            Util.PrintLine($"Row_List_Spells_NPC - {Row_List_Spells_NPC.Count}");
 
             Row_List_Ammunition = ItemParam.Param.Rows.Where(row => ID_List_Ammo.Contains(row.ID)).ToList();
             Row_List_Consumables = ItemParam.Param.Rows.Where(row => ID_List_Consumables.Contains(row.ID)).ToList();
@@ -371,17 +385,17 @@ namespace DS2_Scrambler
             Row_List_Flask_Upgrades = ItemParam.Param.Rows.Where(row => Row_Info_Flask_Upgrades.Contains(row.ID)).ToList();
             Row_List_Bird_Consumables = ItemParam.Param.Rows.Where(row => Row_Info_Trade_Items.Contains(row.ID)).ToList();
 
-            Console.WriteLine($"Row_List_Ammunition - {Row_List_Ammunition.Count}");
-            Console.WriteLine($"Row_List_Consumables - {Row_List_Consumables.Count}");
-            Console.WriteLine($"Row_List_Materials - {Row_List_Materials.Count}");
-            Console.WriteLine($"Row_List_Soul_Consumables - {Row_List_Soul_Consumables.Count}");
-            Console.WriteLine($"Row_List_Throwable_Consumable - {Row_List_Throwable_Consumable.Count}");
-            Console.WriteLine($"Row_List_Misc_Consumable - {Row_List_Misc_Consumable.Count}");
-            Console.WriteLine($"Row_List_HP_Consumables - {Row_List_HP_Consumables.Count}");
-            Console.WriteLine($"Row_List_Cast_Consumables - {Row_List_Cast_Consumables.Count}");
-            Console.WriteLine($"Row_List_Spell_Upgrades - {Row_List_Spell_Upgrades.Count}");
-            Console.WriteLine($"Row_List_Flask_Upgrades - {Row_List_Flask_Upgrades.Count}");
-            Console.WriteLine($"Row_List_Bird_Consumables - {Row_List_Bird_Consumables.Count}");
+            Util.PrintLine($"Row_List_Ammunition - {Row_List_Ammunition.Count}");
+            Util.PrintLine($"Row_List_Consumables - {Row_List_Consumables.Count}");
+            Util.PrintLine($"Row_List_Materials - {Row_List_Materials.Count}");
+            Util.PrintLine($"Row_List_Soul_Consumables - {Row_List_Soul_Consumables.Count}");
+            Util.PrintLine($"Row_List_Throwable_Consumable - {Row_List_Throwable_Consumable.Count}");
+            Util.PrintLine($"Row_List_Misc_Consumable - {Row_List_Misc_Consumable.Count}");
+            Util.PrintLine($"Row_List_HP_Consumables - {Row_List_HP_Consumables.Count}");
+            Util.PrintLine($"Row_List_Cast_Consumables - {Row_List_Cast_Consumables.Count}");
+            Util.PrintLine($"Row_List_Spell_Upgrades - {Row_List_Spell_Upgrades.Count}");
+            Util.PrintLine($"Row_List_Flask_Upgrades - {Row_List_Flask_Upgrades.Count}");
+            Util.PrintLine($"Row_List_Bird_Consumables - {Row_List_Bird_Consumables.Count}");
 
             Row_List_Keys = ItemParam.Rows.Where(row => ID_List_Keys.Contains(row.ID)).ToList();
             Row_List_Tools = ItemParam.Rows.Where(row => ID_List_Tools.Contains(row.ID)).ToList();
@@ -391,29 +405,29 @@ namespace DS2_Scrambler
             Row_List_Ammunition_Greatarrow = ItemParam.Param.Rows.Where(row => row.ID >= 60850000 && row.ID <= 60900000).ToList();
             Row_List_Ammunition_Bolt = ItemParam.Param.Rows.Where(row => row.ID >= 60910000 && row.ID <= 60960000).ToList();
 
-            Console.WriteLine($"Row_List_Ammunition_Arrow - {Row_List_Ammunition_Arrow.Count}");
-            Console.WriteLine($"Row_List_Ammunition_Greatarrow - {Row_List_Ammunition_Greatarrow.Count}");
-            Console.WriteLine($"Row_List_Ammunition_Bolt - {Row_List_Ammunition_Bolt.Count}");
+            Util.PrintLine($"Row_List_Ammunition_Arrow - {Row_List_Ammunition_Arrow.Count}");
+            Util.PrintLine($"Row_List_Ammunition_Greatarrow - {Row_List_Ammunition_Greatarrow.Count}");
+            Util.PrintLine($"Row_List_Ammunition_Bolt - {Row_List_Ammunition_Bolt.Count}");
 
             Row_List_Weapons_Bow = WeaponParam.Param.Rows.Where(row => row.ID >= 4200000 && row.ID <= 4290000).ToList();
             Row_List_Weapons_Greatbow = WeaponParam.Param.Rows.Where(row => row.ID >= 4400000 && row.ID <= 4440000).ToList();
             Row_List_Weapons_Crossbow = WeaponParam.Param.Rows.Where(row => row.ID >= 4600000 && row.ID <= 4680000).ToList();
             Row_List_Weapons_Shield = WeaponParam.Param.Rows.Where(row => row.ID >= 11000000 && row.ID <= 11840000).ToList();
 
-            Console.WriteLine($"Row_List_Weapons_Bow - {Row_List_Weapons_Bow.Count}");
-            Console.WriteLine($"Row_List_Weapons_Greatbow - {Row_List_Weapons_Greatbow.Count}");
-            Console.WriteLine($"Row_List_Weapons_Crossbow - {Row_List_Weapons_Crossbow.Count}");
-            Console.WriteLine($"Row_List_Weapons_Shield - {Row_List_Weapons_Shield.Count}");
+            Util.PrintLine($"Row_List_Weapons_Bow - {Row_List_Weapons_Bow.Count}");
+            Util.PrintLine($"Row_List_Weapons_Greatbow - {Row_List_Weapons_Greatbow.Count}");
+            Util.PrintLine($"Row_List_Weapons_Crossbow - {Row_List_Weapons_Crossbow.Count}");
+            Util.PrintLine($"Row_List_Weapons_Shield - {Row_List_Weapons_Shield.Count}");
 
             Row_List_Spell_Sorceries = SpellParam.Param.Rows.Where(row => row.ID >= 31010000 && row.ID <= 31310000).ToList();
             Row_List_Spell_Miracles = SpellParam.Param.Rows.Where(row => row.ID >= 32010000 && row.ID <= 32310000).ToList();
             Row_List_Spell_Pyromancies = SpellParam.Param.Rows.Where(row => row.ID >= 33010000 && row.ID <= 33320000).ToList();
             Row_List_Spell_Hexes = SpellParam.Param.Rows.Where(row => row.ID >= 34010000 && row.ID <= 35310000).ToList();
 
-            Console.WriteLine($"Row_List_Spell_Sorceries - {Row_List_Spell_Sorceries.Count}");
-            Console.WriteLine($"Row_List_Spell_Miracles - {Row_List_Spell_Miracles.Count}");
-            Console.WriteLine($"Row_List_Spell_Pyromancies - {Row_List_Spell_Pyromancies.Count}");
-            Console.WriteLine($"Row_List_Spell_Hexes - {Row_List_Spell_Hexes.Count}");
+            Util.PrintLine($"Row_List_Spell_Sorceries - {Row_List_Spell_Sorceries.Count}");
+            Util.PrintLine($"Row_List_Spell_Miracles - {Row_List_Spell_Miracles.Count}");
+            Util.PrintLine($"Row_List_Spell_Pyromancies - {Row_List_Spell_Pyromancies.Count}");
+            Util.PrintLine($"Row_List_Spell_Hexes - {Row_List_Spell_Hexes.Count}");
 
             Row_List_Weapons_Melee = Row_List_Weapons.Where(row =>
                 ((row.ID >= 1000000 && row.ID <= 5660000) || row.ID >= 5000000 && row.ID <= 5660000) &&
@@ -421,7 +435,7 @@ namespace DS2_Scrambler
                 !Row_Info_Catalysts.Contains(row.ID)
             ).ToList();
 
-            Console.WriteLine($"Row_List_Weapons_Melee - {Row_List_Weapons_Melee.Count}");
+            Util.PrintLine($"Row_List_Weapons_Melee - {Row_List_Weapons_Melee.Count}");
 
             Row_List_Weapons_Catalyst_Sorcery = Row_List_Weapons.Where(row =>
                 Row_Info_Catalyst_Sorcery.Contains(row.ID)
@@ -439,10 +453,10 @@ namespace DS2_Scrambler
                 Row_Info_Catalyst_Hex.Contains(row.ID)
             ).ToList();
 
-            Console.WriteLine($"Row_List_Weapons_Catalyst_Sorcery - {Row_List_Weapons_Catalyst_Sorcery.Count}");
-            Console.WriteLine($"Row_List_Weapons_Catalyst_Miracles - {Row_List_Weapons_Catalyst_Miracles.Count}");
-            Console.WriteLine($"Row_List_Weapons_Catalyst_Pyromancy - {Row_List_Weapons_Catalyst_Pyromancy.Count}");
-            Console.WriteLine($"Row_List_Weapons_Catalyst_Hex - {Row_List_Weapons_Catalyst_Hex.Count}");
+            Util.PrintLine($"Row_List_Weapons_Catalyst_Sorcery - {Row_List_Weapons_Catalyst_Sorcery.Count}");
+            Util.PrintLine($"Row_List_Weapons_Catalyst_Miracles - {Row_List_Weapons_Catalyst_Miracles.Count}");
+            Util.PrintLine($"Row_List_Weapons_Catalyst_Pyromancy - {Row_List_Weapons_Catalyst_Pyromancy.Count}");
+            Util.PrintLine($"Row_List_Weapons_Catalyst_Hex - {Row_List_Weapons_Catalyst_Hex.Count}");
 
             // Map Itemlots
             Itemlot_List_Vanilla = ItemlotParam_Map.Rows.Where(row =>
@@ -450,203 +464,203 @@ namespace DS2_Scrambler
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Vanilla - {Itemlot_List_Vanilla.Count}");
+            Util.PrintLine($"Itemlot_List_Vanilla - {Itemlot_List_Vanilla.Count}");
 
             Itemlot_List_DLC = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 50355010 && row.ID <= 50376770 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_DLC - {Itemlot_List_DLC.Count}");
+            Util.PrintLine($"Itemlot_List_DLC - {Itemlot_List_DLC.Count}");
 
             Itemlot_List_Things_Betwixt = ItemlotParam_Map.Rows.Where(row => 
                 row.ID >= 10025010 && row.ID <= 50379000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Things_Betwixt - {Itemlot_List_Things_Betwixt.Count}");
+            Util.PrintLine($"Itemlot_List_Things_Betwixt - {Itemlot_List_Things_Betwixt.Count}");
 
             Itemlot_List_Majula = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10045000 && row.ID <= 10049000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Majula - {Itemlot_List_Majula.Count}");
+            Util.PrintLine($"Itemlot_List_Majula - {Itemlot_List_Majula.Count}");
 
             Itemlot_List_Forest_of_Fallen_Giants = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10105000 && row.ID <= 10109000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Forest_of_Fallen_Giants - {Itemlot_List_Forest_of_Fallen_Giants.Count}");
+            Util.PrintLine($"Itemlot_List_Forest_of_Fallen_Giants - {Itemlot_List_Forest_of_Fallen_Giants.Count}");
 
             Itemlot_List_Brightstone_Cove_Tseldora = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10145000 && row.ID <= 10149000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Brightstone_Cove_Tseldora - {Itemlot_List_Brightstone_Cove_Tseldora.Count}");
+            Util.PrintLine($"Itemlot_List_Brightstone_Cove_Tseldora - {Itemlot_List_Brightstone_Cove_Tseldora.Count}");
 
             Itemlot_List_Aldias_Keep = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10155000 && row.ID <= 10159000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Aldias_Keep - {Itemlot_List_Aldias_Keep.Count}");
+            Util.PrintLine($"Itemlot_List_Aldias_Keep - {Itemlot_List_Aldias_Keep.Count}");
 
             Itemlot_List_Lost_Bastille = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10165000 && row.ID <= 10169000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Lost_Bastille - {Itemlot_List_Lost_Bastille.Count}");
+            Util.PrintLine($"Itemlot_List_Lost_Bastille - {Itemlot_List_Lost_Bastille.Count}");
 
             Itemlot_List_Earthen_Peak = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10175000 && row.ID <= 10179000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Earthen_Peak - {Itemlot_List_Earthen_Peak.Count}");
+            Util.PrintLine($"Itemlot_List_Earthen_Peak - {Itemlot_List_Earthen_Peak.Count}");
 
             Itemlot_List_No_Mans_Wharf = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10185000 && row.ID <= 10189000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_No_Mans_Wharf - {Itemlot_List_No_Mans_Wharf.Count}");
+            Util.PrintLine($"Itemlot_List_No_Mans_Wharf - {Itemlot_List_No_Mans_Wharf.Count}");
 
             Itemlot_List_Iron_Keep = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10195000 && row.ID <= 10199000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Iron_Keep - {Itemlot_List_Iron_Keep.Count}");
+            Util.PrintLine($"Itemlot_List_Iron_Keep - {Itemlot_List_Iron_Keep.Count}");
 
             Itemlot_List_Huntmans_Copse = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10235000 && row.ID <= 10239000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Huntmans_Copse - {Itemlot_List_Huntmans_Copse.Count}");
+            Util.PrintLine($"Itemlot_List_Huntmans_Copse - {Itemlot_List_Huntmans_Copse.Count}");
 
             Itemlot_List_The_Gutter = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10255000 && row.ID <= 10259000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_The_Gutter - {Itemlot_List_The_Gutter.Count}");
+            Util.PrintLine($"Itemlot_List_The_Gutter - {Itemlot_List_The_Gutter.Count}");
 
             Itemlot_List_Dragon_Aerie = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10275000 && row.ID <= 10279000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_The_Gutter - {Itemlot_List_The_Gutter.Count}");
+            Util.PrintLine($"Itemlot_List_The_Gutter - {Itemlot_List_The_Gutter.Count}");
 
             Itemlot_List_Path_to_the_Shaded_Woods = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10295000 && row.ID <= 10299000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Path_to_the_Shaded_Woods - {Itemlot_List_Path_to_the_Shaded_Woods.Count}");
+            Util.PrintLine($"Itemlot_List_Path_to_the_Shaded_Woods - {Itemlot_List_Path_to_the_Shaded_Woods.Count}");
 
             Itemlot_List_Unseen_Path_to_Heide = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10305000 && row.ID <= 10309000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Unseen_Path_to_Heide - {Itemlot_List_Unseen_Path_to_Heide.Count}");
+            Util.PrintLine($"Itemlot_List_Unseen_Path_to_Heide - {Itemlot_List_Unseen_Path_to_Heide.Count}");
 
             Itemlot_List_Heides_Tower_of_Flame = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10315000 && row.ID <= 10319000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Heides_Tower_of_Flame - {Itemlot_List_Heides_Tower_of_Flame.Count}");
+            Util.PrintLine($"Itemlot_List_Heides_Tower_of_Flame - {Itemlot_List_Heides_Tower_of_Flame.Count}");
 
             Itemlot_List_Shaded_Woods = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10325000 && row.ID <= 10329000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Shaded_Woods - {Itemlot_List_Shaded_Woods.Count}");
+            Util.PrintLine($"Itemlot_List_Shaded_Woods - {Itemlot_List_Shaded_Woods.Count}");
 
             Itemlot_List_Doors_of_Pharros = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10335000 && row.ID <= 10339000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Doors_of_Pharros - {Itemlot_List_Doors_of_Pharros.Count}");
+            Util.PrintLine($"Itemlot_List_Doors_of_Pharros - {Itemlot_List_Doors_of_Pharros.Count}");
 
             Itemlot_List_Grave_of_Saints = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 10345000 && row.ID <= 10349000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Grave_of_Saints - {Itemlot_List_Grave_of_Saints.Count}");
+            Util.PrintLine($"Itemlot_List_Grave_of_Saints - {Itemlot_List_Grave_of_Saints.Count}");
 
             Itemlot_List_Giants_Memory = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 20105000 && row.ID <= 20109000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Giants_Memory - {Itemlot_List_Giants_Memory.Count}");
+            Util.PrintLine($"Itemlot_List_Giants_Memory - {Itemlot_List_Giants_Memory.Count}");
 
             Itemlot_List_Shrine_of_Amana = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 20115000 && row.ID <= 20119000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Shrine_of_Amana - {Itemlot_List_Shrine_of_Amana.Count}");
+            Util.PrintLine($"Itemlot_List_Shrine_of_Amana - {Itemlot_List_Shrine_of_Amana.Count}");
 
             Itemlot_List_Drangleic_Castle = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 20215000 && row.ID <= 20219000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Drangleic_Castle - {Itemlot_List_Drangleic_Castle.Count}");
+            Util.PrintLine($"Itemlot_List_Drangleic_Castle - {Itemlot_List_Drangleic_Castle.Count}");
 
             Itemlot_List_Undead_Crypt = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 20245000 && row.ID <= 20249000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Undead_Crypt - {Itemlot_List_Undead_Crypt.Count}");
+            Util.PrintLine($"Itemlot_List_Undead_Crypt - {Itemlot_List_Undead_Crypt.Count}");
 
             Itemlot_List_Dragon_Memories = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 20265000 && row.ID <= 20269000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Dragon_Memories - {Itemlot_List_Dragon_Memories.Count}");
+            Util.PrintLine($"Itemlot_List_Dragon_Memories - {Itemlot_List_Dragon_Memories.Count}");
 
             Itemlot_List_Chasm_of_the_Abyss = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 40035000 && row.ID <= 40039000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Chasm_of_the_Abyss - {Itemlot_List_Chasm_of_the_Abyss.Count}");
+            Util.PrintLine($"Itemlot_List_Chasm_of_the_Abyss - {Itemlot_List_Chasm_of_the_Abyss.Count}");
 
             Itemlot_List_Shulva = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 50355000 && row.ID <= 50359000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Shulva - {Itemlot_List_Shulva.Count}");
+            Util.PrintLine($"Itemlot_List_Shulva - {Itemlot_List_Shulva.Count}");
 
             Itemlot_List_Brume_Tower = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 50365000 && row.ID <= 50369000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Brume_Tower - {Itemlot_List_Brume_Tower.Count}");
+            Util.PrintLine($"Itemlot_List_Brume_Tower - {Itemlot_List_Brume_Tower.Count}");
 
             Itemlot_List_Eleum_Loyce = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 50375000 && row.ID <= 50379000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Eleum_Loyce - {Itemlot_List_Eleum_Loyce.Count}");
+            Util.PrintLine($"Itemlot_List_Eleum_Loyce - {Itemlot_List_Eleum_Loyce.Count}");
 
             // Itemlot Groups
             Itemlot_List_Boss_Drops = ItemlotParam_Map.Rows.Where(row =>
@@ -654,199 +668,199 @@ namespace DS2_Scrambler
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Boss_Drops - {Itemlot_List_Boss_Drops.Count}");
+            Util.PrintLine($"Itemlot_List_Boss_Drops - {Itemlot_List_Boss_Drops.Count}");
 
             Itemlot_List_NPC_Rewards = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 1300000 && row.ID <= 1800000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_NPC_Rewards - {Itemlot_List_NPC_Rewards.Count}");
+            Util.PrintLine($"Itemlot_List_NPC_Rewards - {Itemlot_List_NPC_Rewards.Count}");
 
             Itemlot_List_Covenant_Rewards = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 2001000 && row.ID <= 2009013 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Covenant_Rewards - {Itemlot_List_Covenant_Rewards.Count}");
+            Util.PrintLine($"Itemlot_List_Covenant_Rewards - {Itemlot_List_Covenant_Rewards.Count}");
 
             Itemlot_List_Bird_Rewards = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 50000000 && row.ID <= 50000303 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Bird_Rewards - {Itemlot_List_Bird_Rewards.Count}");
+            Util.PrintLine($"Itemlot_List_Bird_Rewards - {Itemlot_List_Bird_Rewards.Count}");
 
             Itemlot_List_Event_Rewards = ItemlotParam_Map.Rows.Where(row =>
                 row.ID >= 60001000 && row.ID <= 60100000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
-            Console.WriteLine($"Itemlot_List_Event_Rewards - {Itemlot_List_Event_Rewards.Count}");
+            Util.PrintLine($"Itemlot_List_Event_Rewards - {Itemlot_List_Event_Rewards.Count}");
 
             // Shoplots
             Shoplot_List_Vengarl = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 30700000 && row.ID <= 30700900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Vengarl - {Shoplot_List_Vengarl.Count}");
+            Util.PrintLine($"Shoplot_List_Vengarl - {Shoplot_List_Vengarl.Count}");
 
             Shoplot_List_Agdayne = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 50600000 && row.ID <= 50600900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Agdayne - {Shoplot_List_Agdayne.Count}");
+            Util.PrintLine($"Shoplot_List_Agdayne - {Shoplot_List_Agdayne.Count}");
 
             Shoplot_List_Gilligan = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 70400000 && row.ID <= 70400900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Gilligan - {Shoplot_List_Gilligan.Count}");
+            Util.PrintLine($"Shoplot_List_Gilligan - {Shoplot_List_Gilligan.Count}");
 
             Shoplot_List_Wellager = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 72110000 && row.ID <= 72110900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Wellager - {Shoplot_List_Wellager.Count}");
+            Util.PrintLine($"Shoplot_List_Wellager - {Shoplot_List_Wellager.Count}");
 
             Shoplot_List_Grandahl = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 72500000 && row.ID <= 72500900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Grandahl - {Shoplot_List_Grandahl.Count}");
+            Util.PrintLine($"Shoplot_List_Grandahl - {Shoplot_List_Grandahl.Count}");
 
             Shoplot_List_Gavlan = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 72600000 && row.ID <= 72600900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Gavlan - {Shoplot_List_Gavlan.Count}");
+            Util.PrintLine($"Shoplot_List_Gavlan - {Shoplot_List_Gavlan.Count}");
 
             Shoplot_List_Melentia = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 75400000 && row.ID <= 75400900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Melentia - {Shoplot_List_Melentia.Count}");
+            Util.PrintLine($"Shoplot_List_Melentia - {Shoplot_List_Melentia.Count}");
 
             Shoplot_List_Rat_King = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 75600000 && row.ID <= 75600900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Rat_King - {Shoplot_List_Rat_King.Count}");
+            Util.PrintLine($"Shoplot_List_Rat_King - {Shoplot_List_Rat_King.Count}");
 
             Shoplot_List_Maughlin = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 76100000 && row.ID <= 76100900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Maughlin - {Shoplot_List_Maughlin.Count}");
+            Util.PrintLine($"Shoplot_List_Maughlin - {Shoplot_List_Maughlin.Count}");
 
             Shoplot_List_Chloanne = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 76200000 && row.ID <= 76200900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Chloanne - {Shoplot_List_Chloanne.Count}");
+            Util.PrintLine($"Shoplot_List_Chloanne - {Shoplot_List_Chloanne.Count}");
 
             Shoplot_List_Rosabeth = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 76300000 && row.ID <= 76300900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Rosabeth - {Shoplot_List_Rosabeth.Count}");
+            Util.PrintLine($"Shoplot_List_Rosabeth - {Shoplot_List_Rosabeth.Count}");
 
             Shoplot_List_Lenigrast = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 76400000 && row.ID <= 76400900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Lenigrast - {Shoplot_List_Lenigrast.Count}");
+            Util.PrintLine($"Shoplot_List_Lenigrast - {Shoplot_List_Lenigrast.Count}");
 
             Shoplot_List_McDuff = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 76430000 && row.ID <= 76430900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_McDuff - {Shoplot_List_McDuff.Count}");
+            Util.PrintLine($"Shoplot_List_McDuff - {Shoplot_List_McDuff.Count}");
 
             Shoplot_List_Carhillion = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 76600000 && row.ID <= 76600900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Carhillion - {Shoplot_List_Carhillion.Count}");
+            Util.PrintLine($"Shoplot_List_Carhillion - {Shoplot_List_Carhillion.Count}");
 
             Shoplot_List_Straid = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 76800000 && row.ID <= 76800900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Straid - {Shoplot_List_Straid.Count}");
+            Util.PrintLine($"Shoplot_List_Straid - {Shoplot_List_Straid.Count}");
 
             Shoplot_List_Licia = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 76900000 && row.ID <= 76900900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Licia - {Shoplot_List_Licia.Count}");
+            Util.PrintLine($"Shoplot_List_Licia - {Shoplot_List_Licia.Count}");
 
             Shoplot_List_Felkin = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 77000000 && row.ID <= 77000900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Felkin - {Shoplot_List_Felkin.Count}");
+            Util.PrintLine($"Shoplot_List_Felkin - {Shoplot_List_Felkin.Count}");
 
             Shoplot_List_Navlaan = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 77100000 && row.ID <= 77100900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Navlaan - {Shoplot_List_Navlaan.Count}");
+            Util.PrintLine($"Shoplot_List_Navlaan - {Shoplot_List_Navlaan.Count}");
 
             Shoplot_List_Magerold = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 77200000 && row.ID <= 77200900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Magerold - {Shoplot_List_Magerold.Count}");
+            Util.PrintLine($"Shoplot_List_Magerold - {Shoplot_List_Magerold.Count}");
 
             Shoplot_List_Ornifex = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 77600000 && row.ID <= 77600900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Ornifex - {Shoplot_List_Ornifex.Count}");
+            Util.PrintLine($"Shoplot_List_Ornifex - {Shoplot_List_Ornifex.Count}");
 
             Shoplot_List_Shalquoir = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 77700000 && row.ID <= 77700900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Shalquoir - {Shoplot_List_Shalquoir.Count}");
+            Util.PrintLine($"Shoplot_List_Shalquoir - {Shoplot_List_Shalquoir.Count}");
 
             Shoplot_List_Gren = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 78300000 && row.ID <= 78300900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Gren - {Shoplot_List_Gren.Count}");
+            Util.PrintLine($"Shoplot_List_Gren - {Shoplot_List_Gren.Count}");
 
             Shoplot_List_Cromwell = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 78400000 && row.ID <= 78400900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Cromwell - {Shoplot_List_Cromwell.Count}");
+            Util.PrintLine($"Shoplot_List_Cromwell - {Shoplot_List_Cromwell.Count}");
 
             Shoplot_List_Targray = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 78500000 && row.ID <= 78500900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Targray - {Shoplot_List_Targray.Count}");
+            Util.PrintLine($"Shoplot_List_Targray - {Shoplot_List_Targray.Count}");
 
             // Shoplots - Boss Trades
             Shoplot_List_Straid_Boss = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 76801000 && row.ID <= 76801900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Straid_Boss - {Shoplot_List_Straid_Boss.Count}");
+            Util.PrintLine($"Shoplot_List_Straid_Boss - {Shoplot_List_Straid_Boss.Count}");
 
             Shoplot_List_Ornifex_Boss = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 77601000 && row.ID <= 77601900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Ornifex_Boss - {Shoplot_List_Ornifex_Boss.Count}");
+            Util.PrintLine($"Shoplot_List_Ornifex_Boss - {Shoplot_List_Ornifex_Boss.Count}");
 
             Shoplot_List_Ornifex_Boss_Free = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 77602000 && row.ID <= 77602900
                 ).ToList();
 
-            Console.WriteLine($"Shoplot_List_Ornifex_Boss_Free - {Shoplot_List_Ornifex_Boss_Free.Count}");
+            Util.PrintLine($"Shoplot_List_Ornifex_Boss_Free - {Shoplot_List_Ornifex_Boss_Free.Count}");
 
             // *** Keys ***
             // Soldier Key
@@ -854,7 +868,7 @@ namespace DS2_Scrambler
             Row_List_Soldier_Key = Row_List_Soldier_Key.Concat(Itemlot_List_Lost_Bastille.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Soldier_Key = Row_List_Soldier_Key.Concat(Itemlot_List_No_Mans_Wharf.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Soldier_Key - {Row_List_Soldier_Key.Count}");
+            Util.PrintLine($"Row_List_Soldier_Key - {Row_List_Soldier_Key.Count}");
 
             // Dull Ember
             Row_List_Dull_Ember = Row_List_Dull_Ember.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -873,7 +887,7 @@ namespace DS2_Scrambler
             Row_List_Dull_Ember = Row_List_Dull_Ember.Concat(Itemlot_List_Doors_of_Pharros.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Dull_Ember = Row_List_Dull_Ember.Concat(Itemlot_List_Grave_of_Saints.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Dull_Ember - {Row_List_Dull_Ember.Count}");
+            Util.PrintLine($"Row_List_Dull_Ember - {Row_List_Dull_Ember.Count}");
 
             // Aldia Key
             Row_List_Aldia_Key = Row_List_Aldia_Key.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -892,7 +906,7 @@ namespace DS2_Scrambler
             Row_List_Aldia_Key = Row_List_Aldia_Key.Concat(Itemlot_List_Doors_of_Pharros.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Aldia_Key = Row_List_Aldia_Key.Concat(Itemlot_List_Grave_of_Saints.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Aldia_Key - {Row_List_Aldia_Key.Count}");
+            Util.PrintLine($"Row_List_Aldia_Key - {Row_List_Aldia_Key.Count}");
 
             // Ashen Mist Heart
             Row_List_Ashen_Mist_Heart = Row_List_Ashen_Mist_Heart.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -911,7 +925,7 @@ namespace DS2_Scrambler
             Row_List_Ashen_Mist_Heart = Row_List_Ashen_Mist_Heart.Concat(Itemlot_List_Doors_of_Pharros.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Ashen_Mist_Heart = Row_List_Ashen_Mist_Heart.Concat(Itemlot_List_Grave_of_Saints.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Ashen_Mist_Heart - {Row_List_Ashen_Mist_Heart.Count}");
+            Util.PrintLine($"Row_List_Ashen_Mist_Heart - {Row_List_Ashen_Mist_Heart.Count}");
 
             // Giant's Kinship
             Row_List_Giants_Kinship = Row_List_Giants_Kinship.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -933,7 +947,7 @@ namespace DS2_Scrambler
             Row_List_Giants_Kinship = Row_List_Giants_Kinship.Concat(Itemlot_List_Drangleic_Castle.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Giants_Kinship = Row_List_Giants_Kinship.Concat(Itemlot_List_Undead_Crypt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Giants_Kinship - {Row_List_Giants_Kinship.Count}");
+            Util.PrintLine($"Row_List_Giants_Kinship - {Row_List_Giants_Kinship.Count}");
 
             // Rotunda Lockstone
             Row_List_Rotunda_Lockstone = Row_List_Rotunda_Lockstone.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -947,7 +961,7 @@ namespace DS2_Scrambler
             Row_List_Rotunda_Lockstone = Row_List_Rotunda_Lockstone.Concat(Itemlot_List_Shaded_Woods.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Rotunda_Lockstone = Row_List_Rotunda_Lockstone.Concat(Itemlot_List_Heides_Tower_of_Flame.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Rotunda_Lockstone - {Row_List_Rotunda_Lockstone.Count}");
+            Util.PrintLine($"Row_List_Rotunda_Lockstone - {Row_List_Rotunda_Lockstone.Count}");
 
             // Lenigrasts Key
             Row_List_Lenigrasts_Key = Row_List_Lenigrasts_Key.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -962,7 +976,7 @@ namespace DS2_Scrambler
             Row_List_Lenigrasts_Key = Row_List_Lenigrasts_Key.Concat(Itemlot_List_Heides_Tower_of_Flame.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Lenigrasts_Key = Row_List_Lenigrasts_Key.Concat(Itemlot_List_Grave_of_Saints.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Lenigrasts_Key - {Row_List_Lenigrasts_Key.Count}");
+            Util.PrintLine($"Row_List_Lenigrasts_Key - {Row_List_Lenigrasts_Key.Count}");
 
             // House Key
             Row_List_House_Key = Row_List_House_Key.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -977,7 +991,7 @@ namespace DS2_Scrambler
             Row_List_House_Key = Row_List_House_Key.Concat(Itemlot_List_Heides_Tower_of_Flame.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_House_Key = Row_List_House_Key.Concat(Itemlot_List_Grave_of_Saints.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_House_Key - {Row_List_House_Key.Count}");
+            Util.PrintLine($"Row_List_House_Key - {Row_List_House_Key.Count}");
 
             // Antiquated Key
             Row_List_Antiquated_Key = Row_List_Antiquated_Key.Concat(Itemlot_List_Forest_of_Fallen_Giants.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -985,86 +999,86 @@ namespace DS2_Scrambler
             Row_List_Antiquated_Key = Row_List_Antiquated_Key.Concat(Itemlot_List_No_Mans_Wharf.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Antiquated_Key = Row_List_Antiquated_Key.Concat(Itemlot_List_Heides_Tower_of_Flame.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Antiquated_Key - {Row_List_Antiquated_Key.Count}");
+            Util.PrintLine($"Row_List_Antiquated_Key - {Row_List_Antiquated_Key.Count}");
 
             // Brightstone Key
             Row_List_Brightstone_Key = Row_List_Brightstone_Key.Concat(Itemlot_List_Brightstone_Cove_Tseldora.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Brightstone_Key = Row_List_Brightstone_Key.Concat(Itemlot_List_Aldias_Keep.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Brightstone_Key = Row_List_Brightstone_Key.Concat(Itemlot_List_Shaded_Woods.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Brightstone_Key - {Row_List_Brightstone_Key.Count}");
+            Util.PrintLine($"Row_List_Brightstone_Key - {Row_List_Brightstone_Key.Count}");
 
             // Bastille Key
             Row_List_Bastille_Key = Row_List_Bastille_Key.Concat(Itemlot_List_Forest_of_Fallen_Giants.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Bastille_Key = Row_List_Bastille_Key.Concat(Itemlot_List_Lost_Bastille.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Bastille_Key = Row_List_Bastille_Key.Concat(Itemlot_List_No_Mans_Wharf.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Bastille_Key - {Row_List_Bastille_Key.Count}");
+            Util.PrintLine($"Row_List_Bastille_Key - {Row_List_Bastille_Key.Count}");
 
             // Tseldora Den Key
             Row_List_Tseldora_Den_Key = Row_List_Tseldora_Den_Key.Concat(Itemlot_List_Brightstone_Cove_Tseldora.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Tseldora_Den_Key = Row_List_Tseldora_Den_Key.Concat(Itemlot_List_Shaded_Woods.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Tseldora_Den_Key - {Row_List_Tseldora_Den_Key.Count}");
+            Util.PrintLine($"Row_List_Tseldora_Den_Key - {Row_List_Tseldora_Den_Key.Count}");
 
             // Fang Key
             Row_List_Fang_Key = Row_List_Fang_Key.Concat(Itemlot_List_Brightstone_Cove_Tseldora.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Fang_Key = Row_List_Fang_Key.Concat(Itemlot_List_Shaded_Woods.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Fang_Key - {Row_List_Fang_Key.Count}");
+            Util.PrintLine($"Row_List_Fang_Key - {Row_List_Fang_Key.Count}");
 
             // Iron Key
             Row_List_Iron_Key = Row_List_Iron_Key.Concat(Itemlot_List_Earthen_Peak.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Iron_Key = Row_List_Iron_Key.Concat(Itemlot_List_Iron_Keep.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Iron_Key = Row_List_Iron_Key.Concat(Itemlot_List_The_Gutter.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Iron_Key - {Row_List_Iron_Key.Count}");
+            Util.PrintLine($"Row_List_Iron_Key - {Row_List_Iron_Key.Count}");
 
             // Forgotten Key
             Row_List_Forgotten_Key = Row_List_Forgotten_Key.Concat(Itemlot_List_Iron_Keep.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Forgotten_Key = Row_List_Forgotten_Key.Concat(Itemlot_List_The_Gutter.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Forgotten_Key - {Row_List_Forgotten_Key.Count}");
+            Util.PrintLine($"Row_List_Forgotten_Key - {Row_List_Forgotten_Key.Count}");
 
             // Key to the Kings Passage
             Row_List_Key_to_the_Kings_Passage = Row_List_Key_to_the_Kings_Passage.Concat(Itemlot_List_Drangleic_Castle.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Key_to_the_Kings_Passage - {Row_List_Key_to_the_Kings_Passage.Count}");
+            Util.PrintLine($"Row_List_Key_to_the_Kings_Passage - {Row_List_Key_to_the_Kings_Passage.Count}");
 
             // Undead Lockaway Key
             Row_List_Undead_Lockaway_Key = Row_List_Undead_Lockaway_Key.Concat(Itemlot_List_Huntmans_Copse.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Undead_Lockaway_Key - {Row_List_Undead_Lockaway_Key.Count}");
+            Util.PrintLine($"Row_List_Undead_Lockaway_Key - {Row_List_Undead_Lockaway_Key.Count}");
 
             // Eternal Sanctum Key
             Row_List_Eternal_Sanctum_Key = Row_List_Eternal_Sanctum_Key = Row_List_Eternal_Sanctum_Key.Concat(Itemlot_List_Shulva.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Eternal_Sanctum_Key - {Row_List_Eternal_Sanctum_Key.Count}");
+            Util.PrintLine($"Row_List_Eternal_Sanctum_Key - {Row_List_Eternal_Sanctum_Key.Count}");
 
             // Dragon Stone
             Row_List_Dragon_Stone = Row_List_Dragon_Stone.Concat(Itemlot_List_Shulva.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Dragon_Stone - {Row_List_Dragon_Stone.Count}");
+            Util.PrintLine($"Row_List_Dragon_Stone - {Row_List_Dragon_Stone.Count}");
 
             // Scorching Iron Scepter
             Row_List_Scorching_Iron_Scepter = Row_List_Scorching_Iron_Scepter.Concat(Itemlot_List_Brume_Tower.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Scorching_Iron_Scepter - {Row_List_Scorching_Iron_Scepter.Count}");
+            Util.PrintLine($"Row_List_Scorching_Iron_Scepter - {Row_List_Scorching_Iron_Scepter.Count}");
 
             // Tower Key
             Row_List_Tower_Key = Row_List_Tower_Key.Concat(Itemlot_List_Brume_Tower.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Tower_Key - {Row_List_Tower_Key.Count}");
+            Util.PrintLine($"Row_List_Tower_Key - {Row_List_Tower_Key.Count}");
 
             // Eye of the Priestess
             Row_List_Eye_of_the_Priestess = Row_List_Eye_of_the_Priestess.Concat(Itemlot_List_Eleum_Loyce.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Eye_of_the_Priestess - {Row_List_Eye_of_the_Priestess.Count}");
+            Util.PrintLine($"Row_List_Eye_of_the_Priestess - {Row_List_Eye_of_the_Priestess.Count}");
 
             // Garrison Ward Key
             Row_List_Garrison_Ward_Key = Row_List_Garrison_Ward_Key.Concat(Itemlot_List_Eleum_Loyce.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Garrison_Ward_Key - {Row_List_Garrison_Ward_Key.Count}");
+            Util.PrintLine($"Row_List_Garrison_Ward_Key - {Row_List_Garrison_Ward_Key.Count}");
 
             // Dragon Talon
             Row_List_Dragon_Talon = Row_List_Dragon_Talon.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -1086,7 +1100,7 @@ namespace DS2_Scrambler
             Row_List_Dragon_Talon = Row_List_Dragon_Talon.Concat(Itemlot_List_Drangleic_Castle.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Dragon_Talon = Row_List_Dragon_Talon.Concat(Itemlot_List_Undead_Crypt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Dragon_Talon - {Row_List_Dragon_Talon.Count}");
+            Util.PrintLine($"Row_List_Dragon_Talon - {Row_List_Dragon_Talon.Count}");
 
             // Heavy Iron Key
             Row_List_Heavy_Iron_Key = Row_List_Heavy_Iron_Key.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -1108,7 +1122,7 @@ namespace DS2_Scrambler
             Row_List_Heavy_Iron_Key = Row_List_Heavy_Iron_Key.Concat(Itemlot_List_Drangleic_Castle.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Heavy_Iron_Key = Row_List_Heavy_Iron_Key.Concat(Itemlot_List_Undead_Crypt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Heavy_Iron_Key - {Row_List_Heavy_Iron_Key.Count}");
+            Util.PrintLine($"Row_List_Heavy_Iron_Key - {Row_List_Heavy_Iron_Key.Count}");
 
             // Frozen Flower
             Row_List_Frozen_Flower = Row_List_Frozen_Flower.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -1130,7 +1144,7 @@ namespace DS2_Scrambler
             Row_List_Frozen_Flower = Row_List_Frozen_Flower.Concat(Itemlot_List_Drangleic_Castle.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Frozen_Flower = Row_List_Frozen_Flower.Concat(Itemlot_List_Undead_Crypt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Frozen_Flower - {Row_List_Frozen_Flower.Count}");
+            Util.PrintLine($"Row_List_Frozen_Flower - {Row_List_Frozen_Flower.Count}");
 
             // Key to the Embedded
             Row_List_Key_to_the_Embedded = Row_List_Key_to_the_Embedded.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -1151,7 +1165,7 @@ namespace DS2_Scrambler
             Row_List_Key_to_the_Embedded = Row_List_Key_to_the_Embedded.Concat(Itemlot_List_Shrine_of_Amana.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Key_to_the_Embedded = Row_List_Key_to_the_Embedded.Concat(Itemlot_List_Drangleic_Castle.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
-            Console.WriteLine($"Row_List_Key_to_the_Embedded - {Row_List_Key_to_the_Embedded.Count}");
+            Util.PrintLine($"Row_List_Key_to_the_Embedded - {Row_List_Key_to_the_Embedded.Count}");
         }
 
         public List<int> ConstructIntegerDataList(string path)

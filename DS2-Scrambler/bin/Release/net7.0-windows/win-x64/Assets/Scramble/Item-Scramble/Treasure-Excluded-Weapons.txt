@@ -1,2 +1,41 @@
 3400000;Fists
 3401000;Fists
+3402000;Fists
+3403000;Fists
+3404000;Fists
+3405000;Fists
+3406000;Fists
+3407000;Fists
+3408000;Fists
+6000000;6000: Torch (Small) -- 6000:??(?)
+6100000;Binoculars
+6300000;6300: Phantom - Dagger  -- 6300:??-??
+6310000;6310: Phantom - Swords  -- 6310:??-??
+6320000;6320: Phantom - Song Sword -- 6320:??-??
+6330000;6330: Phantom-Sword -- 6330:??-?
+6340000;6340: Phantom - Direct Sword -- 6340:??-??
+6350000;6350: Phantom - Two-Handed Sword  -- 6350:??-???
+6360000;6360: Phantom - One-handed battle  -- 6360:??-????
+6370000;6370: Phantom - Two-Handed Battle  -- 6370:??-????
+6380000;6380: Phantom - One Hand Axe -- 6380:??-???
+6390000;6390: Phantom - Two-Handed Axe -- 6390:??-???
+6400000;6400: Phantom -Spear -- 6400:??-?
+6410000;6410: Phantom - Two-Handed Sickle -- 6410:??-???
+6420000;6420: Phantom - Two-Handed Long Axe  -- 6420:??-????
+6430000;6430: Phantom - Bare Hands -- 6430:??-??
+6440000;6440: Phantom - Nails -- 6440:??-?
+6450000;6450: Phantom - Torch -- 6450:??-??
+6460000;6460: Phantom-Telescope  -- 6460:??-???
+6470000;6470: Phantom-Whip  -- 6470:??-?
+6480000;6480: Phantom - One Hand Wand -- 6480:??-???
+6490000;6490: Phantom - One Hand Bell -- 6490:??-????
+6500000;6500: Phantom - Two-Handed Bow -- 6500:??-???
+6510000;6510: Phantom - Two Hands Large Bow  -- 6510:??-????
+6520000;6520: Phantom - One Hand Bow  -- 6520:??-????
+6530000;6530: Phantom - Two-Handed Sword  -- 6530:??-?????
+6540000;6540: Phantom - Two-Handed Oversized Sword -- 6540:??-?????
+6550000;6550: Phantom - Double Blade  -- 6550:??-???
+7010000;7010: Statue of a man for a cut scene -- 7010:??????????
+12000000;12000: Phantom - Small Shield -- 12000:??-??
+12010000;12010: Phantom - Medium Shield -- 12010:??-??
+12020000;12020: Phantom - Great Shield -- 12020:??-??

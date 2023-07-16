@@ -63,7 +63,7 @@ namespace DS2_Scrambler
 
             if (scrambleLoot)
             {
-                Console.WriteLine("Item Scramble: Structured Loot");
+                Util.PrintLine("Item Scramble: Structured Loot");
 
                 if (!T_Ignore_Keys)
                 {
@@ -75,7 +75,7 @@ namespace DS2_Scrambler
                     ScrambleToolItems();
                 }
 
-                Console.WriteLine("Item Scramble: Random Loot");
+                Util.PrintLine("Item Scramble: Random Loot");
 
                 if (T_Include_Boss_Treasure)
                 {
@@ -246,7 +246,7 @@ namespace DS2_Scrambler
         {
             if(rows.Count < 1)
             {
-                Console.WriteLine("AssignKeyToItemlot: passed rows is empty.");
+                Util.PrintLine("AssignKeyToItemlot: passed rows is empty.");
                 return;
             }
 
@@ -268,6 +268,8 @@ namespace DS2_Scrambler
                 )
                     can_assign = true;
             }
+
+            Util.PrintLine($"Assign Key itemlot: {item[0].ID}");
 
             // Add the item to the itemlot
             rows[index][$"item_lot_{slot}"].Value = item[0].ID;
@@ -493,7 +495,7 @@ namespace DS2_Scrambler
         {
             if (rows.Count < 1)
             {
-                Console.WriteLine("AssignToolToItemlot: passed rows is empty.");
+                Util.PrintLine("AssignToolToItemlot: passed rows is empty.");
                 return;
             }
 
@@ -517,10 +519,12 @@ namespace DS2_Scrambler
                     can_assign = true;
             }
 
+            Util.PrintLine($"Assign Tool itemlot: {item[0].ID}");
+
             // Add the item to the itemlot
             rows[index][$"item_lot_{slot}"].Value = item[0].ID;
 
-            if(max_amount > 0)
+            if (max_amount > 0)
                 rows[index][$"amount_lot_{slot}"].Value = rand.Next(amount, max_amount);
             else
                 rows[index][$"amount_lot_{slot}"].Value = amount;
@@ -671,7 +675,7 @@ namespace DS2_Scrambler
         {
             if (rows.Count < 1)
             {
-                Console.WriteLine("AssignBossSoulToItemlot: passed rows is empty.");
+                Util.PrintLine("AssignBossSoulToItemlot: passed rows is empty.");
                 return;
             }
 
@@ -696,6 +700,8 @@ namespace DS2_Scrambler
                     can_assign = true;
             }
 
+            Util.PrintLine($"Assign Boss Soul itemlot: {item[0].ID}");
+
             // Add the item to the itemlot
             rows[index][$"item_lot_{slot}"].Value = item[0].ID;
             rows[index][$"amount_lot_{slot}"].Value = amount;
@@ -713,7 +719,10 @@ namespace DS2_Scrambler
                 !HasMatchingLot(Data.Itemlot_Info_Never_Change, row) &&
                 (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(Data.ID_List_Keys, row)) &&
                 (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(Data.ID_List_Tools, row)))
+                {
+                    Util.PrintLine($"Assign Boss Reward itemlot: {row.ID}");
                     SelectUniqueItemForItemlot(row, 10, false);
+                }
             }
         }
 
@@ -726,7 +735,10 @@ namespace DS2_Scrambler
                 !HasMatchingLot(Data.Itemlot_Info_Never_Change, row) &&
                 (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(Data.ID_List_Keys, row)) &&
                 (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(Data.ID_List_Tools, row)))
+                {
+                    Util.PrintLine($"Assign Character Reward itemlot: {row.ID}");
                     SelectItemForItemlot(row, 10, false);
+                }
             }
         }
 
@@ -739,7 +751,10 @@ namespace DS2_Scrambler
                 !HasMatchingLot(Data.Itemlot_Info_Never_Change, row) &&
                 (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(Data.ID_List_Keys, row)) &&
                 (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(Data.ID_List_Tools, row)))
+                {
+                    Util.PrintLine($"Assign Covenant Reward itemlot: {row.ID}");
                     SelectUniqueItemForItemlot(row, 10, false);
+                }
             }
         }
 
@@ -752,7 +767,10 @@ namespace DS2_Scrambler
                 !HasMatchingLot(Data.Itemlot_Info_Never_Change, row) &&
                 (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(Data.ID_List_Keys, row)) &&
                 (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(Data.ID_List_Tools, row)))
+                {
+                    Util.PrintLine($"Assign Bird Reward itemlot: {row.ID}");
                     SelectItemForItemlot(row, 10, false);
+                }
             }
         }
 
@@ -765,20 +783,26 @@ namespace DS2_Scrambler
                 !HasMatchingLot(Data.Itemlot_Info_Never_Change, row) &&
                 (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(Data.ID_List_Keys, row)) &&
                 (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(Data.ID_List_Tools, row)))
+                {
+                    Util.PrintLine($"Assign Event Reward itemlot: {row.ID}");
                     SelectItemForItemlot(row, 10, false);
+                }
             }
         }
 
         public void ScrambleMapLoot(List<PARAM.Row> itemlots)
         {
-            foreach(PARAM.Row row in itemlots)
+            foreach (PARAM.Row row in itemlots)
             {
                 // Do not change the already changed, or those that have keys/tools/boss souls.
-                if(!Assigned_Itemlots.Contains(row) &&
+                if (!Assigned_Itemlots.Contains(row) &&
                 !HasMatchingLot(Data.Itemlot_Info_Never_Change, row) &&
                 (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(Data.ID_List_Keys, row)) &&
                 (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(Data.ID_List_Tools, row)))
+                {
+                    Util.PrintLine($"Assign Map Treasure itemlot: {row.ID}");
                     SelectItemForItemlot(row, 10, false);
+                }
             }
         }
 
@@ -791,7 +815,10 @@ namespace DS2_Scrambler
                 !HasMatchingLot(Data.Itemlot_Info_Never_Change, row) &&
                 (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(Data.ID_List_Keys, row)) &&
                 (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(Data.ID_List_Tools, row)))
+                {
+                    Util.PrintLine($"Assign Enemy Drop itemlot: {row.ID}");
                     SelectItemForItemlot(row, 60510000, true);
+                }
             }
         }
 
@@ -863,6 +890,7 @@ namespace DS2_Scrambler
                 (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingShopLot(Data.ID_List_Keys, row)) &&
                 (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingShopLot(Data.ID_List_Tools, row)))
                 {
+                    Util.PrintLine($"Assign shoplot: {row.ID}");
                     SelectItemForShoplot(row);
                 }
             }
@@ -901,6 +929,7 @@ namespace DS2_Scrambler
                 (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingShopLot(Data.ID_List_Keys, row)) &&
                 (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingShopLot(Data.ID_List_Tools, row)))
                 {
+                    Util.PrintLine($"Assign Boss Trade shoplot: {row.ID}");
                     SelectUniqueItemForShoplot(row);
                 }
             }
@@ -922,21 +951,29 @@ namespace DS2_Scrambler
                     // Weapon
                     if (roll >= 0 && roll <= 25)
                     {
+                        Util.PrintLine($"Selected unique item for treasure: Weapon");
+
                         AddItemToItemlot(row, slot, Unassigned_Weapons, Data.Row_List_Weapons, applyEnemyChanceReduction);
                     }
                     // Armor
                     else if (roll >= 25 && roll <= 50)
                     {
+                        Util.PrintLine($"Selected unique item for treasure: Armor");
+
                         AddItemToItemlot(row, slot, Unassigned_Armor, Data.Row_List_Armor, applyEnemyChanceReduction);
                     }
                     // Spells
                     else if (roll >= 50 && roll <= 75)
                     {
+                        Util.PrintLine($"Selected unique item for treasure: Spell");
+
                         AddItemToItemlot(row, slot, Unassigned_Spells, Data.Row_List_Spells, applyEnemyChanceReduction);
                     }
                     // Rings
                     else if (roll >= 75)
                     {
+                        Util.PrintLine($"Selected unique item for treasure: Ring");
+
                         AddItemToItemlot(row, slot, Unassigned_Rings, Data.Row_List_Rings, applyEnemyChanceReduction);
                     }
                 }
@@ -961,47 +998,65 @@ namespace DS2_Scrambler
                     // Weapon
                     if (roll >= 0 && roll <= 10)
                     {
+                        Util.PrintLine($"Selected item for treasure: Weapon");
+
                         AddItemToItemlot(row, slot, Unassigned_Weapons, Data.Row_List_Weapons, applyEnemyChanceReduction);
                     }
                     // Armor
                     else if (roll >= 10 && roll <= 20)
                     {
+                        Util.PrintLine($"Selected item for treasure: Armor");
+
                         AddItemToItemlot(row, slot, Unassigned_Armor, Data.Row_List_Armor, applyEnemyChanceReduction);
                     }
                     // Spells
                     else if (roll >= 20 && roll <= 30)
                     {
+                        Util.PrintLine($"Selected item for treasure: Spell");
+
                         AddItemToItemlot(row, slot, Unassigned_Spells, Data.Row_List_Spells, applyEnemyChanceReduction);
                     }
                     // Rings
                     else if (roll >= 30 && roll <= 40)
                     {
+                        Util.PrintLine($"Selected item for treasure: Ring");
+
                         AddItemToItemlot(row, slot, Unassigned_Rings, Data.Row_List_Rings, applyEnemyChanceReduction);
                     }
                     // Item: Ammunition
                     else if (roll >= 40 && roll <= 45)
                     {
+                        Util.PrintLine($"Selected item for treasure: Ammunition");
+
                         AddItemToItemlot(row, slot, null, Data.Row_List_Ammunition, applyEnemyChanceReduction, 10, 50);
                     }
                     // Item: Material
                     else if (roll >= 45 && roll <= 50)
                     {
+                        Util.PrintLine($"Selected item for treasure: Material");
+
                         AddItemToItemlot(row, slot, null, Data.Row_List_Materials, applyEnemyChanceReduction, 1, 3);
                     }
-                    // Item: Soul/Spices
+                    // Item: Soul
                     else if (roll >= 50 && roll <= 60)
                     {
+                        Util.PrintLine($"Selected item for treasure: Soul");
+
                         AddItemToItemlot(row, slot, null, Data.Row_List_Soul_Consumables, applyEnemyChanceReduction, 1, 3);
                     }
                     // Item: Throwable
                     else if (roll >= 60 && roll <= 70)
                     {
+                        Util.PrintLine($"Selected item for treasure: Throwable");
+
                         AddItemToItemlot(row, slot, null, Data.Row_List_Throwable_Consumable, applyEnemyChanceReduction, 1, 3);
                     }
                     // Item: Spice/Bird
                     else if (roll >= 70 && roll <= 80)
                     {
-                        if(roll >= 75)
+                        Util.PrintLine($"Selected item for treasure: Spice/Bird");
+
+                        if (roll >= 75)
                             AddItemToItemlot(row, slot, null, Data.Row_List_Bird_Consumables, applyEnemyChanceReduction, 1, 3);
                         else
                             AddItemToItemlot(row, slot, null, Data.Row_List_Spell_Upgrades, applyEnemyChanceReduction, 1, 3);
@@ -1009,7 +1064,9 @@ namespace DS2_Scrambler
                     // Item: HP/Cast
                     else if (roll >= 80 && roll <= 90)
                     {
-                        if(roll >= 85)
+                        Util.PrintLine($"Selected item for treasure: HP/Cast");
+
+                        if (roll >= 85)
                             AddItemToItemlot(row, slot, null, Data.Row_List_HP_Consumables, applyEnemyChanceReduction, 1, 3);
                         else
                             AddItemToItemlot(row, slot, null, Data.Row_List_Cast_Consumables, applyEnemyChanceReduction, 1, 3);
@@ -1017,6 +1074,7 @@ namespace DS2_Scrambler
                     // Item: Misc
                     else if (roll >= 90)
                     {
+                        Util.PrintLine($"Selected item for treasure: Misc");
                         AddItemToItemlot(row, slot, null, Data.Row_List_Misc_Consumable, applyEnemyChanceReduction, 1, 5);
                     }
                 }
@@ -1037,6 +1095,7 @@ namespace DS2_Scrambler
                 value = unassigned_list[rand.Next(unassigned_list.Count)];
 
                 row[$"item_lot_{slot}"].Value = value.ID;
+                Util.PrintLine($"Adding to itemlot from unassigned: {value.ID}");
             }
             // After all weapons are present, allow duplicates
             else
@@ -1044,6 +1103,7 @@ namespace DS2_Scrambler
                 value = fallback_list[rand.Next(fallback_list.Count)];
 
                 row[$"item_lot_{slot}"].Value = value.ID;
+                Util.PrintLine($"Adding to itemlot from any: {value.ID}");
             }
 
             if (min > 0 && max > 0)
@@ -1117,16 +1177,19 @@ namespace DS2_Scrambler
             // Weapon
             if (roll >= 0 && roll < 50)
             {
+                Util.PrintLine($"Selected unique item for shop: Weapon");
                 AddItemToShoplot(row, Data.Row_List_Weapons, 255, 255);
             }
             // Spells
             else if (roll >= 50 && roll < 75)
             {
+                Util.PrintLine($"Selected unique item for shop: Spell");
                 AddItemToShoplot(row, Data.Row_List_Spells, 255, 255);
             }
             // Rings
             else if (roll >= 75)
             {
+                Util.PrintLine($"Selected unique item for shop: Ring");
                 AddItemToShoplot(row, Data.Row_List_Rings, 255, 255);
             }
         }
@@ -1189,31 +1252,43 @@ namespace DS2_Scrambler
             // Weapon
             if (roll >= 0 && roll < 10)
             {
+                Util.PrintLine($"Selected item for shop: Weapon");
+
                 AddItemToShoplot(row, Data.Row_List_Weapons, 255, 255);
             }
             // Armor
             else if (roll >= 10 && roll < 20)
             {
+                Util.PrintLine($"Selected item for shop: Armor");
+
                 AddItemToShoplot(row, Data.Row_List_Armor, 255, 255);
             }
             // Spells
             else if (roll >= 20 && roll < 30)
             {
+                Util.PrintLine($"Selected item for shop: Spell");
+
                 AddItemToShoplot(row, Data.Row_List_Spells, 1, 3);
             }
             // Rings
             else if (roll >= 30 && roll < 40)
             {
+                Util.PrintLine($"Selected item for shop: Ring");
+
                 AddItemToShoplot(row, Data.Row_List_Rings, 1, 1);
             }
             // Item: Ammunition
             else if (roll >= 40 && roll < 45)
             {
+                Util.PrintLine($"Selected item for shop: Ammunition");
+
                 AddItemToShoplot(row, Data.Row_List_Ammunition, 255, 255);
             }
             // Item: Material
             else if (roll >= 45 && roll < 55)
             {
+                Util.PrintLine($"Selected item for shop: Material");
+
                 if (inf_roll >= 80)
                     AddItemToShoplot(row, Data.Row_List_Materials, 255, 255);
                 else
@@ -1227,6 +1302,8 @@ namespace DS2_Scrambler
             // Item: Throwable
             else if (roll >= 60 && roll < 65)
             {
+                Util.PrintLine($"Selected item for shop: Throwable");
+
                 if (inf_roll >= 80)
                     AddItemToShoplot(row, Data.Row_List_Throwable_Consumable, 255, 255);
                 else
@@ -1235,6 +1312,8 @@ namespace DS2_Scrambler
             // Item: Bird
             else if (roll >= 65 && roll < 70)
             {
+                Util.PrintLine($"Selected item for shop: Bird");
+
                 if (inf_roll >= 80)
                     AddItemToShoplot(row, Data.Row_List_Bird_Consumables, 255, 255);
                 else
@@ -1243,6 +1322,8 @@ namespace DS2_Scrambler
             // Item: Spice
             else if (roll >= 70 && roll < 75)
             {
+                Util.PrintLine($"Selected item for shop: Spice");
+
                 if (inf_roll >= 80)
                     AddItemToShoplot(row, Data.Row_List_Spell_Upgrades, 255, 255);
                 else
@@ -1251,6 +1332,8 @@ namespace DS2_Scrambler
             // Item: HP
             else if (roll >= 75 && roll < 85)
             {
+                Util.PrintLine($"Selected item for shop: HP");
+
                 if (inf_roll >= 80)
                     AddItemToShoplot(row, Data.Row_List_HP_Consumables, 255, 255);
                 else
@@ -1259,6 +1342,8 @@ namespace DS2_Scrambler
             // Item: Cast
             else if (roll >= 85 && roll < 90)
             {
+                Util.PrintLine($"Selected item for shop: Cast");
+
                 if (inf_roll >= 80)
                     AddItemToShoplot(row, Data.Row_List_Cast_Consumables, 255, 255);
                 else
@@ -1267,11 +1352,15 @@ namespace DS2_Scrambler
             // Item: Flask
             else if (roll >= 90 && roll < 95)
             {
+                Util.PrintLine($"Selected item for shop: Flask");
+
                 AddItemToShoplot(row, Data.Row_List_Flask_Upgrades, 1, 1);
             }
             // Item: Misc
             else if (roll >= 95)
             {
+                Util.PrintLine($"Selected item for shop: Misc");
+
                 if (inf_roll >= 80)
                     AddItemToShoplot(row, Data.Row_List_Misc_Consumable, 255, 255);
                 else
@@ -1286,6 +1375,8 @@ namespace DS2_Scrambler
             PARAM.Row value = null;
 
             value = itemlist[rand.Next(itemlist.Count)];
+
+            Util.PrintLine($"Adding to shoplot: {value.ID}");
 
             row[$"equip_id"].Value = value.ID;
 

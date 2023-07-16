@@ -1592,7 +1592,7 @@ namespace DS2_Scrambler
                 if (total < 1)
                     total = 1;
 
-                Console.WriteLine($"Total Stats: {total}");
+                Util.PrintLine($"Total Stats: {total}");
 
                 row["soul_level"].Value = total;
                 row["vigor"].Value = vigor;
@@ -1740,10 +1740,7 @@ namespace DS2_Scrambler
 
             if (armorList.Count > 0)
             {
-                // The armor ID in the param seems to be the actual ID but with a 2 instead of 1 at the start.
-                string armor_id = "2" + armorList[rand.Next(armorList.Count)].ID.ToString().Substring(1);
-
-                row[slot].Value = int.Parse(armor_id, CultureInfo.InvariantCulture);
+                row[slot].Value = armorList[rand.Next(armorList.Count)].ID;
             }
         }
 
@@ -1904,7 +1901,7 @@ namespace DS2_Scrambler
                 faith >= (short)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_melee_weapons: {valid_melee_weapons.Count}");
+                Util.PrintLine($"valid_melee_weapons: {valid_melee_weapons.Count}");
 
                 valid_sorcery_catalyst = Data.Row_List_Weapons_Catalyst_Sorcery.Where(row =>
                 strength >= (short)row["str_requirement"].Value &&
@@ -1913,7 +1910,7 @@ namespace DS2_Scrambler
                 faith >= (short)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_sorcery_catalyst: {valid_sorcery_catalyst.Count}");
+                Util.PrintLine($"valid_sorcery_catalyst: {valid_sorcery_catalyst.Count}");
 
                 valid_miracle_catalyst = Data.Row_List_Weapons_Catalyst_Miracles.Where(row =>
                 strength >= (short)row["str_requirement"].Value &&
@@ -1922,7 +1919,7 @@ namespace DS2_Scrambler
                 faith >= (short)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_miracle_catalyst: {valid_miracle_catalyst.Count}");
+                Util.PrintLine($"valid_miracle_catalyst: {valid_miracle_catalyst.Count}");
 
                 valid_pyromancy_catalyst = Data.Row_List_Weapons_Catalyst_Pyromancy.Where(row =>
                 strength >= (short)row["str_requirement"].Value &&
@@ -1931,7 +1928,7 @@ namespace DS2_Scrambler
                 faith >= (short)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_pyromancy_catalyst: {valid_pyromancy_catalyst.Count}");
+                Util.PrintLine($"valid_pyromancy_catalyst: {valid_pyromancy_catalyst.Count}");
 
                 valid_hex_catalyst = Data.Row_List_Weapons_Catalyst_Hex.Where(row =>
                 strength >= (short)row["str_requirement"].Value &&
@@ -1940,7 +1937,7 @@ namespace DS2_Scrambler
                 faith >= (short)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_hex_catalyst: {valid_hex_catalyst.Count}");
+                Util.PrintLine($"valid_hex_catalyst: {valid_hex_catalyst.Count}");
 
                 valid_bows = Data.Row_List_Weapons_Bow.Where(row =>
                 strength >= (short)row["str_requirement"].Value &&
@@ -1949,7 +1946,7 @@ namespace DS2_Scrambler
                 faith >= (short)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_bows: {valid_bows.Count}");
+                Util.PrintLine($"valid_bows: {valid_bows.Count}");
 
                 valid_greatbows = Data.Row_List_Weapons_Greatbow.Where(row =>
                 strength >= (short)row["str_requirement"].Value &&
@@ -1958,7 +1955,7 @@ namespace DS2_Scrambler
                 faith >= (short)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_greatbows: {valid_greatbows.Count}");
+                Util.PrintLine($"valid_greatbows: {valid_greatbows.Count}");
 
                 valid_crossbows = Data.Row_List_Weapons_Crossbow.Where(row =>
                 strength >= (short)row["str_requirement"].Value &&
@@ -1967,7 +1964,7 @@ namespace DS2_Scrambler
                 faith >= (short)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_crossbows: {valid_crossbows.Count}");
+                Util.PrintLine($"valid_crossbows: {valid_crossbows.Count}");
 
                 valid_shields = Data.Row_List_Weapons_Shield.Where(row =>
                 strength >= (short)row["str_requirement"].Value &&
@@ -1976,7 +1973,7 @@ namespace DS2_Scrambler
                 faith >= (short)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_shields: {valid_shields.Count}");
+                Util.PrintLine($"valid_shields: {valid_shields.Count}");
 
                 valid_head_armor = Data.Row_List_Armor_Head.Where(row =>
                 strength >= (ushort)row["strength_requirement"].Value &&
@@ -1985,7 +1982,7 @@ namespace DS2_Scrambler
                 faith >= (ushort)row["faith_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_head_armor: {valid_head_armor.Count}");
+                Util.PrintLine($"valid_head_armor: {valid_head_armor.Count}");
 
                 valid_chest_armor = Data.Row_List_Armor_Chest.Where(row =>
                 strength >= (ushort)row["strength_requirement"].Value &&
@@ -1994,7 +1991,7 @@ namespace DS2_Scrambler
                 faith >= (ushort)row["faith_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_chest_armor: {valid_chest_armor.Count}");
+                Util.PrintLine($"valid_chest_armor: {valid_chest_armor.Count}");
 
                 valid_arm_armor = Data.Row_List_Armor_Arms.Where(row =>
                 strength >= (ushort)row["strength_requirement"].Value &&
@@ -2003,7 +2000,7 @@ namespace DS2_Scrambler
                 faith >= (ushort)row["faith_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_arm_armor: {valid_arm_armor.Count}");
+                Util.PrintLine($"valid_arm_armor: {valid_arm_armor.Count}");
 
                 valid_leg_armor = Data.Row_List_Armor_Legs.Where(row =>
                 strength >= (ushort)row["strength_requirement"].Value &&
@@ -2012,105 +2009,105 @@ namespace DS2_Scrambler
                 faith >= (ushort)row["faith_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_leg_armor: {valid_leg_armor.Count}");
+                Util.PrintLine($"valid_leg_armor: {valid_leg_armor.Count}");
 
                 valid_sorceries = Data.Row_List_Spell_Sorceries.Where(row =>
                 intelligence >= (ushort)row["int_requirement"].Value &&
                 faith >= (ushort)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_sorceries: {valid_sorceries.Count}");
+                Util.PrintLine($"valid_sorceries: {valid_sorceries.Count}");
 
                 valid_miracles = Data.Row_List_Spell_Miracles.Where(row =>
                 intelligence >= (ushort)row["int_requirement"].Value &&
                 faith >= (ushort)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_miracles: {valid_miracles.Count}");
+                Util.PrintLine($"valid_miracles: {valid_miracles.Count}");
 
                 valid_pyromancies = Data.Row_List_Spell_Pyromancies.Where(row =>
                 intelligence >= (ushort)row["int_requirement"].Value &&
                 faith >= (ushort)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_pyromancies: {valid_pyromancies.Count}");
+                Util.PrintLine($"valid_pyromancies: {valid_pyromancies.Count}");
 
                 valid_hexes = Data.Row_List_Spell_Hexes.Where(row =>
                 intelligence >= (ushort)row["int_requirement"].Value &&
                 faith >= (ushort)row["fth_requirement"].Value
                 ).ToList();
 
-                Console.WriteLine($"valid_hexes: {valid_hexes.Count}");
+                Util.PrintLine($"valid_hexes: {valid_hexes.Count}");
             }
             else
             {
                 valid_melee_weapons = Data.Row_List_Weapons_Melee;
 
-                Console.WriteLine($"valid_melee_weapons: {valid_melee_weapons.Count}");
+                Util.PrintLine($"valid_melee_weapons: {valid_melee_weapons.Count}");
 
                 valid_sorcery_catalyst = Data.Row_List_Weapons_Catalyst_Sorcery;
 
-                Console.WriteLine($"valid_sorcery_catalyst: {valid_sorcery_catalyst.Count}");
+                Util.PrintLine($"valid_sorcery_catalyst: {valid_sorcery_catalyst.Count}");
 
                 valid_miracle_catalyst = Data.Row_List_Weapons_Catalyst_Miracles;
 
-                Console.WriteLine($"valid_miracle_catalyst: {valid_miracle_catalyst.Count}");
+                Util.PrintLine($"valid_miracle_catalyst: {valid_miracle_catalyst.Count}");
 
                 valid_pyromancy_catalyst = Data.Row_List_Weapons_Catalyst_Pyromancy;
 
-                Console.WriteLine($"valid_pyromancy_catalyst: {valid_pyromancy_catalyst.Count}");
+                Util.PrintLine($"valid_pyromancy_catalyst: {valid_pyromancy_catalyst.Count}");
 
                 valid_hex_catalyst = Data.Row_List_Weapons_Catalyst_Hex;
 
-                Console.WriteLine($"valid_hex_catalyst: {valid_hex_catalyst.Count}");
+                Util.PrintLine($"valid_hex_catalyst: {valid_hex_catalyst.Count}");
 
                 valid_bows = Data.Row_List_Weapons_Bow;
 
-                Console.WriteLine($"valid_bows: {valid_bows.Count}");
+                Util.PrintLine($"valid_bows: {valid_bows.Count}");
 
                 valid_greatbows = Data.Row_List_Weapons_Greatbow;
 
-                Console.WriteLine($"valid_greatbows: {valid_greatbows.Count}");
+                Util.PrintLine($"valid_greatbows: {valid_greatbows.Count}");
 
                 valid_crossbows = Data.Row_List_Weapons_Crossbow;
 
-                Console.WriteLine($"valid_crossbows: {valid_crossbows.Count}");
+                Util.PrintLine($"valid_crossbows: {valid_crossbows.Count}");
 
                 valid_shields = Data.Row_List_Weapons_Shield;
 
-                Console.WriteLine($"valid_shields: {valid_shields.Count}");
+                Util.PrintLine($"valid_shields: {valid_shields.Count}");
 
                 valid_head_armor = Data.Row_List_Armor_Head;
 
-                Console.WriteLine($"valid_head_armor: {valid_head_armor.Count}");
+                Util.PrintLine($"valid_head_armor: {valid_head_armor.Count}");
 
                 valid_chest_armor = Data.Row_List_Armor_Chest;
 
-                Console.WriteLine($"valid_chest_armor: {valid_chest_armor.Count}");
+                Util.PrintLine($"valid_chest_armor: {valid_chest_armor.Count}");
 
                 valid_arm_armor = Data.Row_List_Armor_Arms;
 
-                Console.WriteLine($"valid_arm_armor: {valid_arm_armor.Count}");
+                Util.PrintLine($"valid_arm_armor: {valid_arm_armor.Count}");
 
                 valid_leg_armor = Data.Row_List_Armor_Legs;
 
-                Console.WriteLine($"valid_leg_armor: {valid_leg_armor.Count}");
+                Util.PrintLine($"valid_leg_armor: {valid_leg_armor.Count}");
 
                 valid_sorceries = Data.Row_List_Spell_Sorceries;
 
-                Console.WriteLine($"valid_sorceries: {valid_sorceries.Count}");
+                Util.PrintLine($"valid_sorceries: {valid_sorceries.Count}");
 
                 valid_miracles = Data.Row_List_Spell_Miracles;
 
-                Console.WriteLine($"valid_miracles: {valid_miracles.Count}");
+                Util.PrintLine($"valid_miracles: {valid_miracles.Count}");
 
                 valid_pyromancies = Data.Row_List_Spell_Pyromancies;
 
-                Console.WriteLine($"valid_pyromancies: {valid_pyromancies.Count}");
+                Util.PrintLine($"valid_pyromancies: {valid_pyromancies.Count}");
 
                 valid_hexes = Data.Row_List_Spell_Hexes;
 
-                Console.WriteLine($"valid_hexes: {valid_hexes.Count}");
+                Util.PrintLine($"valid_hexes: {valid_hexes.Count}");
             }
         }
         #endregion
@@ -2347,7 +2344,7 @@ namespace DS2_Scrambler
                     else if (cType == "b8" || cType == "b32")
                         RandomizeOne<bool>(rows, cName);
                     else if (cType == "dummy8" || cType == "fixstr" || cType == "fixstrW")
-                        Console.WriteLine($"Skipped {cName}");
+                        Util.PrintLine($"Skipped {cName}");
                     else
                         throw null;
                 }
@@ -2382,7 +2379,7 @@ namespace DS2_Scrambler
                         else if (cType == "b8" || cType == "b32")
                             RandomizeOne<bool>(rows, cName);
                         else if (cType == "dummy8" || cType == "fixstr" || cType == "fixstrW")
-                            Console.WriteLine($"Skipped {cName}");
+                            Util.PrintLine($"Skipped {cName}");
                         else
                             throw null;
                     }
@@ -2397,7 +2394,7 @@ namespace DS2_Scrambler
                 string cType = cell.Def.DisplayType.ToString();
                 string cName = cell.Def.InternalName;
 
-                //Console.WriteLine($"{cName} - {cType}");
+                //Util.PrintLine($"{cName} - {cType}");
 
                 if (cType == "u8" || cType == "x8")
                     RandomizeOne<byte>(rows, cName, plusMode);
@@ -2416,7 +2413,7 @@ namespace DS2_Scrambler
                 else if (cType == "b8" || cType == "b32")
                     RandomizeOne<bool>(rows, cName, plusMode);
                 else if (cType == "dummy8" || cType == "fixstr" || cType == "fixstrW")
-                    Console.WriteLine($"Skipped {cName}");
+                    Util.PrintLine($"Skipped {cName}");
                 else
                     throw null;
             }
