@@ -1,1 +1,15 @@
-﻿
+﻿# 1.04
+# Enemy Scrambler
+- Added exclusion to Enemy Scrambler for the Hollows that open the door in Forest of Fallen Giants.
+
+# Item Scrambler
+- Adjusted Aldia's Key list to eliminate the chance it might spawn behind Aldia's Keep door.
+- Enemy Drop randomisation now includes the fixed drop range.
+- Weapons may now be given a random infusion and reinforcement when set.
+- Existing reinforcement and infusions values are removed during randomisation to fix a potential bug where a non-weapon has those values above 0.
+- The King's Ring is now treated as a Key Item instead of as a ring.
+- The Seeds of a Tree of Giants drop is no longer randomised.
+- Gilligan's shop is now retained between his moves, instead of the items being different at each 'stage'. 
+- Carhillion's shop is now retained between his moves, instead of the items being different at each 'stage'. 
+- Licia's shop is now retained between his moves, instead of the items being different at each 'stage'. 
+

@@ -25,3 +25,4 @@
 53600000;Eye of the Priestess
 50990000;Dull Ember
 1980000;Key to the Embedded
+40510000;King's Ring

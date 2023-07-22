@@ -23,6 +23,7 @@ namespace DS2_Scrambler
         public Random rand;
         public Regulation regulation;
         public ScramblerData Data;
+        public EnemyData EnemyData;
 
         public bool Change_Enemy_Location = false;
         public bool Change_Enemy_Type_Basic = false;
@@ -32,259 +33,29 @@ namespace DS2_Scrambler
         public bool Location_Include_Characters = false;
         public bool Location_Include_NGP = false;
 
-        public EnemyScrambler(Random random, Regulation reg, ScramblerData scramblerData)
+        public Dictionary<string, List<int>> Per_Map_Excluded_Dict = new Dictionary<string, List<int>>
+        {
+            // Forest of Fallen Giants - Hollows Behind Door
+            { "m10_10_00_00", new List<int>{ 2520, 2521, 2522 } }
+
+            // Huntmans Copse
+            // Add the skeletons used by the Skeleton Lords fight
+        };
+
+
+        // TODO: add Petrified enemy list
+        // TODO: add Petrified enemy location scramble option.
+        // FIX: player start enemy is being moved in Things Betwixt
+        // FIX: add Vengarl Head npc to the character list
+
+        public EnemyScrambler(Random random, Regulation reg, ScramblerData scramblerData, EnemyData enemyData)
         {
             Data = scramblerData;
+            EnemyData = enemyData;
             rand = random;
             regulation = reg;
         }
 
-        #region Enemy Type
-        public Regulation Scramble_Enemy_Type(bool sharedEnemyPool, bool ignoreKeyCharacters, bool ignoreBosses)
-        {
-            string paramName = "generatorregistparam";
-            List<List<int>> valueList = new List<List<int>>();
-
-            // Done per map
-            if (!sharedEnemyPool)
-            {
-                foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
-                {
-                    if (wrapper.Name.Contains(paramName))
-                    {
-                        PARAM param = wrapper.Param;
-                        var param_rows = param.Rows;
-
-                        foreach (PARAM.Row row in param_rows)
-                        {
-                            bool addRow = true;
-
-                            int EnemyParamID = 0;
-                            int LogicParamID = 0;
-                            int DefaultLogicParamID = 0;
-
-                            foreach (PARAM.Cell cell in row.Cells)
-                            {
-                                if (cell.Def.InternalName == "EnemyParamID")
-                                    EnemyParamID = (int)cell.Value;
-
-                                if (cell.Def.InternalName == "LogicParamID")
-                                    LogicParamID = (int)cell.Value;
-
-                                if (cell.Def.InternalName == "DefaultLogicParamID")
-                                    DefaultLogicParamID = (int)cell.Value;
-                            }
-
-                            if (EnemyParamID > 0 && EnemyParamID != 837400)
-                            {
-                                if (ignoreKeyCharacters)
-                                    addRow = MayAdjustRow(EnemyParamID, Data.ID_List_Characters);
-
-                                // Only check if editRow is still true
-                                if (addRow && ignoreBosses)
-                                    addRow = MayAdjustRow(EnemyParamID, Data.ID_List_Bosses);
-
-                                if (addRow)
-                                {
-                                    List<int> value_list = new List<int>() { EnemyParamID, LogicParamID, DefaultLogicParamID };
-                                    valueList.Add(value_list);
-                                }
-                            }
-                        }
-
-                        // Change entries
-                        foreach (PARAM.Row row in param_rows)
-                        {
-                            bool editRow = true;
-
-                            List<int> chosenValues = valueList[rand.Next(valueList.Count)];
-
-                            int newEnemyParamID = chosenValues[0];
-                            int newLogicParamID = chosenValues[1];
-                            int newDefaultLogicParamID = chosenValues[2];
-
-                            int oldEnemyParamID = 0;
-                            int oldLogicParamID = 0;
-                            int oldDefaultLogicParamID = 0;
-
-                            foreach (PARAM.Cell cell in row.Cells)
-                            {
-                                if (cell.Def.InternalName == "EnemyParamID")
-                                    oldEnemyParamID = (int)cell.Value;
-
-                                if (cell.Def.InternalName == "LogicParamID")
-                                    oldLogicParamID = (int)cell.Value;
-
-                                if (cell.Def.InternalName == "DefaultLogicParamID")
-                                    oldDefaultLogicParamID = (int)cell.Value;
-                            }
-
-                            if (oldEnemyParamID > 0 && oldEnemyParamID != 837400)
-                            {
-                                if (ignoreKeyCharacters)
-                                    editRow = MayAdjustRow(oldEnemyParamID, Data.ID_List_Characters);
-
-                                // Only check if editRow is still true
-                                if (editRow && ignoreBosses)
-                                    editRow = MayAdjustRow(oldEnemyParamID, Data.ID_List_Bosses);
-
-                                if (editRow)
-                                {
-                                    foreach (PARAM.Cell cell in row.Cells)
-                                    {
-                                        if (cell.Def.InternalName == "EnemyParamID")
-                                            cell.Value = newEnemyParamID;
-
-                                        if (cell.Def.InternalName == "LogicParamID")
-                                            cell.Value = newLogicParamID;
-
-                                        if (cell.Def.InternalName == "DefaultLogicParamID")
-                                            cell.Value = newDefaultLogicParamID;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            // Done with a shared pool across all maps
-            else
-            {
-                foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
-                {
-                    if (wrapper.Name.Contains(paramName))
-                    {
-                        PARAM param = wrapper.Param;
-                        var param_rows = param.Rows;
-
-                        foreach (PARAM.Row row in param_rows)
-                        {
-                            bool addRow = true;
-
-                            int EnemyParamID = 0;
-                            int LogicParamID = 0;
-                            int DefaultLogicParamID = 0;
-
-                            foreach (PARAM.Cell cell in row.Cells)
-                            {
-                                if (cell.Def.InternalName == "EnemyParamID")
-                                    EnemyParamID = (int)cell.Value;
-
-                                if (cell.Def.InternalName == "LogicParamID")
-                                    LogicParamID = (int)cell.Value;
-
-                                if (cell.Def.InternalName == "DefaultLogicParamID")
-                                    DefaultLogicParamID = (int)cell.Value;
-                            }
-
-                            if (EnemyParamID > 0 && EnemyParamID != 837400)
-                            {
-                                if (ignoreKeyCharacters)
-                                    addRow = MayAdjustRow(EnemyParamID, Data.ID_List_Characters);
-
-                                // Only check if editRow is still true
-                                if (addRow && ignoreBosses)
-                                    addRow = MayAdjustRow(EnemyParamID, Data.ID_List_Bosses);
-
-                                if (addRow)
-                                {
-                                    List<int> value_list = new List<int>() { EnemyParamID, LogicParamID, DefaultLogicParamID };
-                                    valueList.Add(value_list);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Change entries
-                foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
-                {
-                    if (wrapper.Name.Contains(paramName))
-                    {
-                        PARAM param = wrapper.Param;
-                        var param_rows = param.Rows;
-
-                        foreach (PARAM.Row row in param_rows)
-                        {
-                            bool editRow = true;
-
-                            List<int> chosenValues = valueList[rand.Next(valueList.Count)];
-
-                            int newEnemyParamID = chosenValues[0];
-                            int newLogicParamID = chosenValues[1];
-                            int newDefaultLogicParamID = chosenValues[2];
-
-                            int oldEnemyParamID = 0;
-                            int oldLogicParamID = 0;
-                            int oldDefaultLogicParamID = 0;
-
-                            foreach (PARAM.Cell cell in row.Cells)
-                            {
-                                if (cell.Def.InternalName == "EnemyParamID")
-                                    oldEnemyParamID = (int)cell.Value;
-
-                                if (cell.Def.InternalName == "LogicParamID")
-                                    oldLogicParamID = (int)cell.Value;
-
-                                if (cell.Def.InternalName == "DefaultLogicParamID")
-                                    oldDefaultLogicParamID = (int)cell.Value;
-                            }
-
-                            if (oldEnemyParamID > 0 && oldEnemyParamID != 837400)
-                            {
-                                if (ignoreKeyCharacters)
-                                    editRow = MayAdjustRow(oldEnemyParamID, Data.ID_List_Characters);
-
-                                // Only check if editRow is still true
-                                if (editRow && ignoreBosses)
-                                    editRow = MayAdjustRow(oldEnemyParamID, Data.ID_List_Bosses);
-
-                                if (editRow)
-                                {
-                                    foreach (PARAM.Cell cell in row.Cells)
-                                    {
-                                        if (cell.Def.InternalName == "EnemyParamID")
-                                            cell.Value = newEnemyParamID;
-
-                                        if (cell.Def.InternalName == "LogicParamID")
-                                            cell.Value = newLogicParamID;
-
-                                        if (cell.Def.InternalName == "DefaultLogicParamID")
-                                            cell.Value = newDefaultLogicParamID;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            return regulation;
-        }
-
-        public bool MayAdjustRow(int value, List<int> list)
-        {
-            bool change = true;
-
-            foreach (int entry in list)
-            {
-                string entryStr = entry.ToString();
-                int target_id = int.Parse(entryStr.Remove(entryStr.Length - 2, 2));
-                string r = value.ToString();
-                r = r.Remove(r.Length - 2, 2);
-                int short_row_id = int.Parse(r);
-
-                if (short_row_id == target_id)
-                {
-                    change = false;
-                }
-            }
-
-            return change;
-        }
-        #endregion
-
-        #region Enemy Location
         public Regulation Scramble_Enemies(bool scrambleLocation, bool scrambleTypeBasic, bool location_OrderedPlacement, bool location_IncludeCharacters, bool location_NGP, bool scrambleTypeBoss, bool scrambleTypeCharacter, bool enableFuriousEnemies)
         {
             Change_Enemy_Location = scrambleLocation;
@@ -295,10 +66,10 @@ namespace DS2_Scrambler
             Location_Include_Characters = location_IncludeCharacters;
             Location_Include_NGP = location_NGP; // New Game Plus
 
-            if(scrambleLocation)
+            if (scrambleLocation)
                 ScrambleEnemyLocations();
 
-            if(scrambleTypeBasic)
+            if (scrambleTypeBasic)
                 ScrambleEnemyTypes();
 
             if (enableFuriousEnemies)
@@ -306,6 +77,95 @@ namespace DS2_Scrambler
 
             return regulation;
         }
+
+        #region Enemy Type
+
+        Dictionary<string, List<int>> enemyDictPerMap = new Dictionary<string, List<int>>();
+
+        public void ScrambleEnemyTypes()
+        {
+           
+            //Console.WriteLine("Dragonrider Test");
+            //ChangeEnemyType("m10_31_00_00", 61100000, 842, "m10_02_00_00", 30000000, 1600);
+        }
+
+        public void ChangeEnemyType(string target_map_id, int target_generator_id, int target_regist_id, string source_map_id, int source_generator_id, int source_regist_id)
+        {
+            List<ParamWrapper> target_regist_wrapper = regulation.regulationParamWrappers.Where(d => d.Name == ($"generatorregistparam_{target_map_id}")).ToList();
+            List<ParamWrapper> target_generator_wrapper = regulation.regulationParamWrappers.Where(d => d.Name == ($"generatorparam_{target_map_id}")).ToList();
+
+            Console.WriteLine($"target_regist_wrapper: {target_regist_wrapper.Count}");
+            Console.WriteLine($"target_generator_wrapper: {target_generator_wrapper.Count}");
+
+            List<ParamWrapper> source_regist_wrapper = regulation.regulationParamWrappers.Where(d => d.Name == ($"generatorregistparam_{source_map_id}")).ToList();
+            List<ParamWrapper> source_generator_wrapper = regulation.regulationParamWrappers.Where(d => d.Name == ($"generatorparam_{source_map_id}")).ToList();
+
+            Console.WriteLine($"source_regist_wrapper: {source_regist_wrapper.Count}");
+            Console.WriteLine($"source_generator_wrapper: {source_generator_wrapper.Count}");
+
+            List<PARAM.Row> target_regist_rows_id_verification = target_regist_wrapper[0].Rows;
+
+            List<PARAM.Row> target_regist_rows = target_regist_wrapper[0].Rows.Where(r => r.ID == target_generator_id).ToList();
+            List<PARAM.Row> target_generator_rows = target_generator_wrapper[0].Rows.Where(row => row.ID == target_regist_id).ToList();
+
+            Console.WriteLine($"target_regist_rows: {target_regist_rows.Count}");
+            Console.WriteLine($"target_generator_rows: {target_generator_rows.Count}");
+
+            List<PARAM.Row> source_regist_rows = source_regist_wrapper[0].Rows.Where(r => r.ID == source_generator_id).ToList();
+            List<PARAM.Row> source_generator_rows = source_generator_wrapper[0].Rows.Where(row => row.ID == source_regist_id).ToList();
+
+            Console.WriteLine($"source_regist_rows: {source_regist_rows.Count}");
+            Console.WriteLine($"source_generator_rows: {source_generator_rows.Count}");
+
+            PARAM.Row target_regist = target_regist_rows[0];
+            PARAM.Row target_generator = target_generator_rows[0];
+
+            Console.WriteLine($"target_regist: {target_regist.ID}");
+            Console.WriteLine($"target_generator: {target_generator.ID}");
+
+            PARAM.Row source_regist = source_regist_rows[0];
+            PARAM.Row source_generator = source_generator_rows[0];
+
+            Console.WriteLine($"source_regist: {source_regist.ID}");
+            Console.WriteLine($"source_generator: {source_generator.ID}");
+
+            // Change Dragonrider
+            int new_id = target_regist.ID;
+
+            bool isUnique = false;
+            while (!isUnique)
+            {
+                new_id = new_id + 1;
+                isUnique = IsUniqueRowID(target_regist_rows_id_verification, new_id);
+                Console.WriteLine($"Unique ID Search result: {new_id} - {isUnique}");
+            }
+
+            target_regist.ID = new_id;
+            target_regist["EnemyParamID"].Value = target_regist["EnemyParamID"].Value;
+            target_regist["LogicParamID"].Value = target_regist["LogicParamID"].Value;
+            target_regist["DefaultLogicParamID"].Value = target_regist["DefaultLogicParamID"].Value;
+            target_regist["SpawnState"].Value = 0; // Zero it out to be safe
+
+            target_generator["GeneratorRegistParam"].Value = target_regist.ID;
+        }
+
+        public bool IsUniqueRowID(List<PARAM.Row> verification_rows, int new_id)
+        {
+            bool isUnique = false;
+
+            foreach (PARAM.Row row in verification_rows)
+            {
+                if (row.ID == new_id)
+                {
+                    isUnique = false;
+                }
+            }
+
+            return isUnique;
+        }
+        #endregion
+
+        #region Enemy Location
 
         public void ScrambleEnemyLocations()
         {
@@ -317,6 +177,15 @@ namespace DS2_Scrambler
                 if (wrapper.Name.Contains("generatorlocation"))
                 {
                     string map_id = wrapper.Name.Replace("generatorlocation_", "");
+
+                    // Ignore excluded rows
+                    if (Per_Map_Excluded_Dict.ContainsKey(map_id))
+                    {
+                        foreach (int row_id in Per_Map_Excluded_Dict[map_id])
+                        {
+                            param_rows = param_rows.Where(row => row.ID != row_id).ToList();
+                        }
+                    }
 
                     // Ignore boss rows
                     foreach (int row_id in Data.Per_Map_Boss_Dict[map_id])
@@ -379,48 +248,9 @@ namespace DS2_Scrambler
             }
         }
 
-        public void ScrambleEnemyTypes()
-        {
-            List<PARAM.Row> GeneratorRegisters = new List<PARAM.Row>();
+        #endregion
 
-            // Build generator register
-            foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)
-            {
-                PARAM param = wrapper.Param;
-                List<PARAM.Row> param_rows = param.Rows;
-
-                if (wrapper.Name.Contains("generatorregistparam"))
-                {
-                    string map_id = wrapper.Name.Replace("generatorregistparam", "");
-
-                    // Ignore skip rows
-                    foreach (int row_id in Data.Per_Map_Skip_Dict[map_id])
-                    {
-                        param_rows = param_rows.Where(row => row.ID != row_id).ToList();
-                    }
-
-                    // Ignore boss rows
-                    foreach (int row_id in Data.Per_Map_Boss_Dict[map_id])
-                    {
-                        param_rows = param_rows.Where(row => row.ID != row_id).ToList();
-                    }
-
-                    // Ignore character
-                    foreach (int row_id in Data.Per_Map_Character_Dict[map_id])
-                    {
-                        param_rows = param_rows.Where(row => row.ID != row_id).ToList();
-                    }
-
-                    foreach (PARAM.Row row in param_rows)
-                    {
-                        
-                    }
-                }
-            }
-
-            // Apply the scrambled registers to the generators
-        }
-
+        #region Enemy Tweaks
         public void ApplyEnemyAggressionMod()
         {
             foreach (ParamWrapper wrapper in regulation.regulationParamWrappers)

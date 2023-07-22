@@ -7,6 +7,7 @@
 3406000;Fists
 3407000;Fists
 3408000;Fists
+1980000;Key to the Embedded
 6000000;6000: Torch (Small) -- 6000:??(?)
 6100000;Binoculars
 6300000;6300: Phantom - Dagger  -- 6300:??-??

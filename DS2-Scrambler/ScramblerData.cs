@@ -33,6 +33,8 @@ namespace DS2_Scrambler
 
         // *** Lists ***
         // ID Lists correspond to EnemyParam
+
+        // TODO: remove these four 
         public List<int> ID_List_Bosses = new List<int>();
         public List<int> ID_List_Characters = new List<int>();
         public List<int> ID_List_Enemies = new List<int>();
@@ -153,7 +155,8 @@ namespace DS2_Scrambler
 
         public List<PARAM.Row> Shoplot_List_Vengarl; // 30700000 - 30700602
         public List<PARAM.Row> Shoplot_List_Agdayne; // 50600300 - 50600603
-        public List<PARAM.Row> Shoplot_List_Gilligan; // 70400000 - 70400605
+        public List<PARAM.Row> Shoplot_List_Gilligan_InitialStage; // 70400000 - 70400605
+        public List<PARAM.Row> Shoplot_List_Gilligan_SecondStage; // 70400000 - 70400605
         public List<PARAM.Row> Shoplot_List_Wellager; // 72110000 - 72110607
         public List<PARAM.Row> Shoplot_List_Grandahl; // 72500300 - 72500601
         public List<PARAM.Row> Shoplot_List_Gavlan; // 72600400 - 72600607
@@ -163,10 +166,14 @@ namespace DS2_Scrambler
         public List<PARAM.Row> Shoplot_List_Chloanne; // 76200300 - 76200618
         public List<PARAM.Row> Shoplot_List_Rosabeth; // 76300300 - 76300603
         public List<PARAM.Row> Shoplot_List_Lenigrast; // 76400000 - 76400605
-        public List<PARAM.Row> Shoplot_List_McDuff; // 76430000 - 76430606
+        public List<PARAM.Row> Shoplot_List_McDuff; // 76430000 - 
         public List<PARAM.Row> Shoplot_List_Carhillion; // 76600000 - 76600602
+        public List<PARAM.Row> Shoplot_List_Carhillion_InitialStage; // 76600000 - 76600602
+        public List<PARAM.Row> Shoplot_List_Carhillion_SecondStage; // 76600000 - 76600602
         public List<PARAM.Row> Shoplot_List_Straid; // 76800000 - 76800600
         public List<PARAM.Row> Shoplot_List_Licia; // 76900000 - 76900400
+        public List<PARAM.Row> Shoplot_List_Licia_InitialStage; // 76900000 - 76900400
+        public List<PARAM.Row> Shoplot_List_Licia_SecondStage; // 76900000 - 76900400
         public List<PARAM.Row> Shoplot_List_Felkin; // 77000000 - 77000600
         public List<PARAM.Row> Shoplot_List_Navlaan; // 77100200 - 77100604
         public List<PARAM.Row> Shoplot_List_Magerold; // 77200200 - 77200606
@@ -207,6 +214,7 @@ namespace DS2_Scrambler
         public List<PARAM.Row> Row_List_Eye_of_the_Priestess = new List<PARAM.Row>();
         public List<PARAM.Row> Row_List_Dull_Ember = new List<PARAM.Row>();
         public List<PARAM.Row> Row_List_Key_to_the_Embedded = new List<PARAM.Row>();
+        public List<PARAM.Row> Row_List_King_Ring = new List<PARAM.Row>();
 
         // *** Strings ***
         public string ParamScramblePath;
@@ -474,7 +482,7 @@ namespace DS2_Scrambler
             Util.PrintLine($"Itemlot_List_DLC - {Itemlot_List_DLC.Count}");
 
             Itemlot_List_Things_Betwixt = ItemlotParam_Map.Rows.Where(row => 
-                row.ID >= 10025010 && row.ID <= 50379000 &&
+                row.ID >= 10025010 && row.ID <= 10027000 &&
                 !Itemlot_Info_Skipped_Lots.Contains(row.ID)
                 ).ToList();
 
@@ -711,11 +719,24 @@ namespace DS2_Scrambler
 
             Util.PrintLine($"Shoplot_List_Agdayne - {Shoplot_List_Agdayne.Count}");
 
-            Shoplot_List_Gilligan = ShopLineupParam.Rows.Where(row =>
-                row.ID >= 70400000 && row.ID <= 70400900
-                ).ToList();
+            // This is to handle the way his shop is set up
+            List<int> GilliganInitialShop = new List<int> {
+                70400000, 70400001, 70400002, 70400003,
+                70400200, 70400201, 70400202, 70400203,
+                70400500, 70400600, 70400601, 70400602
+            };
 
-            Util.PrintLine($"Shoplot_List_Gilligan - {Shoplot_List_Gilligan.Count}");
+            Shoplot_List_Gilligan_InitialStage = ShopLineupParam.Rows.Where(row =>
+                row.ID >= 70400000 && row.ID <= 70400900
+                && GilliganInitialShop.Contains(row.ID)).ToList();
+
+            Util.PrintLine($"Shoplot_List_Gilligan_InitialStage - {Shoplot_List_Gilligan_InitialStage.Count}");
+
+            Shoplot_List_Gilligan_SecondStage = ShopLineupParam.Rows.Where(row =>
+                row.ID >= 70400000 && row.ID <= 70400900
+                && !GilliganInitialShop.Contains(row.ID)).ToList();
+
+            Util.PrintLine($"Shoplot_List_Gilligan_SecondStage - {Shoplot_List_Gilligan_SecondStage.Count}");
 
             Shoplot_List_Wellager = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 72110000 && row.ID <= 72110900
@@ -777,11 +798,36 @@ namespace DS2_Scrambler
 
             Util.PrintLine($"Shoplot_List_McDuff - {Shoplot_List_McDuff.Count}");
 
+            // This is to handle the way his shop is set up
+            List<int> CarhillionInitialShop = new List<int> {
+                76600300, 76600301, 76600302, 76600303, 76600304, 76600305, 76600306, 76600307
+            };
+
+            List<int> CarhillionSecondShop = new List<int> {
+                76600308, 76600309, 76600310, 76600311, 76600312, 76600313, 76600314, 76600315
+            };
+
             Shoplot_List_Carhillion = ShopLineupParam.Rows.Where(row =>
-                row.ID >= 76600000 && row.ID <= 76600900
+                row.ID >= 76600000 && row.ID <= 76600900 &&
+                !CarhillionInitialShop.Contains(row.ID) &&
+                !CarhillionSecondShop.Contains(row.ID)
                 ).ToList();
 
             Util.PrintLine($"Shoplot_List_Carhillion - {Shoplot_List_Carhillion.Count}");
+
+            Shoplot_List_Carhillion_InitialStage = ShopLineupParam.Rows.Where(row =>
+                row.ID >= 76600000 && row.ID <= 76600900 &&
+                CarhillionInitialShop.Contains(row.ID)
+                ).ToList();
+
+            Util.PrintLine($"Shoplot_List_Carhillion_InitialStage - {Shoplot_List_Carhillion_InitialStage.Count}");
+
+            Shoplot_List_Carhillion_SecondStage = ShopLineupParam.Rows.Where(row =>
+                row.ID >= 76600000 && row.ID <= 76600900 &&
+                CarhillionSecondShop.Contains(row.ID)
+                ).ToList();
+
+            Util.PrintLine($"Shoplot_List_Carhillion_SecondStage - {Shoplot_List_Carhillion_SecondStage.Count}");
 
             Shoplot_List_Straid = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 76800000 && row.ID <= 76800900
@@ -789,11 +835,36 @@ namespace DS2_Scrambler
 
             Util.PrintLine($"Shoplot_List_Straid - {Shoplot_List_Straid.Count}");
 
+            // This is to handle the way her shop is set up
+            List<int> LiciaInitialShop = new List<int> {
+                76900300, 76900301, 76900302, 76900303, 76900304, 76900305, 76900306, 76900307, 76900308, 76900309
+            };
+
+            List<int> LiciaSecondShop = new List<int> {
+                76900310, 76900311, 76900312, 76900313, 76900314, 76900315, 76900316, 76900317, 76900318, 76900319
+            };
+
             Shoplot_List_Licia = ShopLineupParam.Rows.Where(row =>
-                row.ID >= 76900000 && row.ID <= 76900900
+                row.ID >= 76900000 && row.ID <= 76900900 &&
+                !LiciaInitialShop.Contains(row.ID) &&
+                !LiciaSecondShop.Contains(row.ID)
                 ).ToList();
 
             Util.PrintLine($"Shoplot_List_Licia - {Shoplot_List_Licia.Count}");
+
+            Shoplot_List_Licia_InitialStage = ShopLineupParam.Rows.Where(row =>
+                row.ID >= 76900000 && row.ID <= 76900900 &&
+                LiciaInitialShop.Contains(row.ID)
+                ).ToList();
+
+            Util.PrintLine($"Shoplot_List_Licia_InitialStage - {Shoplot_List_Licia_InitialStage.Count}");
+
+            Shoplot_List_Licia_SecondStage = ShopLineupParam.Rows.Where(row =>
+                row.ID >= 76900000 && row.ID <= 76900900 &&
+                LiciaSecondShop.Contains(row.ID)
+                ).ToList();
+
+            Util.PrintLine($"Shoplot_List_Licia_SecondStage - {Shoplot_List_Licia_SecondStage.Count}");
 
             Shoplot_List_Felkin = ShopLineupParam.Rows.Where(row =>
                 row.ID >= 77000000 && row.ID <= 77000900
@@ -894,7 +965,6 @@ namespace DS2_Scrambler
             Row_List_Aldia_Key = Row_List_Aldia_Key.Concat(Itemlot_List_Majula.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Aldia_Key = Row_List_Aldia_Key.Concat(Itemlot_List_Forest_of_Fallen_Giants.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Aldia_Key = Row_List_Aldia_Key.Concat(Itemlot_List_Brightstone_Cove_Tseldora.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
-            Row_List_Aldia_Key = Row_List_Aldia_Key.Concat(Itemlot_List_Aldias_Keep.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Aldia_Key = Row_List_Aldia_Key.Concat(Itemlot_List_Lost_Bastille.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Aldia_Key = Row_List_Aldia_Key.Concat(Itemlot_List_Earthen_Peak.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
             Row_List_Aldia_Key = Row_List_Aldia_Key.Concat(Itemlot_List_No_Mans_Wharf.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
@@ -1051,7 +1121,7 @@ namespace DS2_Scrambler
             Util.PrintLine($"Row_List_Undead_Lockaway_Key - {Row_List_Undead_Lockaway_Key.Count}");
 
             // Eternal Sanctum Key
-            Row_List_Eternal_Sanctum_Key = Row_List_Eternal_Sanctum_Key = Row_List_Eternal_Sanctum_Key.Concat(Itemlot_List_Shulva.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_Eternal_Sanctum_Key = Row_List_Eternal_Sanctum_Key.Concat(Itemlot_List_Shulva.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
             Util.PrintLine($"Row_List_Eternal_Sanctum_Key - {Row_List_Eternal_Sanctum_Key.Count}");
 
@@ -1166,6 +1236,28 @@ namespace DS2_Scrambler
             Row_List_Key_to_the_Embedded = Row_List_Key_to_the_Embedded.Concat(Itemlot_List_Drangleic_Castle.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
 
             Util.PrintLine($"Row_List_Key_to_the_Embedded - {Row_List_Key_to_the_Embedded.Count}");
+
+            // King Ring
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Things_Betwixt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Majula.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Forest_of_Fallen_Giants.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Brightstone_Cove_Tseldora.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Aldias_Keep.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Lost_Bastille.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Earthen_Peak.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_No_Mans_Wharf.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Iron_Keep.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Huntmans_Copse.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_The_Gutter.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Heides_Tower_of_Flame.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Shaded_Woods.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Doors_of_Pharros.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Grave_of_Saints.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Shrine_of_Amana.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Drangleic_Castle.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+            Row_List_King_Ring = Row_List_King_Ring.Concat(Itemlot_List_Undead_Crypt.Where(row => !Itemlot_Info_Forbidden_For_Keys.Contains(row.ID)).ToList()).ToList();
+
+            Util.PrintLine($"Row_List_King_Ring - {Row_List_King_Ring.Count}");
         }
 
         public List<int> ConstructIntegerDataList(string path)
@@ -1453,9 +1545,11 @@ namespace DS2_Scrambler
 
         public List<int> Itemlot_Info_Never_Change = new List<int>
         {
-            60155000, 60155010, 60155020, 60155030, 62190000, // Estus Flask
+            60155000, 60155010, 60155020, 60155030, // Estus Flask
             60360000, // Darksign
             53600000, // Eye of the Priestess
+            62190000, // Petrified Egg
+            60002000, // Seed of a Tree of Giants
             64600000 // Loyce Soul
         };
 
@@ -1467,227 +1561,6 @@ namespace DS2_Scrambler
         public List<int> Itemlot_Info_Bird_Trades = new List<int>
         {
             50000000, 50000001, 50000002, 50000003, 50000100, 50000101, 50000102, 50000103, 50000200, 50000201, 50000202, 50000203, 50000300, 50000301, 50000302, 50000303, 50001000,
-        };
-
-        // *** Enemies
-        public Dictionary<string, int> Enemy_Info = new Dictionary<string, int>
-        {
-            { "1000", 1 }, // Forest Grotesque
-            { "1010", 1 }, // Kobold
-            { "1020", 1 }, // Hollow Soldier
-            { "1021", 1 }, // Royal Soldier
-            { "1030", 1 }, // Hollow Infantry
-            { "1031", 1 }, // Drangleic Infantry
-            { "1050", 1 }, // Amana Shrine Maiden
-            { "1060", 1 }, // Hollow Priest
-            { "1062", 1 }, // Hollow Priestess
-            { "1070", 1 }, // Parasitized Undead
-            { "1080", 1 }, // Hollow Rogue
-            { "1130", 1 }, // Varangian Sailor
-            { "1150", 1 }, // Undead Traveler
-            { "1170", 1 }, // Stone Soldier
-            { "1180", 1 }, // Black Hollow Mage
-            { "1182", 1 }, // White Hollow Mage
-            { "1190", 1 }, // Lion Clan Mage
-            { "1210", 1 }, // Giant
-            { "1230", 1 }, // Suspicious Shadow
-            { "1240", 1 }, // Manikin
-            { "1250", 1 }, // Rupturing Hollow
-            { "1270", 1 }, // Captive Undead
-            { "1271", 1 }, // Captive Undead
-            { "1290", 1 }, // Forest Spirit
-            { "1292", 1 }, // Forest Spirit
-            { "1310", 1 }, // Lindelt Cleric
-            { "1320", 1 }, // Skeleton
-            { "1340", 1 }, // Gyrm
-            { "1350", 1 }, // Gyrm Warrior
-            { "1370", 1 }, // Prowling Magus
-            { "1380", 1 }, // Torturer
-            { "1390", 1 }, // Artificial Undead
-            { "1410", 1 }, // Undead Aberration
-            { "1460", 1 }, // Lord Tseldora
-            { "1470", 1 }, // Undead Supplicant
-            { "1480", 1 }, // Undead Peasant
-            { "1490", 1 }, // Undead Steelworker
-            { "1500", 1 }, // Stone Knight
-            { "1510", 1 }, // Ironclad Soldier
-            { "1512", 1 }, // Ironclad Soldier
-            { "1520", 1 }, // Royal Soldier
-            { "1530", 1 }, // Syan Knight
-            { "1540", 1 }, // Skeleton Lord
-            { "1550", 1 }, // Amana Aberration
-            { "1560", 1 }, // UNKNOWN
-            { "1570", 1 }, // Dual-wielding Skeleton
-            { "2011", 1 }, // Small Boar
-            { "2021", 1 }, // Undead Boar
-            { "2030", 1 }, // Parasite Spider
-            { "2040", 1 }, // Poison Moth
-            { "2050", 1 }, // Poison Horn Beetle
-            { "2051", 1 }, // Acid Horn Beetle
-            { "2060", 1 }, // Razorback Nightcrawler
-            { "2090", 1 }, // Hunting Dog
-            { "2100", 1 }, // Basilisk
-            { "2120", 1 }, // Guardian Dragon
-            { "2130", 1 }, // Crystal Lizard
-            { "2131", 1 }, // Red Crystal Lizard
-            { "2140", 1 }, // Giant Undead Boar
-            { "2160", 1 }, // Wall Ghost
-            { "2170", 1 }, // Dark Stalker
-            { "2200", 1 }, // Giant Acid Horn Beetle
-            { "2220", 1 }, // Giant Basilisk
-            { "2230", 1 }, // Mongrel Rat
-            { "2240", 1 }, // Darksucker
-            { "2260", 1 }, // Corpse Rat
-            { "2261", 1 }, // Corpse Rat
-            { "2262", 1 }, // Corpse Rat
-            { "2270", 1 }, // Stray Dog
-            { "2271", 1 }, // Stray Dog
-            { "3000", 1 }, // Ogre
-            { "3010", 1 }, // Heide Knight
-            { "3020", 1 }, // Undead Jailer
-            { "3033", 1 }, // Flexile Sentry
-            { "3040", 1 }, // Milfanito
-            { "3050", 1 }, // Smelter Demon
-            { "3052", 1 }, // Blue Smelter Demon
-            { "3060", 1 }, // Alonne Captain
-            { "3070", 1 }, // Headless Vengarl
-            { "3071", 1 }, // Vengarl
-            { "3080", 1 }, // Lion Clan Warrior
-            { "3090", 1 }, // Forgotten Giant
-            { "3096", 1 }, // Last Giant
-            { "3097", 1 }, // Giant Lord
-            { "3110", 1 }, // Mounted Overseer
-            { "3120", 1 }, // Grave Warden
-            { "3130", 1 }, // Hollow Falconer
-            { "3140", 1 }, // Hollow Primal Knight
-            { "3150", 1 }, // Primal Knight
-            { "3160", 1 }, // Desert Sorceress
-            { "3170", 1 }, // Dragon Acolyte
-            { "3180", 1 }, // The Pursuer
-            { "3190", 1 }, // Alonne Knight
-            { "3210", 1 }, // Mimic
-            { "3240", 1 }, // Belfry Gargoyle
-            { "3250", 1 }, // Ruin Sentinel
-            { "3260", 1 }, // The Rotten
-            { "3270", 1 }, // Dragon Skeleton
-            { "3300", 1 }, // Old Knight
-            { "3310", 1 }, // Drakekeeper
-            { "3320", 1 }, // Throne Defender
-            { "3330", 1 }, // Velstadt
-            { "3340", 1 }, // Throne Watcher
-            { "3370", 1 }, // Captive Undead
-            { "5000", 1 }, // Covetous Demon
-            { "5010", 1 }, // Mytha
-            { "5020", 1 }, // Manscorpion Tark
-            { "5030", 1 }, // Scorpioness Najka
-            { "5040", 1 }, // Looking Glass Knight
-            { "5061", 1 }, // Darklurker
-            { "5062", 1 }, // UNKNOWN
-            { "5065", 1 }, // Grave Warden Agdayne
-            { "5090", 1 }, // Leydia Witch
-            { "5110", 1 }, // Imperious Knight
-            { "5120", 1 }, // Leydia Pyromancer
-            { "5146", 1 }, // Vendrick (hollow)
-            { "6000", 1 }, // Ancient Dragon
-            { "6010", 1 }, // Flame Lizard
-            { "6020", 1 }, // Demon of Song
-            { "6030", 1 }, // The Duke's Dear Freja
-            { "6031", 1 }, // The Duke's Dear Freja - Encounter
-            { "6070", 1 }, // Old Iron King
-            { "6080", 1 }, // Corrosive Ant Queen
-            { "6110", 1 }, // Dragonrider (Heide)
-            { "6115", 1 }, // Dragonrider (Drangleic)
-            { "6191", 1 }, // Executioner's Chariot
-            { "6250", 1 }, // Old Dragonslayer
-            { "6260", 1 }, // The Lost Sinner
-            { "6270", 1 }, // Nashandra
-            { "6280", 1 }, // Royal Rat Authority
-            { "6500", 1 }, // Iron Warrior
-            { "6510", 1 }, // Fume Sorcerer
-            { "6530", 1 }, // Ashen Warrior
-            { "6540", 1 }, // Ashen Crawler
-            { "6560", 1 }, // Possessed Armor
-            { "6570", 1 }, // Barrel Carrier
-            { "6580", 1 }, // Retainer
-            { "6590", 1 }, // Rampart Golem
-            { "6600", 1 }, // Crystal Golem
-            { "6610", 1 }, // Frozen Reindeer
-            { "6620", 1 }, // Rampart Hedgehog
-            { "6630", 1 }, // Rampart Spearman
-            { "6650", 1 }, // Sanctum Knight
-            { "6660", 1 }, // Sanctum Soldier
-            { "6700", 1 }, // Sanctum Priestess
-            { "6710", 1 }, // Poison Statue Cluster
-            { "6711", 1 }, // Poison Statue Cluster (petrify)
-            { "6720", 1 }, // Corrosive Ant
-            { "6740", 1 }, // Pagan Tree
-            { "6750", 1 }, // Fume Knight
-            { "6770", 1 }, // Retainer Sorcerer
-            { "6780", 1 }, // Ice Golem
-            { "6790", 1 }, // Aava
-            { "6791", 1 }, // Lud - Zallen
-            { "6800", 1 }, // Sir Alonne
-            { "6810", 1 }, // Sinh
-            { "6820", 1 }, // Elana
-            { "6830", 1 }, // Imperfect
-            { "6840", 1 }, // Vendrick
-            { "6850", 1 }, // Skeleton (Elana)
-            { "6860", 1 }, // Small Undead Boar (Elana)
-            { "6870", 1 }, // Velstadt (Elana)
-            { "6880", 1 }, // Loyce Knight
-            { "6890", 1 }, // Charred Loyce Knight
-            { "6900", 1 }, // Burnt Ivory King
-            { "6920", 1 }, // Aldia
-            { "6940", 1 }, // Forlorn (Greatsword)
-            { "6950", 1 }, // Forlorn (Scythe)
-            { "6960", 1 }, // Invisible Hollow
-            { "7005", 1 }, // Emerald Herald
-            { "7015", 1 }, // Emerald Herald
-            { "7036", 1 }, // Nashandra (human)
-            { "7045", 1 }, // Laddersmith Gilligan
-            { "7050", 1 }, // Strowen
-            { "7051", 1 }, // Morrel
-            { "7053", 1 }, // Griant
-            { "7055", 1 }, // Strowen
-            { "7056", 1 }, // Morrel
-            { "7058", 1 }, // Griant
-            { "7211", 1 }, // Chancellor Wellager
-            { "7230", 1 }, // Milibeth
-            { "7240", 1 }, // Captain Drummond
-            { "7250", 1 }, // Darkdiver Grandahl
-            { "7260", 1 }, // Lonesome Gavlan
-            { "7300", 1 }, // Looking Glass Phantom (Faraam)
-            { "7310", 1 }, // Looking Glass Phantom (Knight)
-            { "7320", 1 }, // Lost Sinner Pyromancer
-            { "7330", 1 }, // Lost Sinner Pyromancer
-            { "7410", 1 }, // Crestfallen Saulden
-            { "7420", 1 }, // Creighton the Wanderer
-            { "7430", 1 }, // Benhart of Jugo
-            { "7440", 1 }, // Mild Mannered Pate
-            { "7510", 1 }, // Cartographer Cale
-            { "7520", 1 }, // Lucatiel of Mirrah
-            { "7530", 1 }, // Bell Keeper
-            { "7540", 1 }, // Merchant Hag Melentia
-            { "7600", 1 }, // Milfanito 1
-            { "7601", 1 }, // Milfanito 2
-            { "7602", 1 }, // Imprisoned Milfanito
-            { "7610", 1 }, // Maughlin the Armourer
-            { "7620", 1 }, // Stone Trader Chloanne
-            { "7630", 1 }, // Rosabeth of Melfia
-            { "7640", 1 }, // Blacksmith Lenigrast
-            { "7643", 1 }, // Steady Hand McDuff
-            { "7660", 1 }, // Carhillion of the Fold
-            { "7680", 1 }, // Straid of Olaphis
-            { "7690", 1 }, // Licia of Lindeldt
-            { "7700", 1 }, // Felkin the Outcast
-            { "7710", 1 }, // Royal Sorcerer Navlaan
-            { "7720", 1 }, // Magerold of Lanafir
-            { "7760", 1 }, // Weaponsmith Ornifex
-            { "7770", 1 }, // Sweet Shalquoir
-            { "7830", 1 }, // Titchy Gren
-            { "7840", 1 }, // Cromwell the Pardoner
-            { "7850", 1 }, // Blue Sentinel Targray
-            { "7860", 1 }, // Dyna & Tillo
         };
     }
 }

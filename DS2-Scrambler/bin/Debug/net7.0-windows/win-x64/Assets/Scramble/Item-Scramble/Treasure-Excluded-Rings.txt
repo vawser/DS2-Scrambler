@@ -1,2 +1,3 @@
 40560000;Illusory Ring of the Vengeful
 40570000;Illusory Ring of the Guilty
+40510000;King's Ring

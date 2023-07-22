@@ -22,7 +22,10 @@ namespace DS2_Scrambler
         private Progress<string> ProgressText;
 
         public ScramblerData scramblerData;
+        public EnemyData enemyData;
         public Regulation reg;
+
+        // TODO: add 'map' tab, for scrambling stuff such as objects
 
         public Main()
         {
@@ -41,10 +44,6 @@ namespace DS2_Scrambler
             t_ModPath.Text = "";
 
             t_StatSkew.Value = 6;
-
-            c_Scramble_Enemy_Type_Basic.Enabled = false;
-            c_Scramble_Enemy_Type_Boss.Enabled = false;
-            c_Scramble_Enemy_Type_Characters.Enabled = false;
         }
 
         private void b_SelectModPath_Click(object sender, EventArgs e)
@@ -93,6 +92,9 @@ namespace DS2_Scrambler
 
                 scramblerData = new ScramblerData(reg, Path_ScrambledMod);
                 progress.Report("Scrambler data built.");
+
+                enemyData = new EnemyData(reg, Path_ScrambledMod);
+                progress.Report("Enemy data built.");
 
                 // Scramble
                 reg = ScrambleParams(progress, reg);
@@ -347,9 +349,9 @@ namespace DS2_Scrambler
             //********************
             try
             {
-                EnemyScrambler enemy_scrambler = new EnemyScrambler(rand, reg, scramblerData);
+                EnemyScrambler enemy_scrambler = new EnemyScrambler(rand, reg, scramblerData, enemyData);
 
-                if (c_Scramble_Enemy_Location.Checked || c_Scramble_Enemy_Type_Basic.Checked || c_FuriousEnemies.Checked)
+                if (c_Scramble_Enemy_Location.Checked || c_Scramble_Enemy_Type_Basic.Checked || c_Scramble_Enemy_Type_Boss.Checked || c_Scramble_Enemy_Type_Characters.Checked || c_FuriousEnemies.Checked )
                 {
                     // This method is decent, but variety is limited and bosses don't mesh with position changes.
                     progress.Report("Scramble: Enemies");

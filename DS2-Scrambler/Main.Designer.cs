@@ -1752,9 +1752,9 @@
             this.c_Enemy_Location_IncludeSpecial.AutoSize = true;
             this.c_Enemy_Location_IncludeSpecial.Location = new System.Drawing.Point(6, 96);
             this.c_Enemy_Location_IncludeSpecial.Name = "c_Enemy_Location_IncludeSpecial";
-            this.c_Enemy_Location_IncludeSpecial.Size = new System.Drawing.Size(152, 19);
+            this.c_Enemy_Location_IncludeSpecial.Size = new System.Drawing.Size(140, 19);
             this.c_Enemy_Location_IncludeSpecial.TabIndex = 17;
-            this.c_Enemy_Location_IncludeSpecial.Text = "Include Special Enemies";
+            this.c_Enemy_Location_IncludeSpecial.Text = "Include NG+ Enemies";
             this.c_Enemy_Location_IncludeSpecial.UseVisualStyleBackColor = true;
             // 
             // c_Enemy_Location_Ordered
