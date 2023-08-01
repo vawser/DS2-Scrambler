@@ -33,7 +33,6 @@ namespace DS2_Scrambler
 
         // TODO: add cheat-sheet generation so important items can be peeked at - At minimum this should pinpoint keys
         // TODO: add flag set for the boss soul trades if soul item is picked up, will require ESD edits
-        
         // FIX: enemy drops have added entries with 0.0 chance 
 
         public ItemScrambler(Random random, Regulation reg, ScramblerData scramblerData)

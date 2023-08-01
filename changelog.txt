@@ -1,6 +1,9 @@
 ﻿# 1.04
 # Enemy Scrambler
-- Added exclusion to Enemy Scrambler for the Hollows that open the door in Forest of Fallen Giants.
+- Reworked the enemy scrambler to allow for more granular control.
+ - Added the ability to toggle which maps have the enemies scrambled.
+ - Scrambling Characters is now a toggle, and scrambles them to custom locations within each level, instead of existing locations.
+- Added lots of exclusions to the scrambler for entities that should not be scrambled.
 
 # Item Scrambler
 - Adjusted Aldia's Key list to eliminate the chance it might spawn behind Aldia's Keep door.

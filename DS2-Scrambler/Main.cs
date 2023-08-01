@@ -22,7 +22,6 @@ namespace DS2_Scrambler
         private Progress<string> ProgressText;
 
         public ScramblerData scramblerData;
-        public EnemyData enemyData;
         public Regulation reg;
 
         // TODO: add 'map' tab, for scrambling stuff such as objects
@@ -92,9 +91,6 @@ namespace DS2_Scrambler
 
                 scramblerData = new ScramblerData(reg, Path_ScrambledMod);
                 progress.Report("Scrambler data built.");
-
-                enemyData = new EnemyData(reg, Path_ScrambledMod);
-                progress.Report("Enemy data built.");
 
                 // Scramble
                 reg = ScrambleParams(progress, reg);
@@ -349,22 +345,12 @@ namespace DS2_Scrambler
             //********************
             try
             {
-                EnemyScrambler enemy_scrambler = new EnemyScrambler(rand, reg, scramblerData, enemyData);
+                EnemyScrambler enemy_scrambler = new EnemyScrambler(rand, reg, scramblerData);
 
-                if (c_Scramble_Enemy_Location.Checked || c_Scramble_Enemy_Type_Basic.Checked || c_Scramble_Enemy_Type_Boss.Checked || c_Scramble_Enemy_Type_Characters.Checked || c_FuriousEnemies.Checked )
+                if (c_Scramble_Enemy_Location.Checked || c_EnemyShareAggro.Checked)
                 {
-                    // This method is decent, but variety is limited and bosses don't mesh with position changes.
                     progress.Report("Scramble: Enemies");
-                    reg = enemy_scrambler.Scramble_Enemies(
-                        c_Scramble_Enemy_Location.Checked, 
-                        c_Scramble_Enemy_Type_Basic.Checked, 
-                        c_Enemy_Location_Ordered.Checked, 
-                        c_Enemy_Location_IncludeCharacters.Checked, 
-                        c_Enemy_Location_IncludeSpecial.Checked, 
-                        c_Scramble_Enemy_Type_Boss.Checked, 
-                        c_Scramble_Enemy_Type_Characters.Checked,
-                        c_FuriousEnemies.Checked
-                    );
+                    reg = enemy_scrambler.Scramble_Enemies(c_Scramble_Enemy_Location.Checked, c_EnemyShareAggro.Checked, c_Include_Characters.Checked, c_Things_Betwixt.Checked, c_Majula.Checked, c_Forest_of_Fallen_Giants.Checked, c_Brightstone_Cove_Tseldora.Checked, c_Aldias_Keep.Checked, c_Lost_Bastille.Checked, c_Earthen_Peak.Checked, c_No_mans_Wharf.Checked, c_Iron_Keep.Checked, c_Huntmans_Copse.Checked, c_Gutter.Checked, c_Dragon_Aerie.Checked, c_Path_to_Shaded_Woods.Checked, c_Unseen_Path_to_Heides.Checked, c_Heides_Tower_of_Flame.Checked, c_Shaded_Woods.Checked, c_Doors_of_Pharros.Checked, c_Grave_of_Saints.Checked, c_Giant_Memories.Checked, c_Shrine_of_Amana.Checked, c_Drangleic_Castle.Checked, c_Undead_Crypt.Checked, c_Dragon_Memories.Checked, c_Dark_Chasm_of_Old.Checked, c_Shulva.Checked, c_Brume_Tower.Checked, c_Eleum_Loyce.Checked, c_Memory_of_the_King.Checked);
                 }
             }
             catch (Exception ex)
@@ -373,18 +359,14 @@ namespace DS2_Scrambler
                 Util.ShowError($"Failed to scramble enemies:\n{reg.Path_Regulation}\n\n{ex}");
                 return reg;
             }
-
             progress.Report("Scramble finished.");
-
             return reg;
         }
-
         private void ToggleControls(bool state)
         {
             b_SelectModPath.Enabled = state;
             b_Scramble.Enabled = state;
         }
-
         private void b_ToggleRecommended_Click(object sender, EventArgs e)
         {
             c_Scramble_Map_Loot.Checked = true;
@@ -420,18 +402,9 @@ namespace DS2_Scrambler
 
             // ** Enemy Scrambler ***
             // Enemy Location
-            c_Scramble_Enemy_Location.Checked = false;
-            c_Enemy_Location_Ordered.Checked = false;
-            c_Enemy_Location_IncludeCharacters.Checked = false;
-            c_Enemy_Location_IncludeSpecial.Checked = false;
-
-            // Enemy Type
-            c_Scramble_Enemy_Type_Basic.Checked = false;
-            c_Scramble_Enemy_Type_Boss.Checked = false;
-            c_Scramble_Enemy_Type_Characters.Checked = false;
 
             // Tweaks
-            c_FuriousEnemies.Checked = false;
+            c_EnemyShareAggro.Checked = false;
 
             // *** Param Scrambler ***
             // SystemBulletParam
@@ -581,19 +554,9 @@ namespace DS2_Scrambler
             c_RetainShopSpread.Checked = false;
 
             // ** Enemy Scrambler ***
-            // Enemy Location
-            c_Scramble_Enemy_Location.Checked = true;
-            c_Enemy_Location_Ordered.Checked = true;
-            c_Enemy_Location_IncludeCharacters.Checked = true;
-            c_Enemy_Location_IncludeSpecial.Checked = false;
-
-            // Enemy Type
-            c_Scramble_Enemy_Type_Basic.Checked = false;
-            c_Scramble_Enemy_Type_Boss.Checked = false;
-            c_Scramble_Enemy_Type_Characters.Checked = false;
 
             // Tweaks
-            c_FuriousEnemies.Checked = false;
+            c_EnemyShareAggro.Checked = false;
 
             // *** Param Scrambler ***
             // SystemBulletParam

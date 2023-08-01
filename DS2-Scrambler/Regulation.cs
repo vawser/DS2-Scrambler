@@ -223,10 +223,6 @@ namespace DS2_Scrambler
             return true;
         }
 
-        // Issues:
-        // The map loose params do not seem to save correctly, causing DSMS to reject them.
-        // Currently only the regulation params are written out as loose.
-
         public bool SaveAllParamsAsLoose()
         {
             // Save params from regulation

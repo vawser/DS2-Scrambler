@@ -56,6 +56,8 @@ namespace DS2_Scrambler
         public Regulation regulation;
         public ScramblerData Data;
 
+        // TODO: implement more granular controls for each param, try and prevent game-breaking scramble side-effects
+
         public ParamScrambler(Random random, Regulation reg, ScramblerData scramblerData)
         {
             Data = scramblerData;

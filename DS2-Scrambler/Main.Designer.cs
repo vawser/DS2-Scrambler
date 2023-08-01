@@ -166,12 +166,6 @@
             this.c_Generate_EnemyBehaviorParam_Boss = new System.Windows.Forms.CheckBox();
             this.label41 = new System.Windows.Forms.Label();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
-            this.c_Enemy_Location_IncludeSpecial = new System.Windows.Forms.CheckBox();
-            this.c_Enemy_Location_Ordered = new System.Windows.Forms.CheckBox();
-            this.c_Enemy_Location_IncludeCharacters = new System.Windows.Forms.CheckBox();
-            this.label60 = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.c_Scramble_Enemy_Location = new System.Windows.Forms.CheckBox();
             this.groupBox28 = new System.Windows.Forms.GroupBox();
@@ -224,16 +218,40 @@
             this.c_EnsureLifegems = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox39 = new System.Windows.Forms.GroupBox();
+            this.c_Memory_of_the_King = new System.Windows.Forms.CheckBox();
+            this.c_Eleum_Loyce = new System.Windows.Forms.CheckBox();
+            this.c_Brume_Tower = new System.Windows.Forms.CheckBox();
+            this.c_Shulva = new System.Windows.Forms.CheckBox();
+            this.c_Dark_Chasm_of_Old = new System.Windows.Forms.CheckBox();
+            this.c_Dragon_Memories = new System.Windows.Forms.CheckBox();
+            this.c_Undead_Crypt = new System.Windows.Forms.CheckBox();
+            this.c_Drangleic_Castle = new System.Windows.Forms.CheckBox();
+            this.c_Shrine_of_Amana = new System.Windows.Forms.CheckBox();
+            this.c_Giant_Memories = new System.Windows.Forms.CheckBox();
+            this.c_Grave_of_Saints = new System.Windows.Forms.CheckBox();
+            this.c_Doors_of_Pharros = new System.Windows.Forms.CheckBox();
+            this.c_Shaded_Woods = new System.Windows.Forms.CheckBox();
+            this.c_Unseen_Path_to_Heides = new System.Windows.Forms.CheckBox();
+            this.c_Path_to_Shaded_Woods = new System.Windows.Forms.CheckBox();
+            this.c_Dragon_Aerie = new System.Windows.Forms.CheckBox();
+            this.c_Gutter = new System.Windows.Forms.CheckBox();
+            this.c_Huntmans_Copse = new System.Windows.Forms.CheckBox();
+            this.c_Iron_Keep = new System.Windows.Forms.CheckBox();
+            this.c_No_mans_Wharf = new System.Windows.Forms.CheckBox();
+            this.c_Earthen_Peak = new System.Windows.Forms.CheckBox();
+            this.c_Lost_Bastille = new System.Windows.Forms.CheckBox();
+            this.c_Aldias_Keep = new System.Windows.Forms.CheckBox();
+            this.c_Brightstone_Cove_Tseldora = new System.Windows.Forms.CheckBox();
+            this.c_Forest_of_Fallen_Giants = new System.Windows.Forms.CheckBox();
+            this.c_Majula = new System.Windows.Forms.CheckBox();
+            this.c_Things_Betwixt = new System.Windows.Forms.CheckBox();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.c_Include_Characters = new System.Windows.Forms.CheckBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.label81 = new System.Windows.Forms.Label();
-            this.c_FuriousEnemies = new System.Windows.Forms.CheckBox();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.c_Scramble_Enemy_Type_Characters = new System.Windows.Forms.CheckBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.c_Scramble_Enemy_Type_Boss = new System.Windows.Forms.CheckBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.c_Scramble_Enemy_Type_Basic = new System.Windows.Forms.CheckBox();
+            this.c_EnemyShareAggro = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -269,6 +287,7 @@
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.tabPage11 = new System.Windows.Forms.TabPage();
             this.b_ChaosMode = new System.Windows.Forms.Button();
+            this.c_Heides_Tower_of_Flame = new System.Windows.Forms.CheckBox();
             this.groupBox6.SuspendLayout();
             this.groupBox30.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -303,8 +322,9 @@
             this.groupBox38.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.groupBox10.SuspendLayout();
+            this.groupBox39.SuspendLayout();
             this.groupBox12.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -1732,97 +1752,32 @@
             // 
             // groupBox22
             // 
-            this.groupBox22.Controls.Add(this.c_Enemy_Location_IncludeSpecial);
-            this.groupBox22.Controls.Add(this.c_Enemy_Location_Ordered);
-            this.groupBox22.Controls.Add(this.c_Enemy_Location_IncludeCharacters);
-            this.groupBox22.Controls.Add(this.label60);
-            this.groupBox22.Controls.Add(this.label59);
-            this.groupBox22.Controls.Add(this.label42);
             this.groupBox22.Controls.Add(this.label44);
             this.groupBox22.Controls.Add(this.c_Scramble_Enemy_Location);
             this.groupBox22.Location = new System.Drawing.Point(6, 6);
             this.groupBox22.Name = "groupBox22";
-            this.groupBox22.Size = new System.Drawing.Size(841, 130);
+            this.groupBox22.Size = new System.Drawing.Size(841, 52);
             this.groupBox22.TabIndex = 17;
             this.groupBox22.TabStop = false;
-            this.groupBox22.Text = "Enemy Location";
-            // 
-            // c_Enemy_Location_IncludeSpecial
-            // 
-            this.c_Enemy_Location_IncludeSpecial.AutoSize = true;
-            this.c_Enemy_Location_IncludeSpecial.Location = new System.Drawing.Point(6, 96);
-            this.c_Enemy_Location_IncludeSpecial.Name = "c_Enemy_Location_IncludeSpecial";
-            this.c_Enemy_Location_IncludeSpecial.Size = new System.Drawing.Size(140, 19);
-            this.c_Enemy_Location_IncludeSpecial.TabIndex = 17;
-            this.c_Enemy_Location_IncludeSpecial.Text = "Include NG+ Enemies";
-            this.c_Enemy_Location_IncludeSpecial.UseVisualStyleBackColor = true;
-            // 
-            // c_Enemy_Location_Ordered
-            // 
-            this.c_Enemy_Location_Ordered.AutoSize = true;
-            this.c_Enemy_Location_Ordered.Location = new System.Drawing.Point(6, 46);
-            this.c_Enemy_Location_Ordered.Name = "c_Enemy_Location_Ordered";
-            this.c_Enemy_Location_Ordered.Size = new System.Drawing.Size(150, 19);
-            this.c_Enemy_Location_Ordered.TabIndex = 15;
-            this.c_Enemy_Location_Ordered.Text = "Use Ordered Placement";
-            this.c_Enemy_Location_Ordered.UseVisualStyleBackColor = true;
-            // 
-            // c_Enemy_Location_IncludeCharacters
-            // 
-            this.c_Enemy_Location_IncludeCharacters.AutoSize = true;
-            this.c_Enemy_Location_IncludeCharacters.Location = new System.Drawing.Point(6, 71);
-            this.c_Enemy_Location_IncludeCharacters.Name = "c_Enemy_Location_IncludeCharacters";
-            this.c_Enemy_Location_IncludeCharacters.Size = new System.Drawing.Size(124, 19);
-            this.c_Enemy_Location_IncludeCharacters.TabIndex = 9;
-            this.c_Enemy_Location_IncludeCharacters.Text = "Include Characters";
-            this.c_Enemy_Location_IncludeCharacters.UseVisualStyleBackColor = true;
-            // 
-            // label60
-            // 
-            this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(180, 97);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(398, 15);
-            this.label60.TabIndex = 18;
-            this.label60.Text = "Allows enemies such as those that appear in New Game Plus to be moved.";
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(180, 47);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(601, 15);
-            this.label59.TabIndex = 16;
-            this.label59.Text = "Enemy locations will not allow stacking. By default the scrambler will allow mult" +
-    "iple enemies to use one location.";
-            // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(180, 72);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(339, 15);
-            this.label42.TabIndex = 10;
-            this.label42.Text = "Allows key characters such as the Emerald Herald to be moved.";
+            this.groupBox22.Text = "Core";
             // 
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(180, 22);
+            this.label44.Location = new System.Drawing.Point(213, 22);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(507, 15);
+            this.label44.Size = new System.Drawing.Size(325, 15);
             this.label44.TabIndex = 14;
-            this.label44.Text = "Scramble the enemy locations within each map. This does not introduce new types o" +
-    "f enemies.";
+            this.label44.Text = "Enables the scrambler to randomise the location of enemies.";
             // 
             // c_Scramble_Enemy_Location
             // 
             this.c_Scramble_Enemy_Location.AutoSize = true;
             this.c_Scramble_Enemy_Location.Location = new System.Drawing.Point(6, 21);
             this.c_Scramble_Enemy_Location.Name = "c_Scramble_Enemy_Location";
-            this.c_Scramble_Enemy_Location.Size = new System.Drawing.Size(124, 19);
+            this.c_Scramble_Enemy_Location.Size = new System.Drawing.Size(163, 19);
             this.c_Scramble_Enemy_Location.TabIndex = 13;
-            this.c_Scramble_Enemy_Location.Text = "Scramble Location";
+            this.c_Scramble_Enemy_Location.Text = "Scramble Enemy Location";
             this.c_Scramble_Enemy_Location.UseVisualStyleBackColor = true;
             // 
             // groupBox28
@@ -2341,8 +2296,9 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.groupBox10);
+            this.tabPage2.Controls.Add(this.groupBox39);
             this.tabPage2.Controls.Add(this.groupBox12);
+            this.tabPage2.Controls.Add(this.groupBox10);
             this.tabPage2.Controls.Add(this.groupBox22);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
@@ -2352,11 +2308,348 @@
             this.tabPage2.Text = "Enemy Scrambler";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox39
+            // 
+            this.groupBox39.Controls.Add(this.c_Heides_Tower_of_Flame);
+            this.groupBox39.Controls.Add(this.c_Memory_of_the_King);
+            this.groupBox39.Controls.Add(this.c_Eleum_Loyce);
+            this.groupBox39.Controls.Add(this.c_Brume_Tower);
+            this.groupBox39.Controls.Add(this.c_Shulva);
+            this.groupBox39.Controls.Add(this.c_Dark_Chasm_of_Old);
+            this.groupBox39.Controls.Add(this.c_Dragon_Memories);
+            this.groupBox39.Controls.Add(this.c_Undead_Crypt);
+            this.groupBox39.Controls.Add(this.c_Drangleic_Castle);
+            this.groupBox39.Controls.Add(this.c_Shrine_of_Amana);
+            this.groupBox39.Controls.Add(this.c_Giant_Memories);
+            this.groupBox39.Controls.Add(this.c_Grave_of_Saints);
+            this.groupBox39.Controls.Add(this.c_Doors_of_Pharros);
+            this.groupBox39.Controls.Add(this.c_Shaded_Woods);
+            this.groupBox39.Controls.Add(this.c_Unseen_Path_to_Heides);
+            this.groupBox39.Controls.Add(this.c_Path_to_Shaded_Woods);
+            this.groupBox39.Controls.Add(this.c_Dragon_Aerie);
+            this.groupBox39.Controls.Add(this.c_Gutter);
+            this.groupBox39.Controls.Add(this.c_Huntmans_Copse);
+            this.groupBox39.Controls.Add(this.c_Iron_Keep);
+            this.groupBox39.Controls.Add(this.c_No_mans_Wharf);
+            this.groupBox39.Controls.Add(this.c_Earthen_Peak);
+            this.groupBox39.Controls.Add(this.c_Lost_Bastille);
+            this.groupBox39.Controls.Add(this.c_Aldias_Keep);
+            this.groupBox39.Controls.Add(this.c_Brightstone_Cove_Tseldora);
+            this.groupBox39.Controls.Add(this.c_Forest_of_Fallen_Giants);
+            this.groupBox39.Controls.Add(this.c_Majula);
+            this.groupBox39.Controls.Add(this.c_Things_Betwixt);
+            this.groupBox39.Location = new System.Drawing.Point(6, 122);
+            this.groupBox39.Name = "groupBox39";
+            this.groupBox39.Size = new System.Drawing.Size(841, 286);
+            this.groupBox39.TabIndex = 22;
+            this.groupBox39.TabStop = false;
+            this.groupBox39.Text = "Maps to Scramble";
+            // 
+            // c_Memory_of_the_King
+            // 
+            this.c_Memory_of_the_King.AutoSize = true;
+            this.c_Memory_of_the_King.Location = new System.Drawing.Point(483, 197);
+            this.c_Memory_of_the_King.Name = "c_Memory_of_the_King";
+            this.c_Memory_of_the_King.Size = new System.Drawing.Size(132, 19);
+            this.c_Memory_of_the_King.TabIndex = 43;
+            this.c_Memory_of_the_King.Text = "Memory of the King";
+            this.c_Memory_of_the_King.UseVisualStyleBackColor = true;
+            // 
+            // c_Eleum_Loyce
+            // 
+            this.c_Eleum_Loyce.AutoSize = true;
+            this.c_Eleum_Loyce.Location = new System.Drawing.Point(483, 172);
+            this.c_Eleum_Loyce.Name = "c_Eleum_Loyce";
+            this.c_Eleum_Loyce.Size = new System.Drawing.Size(131, 19);
+            this.c_Eleum_Loyce.TabIndex = 42;
+            this.c_Eleum_Loyce.Text = "Frozen Eleum Loyce";
+            this.c_Eleum_Loyce.UseVisualStyleBackColor = true;
+            // 
+            // c_Brume_Tower
+            // 
+            this.c_Brume_Tower.AutoSize = true;
+            this.c_Brume_Tower.Location = new System.Drawing.Point(483, 147);
+            this.c_Brume_Tower.Name = "c_Brume_Tower";
+            this.c_Brume_Tower.Size = new System.Drawing.Size(95, 19);
+            this.c_Brume_Tower.TabIndex = 41;
+            this.c_Brume_Tower.Text = "Brume Tower";
+            this.c_Brume_Tower.UseVisualStyleBackColor = true;
+            // 
+            // c_Shulva
+            // 
+            this.c_Shulva.AutoSize = true;
+            this.c_Shulva.Location = new System.Drawing.Point(483, 122);
+            this.c_Shulva.Name = "c_Shulva";
+            this.c_Shulva.Size = new System.Drawing.Size(138, 19);
+            this.c_Shulva.TabIndex = 40;
+            this.c_Shulva.Text = "Shulva, Sanctum City";
+            this.c_Shulva.UseVisualStyleBackColor = true;
+            // 
+            // c_Dark_Chasm_of_Old
+            // 
+            this.c_Dark_Chasm_of_Old.AutoSize = true;
+            this.c_Dark_Chasm_of_Old.Location = new System.Drawing.Point(483, 97);
+            this.c_Dark_Chasm_of_Old.Name = "c_Dark_Chasm_of_Old";
+            this.c_Dark_Chasm_of_Old.Size = new System.Drawing.Size(126, 19);
+            this.c_Dark_Chasm_of_Old.TabIndex = 39;
+            this.c_Dark_Chasm_of_Old.Text = "Dark Chasm of Old";
+            this.c_Dark_Chasm_of_Old.UseVisualStyleBackColor = true;
+            // 
+            // c_Dragon_Memories
+            // 
+            this.c_Dragon_Memories.AutoSize = true;
+            this.c_Dragon_Memories.Location = new System.Drawing.Point(483, 72);
+            this.c_Dragon_Memories.Name = "c_Dragon_Memories";
+            this.c_Dragon_Memories.Size = new System.Drawing.Size(121, 19);
+            this.c_Dragon_Memories.TabIndex = 38;
+            this.c_Dragon_Memories.Text = "Dragon Memories";
+            this.c_Dragon_Memories.UseVisualStyleBackColor = true;
+            // 
+            // c_Undead_Crypt
+            // 
+            this.c_Undead_Crypt.AutoSize = true;
+            this.c_Undead_Crypt.Location = new System.Drawing.Point(483, 47);
+            this.c_Undead_Crypt.Name = "c_Undead_Crypt";
+            this.c_Undead_Crypt.Size = new System.Drawing.Size(99, 19);
+            this.c_Undead_Crypt.TabIndex = 37;
+            this.c_Undead_Crypt.Text = "Undead Crypt";
+            this.c_Undead_Crypt.UseVisualStyleBackColor = true;
+            // 
+            // c_Drangleic_Castle
+            // 
+            this.c_Drangleic_Castle.AutoSize = true;
+            this.c_Drangleic_Castle.Location = new System.Drawing.Point(483, 22);
+            this.c_Drangleic_Castle.Name = "c_Drangleic_Castle";
+            this.c_Drangleic_Castle.Size = new System.Drawing.Size(219, 19);
+            this.c_Drangleic_Castle.TabIndex = 36;
+            this.c_Drangleic_Castle.Text = "Drangleic Castle and Throne of Want";
+            this.c_Drangleic_Castle.UseVisualStyleBackColor = true;
+            // 
+            // c_Shrine_of_Amana
+            // 
+            this.c_Shrine_of_Amana.AutoSize = true;
+            this.c_Shrine_of_Amana.Location = new System.Drawing.Point(228, 247);
+            this.c_Shrine_of_Amana.Name = "c_Shrine_of_Amana";
+            this.c_Shrine_of_Amana.Size = new System.Drawing.Size(114, 19);
+            this.c_Shrine_of_Amana.TabIndex = 35;
+            this.c_Shrine_of_Amana.Text = "Shrine of Amana";
+            this.c_Shrine_of_Amana.UseVisualStyleBackColor = true;
+            // 
+            // c_Giant_Memories
+            // 
+            this.c_Giant_Memories.AutoSize = true;
+            this.c_Giant_Memories.Location = new System.Drawing.Point(228, 222);
+            this.c_Giant_Memories.Name = "c_Giant_Memories";
+            this.c_Giant_Memories.Size = new System.Drawing.Size(223, 19);
+            this.c_Giant_Memories.TabIndex = 34;
+            this.c_Giant_Memories.Text = "Memories of Vammar, Orro and Jeigh";
+            this.c_Giant_Memories.UseVisualStyleBackColor = true;
+            // 
+            // c_Grave_of_Saints
+            // 
+            this.c_Grave_of_Saints.AutoSize = true;
+            this.c_Grave_of_Saints.Location = new System.Drawing.Point(228, 197);
+            this.c_Grave_of_Saints.Name = "c_Grave_of_Saints";
+            this.c_Grave_of_Saints.Size = new System.Drawing.Size(104, 19);
+            this.c_Grave_of_Saints.TabIndex = 33;
+            this.c_Grave_of_Saints.Text = "Grave of Saints";
+            this.c_Grave_of_Saints.UseVisualStyleBackColor = true;
+            // 
+            // c_Doors_of_Pharros
+            // 
+            this.c_Doors_of_Pharros.AutoSize = true;
+            this.c_Doors_of_Pharros.Location = new System.Drawing.Point(228, 172);
+            this.c_Doors_of_Pharros.Name = "c_Doors_of_Pharros";
+            this.c_Doors_of_Pharros.Size = new System.Drawing.Size(114, 19);
+            this.c_Doors_of_Pharros.TabIndex = 32;
+            this.c_Doors_of_Pharros.Text = "Doors of Pharros";
+            this.c_Doors_of_Pharros.UseVisualStyleBackColor = true;
+            // 
+            // c_Shaded_Woods
+            // 
+            this.c_Shaded_Woods.AutoSize = true;
+            this.c_Shaded_Woods.Location = new System.Drawing.Point(228, 147);
+            this.c_Shaded_Woods.Name = "c_Shaded_Woods";
+            this.c_Shaded_Woods.Size = new System.Drawing.Size(105, 19);
+            this.c_Shaded_Woods.TabIndex = 31;
+            this.c_Shaded_Woods.Text = "Shaded Woods";
+            this.c_Shaded_Woods.UseVisualStyleBackColor = true;
+            // 
+            // c_Unseen_Path_to_Heides
+            // 
+            this.c_Unseen_Path_to_Heides.AutoSize = true;
+            this.c_Unseen_Path_to_Heides.Location = new System.Drawing.Point(228, 97);
+            this.c_Unseen_Path_to_Heides.Name = "c_Unseen_Path_to_Heides";
+            this.c_Unseen_Path_to_Heides.Size = new System.Drawing.Size(182, 19);
+            this.c_Unseen_Path_to_Heides.TabIndex = 30;
+            this.c_Unseen_Path_to_Heides.Text = "Unseen Path to Heide\'s Tower";
+            this.c_Unseen_Path_to_Heides.UseVisualStyleBackColor = true;
+            // 
+            // c_Path_to_Shaded_Woods
+            // 
+            this.c_Path_to_Shaded_Woods.AutoSize = true;
+            this.c_Path_to_Shaded_Woods.Location = new System.Drawing.Point(228, 72);
+            this.c_Path_to_Shaded_Woods.Name = "c_Path_to_Shaded_Woods";
+            this.c_Path_to_Shaded_Woods.Size = new System.Drawing.Size(166, 19);
+            this.c_Path_to_Shaded_Woods.TabIndex = 29;
+            this.c_Path_to_Shaded_Woods.Text = "Path to the Shaded Woods";
+            this.c_Path_to_Shaded_Woods.UseVisualStyleBackColor = true;
+            // 
+            // c_Dragon_Aerie
+            // 
+            this.c_Dragon_Aerie.AutoSize = true;
+            this.c_Dragon_Aerie.Location = new System.Drawing.Point(228, 47);
+            this.c_Dragon_Aerie.Name = "c_Dragon_Aerie";
+            this.c_Dragon_Aerie.Size = new System.Drawing.Size(196, 19);
+            this.c_Dragon_Aerie.TabIndex = 28;
+            this.c_Dragon_Aerie.Text = "Dragon Aerie and Dragon Shrine";
+            this.c_Dragon_Aerie.UseVisualStyleBackColor = true;
+            // 
+            // c_Gutter
+            // 
+            this.c_Gutter.AutoSize = true;
+            this.c_Gutter.Location = new System.Drawing.Point(228, 22);
+            this.c_Gutter.Name = "c_Gutter";
+            this.c_Gutter.Size = new System.Drawing.Size(189, 19);
+            this.c_Gutter.TabIndex = 27;
+            this.c_Gutter.Text = "The Gutter and the Black Gulch";
+            this.c_Gutter.UseVisualStyleBackColor = true;
+            // 
+            // c_Huntmans_Copse
+            // 
+            this.c_Huntmans_Copse.AutoSize = true;
+            this.c_Huntmans_Copse.Location = new System.Drawing.Point(6, 246);
+            this.c_Huntmans_Copse.Name = "c_Huntmans_Copse";
+            this.c_Huntmans_Copse.Size = new System.Drawing.Size(121, 19);
+            this.c_Huntmans_Copse.TabIndex = 26;
+            this.c_Huntmans_Copse.Text = "Huntman\'s Copse";
+            this.c_Huntmans_Copse.UseVisualStyleBackColor = true;
+            // 
+            // c_Iron_Keep
+            // 
+            this.c_Iron_Keep.AutoSize = true;
+            this.c_Iron_Keep.Location = new System.Drawing.Point(6, 221);
+            this.c_Iron_Keep.Name = "c_Iron_Keep";
+            this.c_Iron_Keep.Size = new System.Drawing.Size(76, 19);
+            this.c_Iron_Keep.TabIndex = 25;
+            this.c_Iron_Keep.Text = "Iron Keep";
+            this.c_Iron_Keep.UseVisualStyleBackColor = true;
+            // 
+            // c_No_mans_Wharf
+            // 
+            this.c_No_mans_Wharf.AutoSize = true;
+            this.c_No_mans_Wharf.Location = new System.Drawing.Point(6, 196);
+            this.c_No_mans_Wharf.Name = "c_No_mans_Wharf";
+            this.c_No_mans_Wharf.Size = new System.Drawing.Size(114, 19);
+            this.c_No_mans_Wharf.TabIndex = 24;
+            this.c_No_mans_Wharf.Text = "No-man\'s Wharf";
+            this.c_No_mans_Wharf.UseVisualStyleBackColor = true;
+            // 
+            // c_Earthen_Peak
+            // 
+            this.c_Earthen_Peak.AutoSize = true;
+            this.c_Earthen_Peak.Location = new System.Drawing.Point(6, 171);
+            this.c_Earthen_Peak.Name = "c_Earthen_Peak";
+            this.c_Earthen_Peak.Size = new System.Drawing.Size(193, 19);
+            this.c_Earthen_Peak.TabIndex = 23;
+            this.c_Earthen_Peak.Text = "Harvest Valley and Earthen Peak";
+            this.c_Earthen_Peak.UseVisualStyleBackColor = true;
+            // 
+            // c_Lost_Bastille
+            // 
+            this.c_Lost_Bastille.AutoSize = true;
+            this.c_Lost_Bastille.Location = new System.Drawing.Point(6, 146);
+            this.c_Lost_Bastille.Name = "c_Lost_Bastille";
+            this.c_Lost_Bastille.Size = new System.Drawing.Size(110, 19);
+            this.c_Lost_Bastille.TabIndex = 22;
+            this.c_Lost_Bastille.Text = "The Lost Bastille";
+            this.c_Lost_Bastille.UseVisualStyleBackColor = true;
+            // 
+            // c_Aldias_Keep
+            // 
+            this.c_Aldias_Keep.AutoSize = true;
+            this.c_Aldias_Keep.Location = new System.Drawing.Point(6, 121);
+            this.c_Aldias_Keep.Name = "c_Aldias_Keep";
+            this.c_Aldias_Keep.Size = new System.Drawing.Size(90, 19);
+            this.c_Aldias_Keep.TabIndex = 21;
+            this.c_Aldias_Keep.Text = "Aldia\'s Keep";
+            this.c_Aldias_Keep.UseVisualStyleBackColor = true;
+            // 
+            // c_Brightstone_Cove_Tseldora
+            // 
+            this.c_Brightstone_Cove_Tseldora.AutoSize = true;
+            this.c_Brightstone_Cove_Tseldora.Location = new System.Drawing.Point(6, 96);
+            this.c_Brightstone_Cove_Tseldora.Name = "c_Brightstone_Cove_Tseldora";
+            this.c_Brightstone_Cove_Tseldora.Size = new System.Drawing.Size(163, 19);
+            this.c_Brightstone_Cove_Tseldora.TabIndex = 19;
+            this.c_Brightstone_Cove_Tseldora.Text = "Brightstone Cove Tseldora";
+            this.c_Brightstone_Cove_Tseldora.UseVisualStyleBackColor = true;
+            // 
+            // c_Forest_of_Fallen_Giants
+            // 
+            this.c_Forest_of_Fallen_Giants.AutoSize = true;
+            this.c_Forest_of_Fallen_Giants.Location = new System.Drawing.Point(6, 71);
+            this.c_Forest_of_Fallen_Giants.Name = "c_Forest_of_Fallen_Giants";
+            this.c_Forest_of_Fallen_Giants.Size = new System.Drawing.Size(142, 19);
+            this.c_Forest_of_Fallen_Giants.TabIndex = 17;
+            this.c_Forest_of_Fallen_Giants.Text = "Forest of Fallen Giants";
+            this.c_Forest_of_Fallen_Giants.UseVisualStyleBackColor = true;
+            // 
+            // c_Majula
+            // 
+            this.c_Majula.AutoSize = true;
+            this.c_Majula.Location = new System.Drawing.Point(6, 46);
+            this.c_Majula.Name = "c_Majula";
+            this.c_Majula.Size = new System.Drawing.Size(62, 19);
+            this.c_Majula.TabIndex = 15;
+            this.c_Majula.Text = "Majula";
+            this.c_Majula.UseVisualStyleBackColor = true;
+            // 
+            // c_Things_Betwixt
+            // 
+            this.c_Things_Betwixt.AutoSize = true;
+            this.c_Things_Betwixt.Location = new System.Drawing.Point(6, 21);
+            this.c_Things_Betwixt.Name = "c_Things_Betwixt";
+            this.c_Things_Betwixt.Size = new System.Drawing.Size(103, 19);
+            this.c_Things_Betwixt.TabIndex = 13;
+            this.c_Things_Betwixt.Text = "Things Betwixt";
+            this.c_Things_Betwixt.UseVisualStyleBackColor = true;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.label7);
+            this.groupBox12.Controls.Add(this.c_Include_Characters);
+            this.groupBox12.Location = new System.Drawing.Point(6, 64);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(841, 52);
+            this.groupBox12.TabIndex = 21;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Inclusions";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(213, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(253, 15);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Include the friendly characters in the scramble.";
+            // 
+            // c_Include_Characters
+            // 
+            this.c_Include_Characters.AutoSize = true;
+            this.c_Include_Characters.Location = new System.Drawing.Point(6, 21);
+            this.c_Include_Characters.Name = "c_Include_Characters";
+            this.c_Include_Characters.Size = new System.Drawing.Size(124, 19);
+            this.c_Include_Characters.TabIndex = 13;
+            this.c_Include_Characters.Text = "Include Characters";
+            this.c_Include_Characters.UseVisualStyleBackColor = true;
+            // 
             // groupBox10
             // 
             this.groupBox10.Controls.Add(this.label81);
-            this.groupBox10.Controls.Add(this.c_FuriousEnemies);
-            this.groupBox10.Location = new System.Drawing.Point(6, 252);
+            this.groupBox10.Controls.Add(this.c_EnemyShareAggro);
+            this.groupBox10.Location = new System.Drawing.Point(6, 414);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(841, 54);
             this.groupBox10.TabIndex = 20;
@@ -2366,93 +2659,21 @@
             // label81
             // 
             this.label81.AutoSize = true;
-            this.label81.Location = new System.Drawing.Point(182, 22);
+            this.label81.Location = new System.Drawing.Point(213, 22);
             this.label81.Name = "label81";
             this.label81.Size = new System.Drawing.Size(429, 15);
             this.label81.TabIndex = 18;
             this.label81.Text = "All enemies share the same aggression group (excluding bosses and characters).";
             // 
-            // c_FuriousEnemies
+            // c_EnemyShareAggro
             // 
-            this.c_FuriousEnemies.AutoSize = true;
-            this.c_FuriousEnemies.Location = new System.Drawing.Point(8, 22);
-            this.c_FuriousEnemies.Name = "c_FuriousEnemies";
-            this.c_FuriousEnemies.Size = new System.Drawing.Size(138, 19);
-            this.c_FuriousEnemies.TabIndex = 17;
-            this.c_FuriousEnemies.Text = "Enemies Share Aggro";
-            this.c_FuriousEnemies.UseVisualStyleBackColor = true;
-            // 
-            // groupBox12
-            // 
-            this.groupBox12.Controls.Add(this.c_Scramble_Enemy_Type_Characters);
-            this.groupBox12.Controls.Add(this.label15);
-            this.groupBox12.Controls.Add(this.c_Scramble_Enemy_Type_Boss);
-            this.groupBox12.Controls.Add(this.label13);
-            this.groupBox12.Controls.Add(this.label7);
-            this.groupBox12.Controls.Add(this.c_Scramble_Enemy_Type_Basic);
-            this.groupBox12.Location = new System.Drawing.Point(6, 142);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(841, 104);
-            this.groupBox12.TabIndex = 19;
-            this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "Enemy Type";
-            // 
-            // c_Scramble_Enemy_Type_Characters
-            // 
-            this.c_Scramble_Enemy_Type_Characters.AutoSize = true;
-            this.c_Scramble_Enemy_Type_Characters.Location = new System.Drawing.Point(6, 72);
-            this.c_Scramble_Enemy_Type_Characters.Name = "c_Scramble_Enemy_Type_Characters";
-            this.c_Scramble_Enemy_Type_Characters.Size = new System.Drawing.Size(134, 19);
-            this.c_Scramble_Enemy_Type_Characters.TabIndex = 21;
-            this.c_Scramble_Enemy_Type_Characters.Text = "Scramble Characters";
-            this.c_Scramble_Enemy_Type_Characters.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(180, 73);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(292, 15);
-            this.label15.TabIndex = 22;
-            this.label15.Text = "Scramble the character enemy types within each map.";
-            // 
-            // c_Scramble_Enemy_Type_Boss
-            // 
-            this.c_Scramble_Enemy_Type_Boss.AutoSize = true;
-            this.c_Scramble_Enemy_Type_Boss.Location = new System.Drawing.Point(6, 47);
-            this.c_Scramble_Enemy_Type_Boss.Name = "c_Scramble_Enemy_Type_Boss";
-            this.c_Scramble_Enemy_Type_Boss.Size = new System.Drawing.Size(113, 19);
-            this.c_Scramble_Enemy_Type_Boss.TabIndex = 19;
-            this.c_Scramble_Enemy_Type_Boss.Text = "Scramble Bosses";
-            this.c_Scramble_Enemy_Type_Boss.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(180, 47);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(267, 15);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "Scramble the boss enemy types within each map.";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(180, 22);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(270, 15);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Scramble the basic enemy types within each map.";
-            // 
-            // c_Scramble_Enemy_Type_Basic
-            // 
-            this.c_Scramble_Enemy_Type_Basic.AutoSize = true;
-            this.c_Scramble_Enemy_Type_Basic.Location = new System.Drawing.Point(6, 22);
-            this.c_Scramble_Enemy_Type_Basic.Name = "c_Scramble_Enemy_Type_Basic";
-            this.c_Scramble_Enemy_Type_Basic.Size = new System.Drawing.Size(122, 19);
-            this.c_Scramble_Enemy_Type_Basic.TabIndex = 15;
-            this.c_Scramble_Enemy_Type_Basic.Text = "Scramble Enemies";
-            this.c_Scramble_Enemy_Type_Basic.UseVisualStyleBackColor = true;
+            this.c_EnemyShareAggro.AutoSize = true;
+            this.c_EnemyShareAggro.Location = new System.Drawing.Point(8, 22);
+            this.c_EnemyShareAggro.Name = "c_EnemyShareAggro";
+            this.c_EnemyShareAggro.Size = new System.Drawing.Size(138, 19);
+            this.c_EnemyShareAggro.TabIndex = 17;
+            this.c_EnemyShareAggro.Text = "Enemies Share Aggro";
+            this.c_EnemyShareAggro.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -2864,6 +3085,16 @@
             this.b_ChaosMode.UseVisualStyleBackColor = true;
             this.b_ChaosMode.Click += new System.EventHandler(this.b_ChaosMode_Click);
             // 
+            // c_Heides_Tower_of_Flame
+            // 
+            this.c_Heides_Tower_of_Flame.AutoSize = true;
+            this.c_Heides_Tower_of_Flame.Location = new System.Drawing.Point(228, 122);
+            this.c_Heides_Tower_of_Flame.Name = "c_Heides_Tower_of_Flame";
+            this.c_Heides_Tower_of_Flame.Size = new System.Drawing.Size(148, 19);
+            this.c_Heides_Tower_of_Flame.TabIndex = 44;
+            this.c_Heides_Tower_of_Flame.Text = "Heide\'s Tower of Flame";
+            this.c_Heides_Tower_of_Flame.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2949,10 +3180,12 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
+            this.groupBox39.ResumeLayout(false);
+            this.groupBox39.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
@@ -3119,14 +3352,7 @@
         private CheckBox c_Generate_EnemyBehaviorParam_Boss;
         private Label label41;
         private GroupBox groupBox22;
-        private CheckBox c_Enemy_Location_IncludeSpecial;
-        private Label label60;
-        private CheckBox c_Enemy_Location_Ordered;
-        private Label label59;
         private Label label44;
-        private CheckBox c_Scramble_Enemy_Location;
-        private CheckBox c_Enemy_Location_IncludeCharacters;
-        private Label label42;
         private GroupBox groupBox28;
         private CheckBox c_Generate_LogicComParam;
         private Label label56;
@@ -3178,20 +3404,13 @@
         private TabPage tabPage10;
         private TabPage tabPage11;
         private GroupBox groupBox3;
-        private GroupBox groupBox12;
-        private Label label7;
-        private CheckBox c_Scramble_Enemy_Type_Basic;
-        private CheckBox c_Scramble_Enemy_Type_Boss;
-        private Label label13;
-        private CheckBox c_Scramble_Enemy_Type_Characters;
-        private Label label15;
         private Label label16;
         private CheckBox c_Include_Shops;
         private Label label43;
         private CheckBox c_Include_Boss_Trades;
         private GroupBox groupBox10;
         private Label label81;
-        private CheckBox c_FuriousEnemies;
+        private CheckBox c_EnemyShareAggro;
         private GroupBox groupBox34;
         private CheckBox c_Scramble_ChrMoveParam;
         private Label label84;
@@ -3222,5 +3441,38 @@
         private Label label91;
         private CheckBox c_ClassScramble_LimitEquipment;
         private Button b_ChaosMode;
+        private CheckBox c_Scramble_Enemy_Location;
+        private GroupBox groupBox12;
+        private Label label7;
+        private CheckBox c_Include_Characters;
+        private GroupBox groupBox39;
+        private CheckBox c_Things_Betwixt;
+        private CheckBox c_Memory_of_the_King;
+        private CheckBox c_Eleum_Loyce;
+        private CheckBox c_Brume_Tower;
+        private CheckBox c_Shulva;
+        private CheckBox c_Dark_Chasm_of_Old;
+        private CheckBox c_Dragon_Memories;
+        private CheckBox c_Undead_Crypt;
+        private CheckBox c_Drangleic_Castle;
+        private CheckBox c_Shrine_of_Amana;
+        private CheckBox c_Giant_Memories;
+        private CheckBox c_Grave_of_Saints;
+        private CheckBox c_Doors_of_Pharros;
+        private CheckBox c_Shaded_Woods;
+        private CheckBox c_Unseen_Path_to_Heides;
+        private CheckBox c_Path_to_Shaded_Woods;
+        private CheckBox c_Dragon_Aerie;
+        private CheckBox c_Gutter;
+        private CheckBox c_Huntmans_Copse;
+        private CheckBox c_Iron_Keep;
+        private CheckBox c_No_mans_Wharf;
+        private CheckBox c_Earthen_Peak;
+        private CheckBox c_Lost_Bastille;
+        private CheckBox c_Aldias_Keep;
+        private CheckBox c_Brightstone_Cove_Tseldora;
+        private CheckBox c_Forest_of_Fallen_Giants;
+        private CheckBox c_Majula;
+        private CheckBox c_Heides_Tower_of_Flame;
     }
 }
