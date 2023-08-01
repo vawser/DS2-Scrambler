@@ -1,0 +1,1111 @@
+{
+    // Category ID Start/End - Used to filter param rows
+    "WeaponParam_Category_Start": 1000000,
+    "WeaponParam_Category_End": 19999999,
+    
+    "ArmorParam_Category_Start": 21010100,
+    "ArmorParam_Category_End": 27950103,
+    
+    "SpellParam_Category_Start": 31010000,
+    "SpellParam_Category_End": 39999999,
+    
+    "NPC_SpellParam_Category_Start": 71010000,
+    "NPC_SpellParam_Category_End": 75310000,
+    
+    "RingParam_Category_Start": 40010000,
+    "RingParam_Category_End": 49999999,
+    
+    "ItemParam_Category_Start": 50600000,
+    "ItemParam_Category_End": 64610000,
+    
+    "Arrow_ArrowParam_Category_Start": 60760000,
+    "Arrow_ArrowParam_Category_End": 60830000,
+    
+    "Greatarrow_ArrowParam_Category_Start": 60850000,
+    "Greatarrow_ArrowParam_Category_End": 60900000,
+    
+    "Bolt_ArrowParam_Category_Start": 60910000,
+    "Bolt_ArrowParam_Category_End": 60960000,
+    
+    "Bow_WeaponParam_Category_Start": 4200000,
+    "Bow_WeaponParam_Category_End": 4290000,
+    
+    "Greatbow_WeaponParam_Category_Start": 4400000,
+    "Greatbow_WeaponParam_Category_End": 4440000,
+    
+    "Crossbow_WeaponParam_Category_Start": 4600000,
+    "Crossbow_WeaponParam_Category_End": 4680000,
+    
+    "Shield_WeaponParam_Category_Start": 11000000,
+    "Shield_WeaponParam_Category_End": 11840000,
+    
+    "Sorceries_SpellParam_Category_Start": 31010000,
+    "Sorceries_SpellParam_Category_End": 31310000,
+    
+    "Miracles_SpellParam_Category_Start": 32010000,
+    "Miracles_SpellParam_Category_End": 32310000,
+    
+    "Pyromancies_SpellParam_Category_Start": 33010000,
+    "Pyromancies_SpellParam_Category_End": 33320000,
+    
+    "Hexes_SpellParam_Category_Start": 34010000,
+    "Hexes_SpellParam_Category_End": 35310000,
+    
+    "Melee_WeaponParam_Category_Start": 1000000,
+    "Melee_WeaponParam_Category_End": 5660000,
+    
+    // Map Itemlot ID Start/End - Used to filter itemlot rows
+    "Vanilla_Itemlot_Start": 10025090,
+    "Vanilla_Itemlot_End": 50359000,
+    
+    "DLC_Itemlot_Start": 50355010,
+    "DLC_Itemlot_End": 50376770,
+    
+    "Boss_Drops_Itemlot_Start": 100000,
+    "Boss_Drops_Itemlot_End": 900000,
+    
+    "NPC_Rewards_Itemlot_Start": 1300000,
+    "NPC_Rewards_Itemlot_End": 1800000,
+    
+    "Covenant_Rewards_Itemlot_Start": 2001000,
+    "Covenant_Rewards_Itemlot_End": 2009013,
+    
+    "Trade_Rewards_Itemlot_Start": 50000000,
+    "Trade_Rewards_Itemlot_End": 50000303,
+    
+    "Event_Rewards_Itemlot_Start": 60001000,
+    "Event_Rewards_Itemlot_End": 60100000,
+    
+    "m10_02_00_00_Itemlot_Start": 10025090,
+    "m10_02_00_00_Itemlot_End": 10027000,
+    
+    "m10_04_00_00_Itemlot_Start": 10045000,
+    "m10_04_00_00_Itemlot_End": 10049000,
+    
+    "m10_10_00_00_Itemlot_Start": 10105000,
+    "m10_10_00_00_Itemlot_End": 10109000,
+    
+    "m10_14_00_00_Itemlot_Start": 10145000,
+    "m10_14_00_00_Itemlot_End": 10149000,
+    
+    "m10_15_00_00_Itemlot_Start": 10155000,
+    "m10_15_00_00_Itemlot_End": 10159000,
+    
+    "m10_16_00_00_Itemlot_Start": 10165000,
+    "m10_16_00_00_Itemlot_End": 10169000,
+    
+    "m10_17_00_00_Itemlot_Start": 10175000,
+    "m10_17_00_00_Itemlot_End": 10179000,
+    
+    "m10_18_00_00_Itemlot_Start": 10185000,
+    "m10_18_00_00_Itemlot_End": 10189000,
+    
+    "m10_19_00_00_Itemlot_Start": 10195000,
+    "m10_19_00_00_Itemlot_End": 10199000,
+    
+    "m10_23_00_00_Itemlot_Start": 10235000,
+    "m10_23_00_00_Itemlot_End": 10239000,
+    
+    "m10_25_00_00_Itemlot_Start": 10255000,
+    "m10_25_00_00_Itemlot_End": 10259000,
+    
+    "m10_27_00_00_Itemlot_Start": 10275000,
+    "m10_27_00_00_Itemlot_End": 10279000,
+    
+    "m10_29_00_00_Itemlot_Start": 10295000,
+    "m10_29_00_00_Itemlot_End": 10299000,
+    
+    "m10_30_00_00_Itemlot_Start": 10305000,
+    "m10_30_00_00_Itemlot_End": 10309000,
+    
+    "m10_31_00_00_Itemlot_Start": 10315000,
+    "m10_31_00_00_Itemlot_End": 10319000,
+    
+    "m10_32_00_00_Itemlot_Start": 10325000,
+    "m10_32_00_00_Itemlot_End": 10329000,
+    
+    "m10_33_00_00_Itemlot_Start": 10335000,
+    "m10_33_00_00_Itemlot_End": 10339000,
+    
+    "m10_34_00_00_Itemlot_Start": 10345000,
+    "m10_34_00_00_Itemlot_End": 10349000,
+    
+    "m20_10_00_00_Itemlot_Start": 20105000,
+    "m20_10_00_00_Itemlot_End": 20109000,
+    
+    "m20_11_00_00_Itemlot_Start": 20115000,
+    "m20_11_00_00_Itemlot_End": 20119000,
+    
+    "m20_21_00_00_Itemlot_Start": 20215000,
+    "m20_21_00_00_Itemlot_End": 20219000,
+    
+    "m20_24_00_00_Itemlot_Start": 20245000,
+    "m20_24_00_00_Itemlot_End": 20249000,
+    
+    "m20_26_00_00_Itemlot_Start": 20265000,
+    "m20_26_00_00_Itemlot_End": 20269000,
+    
+    "m40_03_00_00_Itemlot_Start": 40035000,
+    "m40_03_00_00_Itemlot_End": 40039000,
+    
+    "m50_35_00_00_Itemlot_Start": 50355000,
+    "m50_35_00_00_Itemlot_End": 50359000,
+    
+    "m50_36_00_00_Itemlot_Start": 50365000,
+    "m50_36_00_00_Itemlot_End": 50369000,
+    
+    "m50_37_00_00_Itemlot_Start": 50375000,
+    "m50_37_00_00_Itemlot_End": 50379000,
+    
+    // Shop Itemlot ID Start/End - Used to filter shoplot rows
+    "Vengarl_Shoplot_Start": 30700000,
+    "Vengarl_Shoplot_End": 30700900,
+    
+    "Agdayne_Shoplot_Start": 50600000,
+    "Agdayne_Shoplot_End": 50600900,
+    
+    "Gilligan_Shoplot_Start": 70400000,
+    "Gilligan_Shoplot_End": 70400900,
+    
+    "Gilligan_Shop_Initial_Lots": [
+        70400000, 70400001, 70400002, 70400003, 70400200, 70400201, 70400202, 70400203, 70400500, 70400600, 70400601, 70400602
+    ],
+    
+    "Wellager_Shoplot_Start": 72110000,
+    "Wellager_Shoplot_End": 72110900,
+    
+    "Grandahl_Shoplot_Start": 72500000,
+    "Grandahl_Shoplot_End": 72500900,
+    
+    "Gavlan_Shoplot_Start": 72600000,
+    "Gavlan_Shoplot_End": 72600900,
+    
+    "Melentia_Shoplot_Start": 75400000,
+    "Melentia_Shoplot_End": 75400900,
+    
+    "Rat_King_Shoplot_Start": 75600000,
+    "Rat_King_Shoplot_End": 75600900,
+    
+    "Maughlin_Shoplot_Start": 76100000,
+    "Maughlin_Shoplot_End": 76100900,
+    
+    "Chloanne_Shoplot_Start": 76200000,
+    "Chloanne_Shoplot_End": 76200900,
+    
+    "Rosabeth_Shoplot_Start": 76300000,
+    "Rosabeth_Shoplot_End": 76300900,
+    
+    "Lenigrast_Shoplot_Start": 76400000,
+    "Lenigrast_Shoplot_End": 76400900,
+    
+    "McDuff_Shoplot_Start": 76430000,
+    "McDuff_Shoplot_End": 76430900,
+    
+    "Carhillion_Shoplot_Start": 76600000,
+    "Carhillion_Shoplot_End": 76600900,
+    
+    "Carhillion_Shop_Initial_Lots": [
+        76600300, 76600301, 76600302, 76600303, 76600304, 76600305, 76600306, 76600307
+    ],
+    "Carhillion_Shop_Secondary_Lots": [
+        76600308, 76600309, 76600310, 76600311, 76600312, 76600313, 76600314, 76600315
+    ],
+    
+    "Straid_Shoplot_Start": 76800000,
+    "Straid_Shoplot_End": 76800900,
+    
+    "Licia_Shoplot_Start": 76900000,
+    "Licia_Shoplot_End": 76900900,
+    
+    "Licia_Shop_Initial_Lots": [
+        76900300, 76900301, 76900302, 76900303, 76900304, 76900305, 76900306, 76900307, 76900308, 76900309
+    ],
+    "Licia_Shop_Secondary_Lots": [
+        76900310, 76900311, 76900312, 76900313, 76900314, 76900315, 76900316, 76900317, 76900318, 76900319
+    ],
+    
+    "Felkin_Shoplot_Start": 77000000,
+    "Felkin_Shoplot_End": 77000900,
+    
+    "Navlaan_Shoplot_Start": 77100000,
+    "Navlaan_Shoplot_End": 77100900,
+    
+    "Magerold_Shoplot_Start": 77200000,
+    "Magerold_Shoplot_End": 77200900,
+    
+    "Ornifex_Shoplot_Start": 77600000,
+    "Ornifex_Shoplot_End": 77600900,
+    
+    "Shalquior_Shoplot_Start": 77700000,
+    "Shalquior_Shoplot_End": 77700900,
+    
+    "Titchy_Shoplot_Start": 78300000,
+    "Titchy_Shoplot_End": 78300900,
+    
+    "Cromwell_Shoplot_Start": 78400000,
+    "Cromwell_Shoplot_End": 78400900,
+    
+    "Targray_Shoplot_Start": 78500000,
+    "Targray_Shoplot_End": 78500900,
+    
+    // Boss Trade Itemlot ID Start/End - Used to filter shoplot rows
+    "Straid_Bosslot_Start": 76801000,
+    "Straid_Bosslot_End": 78300900,
+    
+    "Ornifex_Bosslot_Start": 77601000,
+    "Ornifex_Bosslot_End": 77601900,
+    
+    "Ornifex_Free_Bosslot_Start": 77602000,
+    "Ornifex_Free_Bosslot_End": 77602900,
+    
+    // Enemy Drop Itemlot ID Start/End - Used to filter drop itemlot rows
+    "Enemy_Drop_Itemlot_Start": 1020000,
+    "Enemy_Drop_Itemlot_End": 89800000,
+    
+    // Blacklists - Used to filter param rows
+    "Blacklist_Itemlots_for_Keys": [
+        10026100, 10045010, 10045040, 10045050, 10045020, 10045030, 10046100, 10105120, 10105050, 10105150, 10105080, 10105090, 10105110, 10106010, 10106070, 10106080, 10106120, 10106290, 10106370, 10106420, 10106430, 10106510, 10106600, 10106610, 10106620, 10106630, 10106350, 10106360, 10106460, 10106470, 10106480, 10145070, 10145080, 10155010, 10155020, 10155000, 10155030, 10156000, 10156010, 10156030, 10156040, 10156050, 10156130, 10156140, 10156150, 10156200, 10156100, 10156110, 10156070, 10156060, 10156160, 10165010, 10165110, 10165150, 10165000, 10165070, 10165020, 10166050, 10166350, 10166330, 10166440, 10175130, 10185120, 10196140, 10195100, 10195110, 10256000, 10256360, 10305010, 10306030, 10325100, 10326220, 10326260, 10335000, 10335020, 10335040, 10336020, 10346100, 20105030, 20105040, 20115070, 20115110, 20115090, 20116200, 20215050, 20215130, 20215160, 20216000, 20216010, 20216020, 50355150, 50355180, 50355350, 50356150, 50356210, 50356380, 50356400, 50356430, 50356460, 50356470, 50356480, 50356490, 50356500, 50356520, 50356530, 50356540, 50356610, 50356620, 50365550, 50365560, 50365680, 50365690, 50365020, 50365080, 50366020, 50366210, 50366240, 50367130, 50366880, 50366890, 50366250, 50366710, 50366720, 50366740, 50366760, 50366830, 50366850, 50366860, 50366870, 50366910, 50366920, 50366930, 50366940, 50366950, 50366960, 50366970, 50366980, 50366990, 50367000, 50367010, 50367020, 50367030, 50367040, 50367050, 50367060, 50367090, 50367100, 50367110, 50367120, 50375740, 50376060, 50376210, 50376220, 50376230, 50376300, 50376450, 50376460, 50376470, 50376570, 50376580, 50376710, 50376730, 50376740
+    ],
+    "Blacklist_Itemlots": [
+        514500, 1705100, 1705300, 1753010, 1757000, 1758000, 1759000, 1777000, 1786000
+    ],
+    "Blacklist_Itemlot_Contents": [
+        60155000, 60155010, 60155020, 60155030, // Estus Flask
+        60360000, // Darksign
+        53600000, // Eye of the Priestess
+        62190000, // Petrified Egg
+        60002000, // Seed of a Tree of Giants
+        64600000 // Loyce Soul
+    ],
+    
+    "Blacklist_Weapons": [
+        3400000, // Fists
+        3401000, // Fists
+        3402000, // Fists
+        3403000, // Fists
+        3404000, // Fists
+        3405000, // Fists
+        3406000, // Fists
+        3407000, // Fists
+        3408000, // Fists
+        1980000, // Key to the Embedded
+        6000000, // 6000: Torch (Small) -- 6000:??(?)
+        6100000, // Binoculars
+        6300000, // 6300: Phantom - Dagger  -- 6300:??-??
+        6310000, // 6310: Phantom - Swords  -- 6310:??-??
+        6320000, // 6320: Phantom - Song Sword -- 6320:??-??
+        6330000, // 6330: Phantom-Sword -- 6330:??-?
+        6340000, // 6340: Phantom - Direct Sword -- 6340:??-??
+        6350000, // 6350: Phantom - Two-Handed Sword  -- 6350:??-???
+        6360000, // 6360: Phantom - One-handed battle  -- 6360:??-????
+        6370000, // 6370: Phantom - Two-Handed Battle  -- 6370:??-????
+        6380000, // 6380: Phantom - One Hand Axe -- 6380:??-???
+        6390000, // 6390: Phantom - Two-Handed Axe -- 6390:??-???
+        6400000, // 6400: Phantom -Spear -- 6400:??-?
+        6410000, // 6410: Phantom - Two-Handed Sickle -- 6410:??-???
+        6420000, // 6420: Phantom - Two-Handed Long Axe  -- 6420:??-????
+        6430000, // 6430: Phantom - Bare Hands -- 6430:??-??
+        6440000, // 6440: Phantom - Nails -- 6440:??-?
+        6450000, // 6450: Phantom - Torch -- 6450:??-??
+        6460000, // 6460: Phantom-Telescope  -- 6460:??-???
+        6470000, // 6470: Phantom-Whip  -- 6470:??-?
+        6480000, // 6480: Phantom - One Hand Wand -- 6480:??-???
+        6490000, // 6490: Phantom - One Hand Bell -- 6490:??-????
+        6500000, // 6500: Phantom - Two-Handed Bow -- 6500:??-???
+        6510000, // 6510: Phantom - Two Hands Large Bow  -- 6510:??-????
+        6520000, // 6520: Phantom - One Hand Bow  -- 6520:??-????
+        6530000, // 6530: Phantom - Two-Handed Sword  -- 6530:??-?????
+        6540000, // 6540: Phantom - Two-Handed Oversized Sword -- 6540:??-?????
+        6550000, // 6550: Phantom - Double Blade  -- 6550:??-???
+        7010000, // 7010: Statue of a man for a cut scene -- 7010:??????????
+        12000000, // 12000: Phantom - Small Shield -- 12000:??-??
+        12010000, // 12010: Phantom - Medium Shield -- 12010:??-??
+        12020000 // 12020: Phantom - Great Shield -- 12020:??-??
+    ],
+    "Blacklist_Armor": [
+        21600000, // Blank
+        21610000, // Blank
+        21620000, // Blank
+        21630000, // Blank
+        21640000, // Blank
+        21650000, // Blank
+        21660000, // Blank
+        21670000, // Blank
+        21680000, // Blank
+        21690000, // Blank
+        21700000, // Blank
+        21710000, // Blank
+        26510000, // Blank
+        26590000, // Blank
+        26750000, // Blank
+        26770000, // Blank
+        26800000, // Blank
+        26880000, // Blank
+        26890000, // Blank
+        26900000, // Blank
+        26940000, // Blank
+        27521000 // Blank
+    ],
+    "Blacklist_Spells": [
+    ],
+    "Blacklist_Rings": [
+        40560000, // Illusory Ring of the Vengeful
+        40570000, // Illusory Ring of the Guilty
+        40510000 // King's Ring
+    ],
+    "Blacklist_Items": [
+        60375000 // Blank
+    ],
+    
+    // Item Categories - Used to filter param rows
+    "Category_Ammo": [
+        60760000, // Wood Arrow
+        60770000, // Iron Arrow
+        60780000, // Magic Arrow
+        60790000, // Lightning Arrow
+        60800000, // Fire Arrow
+        60810000, // Dark Arrow
+        60820000, // Poison Arrow
+        60830000, // Lacerating Arrow
+        60850000, // Iron Greatarrow
+        60870000, // Lightning Greatarrow
+        60880000, // Fire Greatarrow
+        60900000, // Destructive Greatarrow
+        60910000, // Wood Bolt
+        60920000, // Heavy Bolt
+        60930000, // Magic Bolt
+        60940000, // Lightning Bolt
+        60950000, // Fire Bolt
+        60960000 // Dark Bolt
+    ],
+    "Category_Boss_Soul": [
+        53300000, // Soul of Nadalia- Bride of Ash
+        64000000, // Soul of the Pursuer
+        64010000, // Soul of the Last Giant
+        64020000, // Dragonrider Soul
+        64030000, // Old Dragonslayer Soul
+        64040000, // Flexile Sentry Soul
+        64050000, // Ruin Sentinel Soul
+        64060000, // Soul of the Lost Sinner
+        64070000, // Executioner's Chariot Soul
+        64080000, // Skeleton Lord's Soul
+        64090000, // Covetous Demon Soul
+        64100000, // Mytha- the Baneful Queen Soul
+        64110000, // Smelter Demon Soul
+        64120000, // Old Iron King Soul
+        64130000, // Royal Rat Vanguard Soul
+        64140000, // Soul of the Rotten
+        64150000, // Scorpioness Najka Soul
+        64160000, // Royal Rat Authority Soul
+        64170000, // Soul of the Duke's Dear Freja
+        64180000, // Looking Glass Knight Soul
+        64190000, // Demon of Song Soul
+        64200000, // Soul of Velstadt
+        64210000, // Soul of the King
+        64220000, // Guardian Dragon Soul
+        64230000, // Ancient Dragon Soul
+        64240000, // Giant Lord Soul
+        64250000, // Soul of Nashandra
+        64260000, // Throne Defender Soul
+        64270000, // Throne Watcher Soul
+        64280000, // Darklurker Soul
+        64290000, // Belfry Gargoyle Soul
+        64300000, // Old Witch Soul
+        64310000, // Old King Soul
+        64320000, // Old Dead One Soul
+        64330000, // Old Paledrake Soul
+        64500000, // Soul of Sinh- the Slumbering Dragon
+        64510000, // Soul of the Fume Knight
+        64520000, // Soul of Aava- the King's Pet
+        64530000, // Soul of Elana- Squalid Queen
+        64540000, // Soul of Nadalia- Bride of Ash
+        64550000, // Soul of Alsanna- Silent Oracle
+        64560000, // Soul of Sir Alonne
+        64580000, // Soul of the Ivory King
+        64590000, // Soul of Zallen- the King's Pet
+        64610000 // Soul of Lud- the King's Pet
+    ],
+    "Category_Consumable": [
+        50880000, // Smooth & Silky Stone
+        50885000, // Small Smooth & Silky Stone
+        50960000, // Soul Vessel
+        51010000, // Simpletons Spice
+        51020000, // Skeptics Spice
+        60010000, // Lifegem
+        60020000, // Radiant Lifegem
+        60030000, // Old Radiant Lifegem
+        60035000, // Elizabeth Mushroom
+        60036000, // Dried Root
+        60040000, // Amber Herb
+        60050000, // Twilight Herb
+        60060000, // Wilted Dusk Herb
+        60070000, // Poison Moss
+        60090000, // Monastery Charm
+        60100000, // Dragon Charm
+        60105000, // Divine Blessing
+        60110000, // Rouge Water
+        60120000, // Crimson Water
+        60151000, // Human Effigy
+        60160000, // Small Blue Burr
+        60170000, // Small Yellow Burr
+        60180000, // Small Orange Burr
+        60190000, // Dark Troches
+        60200000, // Common Fruit
+        60210000, // Red Leech Troches
+        60230000, // Triclops Snake Troches
+        60235000, // Old Growth Balm
+        60236000, // Vine Balm
+        60237000, // Blackweed Balm
+        60238000, // Goldenfruit Balm
+        60239000, // Brightbug
+        60240000, // Aromatic Ooze
+        60250000, // Gold Pine Resin
+        60260000, // Charcoal Pine Resin
+        60270000, // Dark Pine Resin
+        60280000, // Rotten Pine Resin
+        60290000, // Bleeding Serum
+        60310000, // Green Blossom
+        60320000, // Rusted Coin
+        60350000, // Homeward Bone
+        60370000, // Silver Talisman
+        60410000, // Repair Powder
+        60420000, // Torch
+        60430000, // Flame Butterfly
+        60450000, // Prism Stone
+        60510000, // Rubbish
+        60511000, // Petrified Something
+        60527000, // Bonfire Ascetic
+        60530000, // Alluring Skull
+        60531000, // Lloyd's Talisman
+        60538000, // Fire Seed
+        60540000, // Throwing Knife
+        60550000, // Witching Urn
+        60560000, // Lightning Urn
+        60570000, // Firebomb
+        60575000, // Black Firebomb
+        60580000, // Hexing Urn
+        60590000, // Poison Throwing Knife
+        60595000, // Dung Pie
+        60600000, // Lacerating Knife
+        60610000, // Corrosive Urn
+        60620000, // Holy Water Urn
+        60625000, // Fading Soul
+        60630000, // Soul of a Lost Undead
+        60640000, // Large Soul of a Lost Undead
+        60650000, // Soul of a Nameless Soldier
+        60660000, // Large Soul of a Nameless Soldier
+        60670000, // Soul of a Proud Knight
+        60680000, // Large Soul of a Proud Knight
+        60690000, // Soul of a Brave Warrior
+        60700000, // Large Soul of a Brave Warrior
+        60710000, // Soul of a Hero
+        60720000 // Soul of a Great Hero
+    ],
+    "Category_Gesture": [
+        63000000, // "Point" Gesture
+        63001000, // "I won't bite" Gesture
+        63003000, // "Bow" Gesture
+        63004000, // "Welcome" Gesture
+        63005000, // "Duel bow" Gesture
+        63006000, // "Wave" Gesture
+        63007000, // "Pumped up" Gesture
+        63008000, // "Joy" Gesture
+        63009000, // "Warcry" Gesture
+        63010000, // "Warmup" Gesture
+        63011000, // "Hurrah!" Gesture
+        63012000, // "Righty-ho!" Gesture
+        63013000, // "No way" Gesture
+        63014000, // "This one's me" Gesture
+        63015000, // "Have mercy!" Gesture
+        63016000, // "Prostration" Gesture
+        63017000, // "Decapitate" Gesture
+        63018000, // "Fist pump" Gesture
+        63019000, // "Mock" Gesture
+        63021000 // "Praise the Sun" Gesture
+    ],
+    "Category_Key_Item": [
+        50600000, // Soldier Key
+        50610000, // Key to King's Passage
+        50800000, // Bastille Key
+        50810000, // Iron Key
+        50820000, // Forgotten Key
+        50830000, // Brightstone Key
+        50840000, // Antiquated Key
+        50850000, // Fang Key
+        50860000, // House Key
+        50870000, // Lenigrast's Key
+        50890000, // Rotunda Lockstone
+        50900000, // Giant's Kinship
+        50910000, // Ashen Mist Heart
+        50930000, // Tseldora Den Key
+        50970000, // Undead Lockaway Key
+        51030000, // Aldia Key
+        52000000, // Dragon Talon
+        52100000, // Heavy Iron Key
+        52200000, // Frozen Flower
+        52300000, // Eternal Sanctum Key
+        52400000, // Tower Key
+        52500000, // Garrison Ward Key
+        52650000, // Dragon Stone
+        53100000, // Scorching Iron Scepter
+        53600000, // Eye of the Priestess
+        50990000, // Dull Ember
+        1980000, // Key to the Embedded
+        40510000 // King's Ring
+    ],
+    "Category_Material": [
+        60970000, // Titanite Shard
+        60975000, // Large Titanite Shard
+        60980000, // Titanite Chunk
+        60990000, // Titanite Slab
+        61000000, // Twinkling Titanite
+        61030000, // Petrified Dragon Bone
+        61060000, // Faintstone
+        61070000, // Boltstone
+        61080000, // Firedrake Stone
+        61090000, // Darknight Stone
+        61100000, // Poison Stone
+        61110000, // Bleed Stone
+        61130000, // Raw Stone
+        61140000, // Magic Stone
+        61150000, // Old Mundane Stone
+        61160000, // Palestone
+        62070000, // Dragon Eye
+        62100000, // Token of Fidelity
+        62110000, // Token of Spite
+        62120000, // Sunlight Medal
+        62130000, // Dragon Scale
+        62140000, // Rat Tail
+        62150000 // Awestone
+    ],
+    "Category_Multiplayer_Item": [
+        51000000, // Crushed Eye Orb
+        62160000, // Black Separation Crystal
+        62030000, // White Sign Soapstone
+        62040000, // Small White Sign Soapstone
+        62045000, // Red Sign Soapstone
+        62020000, // Bone of Order
+        62000000, // Dried Fingers
+        62050000, // Cracked Blue Eye Orb
+        62060000, // Cracked Red Eye Orb
+        62160000, // Black Separation Crystal
+        62170000 // Seed of a Tree of Giants
+    ],
+    "Category_Tool_Item": [
+        60355000, // Aged Feather
+        50940000, // Champion's Tablet
+        60405000, // Dragon Head Stone
+        60406000, // Dragon Torso Stone
+        60470000, // Hello Carving
+        60480000, // Thank You Carving
+        60490000, // I'm Sorry Carving
+        60500000, // Very Good! Carving
+        60536000, // Pharros' Lockstone
+        60537000, // Fragrant Branch of Yore
+        53200000, // Smelter Wedge
+        60525000, // Estus Flask Shard
+        60526000 // Sublime Bone Dust
+    ],
+    "Category_Fists": [
+        3400000, 3401000, 3402000, 3403000, 3404000, 3405000, 3406000, 3407000, 3408000
+    ],
+    "Category_Catalysts": [
+        4020000, 3830000, 5540000, 3800000, 3810000, 3850000, 3860000, 3870000, 3880000, 3890000, 3900000, 4150000, 3930000, 3940000, 4010000, 4020000, 4030000, 4040000, 4050000, 4060000, 4080000, 4090000, 4100000,4110000, 4120000, 4150000, 5400000, 5410000
+    ],
+    "Category_Sorcery_Catalysts": [
+        4020000, 3830000, 5540000, 3800000, 3810000, 3850000, 3860000, 3870000, 3880000, 3890000, 3900000, 4150000, 3930000, 3940000
+    ],
+    "Category_Miracle_Catalysts": [
+        4010000, 4020000, 4030000, 4040000, 4050000, 4060000, 4080000, 4090000, 4100000,4110000, 4120000, 4150000
+    ],
+    "Category_Pyromancy_Catalysts": [
+        5400000, 5410000
+    ],
+    "Category_Hex_Catalysts": [
+        4020000, 3830000, 5540000, 3800000, 3810000, 3850000, 3860000, 3870000, 3880000, 3890000, 3900000, 4150000, 3930000, 3940000
+    ],
+    
+    // Item Assignment Categories - Used for item assignment
+    "Assignment_Category_General_Consumable": [
+        60160000, 60170000, 60180000, 60190000, 60200000, 60210000, 60230000, 60235000, 60236000, 60237000, 60238000, 60239000, 60240000, 60250000, 60260000, 60270000, 60280000, 60290000, 60310000, 60320000, 60410000, 60430000, 60450000, 60370000
+    ],
+    "Assignment_Category_Consumable_Soul": [
+        60625000, 60630000, 60640000, 60650000, 60660000, 60670000, 60680000, 60690000, 60700000, 60710000, 60720000
+    ],
+    "Assignment_Category_Throwable_Item": [
+        60530000, 60531000, 60540000, 60540000, 60550000, 60560000, 60570000, 60575000, 60580000, 60590000, 60595000, 60600000, 60610000, 60620000
+    ],
+    "Assignment_Category_HP_Consumable": [
+        60010000, 60020000, 60030000, 60035000, 60036000, 60105000, 60100000, 60100000
+    ],
+    "Assignment_Category_Cast_Consumable": [
+        60040000, 60050000, 60060000, 60110000, 60120000
+    ],
+    "Assignment_Category_Spell_Tier_Consumable": [
+        51010000, 51020000
+    ],
+    "Assignment_Category_Flask_Tier_Consumable": [
+        60525000, 60526000
+    ],
+    "Assignment_Category_Trade_Consumable": [
+        60511000, 50880000, 50885000
+    ],
+    
+    // Key Items - The map IDs denote which itemlots the key can be placed in
+    "Soldier_Key": {
+        "ID": 50600000,
+        "Maps": [
+            "m10_14_00_00",
+            "m10_16_00_00",
+            "m10_18_00_00"
+        ]
+    },
+    "Dull_Ember": {
+        "ID": 50990000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_19_00_00",
+            "m10_23_00_00",
+            "m10_25_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_33_00_00",
+            "m10_34_00_00"
+        ]
+    },
+    "Aldia_Key": {
+        "ID": 51030000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_19_00_00",
+            "m10_23_00_00",
+            "m10_25_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_33_00_00",
+            "m10_34_00_00"
+        ]
+    },
+    "Ashen_Mist_Heart": {
+        "ID": 50910000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_19_00_00",
+            "m10_23_00_00",
+            "m10_25_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_33_00_00",
+            "m10_34_00_00"
+        ]
+    },
+    "Giants_Kinship": {
+        "ID": 50900000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_19_00_00",
+            "m10_23_00_00",
+            "m10_25_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_33_00_00",
+            "m10_34_00_00",
+            "m20_11_00_00",
+            "m20_21_00_00",
+            "m20_24_00_00"
+        ]
+    },
+    "Rotunda_Lockstone": {
+        "ID": 50890000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_25_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00"
+        ]
+    },
+    "Lenigrasts_Key": {
+        "ID": 50870000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_23_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_34_00_00"
+        ]
+    },
+    "House_Key": {
+        "ID": 50860000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_23_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_34_00_00"
+        ]
+    },
+    "Antiquated_Key": {
+        "ID": 50840000,
+        "Maps": [
+            "m10_10_00_00",
+            "m10_16_00_00",
+            "m10_18_00_00",
+            "m10_31_00_00"
+        ]
+    },
+    "Brightstone_Key": {
+        "ID": 50830000,
+        "Maps": [
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_32_00_00"
+        ]
+    },
+    "Bastille_Key": {
+        "ID": 50800000,
+        "Maps": [
+            "m10_10_00_00",
+            "m10_16_00_00",
+            "m10_18_00_00"
+        ]
+    },
+    "Tseldora_Den_Key": {
+        "ID": 50930000,
+        "Maps": [
+            "m10_14_00_00",
+            "m10_32_00_00"
+        ]
+    },
+    "Fang_Key": {
+        "ID": 50850000,
+        "Maps": [
+            "m10_14_00_00",
+            "m10_32_00_00"
+        ]
+    },
+    "Iron_Key": {
+        "ID": 50810000,
+        "Maps": [
+            "m10_17_00_00",
+            "m10_19_00_00",
+            "m10_25_00_00"
+        ]
+    },
+    "Forgotten_Key": {
+        "ID": 50820000,
+        "Maps": [
+            "m10_19_00_00",
+            "m10_25_00_00"
+        ]
+    },
+    "Key_to_the_Kings_Passage": {
+        "ID": 50610000,
+        "Maps": [
+            "m10_32_00_00",
+            "m20_21_00_00"
+        ]
+    },
+    "Undead_Lockaway_Key": {
+        "ID": 50970000,
+        "Maps": [
+            "m10_23_00_00"
+        ]
+    },
+    "Eternal_Sanctum_Key": {
+        "ID": 52300000,
+        "Maps": [
+            "m50_35_00_00"
+        ]
+    },
+    "Dragon_Stone": {
+        "ID": 52650000,
+        "Maps": [
+            "m50_35_00_00"
+        ]
+    },
+    "Scorching_Iron_Scepter": {
+        "ID": 53100000,
+        "Maps": [
+            "m50_36_00_00"
+        ]
+    },
+    "Tower_Key": {
+        "ID": 52400000,
+        "Maps": [
+            "m50_36_00_00"
+        ]
+    },
+    "Garrison_Ward_Key": {
+        "ID": 52500000,
+        "Maps": [
+            "m50_37_00_00"
+        ]
+    },
+    "Dragon_Talon": {
+        "ID": 52000000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_19_00_00",
+            "m10_23_00_00",
+            "m10_25_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_33_00_00",
+            "m10_34_00_00",
+            "m20_11_00_00",
+            "m20_21_00_00",
+            "m20_24_00_00"
+        ]
+    },
+    "Heavy_Iron_Key": {
+        "ID": 52100000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_19_00_00",
+            "m10_23_00_00",
+            "m10_25_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_33_00_00",
+            "m10_34_00_00",
+            "m20_11_00_00",
+            "m20_21_00_00",
+            "m20_24_00_00"
+        ]
+    },
+    "Frozen_Flower": {
+        "ID": 52200000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_19_00_00",
+            "m10_23_00_00",
+            "m10_25_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_33_00_00",
+            "m10_34_00_00",
+            "m20_11_00_00",
+            "m20_21_00_00",
+            "m20_24_00_00"
+        ]
+    },
+    "Key_to_the_Embedded": {
+        "ID": 1980000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_19_00_00",
+            "m10_23_00_00",
+            "m10_25_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_33_00_00",
+            "m10_34_00_00",
+            "m20_11_00_00",
+            "m20_21_00_00"
+        ]
+    },
+    "King_Ring": {
+        "ID": 40510000,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_19_00_00",
+            "m10_23_00_00",
+            "m10_25_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_33_00_00",
+            "m10_34_00_00",
+            "m20_11_00_00",
+            "m20_21_00_00",
+            "m20_24_00_00"
+        ]
+    },
+    
+    // Tool Items - The map IDs denote which itemlots the tool can be placed in
+    "Aged_Feather": {
+        "ID": 60355000,
+        "Maps": [
+            "m10_27_00_00"
+        ]
+    },
+    "Champion_Tablet": {
+        "ID": 50940000,
+        "Maps": [
+            "m20_21_00_00"
+        ]
+    },
+    "Dragon_Head_Stone": {
+        "ID": 60405000,
+        "Maps": [
+            "m10_19_00_00"
+        ]
+    },
+    "Dragon_Torso_Stone": {
+        "ID": 60406000,
+        "Maps": [
+            "m10_19_00_00"
+        ]
+    },
+    "Hello_Carving": {
+        "ID": 60470000,
+        "Maps": [
+            "m10_10_00_00"
+        ]
+    },
+    "Thank_You_Carving": {
+        "ID": 60480000,
+        "Maps": [
+            "m10_10_00_00"
+        ]
+    },
+    "Im_Sorry_Carving": {
+        "ID": 60490000,
+        "Maps": [
+            "m10_25_00_00"
+        ]
+    },
+    "Very_Good_Carving": {
+        "ID": 60500000,
+        "Maps": [
+            "m20_21_00_00"
+        ]
+    },
+    
+    // Consumable Items - The map IDs denote which itemlots the tool can be placed in
+    "Pharros_Lockstone": {
+        "ID": 60536000,
+        "Min": 1,
+        "Max": 2,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_19_00_00",
+            "m10_23_00_00",
+            "m10_25_00_00",
+            "m10_27_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_33_00_00",
+            "m10_34_00_00",
+            "m20_10_00_00",
+            "m20_11_00_00",
+            "m20_21_00_00",
+            "m20_24_00_00"
+        ]
+    },
+    "Fragrant_Branch_of_Yore": {
+        "ID": 60537000,
+        "Min": 1,
+        "Max": 0,
+        "Maps": [
+            "m10_02_00_00",
+            "m10_04_00_00",
+            "m10_10_00_00",
+            "m10_14_00_00",
+            "m10_15_00_00",
+            "m10_16_00_00",
+            "m10_17_00_00",
+            "m10_18_00_00",
+            "m10_19_00_00",
+            "m10_23_00_00",
+            "m10_25_00_00",
+            "m10_27_00_00",
+            "m10_31_00_00",
+            "m10_32_00_00",
+            "m10_33_00_00",
+            "m10_34_00_00",
+            "m20_10_00_00",
+            "m20_11_00_00",
+            "m20_21_00_00",
+            "m20_24_00_00"
+        ]
+    }
+}

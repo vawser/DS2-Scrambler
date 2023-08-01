@@ -219,6 +219,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox39 = new System.Windows.Forms.GroupBox();
+            this.c_Heides_Tower_of_Flame = new System.Windows.Forms.CheckBox();
             this.c_Memory_of_the_King = new System.Windows.Forms.CheckBox();
             this.c_Eleum_Loyce = new System.Windows.Forms.CheckBox();
             this.c_Brume_Tower = new System.Windows.Forms.CheckBox();
@@ -287,7 +288,6 @@
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.tabPage11 = new System.Windows.Forms.TabPage();
             this.b_ChaosMode = new System.Windows.Forms.Button();
-            this.c_Heides_Tower_of_Flame = new System.Windows.Forms.CheckBox();
             this.groupBox6.SuspendLayout();
             this.groupBox30.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -429,7 +429,7 @@
             this.groupBox6.Controls.Add(this.label4);
             this.groupBox6.Location = new System.Drawing.Point(6, 6);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(814, 79);
+            this.groupBox6.Size = new System.Drawing.Size(814, 159);
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "ItemParam";
@@ -481,7 +481,7 @@
             this.groupBox30.Controls.Add(this.label64);
             this.groupBox30.Controls.Add(this.c_Generate_RingParam);
             this.groupBox30.Controls.Add(this.label65);
-            this.groupBox30.Location = new System.Drawing.Point(6, 91);
+            this.groupBox30.Location = new System.Drawing.Point(6, 171);
             this.groupBox30.Name = "groupBox30";
             this.groupBox30.Size = new System.Drawing.Size(814, 79);
             this.groupBox30.TabIndex = 7;
@@ -2345,6 +2345,16 @@
             this.groupBox39.TabStop = false;
             this.groupBox39.Text = "Maps to Scramble";
             // 
+            // c_Heides_Tower_of_Flame
+            // 
+            this.c_Heides_Tower_of_Flame.AutoSize = true;
+            this.c_Heides_Tower_of_Flame.Location = new System.Drawing.Point(228, 122);
+            this.c_Heides_Tower_of_Flame.Name = "c_Heides_Tower_of_Flame";
+            this.c_Heides_Tower_of_Flame.Size = new System.Drawing.Size(148, 19);
+            this.c_Heides_Tower_of_Flame.TabIndex = 44;
+            this.c_Heides_Tower_of_Flame.Text = "Heide\'s Tower of Flame";
+            this.c_Heides_Tower_of_Flame.UseVisualStyleBackColor = true;
+            // 
             // c_Memory_of_the_King
             // 
             this.c_Memory_of_the_King.AutoSize = true;
@@ -3084,16 +3094,6 @@
             this.b_ChaosMode.Text = "Chaos Mode";
             this.b_ChaosMode.UseVisualStyleBackColor = true;
             this.b_ChaosMode.Click += new System.EventHandler(this.b_ChaosMode_Click);
-            // 
-            // c_Heides_Tower_of_Flame
-            // 
-            this.c_Heides_Tower_of_Flame.AutoSize = true;
-            this.c_Heides_Tower_of_Flame.Location = new System.Drawing.Point(228, 122);
-            this.c_Heides_Tower_of_Flame.Name = "c_Heides_Tower_of_Flame";
-            this.c_Heides_Tower_of_Flame.Size = new System.Drawing.Size(148, 19);
-            this.c_Heides_Tower_of_Flame.TabIndex = 44;
-            this.c_Heides_Tower_of_Flame.Text = "Heide\'s Tower of Flame";
-            this.c_Heides_Tower_of_Flame.UseVisualStyleBackColor = true;
             // 
             // Main
             // 

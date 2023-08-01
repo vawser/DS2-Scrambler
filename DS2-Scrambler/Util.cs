@@ -17,7 +17,7 @@ namespace DS2_Scrambler
         }
 
         // *** Random Items
-        public static void SetRandomGood(PARAM.Row row, string field_1, ScramblerData Data, string field_2)
+        public static void SetRandomGood(PARAM.Row row, string field_1, CoreScramblerData Data, string field_2)
         {
             Random rand = new Random();
 

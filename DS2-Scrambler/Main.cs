@@ -21,7 +21,7 @@ namespace DS2_Scrambler
         // Interface
         private Progress<string> ProgressText;
 
-        public ScramblerData scramblerData;
+        public CoreScramblerData scramblerData;
         public Regulation reg;
 
         // TODO: add 'map' tab, for scrambling stuff such as objects
@@ -89,7 +89,7 @@ namespace DS2_Scrambler
             {
                 progress.Report("Params loaded.");
 
-                scramblerData = new ScramblerData(reg, Path_ScrambledMod);
+                scramblerData = new CoreScramblerData(reg, Path_ScrambledMod);
                 progress.Report("Scrambler data built.");
 
                 // Scramble

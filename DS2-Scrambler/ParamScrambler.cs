@@ -54,11 +54,12 @@ namespace DS2_Scrambler
     {
         public Random rand;
         public Regulation regulation;
-        public ScramblerData Data;
+        public CoreScramblerData Data;
 
         // TODO: implement more granular controls for each param, try and prevent game-breaking scramble side-effects
+        // Each param section should be broken into 'gameplay' oriented toggles, i.e. ItemParam will be split into Price, Animation Speed, Hold Count
 
-        public ParamScrambler(Random random, Regulation reg, ScramblerData scramblerData)
+        public ParamScrambler(Random random, Regulation reg, CoreScramblerData scramblerData)
         {
             Data = scramblerData;
             rand = random;
@@ -782,11 +783,11 @@ namespace DS2_Scrambler
 
                     if (isBossOnly)
                     {
-                        param_rows = param_rows.Where(row => Data.ID_List_Bosses.Contains(row.ID)).ToList();
+                        param_rows = param_rows.Where(row => ParamScramblerData.Static.Boss_EnemyParamID_List.Contains(row.ID)).ToList();
                     }
                     else
                     {
-                        param_rows = param_rows.Where(row => !Data.ID_List_Bosses.Contains(row.ID)).ToList();
+                        param_rows = param_rows.Where(row => !ParamScramblerData.Static.Boss_EnemyParamID_List.Contains(row.ID)).ToList();
                     }
 
                     if (!useGenerateType)
@@ -864,11 +865,11 @@ namespace DS2_Scrambler
 
                     if (isBossOnly)
                     {
-                        param_rows = param_rows.Where(row => Data.ID_List_Bosses.Contains(row.ID)).ToList();
+                        param_rows = param_rows.Where(row => ParamScramblerData.Static.Boss_EnemyParamID_List.Contains(row.ID)).ToList();
                     }
                     else
                     {
-                        param_rows = param_rows.Where(row => !Data.ID_List_Bosses.Contains(row.ID)).ToList();
+                        param_rows = param_rows.Where(row => !ParamScramblerData.Static.Boss_EnemyParamID_List.Contains(row.ID)).ToList();
                     }
 
                     if (!useGenerateType)
@@ -903,11 +904,11 @@ namespace DS2_Scrambler
 
                     if (isBossOnly)
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param_rows, Data.ID_List_Bosses, 2, 4, "1");
+                        param_rows = Util.GetRowsFromSubMatch(param_rows, ParamScramblerData.Static.Boss_EnemyParamID_List, 2, 4, "1");
                     }
                     else
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param_rows, Data.ID_List_Bosses, 2, 4, "1", true);
+                        param_rows = Util.GetRowsFromSubMatch(param_rows, ParamScramblerData.Static.Boss_EnemyParamID_List, 2, 4, "1", true);
                     }
 
                     if (!useGenerateType)
@@ -974,11 +975,11 @@ namespace DS2_Scrambler
 
                     if (isBossOnly)
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param.Rows, Data.ID_List_Bosses, 2, 4, "1");
+                        param_rows = Util.GetRowsFromSubMatch(param.Rows, ParamScramblerData.Static.Boss_EnemyParamID_List, 2, 4, "1");
                     }
                     else
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param.Rows, Data.ID_List_Bosses, 2, 4, "1", true);
+                        param_rows = Util.GetRowsFromSubMatch(param.Rows, ParamScramblerData.Static.Boss_EnemyParamID_List, 2, 4, "1", true);
                     }
 
                     if (!useGenerateType)
@@ -1094,11 +1095,11 @@ namespace DS2_Scrambler
 
                     if (isBossOnly)
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param_rows, Data.ID_List_Bosses, 2, 2, "");
+                        param_rows = Util.GetRowsFromSubMatch(param_rows, ParamScramblerData.Static.Boss_EnemyParamID_List, 2, 2, "");
                     }
                     else
                     {
-                        param_rows = Util.GetRowsFromSubMatch(param_rows, Data.ID_List_Bosses, 2, 2, "", true);
+                        param_rows = Util.GetRowsFromSubMatch(param_rows, ParamScramblerData.Static.Boss_EnemyParamID_List, 2, 2, "", true);
                     }
 
                     if (!useGenerateType)
