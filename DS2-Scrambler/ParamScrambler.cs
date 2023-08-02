@@ -18,6 +18,7 @@ using Org.BouncyCastle.Crypto;
 using System.IO;
 using System.DirectoryServices;
 using System.Globalization;
+using static SoulsFormats.PARAMDEF;
 
 namespace DS2_Scrambler
 {
@@ -56,9 +57,6 @@ namespace DS2_Scrambler
         public Regulation regulation;
         public CoreScramblerData Data;
 
-        // TODO: implement more granular controls for each param, try and prevent game-breaking scramble side-effects
-        // Each param section should be broken into 'gameplay' oriented toggles, i.e. ItemParam will be split into Price, Animation Speed, Hold Count
-
         public ParamScrambler(Random random, Regulation reg, CoreScramblerData scramblerData)
         {
             Data = scramblerData;
@@ -66,6 +64,1046 @@ namespace DS2_Scrambler
             regulation = reg;
         }
 
+        public int GetRandomInt(double min, double max)
+        {
+            double random_value = SimpleRNG.GetUniform();
+            double result = (max * random_value) < min ? min : (max * random_value);
+
+            return (int)result;
+        }
+
+        public uint GetRandomUInt(double min, double max)
+        {
+            double random_value = SimpleRNG.GetUniform();
+            double result = (max * random_value) < min ? min : (max * random_value);
+
+            return (uint)result;
+        }
+
+        public short GetRandomShort(double min, double max)
+        {
+            double random_value = SimpleRNG.GetUniform();
+            double result = (max * random_value) < min ? min : (max * random_value);
+
+            return (short)result;
+        }
+
+        public ushort GetRandomUShort(double min, double max)
+        {
+            double random_value = SimpleRNG.GetUniform();
+            double result = (max * random_value) < min ? min : (max * random_value);
+
+            return (ushort)result;
+        }
+
+        public byte GetRandomByte(double min, double max)
+        {
+            double random_value = SimpleRNG.GetUniform();
+            double result = (max * random_value) < min ? min : (max * random_value);
+
+            return (byte)result;
+        }
+
+        public sbyte GetRandomSByte(double min, double max)
+        {
+            double random_value = SimpleRNG.GetUniform();
+            double result = (max * random_value) < min ? min : (max * random_value);
+
+            return (sbyte)result;
+        }
+
+        public float GetRandomFloat(double min, double max)
+        {
+            double random_value = SimpleRNG.GetUniform();
+            double result = (max * random_value) < min ? min : (max * random_value);
+
+            return (float)result;
+        }
+
+        #region Weapons
+        public Regulation Scramble_WeaponAttributes(
+            bool c_ItemParam_Weapon_Price,
+            bool c_ItemParam_Weapon_Effect,
+            bool c_WeaponParam_Weapon_Weight,
+            bool c_WeaponParam_Weapon_Durability,
+            bool c_ItemParam_Weapon_Animation_Speed,
+            bool c_WeaponParam_StatRequirements,
+            bool c_WeaponParam_Damage,
+            bool c_WeaponReinforceParam_Reinforcement,
+            bool c_WeaponParam_StaminaConsumption,
+            bool c_WeaponTypeParam_CastSpeed,
+            bool c_WeaponTypeParam_BowDistance,
+            bool c_ArrowParam_AmmoDamage,
+            bool c_WeaponActionCategoryParam_Moveset,
+            bool c_Tweak_WeaponParam_RemoveStatRequirements
+        )
+        {
+            List<PARAM.Row> ItemParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"ItemParam")).ToList()[0].Rows;
+            List<PARAM.Row> ArmorParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"ArmorParam")).ToList()[0].Rows;
+            List<PARAM.Row> WeaponParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"WeaponParam")).ToList()[0].Rows;
+            List<PARAM.Row> RingParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"RingParam")).ToList()[0].Rows;
+            List<PARAM.Row> WeaponReinforceParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"WeaponReinforceParam")).ToList()[0].Rows;
+            List<PARAM.Row> ArrowParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"ArrowParam")).ToList()[0].Rows;
+            List<PARAM.Row> WeaponTypeParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"WeaponTypeParam")).ToList()[0].Rows;
+            List<PARAM.Row> WeaponActionCategoryParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"WeaponActionCategoryParam")).ToList()[0].Rows;
+
+            if (c_ItemParam_Weapon_Price)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.WeaponParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.WeaponParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["base_price"].Value = GetRandomInt(10, 10000);
+                    row["sell_price"].Value = GetRandomInt(10, 10000);
+                }
+            }
+            if (c_ItemParam_Weapon_Effect)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+                    row.ID >= ItemScramblerData.Static.WeaponParam_Category_Start &&
+                    row.ID <= ItemScramblerData.Static.WeaponParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    var list = ParamScramblerData.Static.SpEffect_ID_List;
+                    var result = list[rand.Next(list.Count)];
+
+                    row["speffect_id"].Value = result;
+                }
+            }
+            if (c_WeaponParam_Weapon_Weight)
+            {
+                List<PARAM.Row> rows = WeaponParam.Where(row =>
+                    row.ID >= ItemScramblerData.Static.WeaponParam_Category_Start &&
+                    row.ID <= ItemScramblerData.Static.WeaponParam_Category_End &&
+                    !ItemScramblerData.Static.Category_Fists.Contains(row.ID)
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["weight"].Value = GetRandomFloat(0.1, 30);
+                }
+            }
+            if (c_WeaponParam_Weapon_Durability)
+            {
+                List<PARAM.Row> rows = WeaponParam.Where(row =>
+                    row.ID >= ItemScramblerData.Static.WeaponParam_Category_Start &&
+                    row.ID <= ItemScramblerData.Static.WeaponParam_Category_End &&
+                    !ItemScramblerData.Static.Category_Fists.Contains(row.ID)
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["max_durability"].Value = (float)GetRandomInt(10, 300);
+                }
+            }
+            if (c_ItemParam_Weapon_Animation_Speed)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.WeaponParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.WeaponParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["animation_speed"].Value = GetRandomFloat(0.2, 1.5);
+                }
+            }
+            if (c_WeaponParam_StatRequirements)
+            {
+                List<PARAM.Row> rows = WeaponParam.Where(row =>
+                    row.ID >= ItemScramblerData.Static.WeaponParam_Category_Start &&
+                    row.ID <= ItemScramblerData.Static.WeaponParam_Category_End &&
+                    !ItemScramblerData.Static.Category_Fists.Contains(row.ID)
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["str_requirement"].Value = GetRandomShort(1, 50);
+                    row["dex_requirement"].Value = GetRandomShort(1, 50);
+                    row["int_requirement"].Value = GetRandomShort(1, 50);
+                    row["fth_requirement"].Value = GetRandomShort(1, 50);
+                }
+            }
+            if (c_WeaponParam_Damage)
+            {
+                List<PARAM.Row> rows = WeaponParam.Where(row =>
+                    row.ID >= ItemScramblerData.Static.WeaponParam_Category_Start &&
+                    row.ID <= ItemScramblerData.Static.WeaponParam_Category_End &&
+                    !ItemScramblerData.Static.Category_Fists.Contains(row.ID)
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["stamina_damage"].Value = GetRandomFloat(100, 1000);
+                    row["damage_mult"].Value = GetRandomFloat(0.5, 2.0);
+                    row["stamina_damage_mult"].Value = GetRandomFloat(0.5, 2.0);
+                    row["durability_damage_mult"].Value = GetRandomFloat(0.5, 2.0);
+
+                    // Only apply if the weapon already uses it
+                    if ((float)row["status_effect_amount"].Value > 0)
+                        row["status_effect_amount"].Value = GetRandomFloat(0.5, 2.0);
+
+                    row["posture_damage_mult"].Value = GetRandomFloat(0.5, 2.0);
+                }
+
+                // WeaponTypeParam
+                rows = WeaponTypeParam;
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["counter_damage"].Value = GetRandomFloat(0.5, 2.0);
+                }
+            }
+            if (c_WeaponReinforceParam_Reinforcement)
+            {
+                List<PARAM.Row> rows = WeaponReinforceParam;
+
+                foreach (PARAM.Row row in rows)
+                {
+                    // Damage
+                    var base_physical = GetRandomFloat(20, 200);
+                    var base_magic = GetRandomFloat(20, 200);
+                    var base_lightning = GetRandomFloat(20, 200);
+                    var base_fire = GetRandomFloat(20, 200);
+                    var base_dark = GetRandomFloat(20, 200);
+                    var base_status = GetRandomFloat(200, 1000);
+
+                    var growth = GetRandomFloat(1.1, 2.5);
+
+                    row["damage_physical"].Value = base_physical;
+                    row["damage_magic"].Value = base_magic;
+                    row["damage_lightning"].Value = base_lightning;
+                    row["damage_fire"].Value = base_fire;
+                    row["damage_dark"].Value = base_dark;
+                    row["damage_poison"].Value = base_status;
+                    row["damage_bleed"].Value = base_status;
+
+                    row["max_damage_physical"].Value = (int)(base_physical * growth);
+                    row["max_damage_magic"].Value = (int)(base_magic * growth);
+                    row["max_damage_lightning"].Value = (int)(base_lightning * growth);
+                    row["max_damage_fire"].Value = (int)(base_fire * growth);
+                    row["max_damage_dark"].Value = (int)(base_dark * growth);
+                    row["max_damage_poison"].Value = (int)(base_status * growth);
+                    row["max_damage_bleed"].Value = (int)(base_status * growth);
+
+
+                    var stability = GetRandomFloat(10, 100);
+                    var stability_factor = GetRandomFloat(1.01, 1.2);
+
+                    // Shields
+                    if(row.ID >= 11000)
+                    {
+                        row["stability_0"].Value = stability;
+                        row["stability_1"].Value = (stability * (stability_factor * 1));
+                        row["stability_2"].Value = (stability * (stability_factor * 2));
+                        row["stability_3"].Value = (stability * (stability_factor * 3));
+                        row["stability_4"].Value = (stability * (stability_factor * 4));
+                        row["stability_5"].Value = (stability * (stability_factor * 5));
+                        row["stability_6"].Value = (stability * (stability_factor * 6));
+                        row["stability_7"].Value = (stability * (stability_factor * 7));
+                        row["stability_8"].Value = (stability * (stability_factor * 8));
+                        row["stability_9"].Value = (stability * (stability_factor * 9));
+                        row["stability_10"].Value = (stability * (stability_factor * 10));
+
+                        if ((float)row["stability_0"].Value > 100)
+                            row["stability_0"].Value = 100;
+
+                        if ((float)row["stability_1"].Value > 100)
+                            row["stability_1"].Value = 100;
+
+                        if ((float)row["stability_2"].Value > 100)
+                            row["stability_2"].Value = 100;
+
+                        if ((float)row["stability_3"].Value > 100)
+                            row["stability_3"].Value = 100;
+
+                        if ((float)row["stability_4"].Value > 100)
+                            row["stability_4"].Value = 100;
+
+                        if ((float)row["stability_5"].Value > 100)
+                            row["stability_5"].Value = 100;
+
+                        if ((float)row["stability_6"].Value > 100)
+                            row["stability_6"].Value = 100;
+
+                        if ((float)row["stability_7"].Value > 100)
+                            row["stability_7"].Value = 100;
+
+                        if ((float)row["stability_8"].Value > 100)
+                            row["stability_8"].Value = 100;
+
+                        if ((float)row["stability_9"].Value > 100)
+                            row["stability_9"].Value = 100;
+
+                        if ((float)row["stability_10"].Value > 100)
+                            row["stability_10"].Value = 100;
+                    }
+                    else
+                    {
+                        row["stability_0"].Value = stability;
+                        row["stability_1"].Value = stability;
+                        row["stability_2"].Value = stability;
+                        row["stability_3"].Value = stability;
+                        row["stability_4"].Value = stability;
+                        row["stability_5"].Value = stability;
+                        row["stability_6"].Value = stability;
+                        row["stability_7"].Value = stability;
+                        row["stability_8"].Value = stability;
+                        row["stability_9"].Value = stability;
+                        row["stability_10"].Value = stability;
+                    }
+
+                    // Absorption
+                    var base_abs_physical = GetRandomFloat(10, 100);
+                    var base_abs_magic = GetRandomFloat(10, 100);
+                    var base_abs_lightning = GetRandomFloat(10, 100);
+                    var base_abs_fire = GetRandomFloat(10, 100);
+                    var base_abs_dark = GetRandomFloat(10, 100);
+                    var base_abs_poison = GetRandomFloat(10, 100);
+                    var base_abs_bleed = GetRandomFloat(10, 100);
+                    var base_abs_curse = GetRandomFloat(10, 100);
+                    var base_abs_petrify = GetRandomFloat(10, 100);
+
+                    var factor = 1.0;
+
+                    if (row.ID >= 11000)
+                        factor = 1.2;
+
+                    row["absorption_physical"].Value = (base_abs_physical * factor);
+                    row["absorption_magic"].Value = (base_abs_magic * factor);
+                    row["absorption_fire"].Value = (base_abs_fire * factor);
+                    row["absorption_lightning"].Value = (base_abs_lightning * factor);
+                    row["absorption_dark"].Value = (base_abs_dark * factor);
+                    row["absorption_poison"].Value = (base_abs_poison * factor);
+                    row["absorption_bleed"].Value = (base_abs_bleed * factor);
+                    row["absorption_petrify"].Value = (base_abs_curse * factor);
+                    row["absorption_curse"].Value = (base_abs_petrify * factor);
+                }
+            }
+            if (c_WeaponParam_StaminaConsumption)
+            {
+                List<PARAM.Row> rows = WeaponParam.Where(row =>
+                    row.ID >= ItemScramblerData.Static.WeaponParam_Category_Start &&
+                    row.ID <= ItemScramblerData.Static.WeaponParam_Category_End &&
+                    !ItemScramblerData.Static.Category_Fists.Contains(row.ID)
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["stamina_consumption"].Value = GetRandomFloat(100, 1000);
+                }
+            }
+            if (c_WeaponTypeParam_CastSpeed)
+            {
+                List<PARAM.Row> rows = WeaponTypeParam.Where(row => row.ID >= 300 && row.ID <= 358).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["cast_speed"].Value = GetRandomFloat(0.5, 2.0);
+                }
+            }
+            if (c_WeaponTypeParam_BowDistance)
+            {
+                List<PARAM.Row> rows = WeaponTypeParam.Where(row => row.ID >= 360 && row.ID <= 386).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["bow_distance"].Value = GetRandomUShort(10, 80);
+                }
+            }
+            if (c_ArrowParam_AmmoDamage)
+            {
+                List<PARAM.Row> rows = ArrowParam;
+
+                foreach (PARAM.Row row in rows)
+                {
+                    if((ushort)row["damage_physical"].Value > 0)
+                        row["damage_physical"].Value = GetRandomUShort(10, 200);
+
+                    if ((ushort)row["damage_magic"].Value > 0)
+                        row["damage_magic"].Value = GetRandomUShort(10, 200);
+
+                    if ((ushort)row["damage_lightning"].Value > 0)
+                        row["damage_lightning"].Value = GetRandomUShort(10, 200);
+
+                    if ((ushort)row["damage_fire"].Value > 0)
+                        row["damage_fire"].Value = GetRandomUShort(10, 200);
+
+                    if ((ushort)row["damage_dark"].Value > 0)
+                        row["damage_dark"].Value = GetRandomUShort(10, 200);
+
+                    if ((byte)row["damage_poison"].Value > 0)
+                        row["damage_poison"].Value = GetRandomByte(10, 200);
+
+                    if ((byte)row["damage_bleed"].Value > 0)
+                        row["damage_bleed"].Value = GetRandomByte(10, 200);
+                }
+            }
+            if (c_WeaponActionCategoryParam_Moveset)
+            {
+                List<PARAM.Row> rows = WeaponActionCategoryParam;
+
+                // This assigns new values based on the range of values within the existing fields.
+                // This is due to the fact that the movesets require similar moves in each slot.
+                // Failure to do this causes weird issues to occur.
+                foreach (string value in ParamScramblerData.Static.WeaponActionCategoryFields)
+                {
+                    AssignRandomMoveset(value, rows);
+                }
+            }
+
+            // Tweaks
+            if(c_Tweak_WeaponParam_RemoveStatRequirements)
+            {
+                List<PARAM.Row> rows = WeaponParam.Where(row =>
+                    row.ID >= ItemScramblerData.Static.WeaponParam_Category_Start &&
+                    row.ID <= ItemScramblerData.Static.WeaponParam_Category_End &&
+                    !ItemScramblerData.Static.Category_Fists.Contains(row.ID)
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["str_requirement"].Value = 0;
+                    row["dex_requirement"].Value = 0;
+                    row["int_requirement"].Value = 0;
+                    row["fth_requirement"].Value = 0;
+                }
+            }
+
+            return regulation;
+        }
+
+        public void AssignRandomMoveset(string field, List<PARAM.Row> rows)
+        {
+            List<uint> new_list = new List<uint>();
+
+            // Build list of possible values
+            foreach (PARAM.Row row in rows)
+            {
+                foreach (PARAM.Cell cell in row.Cells)
+                {
+                    if (cell.Def.InternalName == field)
+                    {
+                        new_list.Add((uint)cell.Value);
+                    }
+                }
+            }
+
+            // Assign new
+            foreach (PARAM.Row row in rows)
+            {
+                foreach (PARAM.Cell cell in row.Cells)
+                {
+                    if (cell.Def.InternalName == field)
+                    {
+                        cell.Value = new_list[rand.Next(new_list.Count)];
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        public Regulation Scramble_ArmorAttributes(
+            bool c_ItemParam_Armor_Price,
+            bool c_ItemParam_Armor_Effect,
+            bool c_ArmorParam_Armor_Weight,
+            bool c_ArmorParam_Armor_Durability,
+            bool c_ArmorParam_Defence,
+            bool c_ArmorParam_StatRequirements,
+            bool c_ArmorParam_Poise,
+            bool c_ArmorReinforceParam_Absorption,
+            bool c_Tweak_ArmorParam_RemoveStatRequirements
+        )
+        {
+            List<PARAM.Row> ItemParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"ItemParam")).ToList()[0].Rows;
+            List<PARAM.Row> ArmorParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"ArmorParam")).ToList()[0].Rows;
+            List<PARAM.Row> ArmorReinforceParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"ArmorReinforceParam")).ToList()[0].Rows;
+
+            if(c_ItemParam_Armor_Price)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+               row.ID >= ItemScramblerData.Static.ArmorParam_Category_Start &&
+               row.ID <= ItemScramblerData.Static.ArmorParam_Category_End
+               ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["base_price"].Value = GetRandomInt(10, 10000);
+                    row["sell_price"].Value = GetRandomInt(10, 10000);
+                }
+            }
+            if (c_ItemParam_Armor_Effect)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+                    row.ID >= ItemScramblerData.Static.ArmorParam_Category_Start &&
+                    row.ID <= ItemScramblerData.Static.ArmorParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    var list = ParamScramblerData.Static.SpEffect_ID_List;
+                    var result = list[rand.Next(list.Count)];
+
+                    row["speffect_id"].Value = result;
+                }
+            }
+            if (c_ArmorParam_Armor_Weight)
+            {
+                List<PARAM.Row> rows = ArmorParam.Where(row => 
+                row.ID >= 11010100 && 
+                row.ID <= 17950103
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["weight"].Value = GetRandomFloat(0.1, 15);
+                }
+            }
+            if (c_ArmorParam_Armor_Durability)
+            {
+                List<PARAM.Row> rows = ArmorParam.Where(row =>
+                 row.ID >= 11010100 &&
+                 row.ID <= 17950103
+                 ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["durability"].Value = (float)GetRandomInt(10, 100);
+                }
+            }
+            if (c_ArmorParam_Defence)
+            {
+                List<PARAM.Row> rows = ArmorParam.Where(row =>
+                row.ID >= 11010100 &&
+                row.ID <= 17950103
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["physical_defence_scaling"].Value = GetRandomFloat(0.1, 1);
+                    row["Unk11"].Value = GetRandomFloat(0.8, 1.2);
+                    row["Unk12"].Value = GetRandomFloat(0.5, 1.0);
+                    row["Unk13"].Value = GetRandomFloat(0.75, 1.25);
+                }
+            }
+            if (c_ArmorParam_StatRequirements)
+            {
+                List<PARAM.Row> rows = ArmorParam.Where(row =>
+                row.ID >= 11010100 &&
+                row.ID <= 17950103
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["strength_requirement"].Value = GetRandomUShort(1, 50);
+                    row["dexterity_requirement"].Value = GetRandomUShort(1, 50);
+                    row["intelligence_requirement"].Value = GetRandomUShort(1, 50);
+                    row["faith_requirement"].Value = GetRandomUShort(1, 50);
+                }
+            }
+            if (c_ArmorParam_Poise)
+            {
+                List<PARAM.Row> rows = ArmorParam.Where(row =>
+                row.ID >= 11010100 &&
+                row.ID <= 17950103
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["poise"].Value = GetRandomFloat(1, 20);
+                }
+            }
+            if (c_ArmorReinforceParam_Absorption)
+            {
+                List<PARAM.Row> rows = ArmorReinforceParam.Where(row =>
+                row.ID >= 11010100 &&
+                row.ID <= 17950103
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    // Defence
+                    var base_slash = GetRandomFloat(10, 100);
+                    var base_thrust = GetRandomFloat(10, 100);
+                    var base_strike = GetRandomFloat(10, 100);
+                    var base_standard = GetRandomFloat(10, 100);
+
+                    var base_magic = GetRandomFloat(1, 5);
+                    var base_lightning = GetRandomFloat(1, 5);
+                    var base_fire = GetRandomFloat(1, 5);
+                    var base_dark = GetRandomFloat(1, 5);
+
+                    var base_poison = GetRandomFloat(1, 5);
+                    var base_bleed = GetRandomFloat(1, 5);
+                    var base_petrify = GetRandomFloat(1, 5);
+                    var base_curse = GetRandomFloat(1, 5);
+
+                    var growth = GetRandomFloat(1.1, 2.5);
+
+                    row["defence_slash"].Value = base_slash;
+                    row["defence_thrust"].Value = base_thrust;
+                    row["defence_strike"].Value = base_strike;
+                    row["defence_standard"].Value = base_standard;
+
+                    row["absorption_magic"].Value = base_magic;
+                    row["absorption_lightning"].Value = base_lightning;
+                    row["absorption_fire"].Value = base_fire;
+                    row["absorption_dark"].Value = base_dark;
+
+                    row["absorption_poison"].Value = base_poison;
+                    row["absorption_bleed"].Value = base_bleed;
+                    row["absorption_petrify"].Value = base_petrify;
+                    row["absorption_curse"].Value = base_curse;
+
+                    row["max_defence_slash"].Value = (int)(base_slash * growth);
+                    row["max_defence_thrust"].Value = (int)(base_thrust * growth);
+                    row["max_defence_strike"].Value = (int)(base_strike * growth);
+                    row["max_defence_standard"].Value = (int)(base_standard * growth);
+
+                    row["max_absorption_magic"].Value = (int)(base_magic * growth);
+                    row["max_absorption_lightning"].Value = (int)(base_lightning * growth);
+                    row["max_absorption_fire"].Value = (int)(base_fire * growth);
+                    row["max_absorption_dark"].Value = (int)(base_dark * growth);
+
+                    row["max_absorption_poison"].Value = (int)(base_poison * growth);
+                    row["max_absorption_bleed"].Value = (int)(base_bleed * growth);
+                    row["max_absorption_petrify"].Value = (int)(base_petrify * growth);
+                    row["max_absorption_curse"].Value = (int)(base_curse * growth);
+                }
+            }
+
+            // Tweaks
+            if (c_Tweak_ArmorParam_RemoveStatRequirements)
+            {
+                List<PARAM.Row> rows = ArmorParam.Where(row =>
+                row.ID >= 11010100 &&
+                row.ID <= 17950103
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["strength_requirement"].Value = 0;
+                    row["dexterity_requirement"].Value = 0;
+                    row["intelligence_requirement"].Value = 0;
+                    row["faith_requirement"].Value = 0;
+                }
+            }
+
+            return regulation;
+        }
+
+        public Regulation Scramble_RingAttributes(
+            bool c_ItemParam_Ring_Price,
+            bool c_ItemParam_Ring_Effect,
+            bool c_RingParam_Ring_Weight,
+            bool c_RingParam_Ring_Durability
+        )
+        {
+            List<PARAM.Row> ItemParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"ItemParam")).ToList()[0].Rows;
+            List<PARAM.Row> RingParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"RingParam")).ToList()[0].Rows;
+
+            if (c_ItemParam_Ring_Price)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.RingParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.RingParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["base_price"].Value = GetRandomInt(10, 10000);
+                    row["sell_price"].Value = GetRandomInt(10, 10000);
+                }
+            }
+            if (c_ItemParam_Ring_Effect)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.RingParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.RingParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    var list = ParamScramblerData.Static.SpEffect_ID_List;
+                    var result = list[rand.Next(list.Count)];
+
+                    row["speffect_id"].Value = result;
+                }
+            }
+            if (c_RingParam_Ring_Weight)
+            {
+                List<PARAM.Row> rows = RingParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.RingParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.RingParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["weight"].Value = GetRandomFloat(0.1, 10);
+                }
+            }
+            if (c_RingParam_Ring_Durability)
+            {
+                List<PARAM.Row> rows = RingParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.RingParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.RingParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["durability"].Value = (float)GetRandomInt(10, 300);
+                }
+            }
+
+            return regulation;
+        }
+        public Regulation Scramble_ItemAttributes(
+            bool c_ItemParam_Item_Price,
+            bool c_ItemParam_Item_Animation_Speed,
+            bool c_ItemParam_Item_Max_Hold_Count,
+            bool c_ItemParam_Item_Effect
+        )
+        {
+            List<PARAM.Row> ItemParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"ItemParam")).ToList()[0].Rows;
+
+            if (c_ItemParam_Item_Price)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.ItemParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.ItemParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["base_price"].Value = GetRandomInt(10, 10000);
+                    row["sell_price"].Value = GetRandomInt(10, 10000);
+                }
+            }
+            if (c_ItemParam_Item_Animation_Speed)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.ItemParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.ItemParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["animation_speed"].Value = GetRandomFloat(0.5, 2.0);
+                }
+            }
+            if (c_ItemParam_Item_Max_Hold_Count)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.ItemParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.ItemParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    if((ushort)row["max_held_count"].Value > 1)
+                        row["max_held_count"].Value = GetRandomUShort(2, 99);
+                }
+            }
+            if (c_ItemParam_Item_Effect)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.ItemParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.ItemParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    var list = ParamScramblerData.Static.SpEffect_ID_List;
+                    var result = list[rand.Next(list.Count)];
+
+                    row["speffect_id"].Value = result;
+                }
+            }
+
+            return regulation;
+        }
+
+        public Regulation Scramble_SpellAttributes(
+            bool c_ItemParam_Spell_Price,
+            bool c_SpellParam_StatRequirements,
+            bool c_SpellParam_StartupSpeed,
+            bool c_SpellParam_CastAnimations,
+            bool c_SpellParam_StaminaConsumption,
+            bool c_SpellParam_CastSpeed,
+            bool c_SpellParam_SlotsUsed,
+            bool c_SpellParam_Casts,
+            bool c_Tweak_SpellParam_RemoveStatRequirements
+        )
+        {
+            List<PARAM.Row> ItemParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"ItemParam")).ToList()[0].Rows;
+            List<PARAM.Row> SpellParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"SpellParam")).ToList()[0].Rows;
+
+            if (c_ItemParam_Spell_Price)
+            {
+                List<PARAM.Row> rows = ItemParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.SpellParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.SpellParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["base_price"].Value = GetRandomInt(10, 10000);
+                    row["sell_price"].Value = GetRandomInt(10, 10000);
+                }
+            }
+            if (c_SpellParam_StatRequirements)
+            {
+                List<PARAM.Row> rows = SpellParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.SpellParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.SpellParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["int_requirement"].Value = GetRandomUShort(1, 50);
+                    row["fth_requirement"].Value = GetRandomUShort(1, 50);
+                }
+            }
+            if (c_SpellParam_StartupSpeed)
+            {
+                List<PARAM.Row> rows = SpellParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.SpellParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.SpellParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["startup_duration"].Value = GetRandomFloat(0.2, 1.5);
+                }
+            }
+            if (c_SpellParam_CastAnimations)
+            {
+                List<PARAM.Row> rows = SpellParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.SpellParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.SpellParam_Category_End
+                ).ToList();
+
+                // This assigns new values based on the range of values within the existing fields.
+                foreach (string value in ParamScramblerData.Static.SpellCastAnimationFields)
+                {
+                    AssignRandomCast(value, rows);
+                }
+            }
+            if (c_SpellParam_StaminaConsumption)
+            {
+                List<PARAM.Row> rows = SpellParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.SpellParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.SpellParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["stamina_cost_1h_left"].Value = GetRandomFloat(0.2, 3.0);
+                    row["stamina_cost_1h_right"].Value = GetRandomFloat(0.2, 3.0);
+                    row["stamina_cost_2h_left"].Value = GetRandomFloat(0.2, 3.0);
+                    row["stamina_cost_2h_right"].Value = GetRandomFloat(0.2, 3.0);
+                    row["Unk13"].Value = GetRandomFloat(0.2, 3.0);
+                    row["Unk18"].Value = GetRandomFloat(0.2, 3.0);
+                    row["Unk23"].Value = GetRandomFloat(0.2, 3.0);
+                    row["Unk28"].Value = GetRandomFloat(0.2, 3.0);
+                }
+            }
+            if (c_SpellParam_CastSpeed)
+            {
+                List<PARAM.Row> rows = SpellParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.SpellParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.SpellParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["cast_speed"].Value = GetRandomFloat(0.5, 2.0);
+                }
+            }
+            if (c_SpellParam_SlotsUsed)
+            {
+                List<PARAM.Row> rows = SpellParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.SpellParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.SpellParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["slots_used"].Value = GetRandomInt(1, 3);
+                }
+            }
+            if (c_SpellParam_Casts)
+            {
+                List<PARAM.Row> rows = SpellParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.SpellParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.SpellParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    var base_casts = GetRandomInt(2, 15);
+                    var growth = GetRandomInt(1, 3);
+
+                    row["casts_tier_1"].Value = base_casts;
+                    row["casts_tier_2"].Value = (base_casts + growth);
+                    row["casts_tier_3"].Value = (base_casts + (growth * 2));
+                    row["casts_tier_4"].Value = (base_casts + (growth * 3));
+                    row["casts_tier_5"].Value = (base_casts + (growth * 4));
+                    row["casts_tier_6"].Value = (base_casts + (growth * 5));
+                    row["casts_tier_7"].Value = (base_casts + (growth * 6));
+                    row["casts_tier_8"].Value = (base_casts + (growth * 7));
+                    row["casts_tier_9"].Value = (base_casts + (growth * 8));
+                    row["casts_tier_10"].Value = (base_casts + (growth * 9));
+                }
+            }
+
+            // Tweaks
+            if (c_Tweak_SpellParam_RemoveStatRequirements)
+            {
+                List<PARAM.Row> rows = SpellParam.Where(row =>
+                row.ID >= ItemScramblerData.Static.SpellParam_Category_Start &&
+                row.ID <= ItemScramblerData.Static.SpellParam_Category_End
+                ).ToList();
+
+                foreach (PARAM.Row row in rows)
+                {
+                    row["int_requirement"].Value = 0;
+                    row["fth_requirement"].Value = 0;
+                }
+            }
+
+            return regulation;
+        }
+
+        public void AssignRandomCast(string field, List<PARAM.Row> rows)
+        {
+            List<int> new_list = new List<int>();
+
+            // Build list of possible values
+            foreach (PARAM.Row row in rows)
+            {
+                foreach (PARAM.Cell cell in row.Cells)
+                {
+                    if (cell.Def.InternalName == field)
+                    {
+                        new_list.Add((int)cell.Value);
+                    }
+                }
+            }
+
+            // Assign new
+            foreach (PARAM.Row row in rows)
+            {
+                foreach (PARAM.Cell cell in row.Cells)
+                {
+                    if (cell.Def.InternalName == field)
+                    {
+                        cell.Value = new_list[rand.Next(new_list.Count)];
+                    }
+                }
+            }
+        }
+
+        public Regulation Scramble_BulletParams(
+            bool c_Bullet_IncludePlayer,
+            bool c_Bullet_IncludeEnemy,
+            bool c_Bullet_IncludeBoss,
+            bool c_Bullet_IncludeTraps,
+            bool c_Bullet_VFX,
+            bool c_Bullet_Movement,
+            bool c_Bullet_Angle,
+            bool c_Bullet_SpawnDistance,
+            bool c_Bullet_Duration,
+            bool c_Bullet_Tracking,
+            bool c_Bullet_Effect
+        )
+        {
+            List<PARAM.Row> BulletParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"BulletParam")).ToList()[0].Rows;
+            List<PARAM.Row> EnemyBulletParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"EnemyBulletParam")).ToList()[0].Rows;
+            List<PARAM.Row> SystemBulletParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"SystemBulletParam")).ToList()[0].Rows;
+
+            return regulation;
+        }
+
+        public Regulation Scramble_PlayerParams(
+            bool c_PlayerStatusParam_StartingAttributes,
+            bool c_PlayerStatusParam_StartingEquipment,
+            bool c_PlayerStatusParam_StartingGifts,
+            bool c_PlayerLevelUpSoulsParam_LevelupCost,
+            bool c_EventCommonParam_ShrineOfWinter_Cost,
+            bool c_BossBattleParam_BossSoulDrops,
+            bool c_LockOnParam_CameraDistance,
+            bool c_LockOnParam_CameraFOV,
+            bool c_ChrMoveParam_Walk,
+            bool c_ChrMoveParam_Run,
+            bool c_ChrMoveParam_Jump,
+            bool c_ChrMoveParam_Ladder,
+            bool c_ChrMoveParam_Turn,
+            bool c_Tweak_AnyEquipmentForStartingEquipment,
+            bool c_Tweak_BigJumpMode
+        )
+        {
+            List<PARAM.Row> PlayerStatusParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"PlayerStatusParam")).ToList()[0].Rows;
+            List<PARAM.Row> PlayerLevelUpSoulsParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"PlayerLevelUpSoulsParam")).ToList()[0].Rows;
+            List<PARAM.Row> EventCommonParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"EventCommonParam")).ToList()[0].Rows;
+            List<PARAM.Row> BossBattleParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"BossBattleParam")).ToList()[0].Rows;
+            List<PARAM.Row> ChrMoveParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"ChrMoveParam")).ToList()[0].Rows;
+
+            return regulation;
+        }
+
+        public Regulation Scramble_MapParams(
+            bool c_TreasureBoxParam_TrappedChests
+        )
+        {
+
+            return regulation;
+        }
+
+        public Regulation Scramble_CharacterParams(
+            bool c_NpcPlayerStatusParam_Equipment
+        )
+        {
+            List<PARAM.Row> NpcPlayerStatusParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"NpcPlayerStatusParam")).ToList()[0].Rows;
+
+            return regulation;
+        }
+
+        public Regulation Scramble_EnemyParams(
+            bool c_Enemy_IncludeEnemies,
+            bool c_Enemy_IncludeBosses,
+            bool c_LogicComParam_Detection,
+            bool c_EnemyParam_HP,
+            bool c_EnemyParam_Souls,
+            bool c_EnemyParam_Stamina,
+            bool c_EnemyParam_Defence,
+            bool c_EnemyParam_ShieldDefence,
+            bool c_EnemyParam_Poise,
+            bool c_EnemyDamageParam_Damage,
+            bool c_EnemyDamageParam_Knockback,
+            bool c_EnemyDamageParam_AttackSpeed,
+            bool c_EnemyMoveParam_Walk,
+            bool c_EnemyMoveParam_Run,
+            bool c_EnemyMoveParam_Jump,
+            bool c_EnemyMoveParam_Climb,
+            bool c_EnemyMoveParam_Turn
+        )
+        {
+            List<PARAM.Row> LogicComParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"LogicComParam")).ToList()[0].Rows;
+            List<PARAM.Row> EnemyParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"EnemyParam")).ToList()[0].Rows;
+            List<PARAM.Row> EnemyDamageParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"EnemyDamageParam")).ToList()[0].Rows;
+            List<PARAM.Row> EnemyMoveParam = regulation.regulationParamWrappers.Where(n => n.Name == ($"EnemyMoveParam")).ToList()[0].Rows;
+
+            return regulation;
+        }
+
+        /*
         #region Scramble - ArmorParam
         public Regulation Scramble_ArmorParam(string paramName, bool useGenerateType, bool ignoreRequirements)
         {
@@ -2114,6 +3152,8 @@ namespace DS2_Scrambler
             }
         }
         #endregion
+
+        */
 
         #region Util
         public int GetRandomRowID(List<PARAM.Row> list)

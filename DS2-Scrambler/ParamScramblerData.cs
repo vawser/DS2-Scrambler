@@ -13,6 +13,10 @@ namespace DS2_Scrambler
         public List<int> Character_EnemyParamID_List { get; set; }
         public List<int> Enemy_EnemyParamID_List { get; set; }
         public List<int> Skipped_EnemyParamID_List { get; set; }
+        public List<int> SpEffect_ID_List { get; set; }
+
+        public List<string> WeaponActionCategoryFields { get; set; }
+        public List<string> SpellCastAnimationFields { get; set; }
 
         public static ParamScramblerData Static { get; }
 

@@ -16,4 +16,4 @@ To run the mod, I recommend you use ModEngine.
 * [SoulsFormats](https://github.com/JKAnderson/SoulsFormats) by TKGP.
 * [Irregulator](https://github.com/JKAnderson/Irregulator) by TKGP.
 * [DSMS](https://github.com/soulsmods/DSMapStudio) by the DSMS Team.
-
+* [SimpleRNG](https://www.codeproject.com/Articles/25172/Simple-Random-Number-Generation) by John D. Cook 

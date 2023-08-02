@@ -24,8 +24,6 @@ namespace DS2_Scrambler
         public CoreScramblerData scramblerData;
         public Regulation reg;
 
-        // TODO: add 'map' tab, for scrambling stuff such as objects
-
         public Main()
         {
             InitializeComponent();
@@ -41,8 +39,6 @@ namespace DS2_Scrambler
             ModPath_Dialog.IsFolderPicker = true;
 
             t_ModPath.Text = "";
-
-            t_StatSkew.Value = 6;
         }
 
         private void b_SelectModPath_Click(object sender, EventArgs e)
@@ -107,10 +103,7 @@ namespace DS2_Scrambler
 
         public Regulation ScrambleParams(IProgress<string> progress, Regulation reg)
         {
-            Random rand = new Random();
-
-            if (t_seed.Text != string.Empty)
-                rand = new Random(t_seed.Text.GetHashCode());
+            Random rand = new Random(DateTime.Now.GetHashCode());
 
             progress.Report("Scramble started.");
 
@@ -121,183 +114,131 @@ namespace DS2_Scrambler
             {
                 ParamScrambler scrambler = new ParamScrambler(rand, reg, scramblerData);
 
-                // Items
-                if (c_Scramble_ItemParam.Checked)
-                {
-                    progress.Report("Scramble: Item Attributes");
-                    reg = scrambler.Scramble_ItemParam("ItemParam", c_Generate_ItemParam.Checked);
-                }
-                if (c_Scramble_RingParam.Checked)
-                {
-                    progress.Report("Scramble: Ring Attributes");
-                    reg = scrambler.Scramble_RingParam("RingParam", c_Generate_RingParam.Checked);
-                }
+                progress.Report("Scramble: Weapon Attributes");
+                reg = scrambler.Scramble_WeaponAttributes(
+                    c_ItemParam_Weapon_Price.Checked,
+                    c_ItemParam_Weapon_Effect.Checked,
+                    c_WeaponParam_Weapon_Weight.Checked,
+                    c_WeaponParam_Weapon_Durability.Checked,
+                    c_ItemParam_Weapon_Animation_Speed.Checked,
+                    c_WeaponParam_StatRequirements.Checked,
+                    c_WeaponParam_Damage.Checked,
+                    c_WeaponReinforceParam_Reinforcement.Checked,
+                    c_WeaponParam_StaminaConsumption.Checked,
+                    c_WeaponTypeParam_CastSpeed.Checked,
+                    c_WeaponTypeParam_BowDistance.Checked,
+                    c_ArrowParam_AmmoDamage.Checked,
+                    c_WeaponActionCategoryParam_Moveset.Checked,
+                    c_Tweak_WeaponParam_RemoveStatRequirements.Checked
+                );
 
-                // Spells
-                if (c_Scramble_SpellParam.Checked)
-                {
-                    progress.Report("Scramble: Spell Attributes");
-                    reg = scrambler.Scramble_SpellParam("SpellParam", c_Generate_SpellParam.Checked, c_IgnoreRequirements_SpellParam.Checked);
-                }
-                if (c_Scramble_BulletParam.Checked)
-                {
-                    progress.Report("Scramble: Projectile Attributes");
-                    reg = scrambler.Scramble_BulletParam("BulletParam", c_Generate_BulletParam.Checked, c_ForceVisuals_BulletParam.Checked);
-                }
+                progress.Report("Scramble: Armor Attributes");
+                reg = scrambler.Scramble_ArmorAttributes(
+                    c_ItemParam_Armor_Price.Checked,
+                    c_ItemParam_Armor_Effect.Checked,
+                    c_ArmorParam_Armor_Weight.Checked,
+                    c_ArmorParam_Armor_Durability.Checked,
+                    c_ArmorParam_Defence.Checked,
+                    c_ArmorParam_StatRequirements.Checked,
+                    c_ArmorParam_Poise.Checked,
+                    c_ArmorReinforceParam_Absorption.Checked,
+                    c_Tweak_ArmorParam_RemoveStatRequirements.Checked
+                );
 
-                // Armor
-                if (c_Scramble_ArmorParam.Checked)
-                {
-                    progress.Report("Scramble: Armor Attributes");
-                    reg = scrambler.Scramble_ArmorParam("ArmorParam", c_Generate_ArmorParam.Checked, c_IgnoreRequirements_ArmorParam.Checked);
-                }
-                if (c_Scramble_ArmorReinforceParam.Checked)
-                {
-                    progress.Report("Scramble: Armor Reinforcement");
-                    reg = scrambler.Scramble_ArmorReinforceParam("ArmorReinforceParam", c_Generate_ArmorReinforceParam.Checked);
-                }
+                progress.Report("Scramble: Ring Attributes");
+                reg = scrambler.Scramble_RingAttributes(
+                    c_ItemParam_Ring_Price.Checked,
+                    c_ItemParam_Ring_Effect.Checked,
+                    c_RingParam_Ring_Weight.Checked,
+                    c_RingParam_Ring_Durability.Checked
+                );
 
-                // Weapons
-                if (c_Scramble_ArrowParam.Checked)
-                {
-                    progress.Report("Scramble: Ammo Attributes");
-                    reg = scrambler.Scramble_ArrowParam("ArrowParam", c_Generate_ArrowParam.Checked);
-                }
-                if (c_Scramble_WeaponActionCategoryParam.Checked)
-                {
-                    progress.Report("Scramble: Weapon Moveset Attributes");
-                    reg = scrambler.Scramble_WeaponActionCategoryParam("WeaponActionCategoryParam");
-                }
-                if (c_Scramble_WeaponParam.Checked)
-                {
-                    progress.Report("Scramble: Weapon Attributes");
-                    reg = scrambler.Scramble_WeaponParam("WeaponParam", c_Generate_WeaponParam.Checked, c_IgnoreFists_WeaponParam.Checked, c_IgnoreRequirements_WeaponParam.Checked);
-                }
-                if (c_Scramble_WeaponReinforceParam.Checked)
-                {
-                    progress.Report("Scramble: Weapon Reinforcement Attributes");
-                    reg = scrambler.Scramble_WeaponReinforceParam("WeaponReinforceParam", c_Generate_WeaponReinforceParam.Checked);
-                }
-                if (c_Scramble_WeaponTypeParam.Checked)
-                {
-                    progress.Report("Scramble: Weapon Attributes");
-                    reg = scrambler.Scramble_WeaponTypeParam("WeaponTypeParam", c_Generate_WeaponTypeParam.Checked);
-                }
+                progress.Report("Scramble: Item Attributes");
+                reg = scrambler.Scramble_ItemAttributes(
+                    c_ItemParam_Item_Price.Checked,
+                    c_ItemParam_Item_Animation_Speed.Checked,
+                    c_ItemParam_Item_Max_Hold_Count.Checked,
+                    c_ItemParam_Item_Effect.Checked
+                );
 
-                // Player
-                if (c_Scramble_EventCommonParam.Checked)
-                {
-                    progress.Report("Scramble: Event Common");
-                    reg = scrambler.Scramble_EventCommonParam("EventCommonParam");
-                }
-                if (c_Scramble_LockOnParam_Distance.Checked || c_Scramble_LockOnParam_FOV.Checked)
-                {
-                    progress.Report("Scramble: Camera Attributes");
-                    reg = scrambler.Scramble_LockOnParam("LockOnParam", c_Scramble_LockOnParam_Distance.Checked, c_Scramble_LockOnParam_FOV.Checked);
-                }
-                if (c_Scramble_PlayerLevelUpSoulsParam.Checked)
-                {
-                    progress.Report("Scramble: Level Up Costs");
-                    reg = scrambler.Scramble_PlayerLevelUpSoulsParam("PlayerLevelUpSoulsParam");
-                }
-                if (c_Scramble_PlayerStatusParam_Classes.Checked || c_Scramble_PlayerStatusParam_Gifts.Checked)
-                {
-                    progress.Report("Scramble: Player Starting Setup");
-                    reg = scrambler.Scramble_PlayerStatusParam("PlayerStatusParam", c_Scramble_PlayerStatusParam_Classes.Checked, c_Scramble_PlayerStatusParam_Gifts.Checked, (int)t_StatSkew.Value, c_ClassScramble_LimitEquipment.Checked);
-                }
 
-                // Character
-                if (c_Scramble_ChrMoveParam.Checked)
-                {
-                    progress.Report("Scramble: Character Movement Attributes");
-                    reg = scrambler.Scramble_ChrMoveParam("ChrMoveParam");
-                }
+                progress.Report("Scramble: Spell Attributes");
+                reg = scrambler.Scramble_SpellAttributes(
+                    c_ItemParam_Spell_Price.Checked,
+                    c_SpellParam_StatRequirements.Checked,
+                    c_SpellParam_StartupSpeed.Checked,
+                    c_SpellParam_CastAnimations.Checked,
+                    c_SpellParam_StaminaConsumption.Checked,
+                    c_SpellParam_CastSpeed.Checked,
+                    c_SpellParam_SlotsUsed.Checked,
+                    c_SpellParam_Casts.Checked,
+                    c_Tweak_SpellParam_RemoveStatRequirements.Checked
+                );
 
-                // Bosses
-                if (c_Scramble_BossBattleParam.Checked)
-                {
-                    progress.Report("Scramble: Boss Rewards");
-                    reg = scrambler.Scramble_BossBattleParam("BossBattleParam", c_Generate_BossBattleParam.Checked);
-                }
-                if (c_Scramble_EnemyParam_Boss.Checked)
-                {
-                    progress.Report("Scramble: Boss Base Attributes");
-                    reg = scrambler.Scramble_EnemyParam("EnemyParam", c_Generate_EnemyParam_Boss.Checked, true);
-                }
-                if (c_Scramble_EnemyMoveParam_Boss.Checked)
-                {
-                    progress.Report("Scramble: Boss Movement Attributes");
-                    reg = scrambler.Scramble_EnemyMoveParam("EnemyMoveParam", c_Generate_EnemyMoveParam_Boss.Checked, true);
-                }
-                if (c_Scramble_EnemyDamageParam_Boss.Checked)
-                {
-                    progress.Report("Scramble: Boss Damage Attributes");
-                    reg = scrambler.Scramble_EnemyDamageParam("EnemyDamageParam", c_Generate_EnemyDamageParam_Boss.Checked, true);
-                }
-                if (c_Scramble_EnemyBulletParam_Boss.Checked)
-                {
-                    progress.Report("Scramble: Boss Projectile Attributes");
-                    reg = scrambler.Scramble_EnemyBulletParam("EnemyBulletParam", c_Generate_EnemyBulletParam_Boss.Checked, c_ForceVisuals_EnemyBulletParam_Boss.Checked, true);
-                }
-                if (c_Scramble_EnemyBehaviorParam_Boss.Checked)
-                {
-                    progress.Report("Scramble: Boss Behavior Attributes");
-                    reg = scrambler.Scramble_EnemyBehaviorParam("EnemyBehaviorParam", c_Generate_EnemyBehaviorParam_Boss.Checked, true);
-                    reg = scrambler.Scramble_EnemyBehaviorParam("EnemyBehaviorSecondParam", c_Generate_EnemyBehaviorParam_Boss.Checked, true);
-                    reg = scrambler.Scramble_EnemyBehaviorParam("EnemyBehaviorThirdParam", c_Generate_EnemyBehaviorParam_Boss.Checked, true);
-                }
+                progress.Report("Scramble: Bullets");
+                reg = scrambler.Scramble_BulletParams(
+                    c_Bullet_IncludePlayer.Checked,
+                    c_Bullet_IncludeEnemy.Checked,
+                    c_Bullet_IncludeBoss.Checked,
+                    c_Bullet_IncludeTraps.Checked,
+                    c_Bullet_VFX.Checked,
+                    c_Bullet_Movement.Checked,
+                    c_Bullet_Angle.Checked,
+                    c_Bullet_SpawnDistance.Checked,
+                    c_Bullet_Duration.Checked,
+                    c_Bullet_Tracking.Checked,
+                    c_Bullet_Effect.Checked
+                );
 
-                // Enemies
-                if (c_Scramble_NpcPlayerStatusParam.Checked)
-                {
-                    progress.Report("Scramble: Character Equipment");
-                    reg = scrambler.Scramble_NpcPlayerStatusParam("NpcPlayerStatusParam", c_Generate_NpcPlayerStatusParam.Checked);
-                }
-                if (c_Scramble_EnemyParam.Checked)
-                {
-                    progress.Report("Scramble: Enemy Base Attributes");
-                    reg = scrambler.Scramble_EnemyParam("EnemyParam", c_Generate_EnemyParam.Checked);
-                }
-                if (c_Scramble_EnemyMoveParam.Checked)
-                {
-                    progress.Report("Scramble: Enemy Movement Attributes");
-                    reg = scrambler.Scramble_EnemyMoveParam("EnemyMoveParam", c_Generate_EnemyMoveParam.Checked);
-                }
-                if (c_Scramble_EnemyDamageParam.Checked)
-                {
-                    progress.Report("Scramble: Enemy Damage Attributes");
-                    reg = scrambler.Scramble_EnemyDamageParam("EnemyDamageParam", c_Generate_EnemyDamageParam.Checked);
-                }
-                if (c_Scramble_EnemyBulletParam.Checked)
-                {
-                    progress.Report("Scramble: Enemy Projectile Attributes");
-                    reg = scrambler.Scramble_EnemyBulletParam("EnemyBulletParam", c_Generate_EnemyBulletParam.Checked, c_ForceVisuals_EnemyBulletParam.Checked);
-                }
-                if (c_Scramble_EnemyBehaviorParam.Checked)
-                {
-                    progress.Report("Scramble: Enemy Behavior Attributes");
-                    reg = scrambler.Scramble_EnemyBehaviorParam("EnemyBehaviorParam", c_Generate_EnemyBehaviorParam.Checked);
-                    reg = scrambler.Scramble_EnemyBehaviorParam("EnemyBehaviorSecondParam", c_Generate_EnemyBehaviorParam.Checked);
-                    reg = scrambler.Scramble_EnemyBehaviorParam("EnemyBehaviorThirdParam", c_Generate_EnemyBehaviorParam.Checked);
-                }
+                progress.Report("Scramble: Player");
+                reg = scrambler.Scramble_PlayerParams(
+                    c_PlayerStatusParam_StartingAttributes.Checked,
+                    c_PlayerStatusParam_StartingEquipment.Checked,
+                    c_PlayerStatusParam_StartingGifts.Checked,
+                    c_PlayerLevelUpSoulsParam_LevelupCost.Checked,
+                    c_EventCommonParam_ShrineOfWinter_Cost.Checked,
+                    c_BossBattleParam_BossSoulDrops.Checked,
+                    c_LockOnParam_CameraDistance.Checked,
+                    c_LockOnParam_CameraFOV.Checked,
+                    c_ChrMoveParam_Walk.Checked,
+                    c_ChrMoveParam_Run.Checked,
+                    c_ChrMoveParam_Jump.Checked,
+                    c_ChrMoveParam_Ladder.Checked,
+                    c_ChrMoveParam_Turn.Checked,
+                    c_Tweak_AnyEquipmentForStartingEquipment.Checked,
+                    c_Tweak_BigJumpMode.Checked
+                );
 
-                // Map
-                if (c_Scramble_TreasureBoxParam.Checked)
-                {
-                    progress.Report("Scramble: Chest Traps");
-                    reg = scrambler.Scramble_TreasureBoxParam();
-                }
-                if (c_Scramble_LogicComParam.Checked)
-                {
-                    progress.Report("Scramble: Enemy AI Attributes");
-                    reg = scrambler.Scramble_LogicComParam("LogicComParam", c_Generate_LogicComParam.Checked);
-                }
-                if (c_Scramble_SystemBulletParam.Checked)
-                {
-                    progress.Report("Scramble: Map Projectile Attributes");
-                    reg = scrambler.Scramble_SystemBulletParam("SystemBulletParam", c_Generate_SystemBulletParam.Checked, c_ForceVisuals_SystemBulletParam.Checked, c_LimitToTraps_SystemBulletParam.Checked);
-                }
+                progress.Report("Scramble: Map");
+                reg = scrambler.Scramble_MapParams(
+                    c_TreasureBoxParam_TrappedChests.Checked
+                );
 
+                progress.Report("Scramble: Characters");
+                reg = scrambler.Scramble_CharacterParams(
+                    c_NpcPlayerStatusParam_Equipment.Checked
+                );
+
+                progress.Report("Scramble: Enemies");
+                reg = scrambler.Scramble_EnemyParams(
+                    c_Enemy_IncludeEnemies.Checked,
+                    c_Enemy_IncludeBosses.Checked,
+                    c_LogicComParam_Detection.Checked,
+                    c_EnemyParam_HP.Checked,
+                    c_EnemyParam_Souls.Checked,
+                    c_EnemyParam_Stamina.Checked,
+                    c_EnemyParam_Defence.Checked,
+                    c_EnemyParam_ShieldDefence.Checked,
+                    c_EnemyParam_Poise.Checked,
+                    c_EnemyDamageParam_Damage.Checked,
+                    c_EnemyDamageParam_Knockback.Checked,
+                    c_EnemyDamageParam_AttackSpeed.Checked,
+                    c_EnemyMoveParam_Walk.Checked,
+                    c_EnemyMoveParam_Run.Checked,
+                    c_EnemyMoveParam_Jump.Checked,
+                    c_EnemyMoveParam_Climb.Checked,
+                    c_EnemyMoveParam_Turn.Checked
+                );
             }
             catch (Exception ex)
             {
@@ -350,7 +291,39 @@ namespace DS2_Scrambler
                 if (c_Scramble_Enemy_Location.Checked || c_EnemyShareAggro.Checked)
                 {
                     progress.Report("Scramble: Enemies");
-                    reg = enemy_scrambler.Scramble_Enemies(c_Scramble_Enemy_Location.Checked, c_EnemyShareAggro.Checked, c_Include_Characters.Checked, c_Things_Betwixt.Checked, c_Majula.Checked, c_Forest_of_Fallen_Giants.Checked, c_Brightstone_Cove_Tseldora.Checked, c_Aldias_Keep.Checked, c_Lost_Bastille.Checked, c_Earthen_Peak.Checked, c_No_mans_Wharf.Checked, c_Iron_Keep.Checked, c_Huntmans_Copse.Checked, c_Gutter.Checked, c_Dragon_Aerie.Checked, c_Path_to_Shaded_Woods.Checked, c_Unseen_Path_to_Heides.Checked, c_Heides_Tower_of_Flame.Checked, c_Shaded_Woods.Checked, c_Doors_of_Pharros.Checked, c_Grave_of_Saints.Checked, c_Giant_Memories.Checked, c_Shrine_of_Amana.Checked, c_Drangleic_Castle.Checked, c_Undead_Crypt.Checked, c_Dragon_Memories.Checked, c_Dark_Chasm_of_Old.Checked, c_Shulva.Checked, c_Brume_Tower.Checked, c_Eleum_Loyce.Checked, c_Memory_of_the_King.Checked);
+                    reg = enemy_scrambler.Scramble_Enemies(
+                        c_Scramble_Enemy_Location.Checked, 
+                        c_EnemyShareAggro.Checked, 
+                        c_Include_Characters.Checked, 
+                        c_Things_Betwixt.Checked, 
+                        c_Majula.Checked, 
+                        c_Forest_of_Fallen_Giants.Checked, 
+                        c_Brightstone_Cove_Tseldora.Checked, 
+                        c_Aldias_Keep.Checked, 
+                        c_Lost_Bastille.Checked, 
+                        c_Earthen_Peak.Checked, 
+                        c_No_mans_Wharf.Checked, 
+                        c_Iron_Keep.Checked, 
+                        c_Huntmans_Copse.Checked, 
+                        c_Gutter.Checked, 
+                        c_Dragon_Aerie.Checked, 
+                        c_Path_to_Shaded_Woods.Checked, 
+                        c_Unseen_Path_to_Heides.Checked, 
+                        c_Heides_Tower_of_Flame.Checked, 
+                        c_Shaded_Woods.Checked, 
+                        c_Doors_of_Pharros.Checked, 
+                        c_Grave_of_Saints.Checked, 
+                        c_Giant_Memories.Checked, 
+                        c_Shrine_of_Amana.Checked, 
+                        c_Drangleic_Castle.Checked, 
+                        c_Undead_Crypt.Checked, 
+                        c_Dragon_Memories.Checked, 
+                        c_Dark_Chasm_of_Old.Checked, 
+                        c_Shulva.Checked, 
+                        c_Brume_Tower.Checked, 
+                        c_Eleum_Loyce.Checked, 
+                        c_Memory_of_the_King.Checked
+                    );
                 }
             }
             catch (Exception ex)
@@ -367,330 +340,225 @@ namespace DS2_Scrambler
             b_SelectModPath.Enabled = state;
             b_Scramble.Enabled = state;
         }
-        private void b_ToggleRecommended_Click(object sender, EventArgs e)
+
+        private void b_ClearSelection_Click(object sender, EventArgs e)
         {
-            c_Scramble_Map_Loot.Checked = true;
-            c_Include_Enemy_Loot.Checked = true;
-            c_Include_Shops.Checked = true;
-            c_IgnoreKeys_Treasure_Map.Checked = true;
-            c_IgnoreTools_Treasure_Map.Checked = true;
+            ToggleCheckboxes(false);
         }
 
-        private void b_ToggleOff_Click(object sender, EventArgs e)
+        private void ToggleMapCheckboxes(bool state)
         {
-            // *** Item Scrambler ***
-            // Core
-            c_Scramble_Map_Loot.Checked = false;
-
-            // Inclusions
-            c_Include_Shops.Checked = false;
-            c_IncludeCharacterTreasure_Treasure_Map.Checked = false;
-            c_IncludeCovenantTreasure_Treasure_Map.Checked = false;
-            c_IncludeBirdTreasure_Treasure_Map.Checked = false;
-            c_IncludEventTreasure_Treasure_Map.Checked = false;
-            c_Include_Enemy_Loot.Checked = false;
-            c_IncludeBossTreasure_Treasure_Map.Checked = false;
-            c_Include_Boss_Trades.Checked = false;
-
-            // Exlcusions
-            c_IgnoreKeys_Treasure_Map.Checked = false;
-            c_IgnoreTools_Treasure_Map.Checked = false;
-
-            // Tweaks
-            c_EnsureLifegems.Checked = false;
-            c_RetainShopSpread.Checked = false;
-
-            // ** Enemy Scrambler ***
-            // Enemy Location
-
-            // Tweaks
-            c_EnemyShareAggro.Checked = false;
-
-            // *** Param Scrambler ***
-            // SystemBulletParam
-            c_Scramble_SystemBulletParam.Checked = false;
-            c_Generate_SystemBulletParam.Checked = false;
-            c_ForceVisuals_SystemBulletParam.Checked = false;
-            c_LimitToTraps_SystemBulletParam.Checked = false;
-
-            // LogicComParam
-            c_Scramble_LogicComParam.Checked = false;
-            c_Generate_LogicComParam.Checked = false;
-
-            // TreasureBoxParam
-            c_Scramble_TreasureBoxParam.Checked = false;
-
-            // EventCommonParam
-            c_Scramble_EventCommonParam.Checked = false;
-
-            // LockOnParam
-            c_Scramble_LockOnParam_Distance.Checked = false;
-            c_Scramble_LockOnParam_FOV.Checked = false;
-
-            // PlayerLevelUpSoulsParam
-            c_Scramble_PlayerLevelUpSoulsParam.Checked = false;
-
-            // PlayerStatusParam
-            c_Scramble_PlayerStatusParam_Classes.Checked = false;
-            c_Scramble_PlayerStatusParam_Gifts.Checked = false;
-            c_ClassScramble_LimitEquipment.Checked = false;
-            t_StatSkew.Value = 6;
-
-            // ChrMoveParam
-            c_Scramble_ChrMoveParam.Checked = false;
-
-            // NpcPlayerStatusParam
-            c_Scramble_NpcPlayerStatusParam.Checked = false;
-            c_Generate_NpcPlayerStatusParam.Checked = false;
-
-            // BossBattleParam
-            c_Scramble_BossBattleParam.Checked = false;
-            c_Generate_BossBattleParam.Checked = false;
-
-            // EnemyParam
-            c_Scramble_EnemyParam.Checked = false;
-            c_Scramble_EnemyParam_Boss.Checked = false;
-            c_Generate_EnemyParam.Checked = false;
-            c_Generate_EnemyParam_Boss.Checked = false;
-
-            // EnemyMoveParam
-            c_Scramble_EnemyMoveParam.Checked = false;
-            c_Scramble_EnemyMoveParam_Boss.Checked = false;
-            c_Generate_EnemyMoveParam.Checked = false;
-            c_Generate_EnemyMoveParam_Boss.Checked = false;
-
-            // EnemyDamageParam 
-            c_Scramble_EnemyDamageParam.Checked = false;
-            c_Scramble_EnemyDamageParam_Boss.Checked = false;
-            c_Generate_EnemyDamageParam.Checked = false;
-            c_Generate_EnemyDamageParam_Boss.Checked = false;
-
-            // EnemyBulletParam
-            c_Scramble_EnemyBulletParam.Checked = false;
-            c_Scramble_EnemyBulletParam_Boss.Checked = false;
-            c_Generate_EnemyBulletParam.Checked = false;
-            c_Generate_EnemyBulletParam_Boss.Checked = false;
-            c_ForceVisuals_EnemyBulletParam.Checked = false;
-            c_ForceVisuals_EnemyBulletParam_Boss.Checked = false;
-
-            // EnemyBehaviorParam
-            c_Scramble_EnemyBehaviorParam.Checked = false;
-            c_Scramble_EnemyBehaviorParam_Boss.Checked = false;
-            c_Generate_EnemyBehaviorParam.Checked = false;
-            c_Generate_EnemyBehaviorParam_Boss.Checked = false;
-
-            // ArrowParam
-            c_Scramble_ArrowParam.Checked = false;
-            c_Generate_ArrowParam.Checked = false;
-
-            // WeaponActionCategoryParam
-            c_Scramble_WeaponActionCategoryParam.Checked = false;
-
-            // WeaponParam
-            c_Scramble_WeaponParam.Checked = false;
-            c_Generate_WeaponParam.Checked = false;
-            c_IgnoreFists_WeaponParam.Checked = false;
-            c_IgnoreRequirements_WeaponParam.Checked = false;
-
-            // WeaponReinforceParam
-            c_Scramble_WeaponReinforceParam.Checked = false;
-            c_Generate_WeaponReinforceParam.Checked = false;
-
-            // WeaponTypeParam
-            c_Scramble_WeaponTypeParam.Checked = false;
-            c_Generate_WeaponTypeParam.Checked = false;
-
-            // ArmorParam
-            c_Scramble_ArmorParam.Checked = false;
-            c_Generate_ArmorParam.Checked = false;
-            c_IgnoreRequirements_ArmorParam.Checked = false;
-
-            // ArmorReinforceParam
-            c_Scramble_ArmorReinforceParam.Checked = false;
-            c_Generate_ArmorReinforceParam.Checked = false;
-
-            // SpellParam
-            c_Scramble_SpellParam.Checked = false;
-            c_Generate_SpellParam.Checked = false;
-            c_IgnoreRequirements_SpellParam.Checked = false;
-
-            // BulletParam
-            c_Scramble_BulletParam.Checked = false;
-            c_Generate_BulletParam.Checked = false;
-            c_ForceVisuals_BulletParam.Checked = false;
-
-            // ItemParam
-            c_Scramble_ItemParam.Checked = false;
-            c_Generate_ItemParam.Checked = false;
-
-            // RingParam
-            c_Scramble_RingParam.Checked = false;
-            c_Generate_RingParam.Checked = false;
-
+            c_Heides_Tower_of_Flame.Checked = state;
+            c_Memory_of_the_King.Checked = state;
+            c_Eleum_Loyce.Checked = state;
+            c_Brume_Tower.Checked = state;
+            c_Shulva.Checked = state;
+            c_Dark_Chasm_of_Old.Checked = state;
+            c_Dragon_Memories.Checked = state;
+            c_Undead_Crypt.Checked = state;
+            c_Drangleic_Castle.Checked = state;
+            c_Shrine_of_Amana.Checked = state;
+            c_Giant_Memories.Checked = state;
+            c_Grave_of_Saints.Checked = state;
+            c_Doors_of_Pharros.Checked = state;
+            c_Shaded_Woods.Checked = state;
+            c_Unseen_Path_to_Heides.Checked = state;
+            c_Path_to_Shaded_Woods.Checked = state;
+            c_Dragon_Aerie.Checked = state;
+            c_Gutter.Checked = state;
+            c_Huntmans_Copse.Checked = state;
+            c_Iron_Keep.Checked = state;
+            c_No_mans_Wharf.Checked = state;
+            c_Earthen_Peak.Checked = state;
+            c_Lost_Bastille.Checked = state;
+            c_Aldias_Keep.Checked = state;
+            c_Brightstone_Cove_Tseldora.Checked = state;
+            c_Forest_of_Fallen_Giants.Checked = state;
+            c_Majula.Checked = state;
+            c_Things_Betwixt.Checked = state;
         }
 
-        private void b_ChaosMode_Click(object sender, EventArgs e)
+        private void ToggleCheckboxes(bool state)
         {
-            // *** Item Scrambler ***
-            // Core
-            c_Scramble_Map_Loot.Checked = true;
+            // Item Scrambler
+            c_Scramble_Map_Loot.Checked = state;
 
-            // Inclusions
-            c_Include_Shops.Checked = true;
-            c_IncludeCharacterTreasure_Treasure_Map.Checked = true;
-            c_IncludeCovenantTreasure_Treasure_Map.Checked = true;
-            c_IncludeBirdTreasure_Treasure_Map.Checked = true;
-            c_IncludEventTreasure_Treasure_Map.Checked = true;
-            c_Include_Enemy_Loot.Checked = true;
-            c_IncludeBossTreasure_Treasure_Map.Checked = true;
-            c_Include_Boss_Trades.Checked = true;
+            c_Include_Boss_Trades.Checked = state;
+            c_IncludEventTreasure_Treasure_Map.Checked = state;
+            c_IncludeBirdTreasure_Treasure_Map.Checked = state;
+            c_Include_Shops.Checked = state;
+            c_IncludeBossTreasure_Treasure_Map.Checked = state;
+            c_Include_Enemy_Loot.Checked = state;
+            c_IncludeCovenantTreasure_Treasure_Map.Checked = state;
+            c_IncludeCharacterTreasure_Treasure_Map.Checked = state;
 
-            // Exlcusions
-            c_IgnoreKeys_Treasure_Map.Checked = false;
-            c_IgnoreTools_Treasure_Map.Checked = false;
+            c_IgnoreKeys_Treasure_Map.Checked = state;
+            c_IgnoreTools_Treasure_Map.Checked = state;
 
-            // Tweaks
-            c_EnsureLifegems.Checked = false;
-            c_RetainShopSpread.Checked = false;
+            c_EnsureLifegems.Checked = state;
+            c_RetainShopSpread.Checked = state;
 
-            // ** Enemy Scrambler ***
+            // Enemy Scrambler
+            c_Scramble_Enemy_Location.Checked = state;
 
-            // Tweaks
-            c_EnemyShareAggro.Checked = false;
+            c_Include_Characters.Checked = state;
 
-            // *** Param Scrambler ***
-            // SystemBulletParam
-            c_Scramble_SystemBulletParam.Checked = true;
-            c_Generate_SystemBulletParam.Checked = true;
-            c_ForceVisuals_SystemBulletParam.Checked = true;
-            c_LimitToTraps_SystemBulletParam.Checked = false;
+            c_Heides_Tower_of_Flame.Checked = state;
+            c_Memory_of_the_King.Checked = state;
+            c_Eleum_Loyce.Checked = state;
+            c_Brume_Tower.Checked = state;
+            c_Shulva.Checked = state;
+            c_Dark_Chasm_of_Old.Checked = state;
+            c_Dragon_Memories.Checked = state;
+            c_Undead_Crypt.Checked = state;
+            c_Drangleic_Castle.Checked = state;
+            c_Shrine_of_Amana.Checked = state;
+            c_Giant_Memories.Checked = state;
+            c_Grave_of_Saints.Checked = state;
+            c_Doors_of_Pharros.Checked = state;
+            c_Shaded_Woods.Checked = state;
+            c_Unseen_Path_to_Heides.Checked = state;
+            c_Path_to_Shaded_Woods.Checked = state;
+            c_Dragon_Aerie.Checked = state;
+            c_Gutter.Checked = state;
+            c_Huntmans_Copse.Checked = state;
+            c_Iron_Keep.Checked = state;
+            c_No_mans_Wharf.Checked = state;
+            c_Earthen_Peak.Checked = state;
+            c_Lost_Bastille.Checked = state;
+            c_Aldias_Keep.Checked = state;
+            c_Brightstone_Cove_Tseldora.Checked = state;
+            c_Forest_of_Fallen_Giants.Checked = state;
+            c_Majula.Checked = state;
+            c_Things_Betwixt.Checked = state;
 
-            // LogicComParam
-            c_Scramble_LogicComParam.Checked = false;
-            c_Generate_LogicComParam.Checked = false;
+            c_EnemyShareAggro.Checked = state;
 
-            // TreasureBoxParam
-            c_Scramble_TreasureBoxParam.Checked = true;
+            // Weapon Attributes
+            c_ItemParam_Weapon_Price.Checked = state;
+            c_ItemParam_Weapon_Effect.Checked = state;
+            c_WeaponParam_Weapon_Weight.Checked = state;
+            c_WeaponParam_Weapon_Durability.Checked = state;
+            c_ItemParam_Weapon_Animation_Speed.Checked = state;
+            c_WeaponParam_StatRequirements.Checked = state;
+            c_WeaponParam_Damage.Checked = state;
+            c_WeaponReinforceParam_Reinforcement.Checked = state;
+            c_WeaponParam_StaminaConsumption.Checked = state;
+            c_WeaponTypeParam_CastSpeed.Checked = state;
+            c_WeaponTypeParam_BowDistance.Checked = state;
+            c_ArrowParam_AmmoDamage.Checked = state;
+            c_WeaponActionCategoryParam_Moveset.Checked = state;
+            c_Tweak_WeaponParam_RemoveStatRequirements.Checked = state;
 
-            // EventCommonParam
-            c_Scramble_EventCommonParam.Checked = true;
+            // Armor Attributes
+            c_ItemParam_Armor_Price.Checked = state;
+            c_ItemParam_Armor_Effect.Checked = state;
+            c_ArmorParam_Armor_Weight.Checked = state;
+            c_ArmorParam_Armor_Durability.Checked = state;
+            c_ArmorParam_Defence.Checked = state;
+            c_ArmorParam_StatRequirements.Checked = state;
+            c_ArmorParam_Poise.Checked = state;
+            c_ArmorReinforceParam_Absorption.Checked = state;
+            c_Tweak_ArmorParam_RemoveStatRequirements.Checked = state;
 
-            // LockOnParam
-            c_Scramble_LockOnParam_Distance.Checked = false;
-            c_Scramble_LockOnParam_FOV.Checked = false;
+            // Ring Attributes
+            c_ItemParam_Ring_Price.Checked = state;
+            c_ItemParam_Ring_Effect.Checked = state;
+            c_RingParam_Ring_Weight.Checked = state;
+            c_RingParam_Ring_Durability.Checked = state;
 
-            // PlayerLevelUpSoulsParam
-            c_Scramble_PlayerLevelUpSoulsParam.Checked = true;
+            // Item Attributes
+            c_ItemParam_Item_Price.Checked = state;
+            c_ItemParam_Item_Animation_Speed.Checked = state;
+            c_ItemParam_Item_Max_Hold_Count.Checked = state;
+            c_ItemParam_Item_Effect.Checked = state;
 
-            // PlayerStatusParam
-            c_Scramble_PlayerStatusParam_Classes.Checked = true;
-            c_Scramble_PlayerStatusParam_Gifts.Checked = true;
-            c_ClassScramble_LimitEquipment.Checked = false;
-            t_StatSkew.Value = 12;
+            // Spell Attributes
+            c_ItemParam_Spell_Price.Checked = state;
+            c_SpellParam_StatRequirements.Checked = state;
+            c_SpellParam_StartupSpeed.Checked = state;
+            c_SpellParam_CastAnimations.Checked = state;
+            c_SpellParam_StaminaConsumption.Checked = state;
+            c_SpellParam_CastSpeed.Checked = state;
+            c_SpellParam_SlotsUsed.Checked = state;
+            c_SpellParam_Casts.Checked = state;
+            c_Tweak_SpellParam_RemoveStatRequirements.Checked = state;
 
-            // ChrMoveParam
-            c_Scramble_ChrMoveParam.Checked = true;
+            // Bullet
+            c_Bullet_IncludePlayer.Checked = state;
+            c_Bullet_IncludeEnemy.Checked = state;
+            c_Bullet_IncludeBoss.Checked = state;
+            c_Bullet_IncludeTraps.Checked = state;
 
-            // NpcPlayerStatusParam
-            c_Scramble_NpcPlayerStatusParam.Checked = true;
-            c_Generate_NpcPlayerStatusParam.Checked = true;
+            c_Bullet_VFX.Checked = state;
+            c_Bullet_Movement.Checked = state;
+            c_Bullet_Angle.Checked = state;
+            c_Bullet_SpawnDistance.Checked = state;
+            c_Bullet_Duration.Checked = state;
+            c_Bullet_Tracking.Checked = state;
+            c_Bullet_Effect.Checked = state;
 
-            // BossBattleParam
-            c_Scramble_BossBattleParam.Checked = true;
-            c_Generate_BossBattleParam.Checked = true;
+            // Player
+            c_PlayerStatusParam_StartingAttributes.Checked = state;
+            c_PlayerStatusParam_StartingEquipment.Checked = state;
+            c_PlayerStatusParam_StartingGifts.Checked = state;
+            c_PlayerLevelUpSoulsParam_LevelupCost.Checked = state;
 
-            // EnemyParam
-            c_Scramble_EnemyParam.Checked = true;
-            c_Scramble_EnemyParam_Boss.Checked = true;
-            c_Generate_EnemyParam.Checked = true;
-            c_Generate_EnemyParam_Boss.Checked = true;
+            c_EventCommonParam_ShrineOfWinter_Cost.Checked = state;
+            c_BossBattleParam_BossSoulDrops.Checked = state;
 
-            // EnemyMoveParam
-            c_Scramble_EnemyMoveParam.Checked = true;
-            c_Scramble_EnemyMoveParam_Boss.Checked = true;
-            c_Generate_EnemyMoveParam.Checked = true;
-            c_Generate_EnemyMoveParam_Boss.Checked = true;
+            c_LockOnParam_CameraDistance.Checked = state;
+            c_LockOnParam_CameraFOV.Checked = state;
 
-            // EnemyDamageParam 
-            c_Scramble_EnemyDamageParam.Checked = true;
-            c_Scramble_EnemyDamageParam_Boss.Checked = true;
-            c_Generate_EnemyDamageParam.Checked = true;
-            c_Generate_EnemyDamageParam_Boss.Checked = true;
+            c_ChrMoveParam_Walk.Checked = state;
+            c_ChrMoveParam_Run.Checked = state;
+            c_ChrMoveParam_Jump.Checked = state;
+            c_ChrMoveParam_Ladder.Checked = state;
+            c_ChrMoveParam_Turn.Checked = state;
 
-            // EnemyBulletParam
-            c_Scramble_EnemyBulletParam.Checked = true;
-            c_Scramble_EnemyBulletParam_Boss.Checked = true;
-            c_Generate_EnemyBulletParam.Checked = true;
-            c_Generate_EnemyBulletParam_Boss.Checked = true;
-            c_ForceVisuals_EnemyBulletParam.Checked = true;
-            c_ForceVisuals_EnemyBulletParam_Boss.Checked = true;
+            c_Tweak_AnyEquipmentForStartingEquipment.Checked = state;
+            c_Tweak_BigJumpMode.Checked = state;
 
-            // EnemyBehaviorParam
-            c_Scramble_EnemyBehaviorParam.Checked = true;
-            c_Scramble_EnemyBehaviorParam_Boss.Checked = true;
-            c_Generate_EnemyBehaviorParam.Checked = true;
-            c_Generate_EnemyBehaviorParam_Boss.Checked = true;
+            // Map
+            c_TreasureBoxParam_TrappedChests.Checked = state;
 
-            // ArrowParam
-            c_Scramble_ArrowParam.Checked = true;
-            c_Generate_ArrowParam.Checked = true;
+            // Characters
+            c_NpcPlayerStatusParam_Equipment.Checked = state;
 
-            // WeaponActionCategoryParam
-            c_Scramble_WeaponActionCategoryParam.Checked = true;
+            // Enemies
+            c_Enemy_IncludeEnemies.Checked = state;
+            c_Enemy_IncludeBosses.Checked = state;
 
-            // WeaponParam
-            c_Scramble_WeaponParam.Checked = true;
-            c_Generate_WeaponParam.Checked = true;
-            c_IgnoreFists_WeaponParam.Checked = true;
-            c_IgnoreRequirements_WeaponParam.Checked = false;
+            c_LogicComParam_Detection.Checked = state;
 
-            // WeaponReinforceParam
-            c_Scramble_WeaponReinforceParam.Checked = true;
-            c_Generate_WeaponReinforceParam.Checked = true;
+            c_EnemyParam_HP.Checked = state;
+            c_EnemyParam_Souls.Checked = state;
+            c_EnemyParam_Stamina.Checked = state;
+            c_EnemyParam_Defence.Checked = state;
+            c_EnemyParam_ShieldDefence.Checked = state;
+            c_EnemyParam_Poise.Checked = state;
+            c_EnemyDamageParam_Damage.Checked = state;
+            c_EnemyDamageParam_Knockback.Checked = state;
+            c_EnemyDamageParam_AttackSpeed.Checked = state;
 
-            // WeaponTypeParam
-            c_Scramble_WeaponTypeParam.Checked = true;
-            c_Generate_WeaponTypeParam.Checked = true;
-
-            // ArmorParam
-            c_Scramble_ArmorParam.Checked = true;
-            c_Generate_ArmorParam.Checked = true;
-            c_IgnoreRequirements_ArmorParam.Checked = false;
-
-            // ArmorReinforceParam
-            c_Scramble_ArmorReinforceParam.Checked = true;
-            c_Generate_ArmorReinforceParam.Checked = true;
-
-            // SpellParam
-            c_Scramble_SpellParam.Checked = true;
-            c_Generate_SpellParam.Checked = true;
-            c_IgnoreRequirements_SpellParam.Checked = false;
-
-            // BulletParam
-            c_Scramble_BulletParam.Checked = true;
-            c_Generate_BulletParam.Checked = true;
-            c_ForceVisuals_BulletParam.Checked = true;
-
-            // ItemParam
-            c_Scramble_ItemParam.Checked = true;
-            c_Generate_ItemParam.Checked = true;
-
-            // RingParam
-            c_Scramble_RingParam.Checked = true;
-            c_Generate_RingParam.Checked = true;
+            c_EnemyMoveParam_Walk.Checked = state;
+            c_EnemyMoveParam_Run.Checked = state;
+            c_EnemyMoveParam_Jump.Checked = state;
+            c_EnemyMoveParam_Climb.Checked = state;
+            c_EnemyMoveParam_Turn.Checked = state;
         }
 
-        private void groupBox6_Enter(object sender, EventArgs e)
+        private void b_QuickTick_Maps_Click(object sender, EventArgs e)
         {
-
+            ToggleMapCheckboxes(true);
         }
 
-        private void groupBox14_Enter(object sender, EventArgs e)
+        private void b_QuickClear_Maps_Click(object sender, EventArgs e)
         {
-
+            ToggleMapCheckboxes(false);
         }
 
-        private void t_StatSkew_ValueChanged(object sender, EventArgs e)
+        private void groupBox7_Enter(object sender, EventArgs e)
         {
 
         }
