@@ -49,6 +49,10 @@ namespace DS2_Scrambler
         // Items
         public List<PARAM.Row> Row_List_Weapons;
         public List<PARAM.Row> Row_List_Armor;
+        public List<PARAM.Row> Row_List_Armor_Head = new List<PARAM.Row>();
+        public List<PARAM.Row> Row_List_Armor_Chest = new List<PARAM.Row>();
+        public List<PARAM.Row> Row_List_Armor_Arms = new List<PARAM.Row>();
+        public List<PARAM.Row> Row_List_Armor_Legs = new List<PARAM.Row>();
         public List<PARAM.Row> Row_List_Spells;
         public List<PARAM.Row> Row_List_Rings;
         public List<PARAM.Row> Row_List_Items;
@@ -56,10 +60,11 @@ namespace DS2_Scrambler
         public List<PARAM.Row> Row_List_Consumables;
         public List<PARAM.Row> Row_List_Materials;
 
-        public List<PARAM.Row> Row_List_Armor_Head = new List<PARAM.Row>();
-        public List<PARAM.Row> Row_List_Armor_Chest = new List<PARAM.Row>();
-        public List<PARAM.Row> Row_List_Armor_Arms = new List<PARAM.Row>();
-        public List<PARAM.Row> Row_List_Armor_Legs = new List<PARAM.Row>();
+        public List<PARAM.Row> Row_List_ActualArmor;
+        public List<PARAM.Row> Row_List_ActualArmor_Head = new List<PARAM.Row>();
+        public List<PARAM.Row> Row_List_ActualArmor_Chest = new List<PARAM.Row>();
+        public List<PARAM.Row> Row_List_ActualArmor_Arms = new List<PARAM.Row>();
+        public List<PARAM.Row> Row_List_ActualArmor_Legs = new List<PARAM.Row>();
 
         public List<PARAM.Row> Row_List_Weapons_Melee;
         public List<PARAM.Row> Row_List_Weapons_Shield;
@@ -277,6 +282,24 @@ namespace DS2_Scrambler
 
                 if ((byte)armor_rows[0]["slot_category"].Value == 4)
                     Row_List_Armor_Legs.Add(row);
+            }
+
+            Row_List_ActualArmor = ArmorParam.Param.Rows.Where(row => row.ID >= ItemScramblerData.Static.ActualArmorParam_Category_Start && row.ID <= ItemScramblerData.Static.ActualArmorParam_Category_End
+            ).ToList();
+
+            foreach (PARAM.Row row in Row_List_ActualArmor)
+            {
+                if ((byte)row["slot_category"].Value == 1)
+                    Row_List_ActualArmor_Head.Add(row);
+
+                if ((byte)row["slot_category"].Value == 2)
+                    Row_List_ActualArmor_Chest.Add(row);
+
+                if ((byte)row["slot_category"].Value == 3)
+                    Row_List_ActualArmor_Arms.Add(row);
+
+                if ((byte)row["slot_category"].Value == 4)
+                    Row_List_ActualArmor_Legs.Add(row);
             }
 
             Row_List_Spells = SpellParam.Param.Rows.Where(row => row.ID >= ItemScramblerData.Static.SpellParam_Category_Start && row.ID <= ItemScramblerData.Static.SpellParam_Category_End && !ItemScramblerData.Static.Blacklist_Spells.Contains(row.ID)).ToList();

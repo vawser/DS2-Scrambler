@@ -204,6 +204,8 @@
             this.label24 = new System.Windows.Forms.Label();
             this.tab_Bullets = new System.Windows.Forms.TabPage();
             this.groupBox31 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.c_Bullet_Count = new System.Windows.Forms.CheckBox();
             this.label73 = new System.Windows.Forms.Label();
             this.c_Bullet_Effect = new System.Windows.Forms.CheckBox();
             this.label72 = new System.Windows.Forms.Label();
@@ -234,6 +236,8 @@
             this.c_Tweak_AnyEquipmentForStartingEquipment = new System.Windows.Forms.CheckBox();
             this.label31 = new System.Windows.Forms.Label();
             this.groupBox34 = new System.Windows.Forms.GroupBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.c_ChrMoveParam_Evasion = new System.Windows.Forms.CheckBox();
             this.label104 = new System.Windows.Forms.Label();
             this.c_ChrMoveParam_Turn = new System.Windows.Forms.CheckBox();
             this.label91 = new System.Windows.Forms.Label();
@@ -273,6 +277,8 @@
             this.label28 = new System.Windows.Forms.Label();
             this.tab_Enemy = new System.Windows.Forms.TabPage();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.c_EnemyMoveParam_Evasion = new System.Windows.Forms.CheckBox();
             this.label32 = new System.Windows.Forms.Label();
             this.c_EnemyMoveParam_Turn = new System.Windows.Forms.CheckBox();
             this.label33 = new System.Windows.Forms.Label();
@@ -284,10 +290,10 @@
             this.c_EnemyMoveParam_Walk = new System.Windows.Forms.CheckBox();
             this.label36 = new System.Windows.Forms.Label();
             this.groupBox27 = new System.Windows.Forms.GroupBox();
-            this.label29 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.c_Enemy_IncludeCharacters = new System.Windows.Forms.CheckBox();
             this.c_Enemy_IncludeBosses = new System.Windows.Forms.CheckBox();
-            this.c_Enemy_IncludeEnemies = new System.Windows.Forms.CheckBox();
-            this.label53 = new System.Windows.Forms.Label();
             this.groupBox25 = new System.Windows.Forms.GroupBox();
             this.label107 = new System.Windows.Forms.Label();
             this.label106 = new System.Windows.Forms.Label();
@@ -314,6 +320,10 @@
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.groupBox30 = new System.Windows.Forms.GroupBox();
             this.b_ClearSelection = new System.Windows.Forms.Button();
+            this.c_Enemy_IncludeSummons = new System.Windows.Forms.CheckBox();
+            this.c_Enemy_IncludeHostileCharacters = new System.Windows.Forms.CheckBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
             this.groupBox22.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox11.SuspendLayout();
@@ -690,7 +700,7 @@
             this.tabControl2.Location = new System.Drawing.Point(8, 139);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(861, 566);
+            this.tabControl2.Size = new System.Drawing.Size(861, 620);
             this.tabControl2.TabIndex = 10;
             // 
             // tabPage1
@@ -702,7 +712,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(853, 538);
+            this.tabPage1.Size = new System.Drawing.Size(853, 581);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Item Scrambler";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -780,7 +790,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(853, 538);
+            this.tabPage2.Size = new System.Drawing.Size(853, 581);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Enemy Scrambler";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1192,10 +1202,11 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(853, 538);
+            this.tabPage3.Size = new System.Drawing.Size(853, 592);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Param Scrambler";
             this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
             // tabControl3
             // 
@@ -1212,7 +1223,7 @@
             this.tabControl3.Location = new System.Drawing.Point(6, 6);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(841, 522);
+            this.tabControl3.Size = new System.Drawing.Size(841, 583);
             this.tabControl3.TabIndex = 0;
             // 
             // tab_WeaponAttributes
@@ -1222,7 +1233,7 @@
             this.tab_WeaponAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_WeaponAttributes.Name = "tab_WeaponAttributes";
             this.tab_WeaponAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_WeaponAttributes.Size = new System.Drawing.Size(833, 494);
+            this.tab_WeaponAttributes.Size = new System.Drawing.Size(833, 541);
             this.tab_WeaponAttributes.TabIndex = 4;
             this.tab_WeaponAttributes.Text = "Weapon";
             this.tab_WeaponAttributes.UseVisualStyleBackColor = true;
@@ -1547,7 +1558,7 @@
             this.tab_ArmorAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_ArmorAttributes.Name = "tab_ArmorAttributes";
             this.tab_ArmorAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_ArmorAttributes.Size = new System.Drawing.Size(833, 494);
+            this.tab_ArmorAttributes.Size = new System.Drawing.Size(833, 541);
             this.tab_ArmorAttributes.TabIndex = 5;
             this.tab_ArmorAttributes.Text = "Armor";
             this.tab_ArmorAttributes.UseVisualStyleBackColor = true;
@@ -1765,7 +1776,7 @@
             this.tab_RingAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_RingAttributes.Name = "tab_RingAttributes";
             this.tab_RingAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_RingAttributes.Size = new System.Drawing.Size(833, 494);
+            this.tab_RingAttributes.Size = new System.Drawing.Size(833, 541);
             this.tab_RingAttributes.TabIndex = 10;
             this.tab_RingAttributes.Text = "Ring";
             this.tab_RingAttributes.UseVisualStyleBackColor = true;
@@ -1869,7 +1880,7 @@
             this.tab_ItemAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_ItemAttributes.Name = "tab_ItemAttributes";
             this.tab_ItemAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_ItemAttributes.Size = new System.Drawing.Size(833, 494);
+            this.tab_ItemAttributes.Size = new System.Drawing.Size(833, 541);
             this.tab_ItemAttributes.TabIndex = 7;
             this.tab_ItemAttributes.Text = "Item";
             this.tab_ItemAttributes.UseVisualStyleBackColor = true;
@@ -1974,7 +1985,7 @@
             this.tab_SpellAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_SpellAttributes.Name = "tab_SpellAttributes";
             this.tab_SpellAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_SpellAttributes.Size = new System.Drawing.Size(833, 494);
+            this.tab_SpellAttributes.Size = new System.Drawing.Size(833, 541);
             this.tab_SpellAttributes.TabIndex = 6;
             this.tab_SpellAttributes.Text = "Spell";
             this.tab_SpellAttributes.UseVisualStyleBackColor = true;
@@ -2193,13 +2204,15 @@
             this.tab_Bullets.Location = new System.Drawing.Point(4, 24);
             this.tab_Bullets.Name = "tab_Bullets";
             this.tab_Bullets.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Bullets.Size = new System.Drawing.Size(833, 494);
+            this.tab_Bullets.Size = new System.Drawing.Size(833, 541);
             this.tab_Bullets.TabIndex = 9;
             this.tab_Bullets.Text = "Projectiles";
             this.tab_Bullets.UseVisualStyleBackColor = true;
             // 
             // groupBox31
             // 
+            this.groupBox31.Controls.Add(this.label3);
+            this.groupBox31.Controls.Add(this.c_Bullet_Count);
             this.groupBox31.Controls.Add(this.label73);
             this.groupBox31.Controls.Add(this.c_Bullet_Effect);
             this.groupBox31.Controls.Add(this.label72);
@@ -2216,10 +2229,29 @@
             this.groupBox31.Controls.Add(this.label67);
             this.groupBox31.Location = new System.Drawing.Point(6, 6);
             this.groupBox31.Name = "groupBox31";
-            this.groupBox31.Size = new System.Drawing.Size(814, 170);
+            this.groupBox31.Size = new System.Drawing.Size(814, 190);
             this.groupBox31.TabIndex = 12;
             this.groupBox31.TabStop = false;
             this.groupBox31.Text = "Attributes";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(250, 160);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(245, 15);
+            this.label3.TabIndex = 26;
+            this.label3.Text = "Scramble the number of projectiles spawned.";
+            // 
+            // c_Bullet_Count
+            // 
+            this.c_Bullet_Count.AutoSize = true;
+            this.c_Bullet_Count.Location = new System.Drawing.Point(8, 160);
+            this.c_Bullet_Count.Name = "c_Bullet_Count";
+            this.c_Bullet_Count.Size = new System.Drawing.Size(111, 19);
+            this.c_Bullet_Count.TabIndex = 25;
+            this.c_Bullet_Count.Text = "Scramble Count";
+            this.c_Bullet_Count.UseVisualStyleBackColor = true;
             // 
             // label73
             // 
@@ -2364,7 +2396,7 @@
             this.groupBox5.Controls.Add(this.c_Bullet_IncludeEnemy);
             this.groupBox5.Controls.Add(this.c_Bullet_IncludePlayer);
             this.groupBox5.Controls.Add(this.label38);
-            this.groupBox5.Location = new System.Drawing.Point(6, 182);
+            this.groupBox5.Location = new System.Drawing.Point(6, 202);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(814, 110);
             this.groupBox5.TabIndex = 6;
@@ -2459,7 +2491,7 @@
             this.tab_PlayerAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_PlayerAttributes.Name = "tab_PlayerAttributes";
             this.tab_PlayerAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_PlayerAttributes.Size = new System.Drawing.Size(833, 494);
+            this.tab_PlayerAttributes.Size = new System.Drawing.Size(833, 541);
             this.tab_PlayerAttributes.TabIndex = 3;
             this.tab_PlayerAttributes.Text = "Player";
             this.tab_PlayerAttributes.UseVisualStyleBackColor = true;
@@ -2470,7 +2502,7 @@
             this.groupBox1.Controls.Add(this.c_Tweak_BigJumpMode);
             this.groupBox1.Controls.Add(this.c_Tweak_AnyEquipmentForStartingEquipment);
             this.groupBox1.Controls.Add(this.label31);
-            this.groupBox1.Location = new System.Drawing.Point(6, 412);
+            this.groupBox1.Location = new System.Drawing.Point(6, 432);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(814, 70);
             this.groupBox1.TabIndex = 17;
@@ -2518,6 +2550,8 @@
             // 
             // groupBox34
             // 
+            this.groupBox34.Controls.Add(this.label37);
+            this.groupBox34.Controls.Add(this.c_ChrMoveParam_Evasion);
             this.groupBox34.Controls.Add(this.label104);
             this.groupBox34.Controls.Add(this.c_ChrMoveParam_Turn);
             this.groupBox34.Controls.Add(this.label91);
@@ -2530,10 +2564,29 @@
             this.groupBox34.Controls.Add(this.label84);
             this.groupBox34.Location = new System.Drawing.Point(6, 276);
             this.groupBox34.Name = "groupBox34";
-            this.groupBox34.Size = new System.Drawing.Size(814, 130);
+            this.groupBox34.Size = new System.Drawing.Size(814, 150);
             this.groupBox34.TabIndex = 11;
             this.groupBox34.TabStop = false;
             this.groupBox34.Text = "Player Movement";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(250, 120);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(243, 15);
+            this.label37.TabIndex = 22;
+            this.label37.Text = "Scramble the attributes for roll and backstep.";
+            // 
+            // c_ChrMoveParam_Evasion
+            // 
+            this.c_ChrMoveParam_Evasion.AutoSize = true;
+            this.c_ChrMoveParam_Evasion.Location = new System.Drawing.Point(8, 120);
+            this.c_ChrMoveParam_Evasion.Name = "c_ChrMoveParam_Evasion";
+            this.c_ChrMoveParam_Evasion.Size = new System.Drawing.Size(118, 19);
+            this.c_ChrMoveParam_Evasion.TabIndex = 21;
+            this.c_ChrMoveParam_Evasion.Text = "Scramble Evasion";
+            this.c_ChrMoveParam_Evasion.UseVisualStyleBackColor = true;
             // 
             // label104
             // 
@@ -2832,7 +2885,7 @@
             this.tab_Map.Location = new System.Drawing.Point(4, 24);
             this.tab_Map.Name = "tab_Map";
             this.tab_Map.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Map.Size = new System.Drawing.Size(833, 494);
+            this.tab_Map.Size = new System.Drawing.Size(833, 541);
             this.tab_Map.TabIndex = 0;
             this.tab_Map.Text = "Map";
             this.tab_Map.UseVisualStyleBackColor = true;
@@ -2873,7 +2926,7 @@
             this.tab_Character.Location = new System.Drawing.Point(4, 24);
             this.tab_Character.Name = "tab_Character";
             this.tab_Character.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Character.Size = new System.Drawing.Size(833, 494);
+            this.tab_Character.Size = new System.Drawing.Size(833, 541);
             this.tab_Character.TabIndex = 8;
             this.tab_Character.Text = "Character";
             this.tab_Character.UseVisualStyleBackColor = true;
@@ -2917,13 +2970,15 @@
             this.tab_Enemy.Location = new System.Drawing.Point(4, 24);
             this.tab_Enemy.Name = "tab_Enemy";
             this.tab_Enemy.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Enemy.Size = new System.Drawing.Size(833, 494);
+            this.tab_Enemy.Size = new System.Drawing.Size(833, 555);
             this.tab_Enemy.TabIndex = 1;
             this.tab_Enemy.Text = "Enemy";
             this.tab_Enemy.UseVisualStyleBackColor = true;
             // 
             // groupBox18
             // 
+            this.groupBox18.Controls.Add(this.label40);
+            this.groupBox18.Controls.Add(this.c_EnemyMoveParam_Evasion);
             this.groupBox18.Controls.Add(this.label32);
             this.groupBox18.Controls.Add(this.c_EnemyMoveParam_Turn);
             this.groupBox18.Controls.Add(this.label33);
@@ -2934,12 +2989,31 @@
             this.groupBox18.Controls.Add(this.c_EnemyMoveParam_Run);
             this.groupBox18.Controls.Add(this.c_EnemyMoveParam_Walk);
             this.groupBox18.Controls.Add(this.label36);
-            this.groupBox18.Location = new System.Drawing.Point(6, 354);
+            this.groupBox18.Location = new System.Drawing.Point(6, 394);
             this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(814, 130);
+            this.groupBox18.Size = new System.Drawing.Size(814, 149);
             this.groupBox18.TabIndex = 15;
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = "Enemy Movement";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(250, 120);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(243, 15);
+            this.label40.TabIndex = 24;
+            this.label40.Text = "Scramble the attributes for roll and backstep.";
+            // 
+            // c_EnemyMoveParam_Evasion
+            // 
+            this.c_EnemyMoveParam_Evasion.AutoSize = true;
+            this.c_EnemyMoveParam_Evasion.Location = new System.Drawing.Point(8, 120);
+            this.c_EnemyMoveParam_Evasion.Name = "c_EnemyMoveParam_Evasion";
+            this.c_EnemyMoveParam_Evasion.Size = new System.Drawing.Size(118, 19);
+            this.c_EnemyMoveParam_Evasion.TabIndex = 23;
+            this.c_EnemyMoveParam_Evasion.Text = "Scramble Evasion";
+            this.c_EnemyMoveParam_Evasion.UseVisualStyleBackColor = true;
             // 
             // label32
             // 
@@ -3038,54 +3112,58 @@
             // 
             // groupBox27
             // 
+            this.groupBox27.Controls.Add(this.label46);
             this.groupBox27.Controls.Add(this.label29);
+            this.groupBox27.Controls.Add(this.c_Enemy_IncludeHostileCharacters);
+            this.groupBox27.Controls.Add(this.c_Enemy_IncludeSummons);
+            this.groupBox27.Controls.Add(this.label45);
+            this.groupBox27.Controls.Add(this.label41);
+            this.groupBox27.Controls.Add(this.c_Enemy_IncludeCharacters);
             this.groupBox27.Controls.Add(this.c_Enemy_IncludeBosses);
-            this.groupBox27.Controls.Add(this.c_Enemy_IncludeEnemies);
-            this.groupBox27.Controls.Add(this.label53);
             this.groupBox27.Location = new System.Drawing.Point(6, 6);
             this.groupBox27.Name = "groupBox27";
-            this.groupBox27.Size = new System.Drawing.Size(814, 70);
+            this.groupBox27.Size = new System.Drawing.Size(814, 110);
             this.groupBox27.TabIndex = 8;
             this.groupBox27.TabStop = false;
             this.groupBox27.Text = "Inclusions";
             // 
-            // label29
+            // label45
             // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(250, 40);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(196, 15);
-            this.label29.TabIndex = 14;
-            this.label29.Text = "Include bosses within this scramble.";
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(250, 40);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(258, 15);
+            this.label45.TabIndex = 18;
+            this.label45.Text = "Include friendly characters within this scramble.";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(250, 20);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(232, 15);
+            this.label41.TabIndex = 17;
+            this.label41.Text = "Include boss enemies within this scramble.";
+            // 
+            // c_Enemy_IncludeCharacters
+            // 
+            this.c_Enemy_IncludeCharacters.AutoSize = true;
+            this.c_Enemy_IncludeCharacters.Location = new System.Drawing.Point(8, 40);
+            this.c_Enemy_IncludeCharacters.Name = "c_Enemy_IncludeCharacters";
+            this.c_Enemy_IncludeCharacters.Size = new System.Drawing.Size(124, 19);
+            this.c_Enemy_IncludeCharacters.TabIndex = 16;
+            this.c_Enemy_IncludeCharacters.Text = "Include Characters";
+            this.c_Enemy_IncludeCharacters.UseVisualStyleBackColor = true;
             // 
             // c_Enemy_IncludeBosses
             // 
             this.c_Enemy_IncludeBosses.AutoSize = true;
-            this.c_Enemy_IncludeBosses.Location = new System.Drawing.Point(8, 40);
+            this.c_Enemy_IncludeBosses.Location = new System.Drawing.Point(8, 20);
             this.c_Enemy_IncludeBosses.Name = "c_Enemy_IncludeBosses";
             this.c_Enemy_IncludeBosses.Size = new System.Drawing.Size(103, 19);
-            this.c_Enemy_IncludeBosses.TabIndex = 13;
+            this.c_Enemy_IncludeBosses.TabIndex = 15;
             this.c_Enemy_IncludeBosses.Text = "Include Bosses";
             this.c_Enemy_IncludeBosses.UseVisualStyleBackColor = true;
-            // 
-            // c_Enemy_IncludeEnemies
-            // 
-            this.c_Enemy_IncludeEnemies.AutoSize = true;
-            this.c_Enemy_IncludeEnemies.Location = new System.Drawing.Point(8, 20);
-            this.c_Enemy_IncludeEnemies.Name = "c_Enemy_IncludeEnemies";
-            this.c_Enemy_IncludeEnemies.Size = new System.Drawing.Size(112, 19);
-            this.c_Enemy_IncludeEnemies.TabIndex = 11;
-            this.c_Enemy_IncludeEnemies.Text = "Include Enemies";
-            this.c_Enemy_IncludeEnemies.UseVisualStyleBackColor = true;
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(250, 20);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(205, 15);
-            this.label53.TabIndex = 12;
-            this.label53.Text = "Include enemies within this scramble.";
             // 
             // groupBox25
             // 
@@ -3107,7 +3185,7 @@
             this.groupBox25.Controls.Add(this.c_EnemyParam_HP);
             this.groupBox25.Controls.Add(this.label49);
             this.groupBox25.Controls.Add(this.c_EnemyParam_Souls);
-            this.groupBox25.Location = new System.Drawing.Point(6, 138);
+            this.groupBox25.Location = new System.Drawing.Point(6, 178);
             this.groupBox25.Name = "groupBox25";
             this.groupBox25.Size = new System.Drawing.Size(814, 210);
             this.groupBox25.TabIndex = 10;
@@ -3289,7 +3367,7 @@
             // 
             this.groupBox26.Controls.Add(this.c_LogicComParam_Detection);
             this.groupBox26.Controls.Add(this.label51);
-            this.groupBox26.Location = new System.Drawing.Point(6, 82);
+            this.groupBox26.Location = new System.Drawing.Point(6, 122);
             this.groupBox26.Name = "groupBox26";
             this.groupBox26.Size = new System.Drawing.Size(814, 50);
             this.groupBox26.TabIndex = 9;
@@ -3357,12 +3435,50 @@
             this.b_ClearSelection.UseVisualStyleBackColor = true;
             this.b_ClearSelection.Click += new System.EventHandler(this.b_ClearSelection_Click);
             // 
+            // c_Enemy_IncludeSummons
+            // 
+            this.c_Enemy_IncludeSummons.AutoSize = true;
+            this.c_Enemy_IncludeSummons.Location = new System.Drawing.Point(8, 60);
+            this.c_Enemy_IncludeSummons.Name = "c_Enemy_IncludeSummons";
+            this.c_Enemy_IncludeSummons.Size = new System.Drawing.Size(189, 19);
+            this.c_Enemy_IncludeSummons.TabIndex = 19;
+            this.c_Enemy_IncludeSummons.Text = "Include Summoned Characters";
+            this.c_Enemy_IncludeSummons.UseVisualStyleBackColor = true;
+            // 
+            // c_Enemy_IncludeHostileCharacters
+            // 
+            this.c_Enemy_IncludeHostileCharacters.AutoSize = true;
+            this.c_Enemy_IncludeHostileCharacters.Location = new System.Drawing.Point(8, 80);
+            this.c_Enemy_IncludeHostileCharacters.Name = "c_Enemy_IncludeHostileCharacters";
+            this.c_Enemy_IncludeHostileCharacters.Size = new System.Drawing.Size(164, 19);
+            this.c_Enemy_IncludeHostileCharacters.TabIndex = 20;
+            this.c_Enemy_IncludeHostileCharacters.Text = "Include Hostile Characters";
+            this.c_Enemy_IncludeHostileCharacters.UseVisualStyleBackColor = true;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(250, 60);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(279, 15);
+            this.label29.TabIndex = 21;
+            this.label29.Text = "Include summoned characters within this scramble.";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(250, 80);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(253, 15);
+            this.label46.TabIndex = 22;
+            this.label46.Text = "Include hostile characters within this scramble.";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(878, 709);
+            this.ClientSize = new System.Drawing.Size(878, 771);
             this.Controls.Add(this.groupBox30);
             this.Controls.Add(this.groupBox15);
             this.Controls.Add(this.groupBox14);
@@ -3687,8 +3803,6 @@
         private Label label28;
         private TabPage tab_Enemy;
         private GroupBox groupBox27;
-        private CheckBox c_Enemy_IncludeEnemies;
-        private Label label53;
         private GroupBox groupBox25;
         private CheckBox c_EnemyParam_HP;
         private Label label49;
@@ -3711,8 +3825,6 @@
         private CheckBox c_Tweak_BigJumpMode;
         private Label label104;
         private CheckBox c_ChrMoveParam_Turn;
-        private Label label29;
-        private CheckBox c_Enemy_IncludeBosses;
         private CheckBox c_EnemyDamageParam_AttackSpeed;
         private CheckBox c_EnemyDamageParam_Knockback;
         private CheckBox c_EnemyDamageParam_Damage;
@@ -3739,5 +3851,19 @@
         private CheckBox c_EnemyMoveParam_Run;
         private CheckBox c_EnemyMoveParam_Walk;
         private Label label36;
+        private Label label3;
+        private CheckBox c_Bullet_Count;
+        private Label label37;
+        private CheckBox c_ChrMoveParam_Evasion;
+        private Label label40;
+        private CheckBox c_EnemyMoveParam_Evasion;
+        private CheckBox c_Enemy_IncludeCharacters;
+        private CheckBox c_Enemy_IncludeBosses;
+        private Label label45;
+        private Label label41;
+        private CheckBox c_Enemy_IncludeHostileCharacters;
+        private CheckBox c_Enemy_IncludeSummons;
+        private Label label46;
+        private Label label29;
     }
 }

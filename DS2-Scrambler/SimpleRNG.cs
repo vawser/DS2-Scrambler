@@ -235,19 +235,5 @@ namespace DS2_Scrambler
             return u / (u + v);
         }
 
-        // Written by Andras Nemes
-        public static double GetStandardDeviation(this IEnumerable<int> values)
-        {
-            double standardDeviation = 0;
-            int[] enumerable = values as int[] ?? values.ToArray();
-            int count = enumerable.Count();
-            if (count > 1)
-            {
-                double avg = enumerable.Average();
-                double sum = enumerable.Sum(d => (d - avg) * (d - avg));
-                standardDeviation = Math.Sqrt(sum / count);
-            }
-            return standardDeviation;
-        }
     }
 }

@@ -187,7 +187,8 @@ namespace DS2_Scrambler
                     c_Bullet_SpawnDistance.Checked,
                     c_Bullet_Duration.Checked,
                     c_Bullet_Tracking.Checked,
-                    c_Bullet_Effect.Checked
+                    c_Bullet_Effect.Checked,
+                    c_Bullet_Count.Checked
                 );
 
                 progress.Report("Scramble: Player");
@@ -205,6 +206,7 @@ namespace DS2_Scrambler
                     c_ChrMoveParam_Jump.Checked,
                     c_ChrMoveParam_Ladder.Checked,
                     c_ChrMoveParam_Turn.Checked,
+                    c_ChrMoveParam_Evasion.Checked,
                     c_Tweak_AnyEquipmentForStartingEquipment.Checked,
                     c_Tweak_BigJumpMode.Checked
                 );
@@ -221,8 +223,10 @@ namespace DS2_Scrambler
 
                 progress.Report("Scramble: Enemies");
                 reg = scrambler.Scramble_EnemyParams(
-                    c_Enemy_IncludeEnemies.Checked,
                     c_Enemy_IncludeBosses.Checked,
+                    c_Enemy_IncludeCharacters.Checked,
+                    c_Enemy_IncludeSummons.Checked,
+                    c_Enemy_IncludeHostileCharacters.Checked,
                     c_LogicComParam_Detection.Checked,
                     c_EnemyParam_HP.Checked,
                     c_EnemyParam_Souls.Checked,
@@ -237,7 +241,8 @@ namespace DS2_Scrambler
                     c_EnemyMoveParam_Run.Checked,
                     c_EnemyMoveParam_Jump.Checked,
                     c_EnemyMoveParam_Climb.Checked,
-                    c_EnemyMoveParam_Turn.Checked
+                    c_EnemyMoveParam_Turn.Checked,
+                    c_EnemyMoveParam_Evasion.Checked
                 );
             }
             catch (Exception ex)
@@ -515,6 +520,7 @@ namespace DS2_Scrambler
             c_ChrMoveParam_Jump.Checked = state;
             c_ChrMoveParam_Ladder.Checked = state;
             c_ChrMoveParam_Turn.Checked = state;
+            c_ChrMoveParam_Evasion.Checked = state;
 
             c_Tweak_AnyEquipmentForStartingEquipment.Checked = state;
             c_Tweak_BigJumpMode.Checked = state;
@@ -526,8 +532,10 @@ namespace DS2_Scrambler
             c_NpcPlayerStatusParam_Equipment.Checked = state;
 
             // Enemies
-            c_Enemy_IncludeEnemies.Checked = state;
             c_Enemy_IncludeBosses.Checked = state;
+            c_Enemy_IncludeCharacters.Checked = state;
+            c_Enemy_IncludeSummons.Checked = state;
+            c_Enemy_IncludeHostileCharacters.Checked = state;
 
             c_LogicComParam_Detection.Checked = state;
 
@@ -546,6 +554,7 @@ namespace DS2_Scrambler
             c_EnemyMoveParam_Jump.Checked = state;
             c_EnemyMoveParam_Climb.Checked = state;
             c_EnemyMoveParam_Turn.Checked = state;
+            c_EnemyMoveParam_Evasion.Checked = state;
         }
 
         private void b_QuickTick_Maps_Click(object sender, EventArgs e)
@@ -559,6 +568,11 @@ namespace DS2_Scrambler
         }
 
         private void groupBox7_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
         {
 
         }

@@ -11,6 +11,8 @@ namespace DS2_Scrambler
     {
         public int WeaponParam_Category_Start { get; set; }
         public int WeaponParam_Category_End { get; set; }
+        public int ActualArmorParam_Category_Start { get; set; }
+        public int ActualArmorParam_Category_End { get; set; }
         public int ArmorParam_Category_Start { get; set; }
         public int ArmorParam_Category_End { get; set; }
         public int SpellParam_Category_Start { get; set; }

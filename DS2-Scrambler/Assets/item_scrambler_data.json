@@ -3,6 +3,9 @@
     "WeaponParam_Category_Start": 1000000,
     "WeaponParam_Category_End": 19999999,
     
+    "ActualArmorParam_Category_Start": 11010100,
+    "ActualArmorParam_Category_End": 17950103,
+    
     "ArmorParam_Category_Start": 21010100,
     "ArmorParam_Category_End": 27950103,
     
