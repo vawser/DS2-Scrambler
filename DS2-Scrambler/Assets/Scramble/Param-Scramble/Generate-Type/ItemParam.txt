@@ -1,4 +1,0 @@
-base_price;10;10000;RANDOM
-sell_price;10;10000;RANDOM
-animation_speed;0.5;2.0;RANDOM
-max_held_count;1;99;WEIGHTED

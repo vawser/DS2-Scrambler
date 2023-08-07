@@ -1,1 +1,0 @@
-equip_load;0;50;RANDOM

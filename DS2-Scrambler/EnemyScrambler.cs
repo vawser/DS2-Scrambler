@@ -23,11 +23,11 @@ namespace DS2_Scrambler
     {
         public Random rand;
         public Regulation regulation;
-        public CoreScramblerData Data;
+        public ScramblerData Data;
 
         public bool T_IncludeCharacters = false;
 
-        public EnemyScrambler(Random random, Regulation reg, CoreScramblerData scramblerData)
+        public EnemyScrambler(Random random, Regulation reg, ScramblerData scramblerData)
         {
             Data = scramblerData;
             rand = random;
@@ -46,15 +46,15 @@ namespace DS2_Scrambler
                 if (enable_Things_Betwixt)
                 {
                     ScrambleEnemyLocation("m10_02_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_02_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_02_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_02_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_02_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_02_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_02_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_02_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_02_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_02_00_00
                         );
                     }
                 }
@@ -62,15 +62,15 @@ namespace DS2_Scrambler
                 if (enable_Majula)
                 {
                     ScrambleEnemyLocation("m10_04_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_04_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_04_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_04_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_04_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_04_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_04_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_04_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_04_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_04_00_00
                         );
                     }
                 }
@@ -78,15 +78,15 @@ namespace DS2_Scrambler
                 if (enable_Forest_of_Fallen_Giants)
                 {
                     ScrambleEnemyLocation("m10_10_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_10_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_10_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_10_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_10_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_10_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_10_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_10_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_10_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_10_00_00
                         );
                     }
                 }
@@ -94,15 +94,15 @@ namespace DS2_Scrambler
                 if (enable_Brightstone_Cove_Tseldora)
                 {
                     ScrambleEnemyLocation("m10_14_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_14_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_14_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_14_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_14_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_14_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_14_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_14_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_14_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_14_00_00
                         );
                     }
 
@@ -111,15 +111,15 @@ namespace DS2_Scrambler
                 if (enable_Aldias_Keep)
                 {
                     ScrambleEnemyLocation("m10_15_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_15_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_15_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_15_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_15_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_15_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_15_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_15_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_15_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_15_00_00
                         );
                     }
                 }
@@ -127,15 +127,15 @@ namespace DS2_Scrambler
                 if (enable_Lost_Bastille)
                 {
                     ScrambleEnemyLocation("m10_16_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_16_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_16_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_16_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_16_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_16_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_16_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_16_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_16_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_16_00_00
                         );
                     }
                 }
@@ -143,15 +143,15 @@ namespace DS2_Scrambler
                 if (enable_Earthen_Peak)
                 {
                     ScrambleEnemyLocation("m10_17_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_17_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_17_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_17_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_17_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_17_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_17_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_17_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_17_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_17_00_00
                         );
                     }
                 }
@@ -159,15 +159,15 @@ namespace DS2_Scrambler
                 if (enable_No_mans_Wharf)
                 {
                     ScrambleEnemyLocation("m10_18_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_18_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_18_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_18_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_18_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_18_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_18_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_18_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_18_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_18_00_00
                         );
                     }
                 }
@@ -175,15 +175,15 @@ namespace DS2_Scrambler
                 if (enable_Iron_Keep)
                 {
                     ScrambleEnemyLocation("m10_19_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_19_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_19_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_19_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_19_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_19_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_19_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_19_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_19_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_19_00_00
                         );
                     }
                 }
@@ -191,15 +191,15 @@ namespace DS2_Scrambler
                 if (enable_Huntmans_Copse)
                 {
                     ScrambleEnemyLocation("m10_23_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_23_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_23_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_23_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_23_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_23_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_23_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_23_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_23_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_23_00_00
                         );
                     }
                 }
@@ -207,15 +207,15 @@ namespace DS2_Scrambler
                 if (enable_Gutter)
                 {
                     ScrambleEnemyLocation("m10_25_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_25_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_25_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_25_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_25_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_25_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_25_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_25_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_25_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_25_00_00
                         );
                     }
                 }
@@ -223,15 +223,15 @@ namespace DS2_Scrambler
                 if (enable_Dragon_Aerie)
                 {
                     ScrambleEnemyLocation("m10_27_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_27_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_27_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_27_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_27_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_27_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_27_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_27_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_27_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_27_00_00
                         );
                     }
                 }
@@ -239,15 +239,15 @@ namespace DS2_Scrambler
                 if (enable_Path_to_Shaded_Woods)
                 {
                     ScrambleEnemyLocation("m10_29_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_29_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_29_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_29_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_29_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_29_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_29_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_29_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_29_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_29_00_00
                         );
                     }
                 }
@@ -255,15 +255,15 @@ namespace DS2_Scrambler
                 if (enable_Unseen_Path_to_Heides)
                 {
                     ScrambleEnemyLocation("m10_30_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_30_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_30_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_30_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_30_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_30_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_30_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_30_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_30_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_30_00_00
                         );
                     }
                 }
@@ -271,15 +271,15 @@ namespace DS2_Scrambler
                 if (enable_Heides_Tower_of_Flame)
                 {
                     ScrambleEnemyLocation("m10_31_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_31_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_31_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_31_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_31_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_31_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_31_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_31_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_31_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_31_00_00
                         );
                     }
                 }
@@ -287,15 +287,15 @@ namespace DS2_Scrambler
                 if (enable_Shaded_Woods)
                 {
                     ScrambleEnemyLocation("m10_32_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_32_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_32_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_32_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_32_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_32_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_32_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_32_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_32_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_32_00_00
                         );
                     }
                 }
@@ -303,15 +303,15 @@ namespace DS2_Scrambler
                 if (enable_Doors_of_Pharros)
                 {
                     ScrambleEnemyLocation("m10_33_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_33_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_33_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_33_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_33_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_33_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_33_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_33_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_33_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_33_00_00
                         );
                     }
                 }
@@ -319,15 +319,15 @@ namespace DS2_Scrambler
                 if (enable_Grave_of_Saints)
                 {
                     ScrambleEnemyLocation("m10_34_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m10_34_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m10_34_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m10_34_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m10_34_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m10_34_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m10_34_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m10_34_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m10_34_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m10_34_00_00
                         );
                     }
                 }
@@ -335,15 +335,15 @@ namespace DS2_Scrambler
                 if (enable_Giant_Memories)
                 {
                     ScrambleEnemyLocation("m20_10_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m20_10_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m20_10_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m20_10_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m20_10_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m20_10_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m20_10_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m20_10_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m20_10_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m20_10_00_00
                         );
                     }
                 }
@@ -351,15 +351,15 @@ namespace DS2_Scrambler
                 if (enable_Shrine_of_Amana)
                 {
                     ScrambleEnemyLocation("m20_11_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m20_11_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m20_11_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m20_11_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m20_11_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m20_11_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m20_11_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m20_11_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m20_11_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m20_11_00_00
                         );
                     }
                 }
@@ -367,15 +367,15 @@ namespace DS2_Scrambler
                 if (enable_Drangleic_Castle)
                 {
                     ScrambleEnemyLocation("m20_21_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m20_21_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m20_21_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m20_21_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m20_21_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m20_21_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m20_21_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m20_21_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m20_21_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m20_21_00_00
                         );
                     }
                 }
@@ -384,15 +384,15 @@ namespace DS2_Scrambler
                 {
 
                     ScrambleEnemyLocation("m20_24_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m20_24_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m20_24_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m20_24_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m20_24_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m20_24_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m20_24_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m20_24_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m20_24_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m20_24_00_00
                         );
                     }
                 }
@@ -401,15 +401,15 @@ namespace DS2_Scrambler
                 {
 
                     ScrambleEnemyLocation("m20_26_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m20_26_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m20_26_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m20_26_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m20_26_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m20_26_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m20_26_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m20_26_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m20_26_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m20_26_00_00
                         );
                     }
                 }
@@ -417,15 +417,15 @@ namespace DS2_Scrambler
                 if (enable_Dark_Chasm_of_Old)
                 {
                     ScrambleEnemyLocation("m40_03_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m40_03_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m40_03_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m40_03_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m40_03_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m40_03_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m40_03_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m40_03_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m40_03_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m40_03_00_00
                         );
                     }
                 }
@@ -433,15 +433,15 @@ namespace DS2_Scrambler
                 if (enable_Shulva)
                 {
                     ScrambleEnemyLocation("m50_35_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m50_35_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m50_35_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m50_35_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m50_35_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m50_35_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m50_35_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m50_35_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m50_35_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m50_35_00_00
                         );
                     }
                 }
@@ -449,15 +449,15 @@ namespace DS2_Scrambler
                 if (enable_Brume_Tower)
                 {
                     ScrambleEnemyLocation("m50_36_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m50_36_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m50_36_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m50_36_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m50_36_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m50_36_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m50_36_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m50_36_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m50_36_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m50_36_00_00
                         );
                     }
                 }
@@ -465,15 +465,15 @@ namespace DS2_Scrambler
                 if (enable_Eleum_Loyce)
                 {
                     ScrambleEnemyLocation("m50_37_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m50_37_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m50_37_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m50_37_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m50_37_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m50_37_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m50_37_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m50_37_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m50_37_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m50_37_00_00
                         );
                     }
                 }
@@ -481,15 +481,15 @@ namespace DS2_Scrambler
                 if (enable_Memory_of_the_King)
                 {
                     ScrambleEnemyLocation("m50_38_00_00",
-                    EnemyScramblerData.Static.Generator_Skip_List_m50_38_00_00,
-                    EnemyScramblerData.Static.Additional_Locations_Enemy_List_m50_38_00_00
+                    ScramblerData_Map.Static.Generator_Skip_List_m50_38_00_00,
+                    ScramblerData_Map.Static.Additional_Locations_Enemy_List_m50_38_00_00
                     );
 
                     if (T_IncludeCharacters)
                     {
                         ScrambleCharacterLocation("m50_38_00_00",
-                        EnemyScramblerData.Static.Character_Generator_List_m50_38_00_00,
-                        EnemyScramblerData.Static.Additional_Locations_Character_List_m50_38_00_00
+                        ScramblerData_Map.Static.Character_Generator_List_m50_38_00_00,
+                        ScramblerData_Map.Static.Additional_Locations_Character_List_m50_38_00_00
                         );
                     }
                 }

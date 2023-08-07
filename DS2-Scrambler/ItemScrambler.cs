@@ -12,7 +12,7 @@ namespace DS2_Scrambler
     {
         public Random rand;
         public Regulation regulation;
-        public CoreScramblerData Data;
+        public ScramblerData Data;
 
         public bool T_Ignore_Keys = false;
         public bool T_Ignore_Tools = false;
@@ -33,7 +33,7 @@ namespace DS2_Scrambler
 
         // TODO: add cheat-sheet generation so important items can be peeked at - At minimum this should pinpoint keys
 
-        public ItemScrambler(Random random, Regulation reg, CoreScramblerData scramblerData)
+        public ItemScrambler(Random random, Regulation reg, ScramblerData scramblerData)
         {
             Data = scramblerData;
             rand = random;
@@ -129,8 +129,8 @@ namespace DS2_Scrambler
                 if (scrambleEnemyDrops)
                 {
                     ScrambleEnemyDrops(Data.ItemlotParam_Chr.Rows.Where(row => 
-                    row.ID >= ItemScramblerData.Static.Enemy_Drop_Itemlot_Start && 
-                    row.ID <= ItemScramblerData.Static.Enemy_Drop_Itemlot_End
+                    row.ID >= ScramblerData_Items.Static.Enemy_Drop_Itemlot_Start && 
+                    row.ID <= ScramblerData_Items.Static.Enemy_Drop_Itemlot_End
                     ).ToList());
                 }
 
@@ -154,20 +154,20 @@ namespace DS2_Scrambler
             if (T_Include_Event_Treasure || T_Include_Boss_Treasure) // Only include this if Boss/Event Treasure is randomised
             {
                 AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Soldier_Key.ID
+                row.ID == ScramblerData_Items.Static.Soldier_Key.ID
                 ).ToList(), Data.Row_List_Soldier_Key, 0, 1);
             }
 
             // Dull Ember
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Dull_Ember.ID
+            row.ID == ScramblerData_Items.Static.Dull_Ember.ID
             ).ToList(), Data.Row_List_Dull_Ember, 0, 1);
 
             // Aldia Key
             if (T_Include_Event_Treasure) // Only include this if Event Treasure is randomised
             {
                 AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Aldia_Key.ID
+                row.ID == ScramblerData_Items.Static.Aldia_Key.ID
                 ).ToList(), Data.Row_List_Aldia_Key, 0, 1);
             }
 
@@ -175,7 +175,7 @@ namespace DS2_Scrambler
             if (T_Include_Event_Treasure || T_Include_Character_Treasure) // Only include this if Character/Event Treasure is randomised
             {
                 AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Ashen_Mist_Heart.ID
+                row.ID == ScramblerData_Items.Static.Ashen_Mist_Heart.ID
                 ).ToList(), Data.Row_List_Ashen_Mist_Heart, 0, 1);
             }
 
@@ -183,7 +183,7 @@ namespace DS2_Scrambler
             if (T_Include_Event_Treasure || T_Include_Boss_Treasure) // Only include this if Boss/Event Treasure is randomised
             {
                 AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Giants_Kinship.ID
+                row.ID == ScramblerData_Items.Static.Giants_Kinship.ID
                 ).ToList(), Data.Row_List_Giants_Kinship, 0, 1);
             }
 
@@ -191,43 +191,43 @@ namespace DS2_Scrambler
             if (T_Include_Event_Treasure) // Only include this if Event Treasure is randomised
             {
                 AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Rotunda_Lockstone.ID
+                row.ID == ScramblerData_Items.Static.Rotunda_Lockstone.ID
                 ).ToList(), Data.Row_List_Rotunda_Lockstone, 0, 1);
             }
 
             // Lenigrasts Key
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Lenigrasts_Key.ID
+            row.ID == ScramblerData_Items.Static.Lenigrasts_Key.ID
             ).ToList(), Data.Row_List_Lenigrasts_Key, 0, 1);
 
             // House Key
             if (T_Include_Character_Treasure) // Only include this if Character Treasure is randomised
             {
                 AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.House_Key.ID
+                row.ID == ScramblerData_Items.Static.House_Key.ID
                 ).ToList(), Data.Row_List_House_Key, 0, 1);
             }
 
             // Antiquated Key
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Antiquated_Key.ID
+            row.ID == ScramblerData_Items.Static.Antiquated_Key.ID
             ).ToList(), Data.Row_List_Antiquated_Key, 0, 1);
 
             // Brightstone Key
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Brightstone_Key.ID
+            row.ID == ScramblerData_Items.Static.Brightstone_Key.ID
             ).ToList(), Data.Row_List_Brightstone_Key, 0, 1);
 
             // Bastille Key
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Bastille_Key.ID
+            row.ID == ScramblerData_Items.Static.Bastille_Key.ID
             ).ToList(), Data.Row_List_Bastille_Key, 0, 1);
 
             // Tseldora Den Key
             if (T_Include_Character_Treasure) // Only include this if Character Treasure is randomised
             {
                 AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Tseldora_Den_Key.ID
+                row.ID == ScramblerData_Items.Static.Tseldora_Den_Key.ID
                 ).ToList(), Data.Row_List_Tseldora_Den_Key, 0, 1);
             }
 
@@ -235,87 +235,87 @@ namespace DS2_Scrambler
             if (T_Include_Event_Treasure) // Only include this if Event Treasure is randomised
             {
                 AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Fang_Key.ID
+                row.ID == ScramblerData_Items.Static.Fang_Key.ID
                 ).ToList(), Data.Row_List_Fang_Key, 0, 1);
             }
 
             // Iron Key
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Iron_Key.ID
+            row.ID == ScramblerData_Items.Static.Iron_Key.ID
             ).ToList(), Data.Row_List_Iron_Key, 0, 1);
 
             // Forgotten Key
             if (T_Include_Event_Treasure) // Only include this if Event Treasure is randomised
             {
                 AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Forgotten_Key.ID
+                row.ID == ScramblerData_Items.Static.Forgotten_Key.ID
                 ).ToList(), Data.Row_List_Forgotten_Key, 0, 1);
             }
 
             // Key to the Kings Passage
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Key_to_the_Kings_Passage.ID
+            row.ID == ScramblerData_Items.Static.Key_to_the_Kings_Passage.ID
             ).ToList(), Data.Row_List_Key_to_the_Kings_Passage, 0, 1);
 
             // Undead Lockaway Key
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Undead_Lockaway_Key.ID
+            row.ID == ScramblerData_Items.Static.Undead_Lockaway_Key.ID
             ).ToList(), Data.Row_List_Undead_Lockaway_Key, 0, 1);
 
             // Eternal Sanctum Key
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Eternal_Sanctum_Key.ID
+            row.ID == ScramblerData_Items.Static.Eternal_Sanctum_Key.ID
             ).ToList(), Data.Row_List_Eternal_Sanctum_Key, 0, 1);
 
             // Dragon Stone
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Dragon_Stone.ID
+            row.ID == ScramblerData_Items.Static.Dragon_Stone.ID
             ).ToList(), Data.Row_List_Dragon_Stone, 0, 1);
 
             // Scorching Iron Scepter
             if (T_Include_Event_Treasure) // Only include this if Event Treasure is randomised
             {
                 AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Scorching_Iron_Scepter.ID
+                row.ID == ScramblerData_Items.Static.Scorching_Iron_Scepter.ID
                 ).ToList(), Data.Row_List_Scorching_Iron_Scepter, 0, 1);
             }
 
             // Tower Key
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Tower_Key.ID
+            row.ID == ScramblerData_Items.Static.Tower_Key.ID
             ).ToList(), Data.Row_List_Tower_Key, 0, 1);
 
             // Garrison Ward Key
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Garrison_Ward_Key.ID
+            row.ID == ScramblerData_Items.Static.Garrison_Ward_Key.ID
             ).ToList(), Data.Row_List_Garrison_Ward_Key, 0, 1);
 
             // Dragon Talon
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Dragon_Talon.ID
+            row.ID == ScramblerData_Items.Static.Dragon_Talon.ID
             ).ToList(), Data.Row_List_Dragon_Talon, 0, 1);
 
             // Heavy Iron Key
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Heavy_Iron_Key.ID
+            row.ID == ScramblerData_Items.Static.Heavy_Iron_Key.ID
             ).ToList(), Data.Row_List_Heavy_Iron_Key, 0, 1);
 
             // Frozen Flower
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.Frozen_Flower.ID
+            row.ID == ScramblerData_Items.Static.Frozen_Flower.ID
             ).ToList(), Data.Row_List_Frozen_Flower, 0, 1);
 
             // Key to the Embedded
             if (T_Include_Boss_Treasure) // Only include this if Boss Treasure is randomised
             {
                 AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Key_to_the_Embedded.ID
+                row.ID == ScramblerData_Items.Static.Key_to_the_Embedded.ID
                 ).ToList(), Data.Row_List_Key_to_the_Embedded, 0, 1);
             }
 
             // King Ring
             AssignKeyToItemlot(Data.ItemParam.Rows.Where(row =>
-            row.ID == ItemScramblerData.Static.King_Ring.ID
+            row.ID == ScramblerData_Items.Static.King_Ring.ID
             ).ToList(), Data.Row_List_King_Ring, 0, 1);
         }
 
@@ -341,7 +341,7 @@ namespace DS2_Scrambler
 
                 // Do not assign if the itemlot has already been used, or it has a never-change item in it.
                 if (!Assigned_Itemlots.Contains(chosen_row) &&
-                    !HasMatchingLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, chosen_row)
+                    !HasMatchingLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, chosen_row)
                 )
                     can_assign = true;
             }
@@ -362,7 +362,7 @@ namespace DS2_Scrambler
             if (T_Include_Character_Treasure) // Only include this if Character Treasure is randomised
             {
                 AssignToolToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Aged_Feather.ID
+                row.ID == ScramblerData_Items.Static.Aged_Feather.ID
                 ).ToList(), Data.Row_List_Aged_Feather, 0, 1);
             }
 
@@ -370,7 +370,7 @@ namespace DS2_Scrambler
             if (T_Include_Covenant_Treasure) // Only include this if Covenant Treasure is randomised
             {
                 AssignToolToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Champion_Tablet.ID
+                row.ID == ScramblerData_Items.Static.Champion_Tablet.ID
                 ).ToList(), Data.Row_List_Champion_Tablet, 0, 1);
             }
 
@@ -378,7 +378,7 @@ namespace DS2_Scrambler
             if (T_Include_Covenant_Treasure) // Only include this if Covenant Treasure is randomised
             {
                 AssignToolToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Dragon_Head_Stone.ID
+                row.ID == ScramblerData_Items.Static.Dragon_Head_Stone.ID
                 ).ToList(), Data.Row_List_Dragon_Head_Stone, 0, 1);
             }
 
@@ -386,7 +386,7 @@ namespace DS2_Scrambler
             if (T_Include_Covenant_Treasure) // Only include this if Covenant Treasure is randomised
             {
                 AssignToolToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Dragon_Torso_Stone.ID
+                row.ID == ScramblerData_Items.Static.Dragon_Torso_Stone.ID
                 ).ToList(), Data.Row_List_Dragon_Torso_Stone, 0, 1);
             }
 
@@ -394,7 +394,7 @@ namespace DS2_Scrambler
             if (T_Include_Covenant_Treasure) // Only include this if Covenant Treasure is randomised
             {
                 AssignToolToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Hello_Carving.ID
+                row.ID == ScramblerData_Items.Static.Hello_Carving.ID
                 ).ToList(), Data.Row_List_Hello_Carving, 0, 1);
             }
 
@@ -402,7 +402,7 @@ namespace DS2_Scrambler
             if (T_Include_Covenant_Treasure) // Only include this if Covenant Treasure is randomised
             {
                 AssignToolToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Thank_You_Carving.ID
+                row.ID == ScramblerData_Items.Static.Thank_You_Carving.ID
                 ).ToList(), Data.Row_List_Thank_You_Carving, 0, 1);
             }
 
@@ -410,7 +410,7 @@ namespace DS2_Scrambler
             if (T_Include_Covenant_Treasure) // Only include this if Covenant Treasure is randomised
             {
                 AssignToolToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Im_Sorry_Carving.ID
+                row.ID == ScramblerData_Items.Static.Im_Sorry_Carving.ID
                 ).ToList(), Data.Row_List_Im_Sorry_Carving, 0, 1);
             }
 
@@ -418,40 +418,40 @@ namespace DS2_Scrambler
             if (T_Include_Covenant_Treasure) // Only include this if Covenant Treasure is randomised
             {
                 AssignToolToItemlot(Data.ItemParam.Rows.Where(row =>
-                row.ID == ItemScramblerData.Static.Very_Good_Carving.ID
+                row.ID == ScramblerData_Items.Static.Very_Good_Carving.ID
                 ).ToList(), Data.Row_List_Very_Good_Carving, 0, 1);
             }
 
             // Pharros' Lockstone
-            foreach (string map in ItemScramblerData.Static.Pharros_Lockstone.Maps)
+            foreach (string map in ScramblerData_Items.Static.Pharros_Lockstone.Maps)
             {
                 if (Data.map_itemlots.ContainsKey(map))
                 {
                     List<PARAM.Row> rows = Data.map_itemlots[map];
 
                     AssignToolToItemlot(Data.ItemParam.Rows.Where(row => 
-                    row.ID == ItemScramblerData.Static.Pharros_Lockstone.ID).ToList(), 
+                    row.ID == ScramblerData_Items.Static.Pharros_Lockstone.ID).ToList(), 
                     rows, 0,
-                    ItemScramblerData.Static.Pharros_Lockstone.Min,
-                    ItemScramblerData.Static.Pharros_Lockstone.Max
+                    ScramblerData_Items.Static.Pharros_Lockstone.Min,
+                    ScramblerData_Items.Static.Pharros_Lockstone.Max
                     );
                 }
             }
 
             // Fragrant Branch of Yore
-            foreach (string map in ItemScramblerData.Static.Fragrant_Branch_of_Yore.Maps)
+            foreach (string map in ScramblerData_Items.Static.Fragrant_Branch_of_Yore.Maps)
             {
                 if (Data.map_itemlots.ContainsKey(map))
                 {
                     List<PARAM.Row> rows = Data.map_itemlots[map];
 
                     AssignToolToItemlot(Data.ItemParam.Rows.Where(row =>
-                    row.ID == ItemScramblerData.Static.Fragrant_Branch_of_Yore.ID).ToList(),
+                    row.ID == ScramblerData_Items.Static.Fragrant_Branch_of_Yore.ID).ToList(),
                     rows.Where(row => 
-                    !ItemScramblerData.Static.Blacklist_Itemlots_for_Keys.Contains(row.ID)).ToList(), 
+                    !ScramblerData_Items.Static.Blacklist_Itemlots_for_Keys.Contains(row.ID)).ToList(), 
                     0,
-                    ItemScramblerData.Static.Fragrant_Branch_of_Yore.Min,
-                    ItemScramblerData.Static.Pharros_Lockstone.Max
+                    ScramblerData_Items.Static.Fragrant_Branch_of_Yore.Min,
+                    ScramblerData_Items.Static.Pharros_Lockstone.Max
                     );
                 }
             }
@@ -613,8 +613,8 @@ namespace DS2_Scrambler
 
                 // Do not assign if the itemlot has already been used, or it has a never-change item in it or an existing key itemlot
                 if (!Assigned_Itemlots.Contains(chosen_row) &&
-                    !HasMatchingLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, chosen_row) &&
-                    (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ItemScramblerData.Static.Category_Key_Item, chosen_row))
+                    !HasMatchingLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, chosen_row) &&
+                    (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ScramblerData_Items.Static.Category_Key_Item, chosen_row))
                 )
                     can_assign = true;
             }
@@ -793,9 +793,9 @@ namespace DS2_Scrambler
 
                 // Do not assign if the itemlot has already been used, or it has a never-change item in it or an existing key itemlot or an existing tool itemlot
                 if (!Assigned_Itemlots.Contains(chosen_row) &&
-                !HasMatchingLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, chosen_row) &&
-                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ItemScramblerData.Static.Category_Key_Item, chosen_row)) &&
-                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ItemScramblerData.Static.Category_Tool_Item, chosen_row))
+                !HasMatchingLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, chosen_row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ScramblerData_Items.Static.Category_Key_Item, chosen_row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ScramblerData_Items.Static.Category_Tool_Item, chosen_row))
                 )
                     can_assign = true;
             }
@@ -818,9 +818,9 @@ namespace DS2_Scrambler
             {
                 // Do not change the already changed, or those that have keys/tools/boss souls.
                 if (!Assigned_Itemlots.Contains(row) &&
-                !HasMatchingLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, row) &&
-                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ItemScramblerData.Static.Category_Key_Item, row)) &&
-                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ItemScramblerData.Static.Category_Tool_Item, row)))
+                !HasMatchingLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ScramblerData_Items.Static.Category_Key_Item, row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ScramblerData_Items.Static.Category_Tool_Item, row)))
                 {
                     Util.PrintLine($"Assign Boss Reward itemlot: {row.ID}");
                     SelectUniqueItemForItemlot(row, 10, false);
@@ -834,9 +834,9 @@ namespace DS2_Scrambler
             {
                 // Do not change the already changed, or those that have keys/tools/boss souls.
                 if (!Assigned_Itemlots.Contains(row) &&
-                !HasMatchingLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, row) &&
-                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ItemScramblerData.Static.Category_Key_Item, row)) &&
-                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ItemScramblerData.Static.Category_Tool_Item, row)))
+                !HasMatchingLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ScramblerData_Items.Static.Category_Key_Item, row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ScramblerData_Items.Static.Category_Tool_Item, row)))
                 {
                     Util.PrintLine($"Assign Character Reward itemlot: {row.ID}");
                     SelectItemForItemlot(row, 10, false);
@@ -850,9 +850,9 @@ namespace DS2_Scrambler
             {
                 // Do not change the already changed, or those that have keys/tools/boss souls.
                 if (!Assigned_Itemlots.Contains(row) &&
-                !HasMatchingLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, row) &&
-                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ItemScramblerData.Static.Category_Key_Item, row)) &&
-                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ItemScramblerData.Static.Category_Tool_Item, row)))
+                !HasMatchingLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ScramblerData_Items.Static.Category_Key_Item, row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ScramblerData_Items.Static.Category_Tool_Item, row)))
                 {
                     Util.PrintLine($"Assign Covenant Reward itemlot: {row.ID}");
                     SelectUniqueItemForItemlot(row, 10, false);
@@ -866,9 +866,9 @@ namespace DS2_Scrambler
             {
                 // Do not change the already changed, or those that have keys/tools/boss souls.
                 if (!Assigned_Itemlots.Contains(row) &&
-                !HasMatchingLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, row) &&
-                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ItemScramblerData.Static.Category_Key_Item, row)) &&
-                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ItemScramblerData.Static.Category_Tool_Item, row)))
+                !HasMatchingLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ScramblerData_Items.Static.Category_Key_Item, row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ScramblerData_Items.Static.Category_Tool_Item, row)))
                 {
                     Util.PrintLine($"Assign Bird Reward itemlot: {row.ID}");
                     SelectItemForItemlot(row, 10, false);
@@ -882,9 +882,9 @@ namespace DS2_Scrambler
             {
                 // Do not change the already changed, or those that have keys/tools/boss souls.
                 if (!Assigned_Itemlots.Contains(row) &&
-                !HasMatchingLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, row) &&
-                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ItemScramblerData.Static.Category_Key_Item, row)) &&
-                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ItemScramblerData.Static.Category_Tool_Item, row)))
+                !HasMatchingLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ScramblerData_Items.Static.Category_Key_Item, row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ScramblerData_Items.Static.Category_Tool_Item, row)))
                 {
                     Util.PrintLine($"Assign Event Reward itemlot: {row.ID}");
                     SelectItemForItemlot(row, 10, false);
@@ -898,9 +898,9 @@ namespace DS2_Scrambler
             {
                 // Do not change the already changed, or those that have keys/tools/boss souls.
                 if (!Assigned_Itemlots.Contains(row) &&
-                !HasMatchingLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, row) &&
-                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ItemScramblerData.Static.Category_Key_Item, row)) &&
-                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ItemScramblerData.Static.Category_Tool_Item, row)))
+                !HasMatchingLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ScramblerData_Items.Static.Category_Key_Item, row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ScramblerData_Items.Static.Category_Tool_Item, row)))
                 {
                     Util.PrintLine($"Assign Map Treasure itemlot: {row.ID}");
                     SelectItemForItemlot(row, 10, false);
@@ -914,9 +914,9 @@ namespace DS2_Scrambler
             {
                 // Do not change the already changed, or those that have keys/tools/boss souls.
                 if (!Assigned_Itemlots.Contains(row) &&
-                !HasMatchingLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, row) &&
-                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ItemScramblerData.Static.Category_Key_Item, row)) &&
-                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ItemScramblerData.Static.Category_Tool_Item, row)))
+                !HasMatchingLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingLot(ScramblerData_Items.Static.Category_Key_Item, row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingLot(ScramblerData_Items.Static.Category_Tool_Item, row)))
                 {
                     Util.PrintLine($"Assign Enemy Drop itemlot: {row.ID}");
                     SelectItemForItemlot(row, 60510000, true);
@@ -1007,9 +1007,9 @@ namespace DS2_Scrambler
             
             foreach(PARAM.Row row in rows)
             {
-                if(!HasMatchingShopLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, row) &&
-                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingShopLot(ItemScramblerData.Static.Category_Key_Item, row)) &&
-                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingShopLot(ItemScramblerData.Static.Category_Tool_Item, row)))
+                if(!HasMatchingShopLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingShopLot(ScramblerData_Items.Static.Category_Key_Item, row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingShopLot(ScramblerData_Items.Static.Category_Tool_Item, row)))
                 {
                     Util.PrintLine($"Assign shoplot: {row.ID}");
                     SelectItemForShoplot(row);
@@ -1046,9 +1046,9 @@ namespace DS2_Scrambler
 
             foreach (PARAM.Row row in rows)
             {
-                if (!HasMatchingShopLot(ItemScramblerData.Static.Blacklist_Itemlot_Contents, row) &&
-                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingShopLot(ItemScramblerData.Static.Category_Key_Item, row)) &&
-                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingShopLot(ItemScramblerData.Static.Category_Tool_Item, row)))
+                if (!HasMatchingShopLot(ScramblerData_Items.Static.Blacklist_Itemlot_Contents, row) &&
+                (!T_Ignore_Keys || T_Ignore_Keys && !HasMatchingShopLot(ScramblerData_Items.Static.Category_Key_Item, row)) &&
+                (!T_Ignore_Tools || T_Ignore_Tools && !HasMatchingShopLot(ScramblerData_Items.Static.Category_Tool_Item, row)))
                 {
                     Util.PrintLine($"Assign Boss Trade shoplot: {row.ID}");
                     SelectUniqueItemForShoplot(row);

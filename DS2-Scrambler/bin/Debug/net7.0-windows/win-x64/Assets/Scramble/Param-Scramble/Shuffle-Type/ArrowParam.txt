@@ -1,7 +1,0 @@
-damage_physical
-damage_magic
-damage_lightning
-damage_fire
-damage_dark
-damage_poison
-damage_bleed

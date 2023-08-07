@@ -290,6 +290,10 @@
             this.c_EnemyMoveParam_Walk = new System.Windows.Forms.CheckBox();
             this.label36 = new System.Windows.Forms.Label();
             this.groupBox27 = new System.Windows.Forms.GroupBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.c_Enemy_IncludeHostileCharacters = new System.Windows.Forms.CheckBox();
+            this.c_Enemy_IncludeSummons = new System.Windows.Forms.CheckBox();
             this.label45 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.c_Enemy_IncludeCharacters = new System.Windows.Forms.CheckBox();
@@ -319,11 +323,8 @@
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.groupBox30 = new System.Windows.Forms.GroupBox();
+            this.b_SelectAll = new System.Windows.Forms.Button();
             this.b_ClearSelection = new System.Windows.Forms.Button();
-            this.c_Enemy_IncludeSummons = new System.Windows.Forms.CheckBox();
-            this.c_Enemy_IncludeHostileCharacters = new System.Windows.Forms.CheckBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
             this.groupBox22.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox11.SuspendLayout();
@@ -712,7 +713,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(853, 581);
+            this.tabPage1.Size = new System.Drawing.Size(853, 592);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Item Scrambler";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -790,7 +791,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(853, 581);
+            this.tabPage2.Size = new System.Drawing.Size(853, 592);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Enemy Scrambler";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1233,7 +1234,7 @@
             this.tab_WeaponAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_WeaponAttributes.Name = "tab_WeaponAttributes";
             this.tab_WeaponAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_WeaponAttributes.Size = new System.Drawing.Size(833, 541);
+            this.tab_WeaponAttributes.Size = new System.Drawing.Size(833, 555);
             this.tab_WeaponAttributes.TabIndex = 4;
             this.tab_WeaponAttributes.Text = "Weapon";
             this.tab_WeaponAttributes.UseVisualStyleBackColor = true;
@@ -1558,7 +1559,7 @@
             this.tab_ArmorAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_ArmorAttributes.Name = "tab_ArmorAttributes";
             this.tab_ArmorAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_ArmorAttributes.Size = new System.Drawing.Size(833, 541);
+            this.tab_ArmorAttributes.Size = new System.Drawing.Size(833, 555);
             this.tab_ArmorAttributes.TabIndex = 5;
             this.tab_ArmorAttributes.Text = "Armor";
             this.tab_ArmorAttributes.UseVisualStyleBackColor = true;
@@ -1776,7 +1777,7 @@
             this.tab_RingAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_RingAttributes.Name = "tab_RingAttributes";
             this.tab_RingAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_RingAttributes.Size = new System.Drawing.Size(833, 541);
+            this.tab_RingAttributes.Size = new System.Drawing.Size(833, 555);
             this.tab_RingAttributes.TabIndex = 10;
             this.tab_RingAttributes.Text = "Ring";
             this.tab_RingAttributes.UseVisualStyleBackColor = true;
@@ -1880,7 +1881,7 @@
             this.tab_ItemAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_ItemAttributes.Name = "tab_ItemAttributes";
             this.tab_ItemAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_ItemAttributes.Size = new System.Drawing.Size(833, 541);
+            this.tab_ItemAttributes.Size = new System.Drawing.Size(833, 555);
             this.tab_ItemAttributes.TabIndex = 7;
             this.tab_ItemAttributes.Text = "Item";
             this.tab_ItemAttributes.UseVisualStyleBackColor = true;
@@ -1985,7 +1986,7 @@
             this.tab_SpellAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_SpellAttributes.Name = "tab_SpellAttributes";
             this.tab_SpellAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_SpellAttributes.Size = new System.Drawing.Size(833, 541);
+            this.tab_SpellAttributes.Size = new System.Drawing.Size(833, 555);
             this.tab_SpellAttributes.TabIndex = 6;
             this.tab_SpellAttributes.Text = "Spell";
             this.tab_SpellAttributes.UseVisualStyleBackColor = true;
@@ -2204,7 +2205,7 @@
             this.tab_Bullets.Location = new System.Drawing.Point(4, 24);
             this.tab_Bullets.Name = "tab_Bullets";
             this.tab_Bullets.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Bullets.Size = new System.Drawing.Size(833, 541);
+            this.tab_Bullets.Size = new System.Drawing.Size(833, 555);
             this.tab_Bullets.TabIndex = 9;
             this.tab_Bullets.Text = "Projectiles";
             this.tab_Bullets.UseVisualStyleBackColor = true;
@@ -2491,7 +2492,7 @@
             this.tab_PlayerAttributes.Location = new System.Drawing.Point(4, 24);
             this.tab_PlayerAttributes.Name = "tab_PlayerAttributes";
             this.tab_PlayerAttributes.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_PlayerAttributes.Size = new System.Drawing.Size(833, 541);
+            this.tab_PlayerAttributes.Size = new System.Drawing.Size(833, 555);
             this.tab_PlayerAttributes.TabIndex = 3;
             this.tab_PlayerAttributes.Text = "Player";
             this.tab_PlayerAttributes.UseVisualStyleBackColor = true;
@@ -2885,7 +2886,7 @@
             this.tab_Map.Location = new System.Drawing.Point(4, 24);
             this.tab_Map.Name = "tab_Map";
             this.tab_Map.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Map.Size = new System.Drawing.Size(833, 541);
+            this.tab_Map.Size = new System.Drawing.Size(833, 555);
             this.tab_Map.TabIndex = 0;
             this.tab_Map.Text = "Map";
             this.tab_Map.UseVisualStyleBackColor = true;
@@ -2926,7 +2927,7 @@
             this.tab_Character.Location = new System.Drawing.Point(4, 24);
             this.tab_Character.Name = "tab_Character";
             this.tab_Character.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Character.Size = new System.Drawing.Size(833, 541);
+            this.tab_Character.Size = new System.Drawing.Size(833, 555);
             this.tab_Character.TabIndex = 8;
             this.tab_Character.Text = "Character";
             this.tab_Character.UseVisualStyleBackColor = true;
@@ -3126,6 +3127,44 @@
             this.groupBox27.TabIndex = 8;
             this.groupBox27.TabStop = false;
             this.groupBox27.Text = "Inclusions";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(250, 80);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(253, 15);
+            this.label46.TabIndex = 22;
+            this.label46.Text = "Include hostile characters within this scramble.";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(250, 60);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(279, 15);
+            this.label29.TabIndex = 21;
+            this.label29.Text = "Include summoned characters within this scramble.";
+            // 
+            // c_Enemy_IncludeHostileCharacters
+            // 
+            this.c_Enemy_IncludeHostileCharacters.AutoSize = true;
+            this.c_Enemy_IncludeHostileCharacters.Location = new System.Drawing.Point(8, 80);
+            this.c_Enemy_IncludeHostileCharacters.Name = "c_Enemy_IncludeHostileCharacters";
+            this.c_Enemy_IncludeHostileCharacters.Size = new System.Drawing.Size(164, 19);
+            this.c_Enemy_IncludeHostileCharacters.TabIndex = 20;
+            this.c_Enemy_IncludeHostileCharacters.Text = "Include Hostile Characters";
+            this.c_Enemy_IncludeHostileCharacters.UseVisualStyleBackColor = true;
+            // 
+            // c_Enemy_IncludeSummons
+            // 
+            this.c_Enemy_IncludeSummons.AutoSize = true;
+            this.c_Enemy_IncludeSummons.Location = new System.Drawing.Point(8, 60);
+            this.c_Enemy_IncludeSummons.Name = "c_Enemy_IncludeSummons";
+            this.c_Enemy_IncludeSummons.Size = new System.Drawing.Size(189, 19);
+            this.c_Enemy_IncludeSummons.TabIndex = 19;
+            this.c_Enemy_IncludeSummons.Text = "Include Summoned Characters";
+            this.c_Enemy_IncludeSummons.UseVisualStyleBackColor = true;
             // 
             // label45
             // 
@@ -3416,6 +3455,7 @@
             // 
             // groupBox30
             // 
+            this.groupBox30.Controls.Add(this.b_SelectAll);
             this.groupBox30.Controls.Add(this.b_ClearSelection);
             this.groupBox30.Controls.Add(this.b_Scramble);
             this.groupBox30.Location = new System.Drawing.Point(8, 73);
@@ -3424,6 +3464,16 @@
             this.groupBox30.TabIndex = 13;
             this.groupBox30.TabStop = false;
             this.groupBox30.Text = "Actions";
+            // 
+            // b_SelectAll
+            // 
+            this.b_SelectAll.Location = new System.Drawing.Point(352, 25);
+            this.b_SelectAll.Name = "b_SelectAll";
+            this.b_SelectAll.Size = new System.Drawing.Size(160, 23);
+            this.b_SelectAll.TabIndex = 5;
+            this.b_SelectAll.Text = "Select All";
+            this.b_SelectAll.UseVisualStyleBackColor = true;
+            this.b_SelectAll.Click += new System.EventHandler(this.button1_Click);
             // 
             // b_ClearSelection
             // 
@@ -3434,44 +3484,6 @@
             this.b_ClearSelection.Text = "Clear Selection";
             this.b_ClearSelection.UseVisualStyleBackColor = true;
             this.b_ClearSelection.Click += new System.EventHandler(this.b_ClearSelection_Click);
-            // 
-            // c_Enemy_IncludeSummons
-            // 
-            this.c_Enemy_IncludeSummons.AutoSize = true;
-            this.c_Enemy_IncludeSummons.Location = new System.Drawing.Point(8, 60);
-            this.c_Enemy_IncludeSummons.Name = "c_Enemy_IncludeSummons";
-            this.c_Enemy_IncludeSummons.Size = new System.Drawing.Size(189, 19);
-            this.c_Enemy_IncludeSummons.TabIndex = 19;
-            this.c_Enemy_IncludeSummons.Text = "Include Summoned Characters";
-            this.c_Enemy_IncludeSummons.UseVisualStyleBackColor = true;
-            // 
-            // c_Enemy_IncludeHostileCharacters
-            // 
-            this.c_Enemy_IncludeHostileCharacters.AutoSize = true;
-            this.c_Enemy_IncludeHostileCharacters.Location = new System.Drawing.Point(8, 80);
-            this.c_Enemy_IncludeHostileCharacters.Name = "c_Enemy_IncludeHostileCharacters";
-            this.c_Enemy_IncludeHostileCharacters.Size = new System.Drawing.Size(164, 19);
-            this.c_Enemy_IncludeHostileCharacters.TabIndex = 20;
-            this.c_Enemy_IncludeHostileCharacters.Text = "Include Hostile Characters";
-            this.c_Enemy_IncludeHostileCharacters.UseVisualStyleBackColor = true;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(250, 60);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(279, 15);
-            this.label29.TabIndex = 21;
-            this.label29.Text = "Include summoned characters within this scramble.";
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(250, 80);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(253, 15);
-            this.label46.TabIndex = 22;
-            this.label46.Text = "Include hostile characters within this scramble.";
             // 
             // Main
             // 
@@ -3865,5 +3877,6 @@
         private CheckBox c_Enemy_IncludeSummons;
         private Label label46;
         private Label label29;
+        private Button b_SelectAll;
     }
 }

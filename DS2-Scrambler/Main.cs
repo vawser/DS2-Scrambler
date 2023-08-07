@@ -21,7 +21,7 @@ namespace DS2_Scrambler
         // Interface
         private Progress<string> ProgressText;
 
-        public CoreScramblerData scramblerData;
+        public ScramblerData scramblerData;
         public Regulation reg;
 
         public Main()
@@ -85,7 +85,7 @@ namespace DS2_Scrambler
             {
                 progress.Report("Params loaded.");
 
-                scramblerData = new CoreScramblerData(reg, Path_ScrambledMod);
+                scramblerData = new ScramblerData(reg, Path_ScrambledMod);
                 progress.Report("Scrambler data built.");
 
                 // Scramble
@@ -383,7 +383,7 @@ namespace DS2_Scrambler
             c_Things_Betwixt.Checked = state;
         }
 
-        private void ToggleCheckboxes(bool state)
+        private void ToggleCheckboxes(bool state, bool includeTweaks = true)
         {
             // Item Scrambler
             c_Scramble_Map_Loot.Checked = state;
@@ -397,11 +397,17 @@ namespace DS2_Scrambler
             c_IncludeCovenantTreasure_Treasure_Map.Checked = state;
             c_IncludeCharacterTreasure_Treasure_Map.Checked = state;
 
-            c_IgnoreKeys_Treasure_Map.Checked = state;
-            c_IgnoreTools_Treasure_Map.Checked = state;
+            if(includeTweaks)
+                c_IgnoreKeys_Treasure_Map.Checked = state;
 
-            c_EnsureLifegems.Checked = state;
-            c_RetainShopSpread.Checked = state;
+            if (includeTweaks)
+                c_IgnoreTools_Treasure_Map.Checked = state;
+
+            if (includeTweaks)
+                c_EnsureLifegems.Checked = state;
+
+            if (includeTweaks)
+                c_RetainShopSpread.Checked = state;
 
             // Enemy Scrambler
             c_Scramble_Enemy_Location.Checked = state;
@@ -437,7 +443,8 @@ namespace DS2_Scrambler
             c_Majula.Checked = state;
             c_Things_Betwixt.Checked = state;
 
-            c_EnemyShareAggro.Checked = state;
+            if (includeTweaks)
+                c_EnemyShareAggro.Checked = state;
 
             // Weapon Attributes
             c_ItemParam_Weapon_Price.Checked = state;
@@ -453,7 +460,9 @@ namespace DS2_Scrambler
             c_WeaponTypeParam_BowDistance.Checked = state;
             c_ArrowParam_AmmoDamage.Checked = state;
             c_WeaponActionCategoryParam_Moveset.Checked = state;
-            c_Tweak_WeaponParam_RemoveStatRequirements.Checked = state;
+
+            if (includeTweaks)
+                c_Tweak_WeaponParam_RemoveStatRequirements.Checked = state;
 
             // Armor Attributes
             c_ItemParam_Armor_Price.Checked = state;
@@ -464,7 +473,9 @@ namespace DS2_Scrambler
             c_ArmorParam_StatRequirements.Checked = state;
             c_ArmorParam_Poise.Checked = state;
             c_ArmorReinforceParam_Absorption.Checked = state;
-            c_Tweak_ArmorParam_RemoveStatRequirements.Checked = state;
+
+            if (includeTweaks)
+                c_Tweak_ArmorParam_RemoveStatRequirements.Checked = state;
 
             // Ring Attributes
             c_ItemParam_Ring_Price.Checked = state;
@@ -487,7 +498,9 @@ namespace DS2_Scrambler
             c_SpellParam_CastSpeed.Checked = state;
             c_SpellParam_SlotsUsed.Checked = state;
             c_SpellParam_Casts.Checked = state;
-            c_Tweak_SpellParam_RemoveStatRequirements.Checked = state;
+
+            if (includeTweaks)
+                c_Tweak_SpellParam_RemoveStatRequirements.Checked = state;
 
             // Bullet
             c_Bullet_IncludePlayer.Checked = state;
@@ -502,6 +515,7 @@ namespace DS2_Scrambler
             c_Bullet_Duration.Checked = state;
             c_Bullet_Tracking.Checked = state;
             c_Bullet_Effect.Checked = state;
+            c_Bullet_Count.Checked = state;
 
             // Player
             c_PlayerStatusParam_StartingAttributes.Checked = state;
@@ -522,8 +536,11 @@ namespace DS2_Scrambler
             c_ChrMoveParam_Turn.Checked = state;
             c_ChrMoveParam_Evasion.Checked = state;
 
-            c_Tweak_AnyEquipmentForStartingEquipment.Checked = state;
-            c_Tweak_BigJumpMode.Checked = state;
+            if (includeTweaks)
+                c_Tweak_AnyEquipmentForStartingEquipment.Checked = state;
+
+            if (includeTweaks)
+                c_Tweak_BigJumpMode.Checked = state;
 
             // Map
             c_TreasureBoxParam_TrappedChests.Checked = state;
@@ -575,6 +592,11 @@ namespace DS2_Scrambler
         private void tabPage3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ToggleCheckboxes(true, false);
         }
     }
 }

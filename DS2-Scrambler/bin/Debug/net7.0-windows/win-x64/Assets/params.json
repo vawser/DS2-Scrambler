@@ -1,0 +1,192 @@
+{
+    // These definitions are used during the generation of new values .
+    // Min is the minimum value it can generate.
+    // Max is the maximum value it can generate.
+    
+    // Weapons Tab
+    "WeaponParamData": {
+        // Price
+        "Base_Price_Min": 10,
+        "Base_Price_Max": 10000,
+        "Sell_Price_Min": 10,
+        "Sell_Price_Max": 10000,
+        
+        // Weight
+        "Weight_Min": 0.1,
+        "Weight_Max": 30,
+        
+        // Durability
+        "Durability_Min": 10,
+        "Durability_Max": 300,
+        
+        // Animation Speed
+        "Animation_Speed_Min": 0.2,
+        "Animation_Speed_Max": 1.5,
+        
+        // Stat Requirements
+        "STR_Requirement_Min": 0,
+        "STR_Requirement_Max": 40,
+        "DEX_Requirement_Min": 0,
+        "DEX_Requirement_Max": 40,
+        "INT_Requirement_Min": 0,
+        "INT_Requirement_Max": 40,
+        "FTH_Requirement_Min": 0,
+        "FTH_Requirement_Max": 40,
+        
+        // Weapon Damage
+        "Stamina_Damage_Min": 100,
+        "Stamina_Damage_Max": 1000,
+        "Damage_Multiplier_Min": 0.5,
+        "Damage_Multiplier_Max": 2.0,
+        "Stamina_Damage_Multiplier_Min": 0.5,
+        "Stamina_Damage_Multiplier_Max": 2.0,
+        "Durability_Damage_Multiplier_Min": 0.5,
+        "Durability_Damage_Multiplier_Max": 2.0,
+        "Status_Inflict_Multiplier_Min": 0.5,
+        "Status_Inflict_Multiplier_Max": 2.0,
+        "Posture_Damage_Multiplier_Min": 0.5,
+        "Posture_Damage_Multiplier_Max": 2.0,
+        "Counter_Damage_Multiplier_Min": 0.5,
+        "Counter_Damage_Multiplier_Max": 2.0,
+        
+        // Weapon Reinforcement
+        "Physical_Damage_Min": 20,
+        "Physical_Damage_Max": 200,
+        "Magic_Damage_Min": 20,
+        "Magic_Damage_Max": 200,
+        "Lightning_Damage_Min": 20,
+        "Lightning_Damage_Max": 200,
+        "Fire_Damage_Min": 20,
+        "Fire_Damage_Max": 200,
+        "Dark_Damage_Min": 20,
+        "Dark_Damage_Max": 200,
+        "Poison_Damage_Min": 200,
+        "Poison_Damage_Max": 1000,
+        "Bleed_Damage_Min": 200,
+        "Bleed_Damage_Max": 1000,
+        
+        "Damage_Growth_Min": 1.2,
+        "Damage_Growth_Max": 2.5,
+        
+        "Shield_Stability_Min": 10,
+        "Shield_Stability_Max": 100,
+        "Shield_Stability_Growth_Min": 1.05,
+        "Shield_Stability_Growth_Max": 1.2,
+        
+        "Physical_Absorption_Min": 10,
+        "Physical_Absorption_Max": 100,
+        "Magic_Absorption_Min": 10,
+        "Magic_Absorption_Max": 100,
+        "Lightning_Absorption_Min": 10,
+        "Lightning_Absorption_Max": 100,
+        "Fire_Absorption_Min": 10,
+        "Fire_Absorption_Max": 100,
+        "Dark_Absorption_Min": 10,
+        "Dark_Absorption_Max": 100,
+        "Poison_Absorption_Min": 10,
+        "Poison_Absorption_Max": 100,
+        "Bleed_Absorption_Min": 10,
+        "Bleed_Absorption_Max": 100,
+        "Curse_Absorption_Min": 10,
+        "Curse_Absorption_Max": 100,
+        "Petrify_Absorption_Min": 10,
+        "Petrify_Absorption_Max": 100,
+        
+        "Shield_Absorption_Factor": 1.2,
+        
+        // Stamina Consumption
+        "Stamina_Consumption_Min": 100,
+        "Stamina_Consumption_Max": 1000,
+        
+        // Cast Speed
+        "Cast_Speed_Min": 0.5,
+        "Cast_Speed_Max": 2.0,
+        
+        // Bow Distance
+        "Bow_Distance_Min": 10,
+        "Bow_Distance_Max": 80,
+        
+        // Ammo Damage
+        "Arrow_Physical_Damage_Min": 10,
+        "Arrow_Physical_Damage_Max": 200,
+        "Arrow_Magic_Damage_Min": 10,
+        "Arrow_Magic_Damage_Max": 200,
+        "Arrow_Lightning_Damage_Min": 10,
+        "Arrow_Lightning_Damage_Max": 200,
+        "Arrow_Fire_Damage_Min": 10,
+        "Arrow_Fire_Damage_Max": 200,
+        "Arrow_Dark_Damage_Min": 10,
+        "Arrow_Dark_Damage_Max": 200,
+        "Arrow_Poison_Damage_Min": 10,
+        "Arrow_Poison_Damage_Max": 200,
+        "Arrow_Bleed_Damage_Min": 10,
+        "Arrow_Bleed_Damage_Max": 200
+    },
+    
+    // Armor Tab
+    "ArmorParamData": {
+        // Price
+        "Base_Price_Min": 10,
+        "Base_Price_Max": 10000,
+        "Sell_Price_Min": 10,
+        "Sell_Price_Max": 10000,
+        
+        // Weight
+        "Weight_Min": 10,
+        "Weight_Max": 10000,
+        
+        // Durability
+        "Durability_Min": 10,
+        "Durability_Max": 300,
+        
+        // Stat Requirements
+        "STR_Requirement_Min": 0,
+        "STR_Requirement_Max": 40,
+        "DEX_Requirement_Min": 0,
+        "DEX_Requirement_Max": 40,
+        "INT_Requirement_Min": 0,
+        "INT_Requirement_Max": 40,
+        "FTH_Requirement_Min": 0,
+        "FTH_Requirement_Max": 40,
+    },
+    
+    // Ring Tab
+    "RingParamData": {
+        "ID": 60470000
+    },
+    
+    // Item Tab
+    "ItemParamData": {
+        "ID": 60470000
+    },
+    
+    // Spell Tab
+    "SpellParamData": {
+        "ID": 60470000
+    },
+    
+    // Projectile Tab
+    "ProjectileParamData": {
+        "ID": 60470000
+    },
+    
+    // Player Tab
+    "PlayerParamData": {
+        "ID": 60470000
+    },
+    
+    // Map Tab
+    "MapParamData": {
+        "ID": 60470000
+    },
+    
+    // Character Tab
+    "CharacterParamData": {
+        "ID": 60470000
+    },
+    
+    // Enemy Tab
+    "EnemyParamData": {
+        "ID": 60470000
+    },
+}
