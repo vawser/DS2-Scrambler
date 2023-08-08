@@ -1110,7 +1110,7 @@ namespace DS2_Scrambler
     }
     public class ParamData_Map
     {
-
+        public int Trapped_Chest_Chance { get; set; }
     }
     public class ParamData_Character
     {
@@ -1118,7 +1118,185 @@ namespace DS2_Scrambler
     }
     public class ParamData_Enemy
     {
+        public float AI_Sight_Distance_Min { get; set; }
+        public float AI_Sight_Distance_Max { get; set; }
+        public float AI_Detect_Distance_Min { get; set; }
+        public float AI_Detect_Distance_Max { get; set; }
+        public float Vision_Cone_Horizontal_Angle_Min { get; set; }
+        public float Vision_Cone_Horizontal_Angle_Max { get; set; }
+        public float Vision_Cone_Vertical_Angle_Min { get; set; }
+        public float Vision_Cone_Vertical_Angle_Max { get; set; }
 
+        public int Boss_HP_Min { get; set; }
+        public int Boss_HP_Max { get; set; }
+        public int Enemy_HP_Min { get; set; }
+        public int Enemy_HP_Max { get; set; }
+
+        public int Boss_Souls_Min { get; set; }
+        public int Boss_Souls_Max { get; set; }
+        public int Enemy_Souls_Min { get; set; }
+        public int Enemy_Souls_Max { get; set; }
+
+        public float Stamina_Min { get; set; }
+        public float Stamina_Max { get; set; }
+        public float Stamina_Regen_Min { get; set; }
+        public float Stamina_Regen_Max { get; set; }
+
+        public int Physical_Defence_Min { get; set; }
+        public int Physical_Defence_Max { get; set; }
+        public int Magic_Defence_Min { get; set; }
+        public int Magic_Defence_Max { get; set; }
+        public int Lightning_Defence_Min { get; set; }
+        public int Lightning_Defence_Max { get; set; }
+        public int Fire_Defence_Min { get; set; }
+        public int Fire_Defence_Max { get; set; }
+        public int Dark_Defence_Min { get; set; }
+        public int Dark_Defence_Max { get; set; }
+        public int Poison_Defence_Min { get; set; }
+        public int Poison_Defence_Max { get; set; }
+        public int Bleed_Defence_Min { get; set; }
+        public int Bleed_Defence_Max { get; set; }
+        public int Curse_Defence_Min { get; set; }
+        public int Curse_Defence_Max { get; set; }
+        public int Petrify_Defence_Min { get; set; }
+        public int Petrify_Defence_Max { get; set; }
+
+
+        public int Shield_Stability_Min { get; set; }
+        public int Shield_Stability_Max { get; set; }
+        public int Shield_Physical_Defence_Min { get; set; }
+        public int Shield_Physical_Defence_Max { get; set; }
+        public int Shield_Magic_Defence_Min { get; set; }
+        public int Shield_Magic_Defence_Max { get; set; }
+        public int Shield_Lightning_Defence_Min { get; set; }
+        public int Shield_Lightning_Defence_Max { get; set; }
+        public int Shield_Fire_Defence_Min { get; set; }
+        public int Shield_Fire_Defence_Max { get; set; }
+        public int Shield_Dark_Defence_Min { get; set; }
+        public int Shield_Dark_Defence_Max { get; set; }
+        public int Shield_Poison_Defence_Min { get; set; }
+        public int Shield_Poison_Defence_Max { get; set; }
+        public int Shield_Bleed_Defence_Min { get; set; }
+        public int Shield_Bleed_Defence_Max { get; set; }
+        public int Shield_Curse_Defence_Min { get; set; }
+        public int Shield_Curse_Defence_Max { get; set; }
+        public int Shield_Petrify_Defence_Min { get; set; }
+        public int Shield_Petrify_Defence_Max { get; set; }
+
+        public float Poise_Min { get; set; }
+        public float Poise_Max { get; set; }
+        public float Poise_Regen_Min { get; set; }
+        public float Poise_Regen_Max { get; set; }
+
+        public int Damage_A_Min { get; set; }
+        public int Damage_A_Max { get; set; }
+        public int Damage_B_Min { get; set; }
+        public int Damage_B_Max { get; set; }
+        public int Damage_C_Min { get; set; }
+        public int Damage_C_Max { get; set; }
+        public int Damage_B_Apply_Chance { get; set; }
+        public int Damage_C_Apply_Chance { get; set; }
+        public ushort Stamina_Damage_Min { get; set; }
+        public ushort Stamina_Damage_Max { get; set; }
+
+        public float Knockback_Amount_Min { get; set; }
+        public float Knockback_Amount_Max { get; set; }
+        public float Knockback_Speed_Min { get; set; }
+        public float Knockback_Speed_Max { get; set; }
+
+        public float Attack_Speed_Min { get; set; }
+        public float Attack_Speed_Max { get; set; }
+        public float Recovery_Speed_Min { get; set; }
+        public float Recovery_Speed_Max { get; set; }
+
+        public float Walk_Acceleration_Min { get; set; }
+        public float Walk_Acceleration_Max { get; set; }
+        public float Walk_Speed_Min { get; set; }
+        public float Walk_Speed_Max { get; set; }
+        public float Walk_Deceleration_Min { get; set; }
+        public float Walk_Deceleration_Max { get; set; }
+        public float Walk_LockOn_Acceleration_Min { get; set; }
+        public float Walk_LockOn_Acceleration_Max { get; set; }
+        public float Walk_LockOn_Speed_Min { get; set; }
+        public float Walk_LockOn_Speed_Max { get; set; }
+        public float Walk_LockOn_Deceleration_Min { get; set; }
+        public float Walk_LockOn_Deceleration_Max { get; set; }
+        public float Run_Acceleration_Min { get; set; }
+        public float Run_Acceleration_Max { get; set; }
+        public float Run_Speed_Min { get; set; }
+        public float Run_Speed_Max { get; set; }
+        public float Run_Deceleration_Min { get; set; }
+        public float Run_Deceleration_Max { get; set; }
+        public float Run_LockOn_Acceleration_Min { get; set; }
+        public float Run_LockOn_Acceleration_Max { get; set; }
+        public float Run_LockOn_Speed_Min { get; set; }
+        public float Run_LockOn_Speed_Max { get; set; }
+        public float Run_LockOn_Deceleration_Min { get; set; }
+        public float Run_LockOn_Deceleration_Max { get; set; }
+        public float Jump_Height_Min { get; set; }
+        public float Jump_Height_Max { get; set; }
+        public float Jump_Unk51_Min { get; set; }
+        public float Jump_Unk51_Max { get; set; }
+        public float Jump_Unk52_Min { get; set; }
+        public float Jump_Unk52_Max { get; set; }
+        public float Jump_Length_Minimum_Min { get; set; }
+        public float Jump_Length_Minimum_Max { get; set; }
+        public float Jump_Length_Maximum_Multiplier_Min { get; set; }
+        public float Jump_Length_Maximum_Multiplier_Max { get; set; }
+        public float Jump_Unk53_Min { get; set; }
+        public float Jump_Unk53_Max { get; set; }
+        public float Jump_Unk54_Min { get; set; }
+        public float Jump_Unk54_Max { get; set; }
+        public float Jump_Gravity_Minimum_Min { get; set; }
+        public float Jump_Gravity_Minimum_Max { get; set; }
+        public float Jump_Gravity_Maximum_Min { get; set; }
+        public float Jump_Gravity_Maximum_Max { get; set; }
+        public float Jump_Unk55_Min { get; set; }
+        public float Jump_Unk55_Max { get; set; }
+        public float Jump_Unk56_Min { get; set; }
+        public float Jump_Unk56_Max { get; set; }
+        public float Jump_Unk57_Min { get; set; }
+        public float Jump_Unk57_Max { get; set; }
+        public float Climb_Ladder_Speed_Min { get; set; }
+        public float Climb_Ladder_Speed_Max { get; set; }
+        public float Climb_Ladder_Fast_Speed_Min { get; set; }
+        public float Climb_Ladder_Fast_Speed_Max { get; set; }
+        public float Climb_Ladder_Slide_Speed_Min { get; set; }
+        public float Climb_Ladder_Slide_Speed_Max { get; set; }
+        public float Climb_Unk107_Min { get; set; }
+        public float Climb_Unk107_Max { get; set; }
+        public float Climb_Unk108_Min { get; set; }
+        public float Climb_Unk108_Max { get; set; }
+        public float Slow_Walk_Turn_Rate_Min { get; set; }
+        public float Slow_Walk_Turn_Rate_Max { get; set; }
+        public float Walk_Turn_Rate_Min { get; set; }
+        public float Walk_Turn_Rate_Max { get; set; }
+        public float Unk08_Turn_Rate_Min { get; set; }
+        public float Unk08_Turn_Rate_Max { get; set; }
+        public float Unk09_Turn_Rate_Min { get; set; }
+        public float Unk09_Turn_Rate_Max { get; set; }
+        public float Unk12_Turn_Rate_Min { get; set; }
+        public float Unk12_Turn_Rate_Max { get; set; }
+        public float Unk13_Turn_Rate_Min { get; set; }
+        public float Unk13_Turn_Rate_Max { get; set; }
+        public float Unk14_Turn_Rate_Min { get; set; }
+        public float Unk14_Turn_Rate_Max { get; set; }
+        public float Unk15_Turn_Rate_Min { get; set; }
+        public float Unk15_Turn_Rate_Max { get; set; }
+        public float Walk_LockOn_Turn_Rate_Min { get; set; }
+        public float Walk_LockOn_Turn_Rate_Max { get; set; }
+        public float Backstep_Speed_Min { get; set; }
+        public float Backstep_Speed_Max { get; set; }
+        public float Backstep_Distance_Min { get; set; }
+        public float Backstep_Distance_Max { get; set; }
+        public float Roll_Speed_Min { get; set; }
+        public float Roll_Speed_Max { get; set; }
+        public float Unk45_Min { get; set; }
+        public float Unk45_Max { get; set; }
+        public float Unk47_Min { get; set; }
+        public float Unk47_Max { get; set; }
+        public float Unk49_Min { get; set; }
+        public float Unk49_Max { get; set; }
     }
 
     public class ScramblerData_Map

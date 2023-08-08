@@ -493,16 +493,209 @@
     
     // Map Tab
     "MapParamData": {
-        "ID": 60470000
+        "Trapped_Chest_Chance": 25
     },
     
     // Character Tab
     "CharacterParamData": {
-        "ID": 60470000
+        
     },
     
     // Enemy Tab
     "EnemyParamData": {
-        "ID": 60470000
-    },
+        // AI
+        "AI_Sight_Distance_Min": 0,
+        "AI_Sight_Distance_Max": 100,
+        "AI_Detect_Distance_Min": 0,
+        "AI_Detect_Distance_Max": 100,
+        "Vision_Cone_Horizontal_Angle_Min": 0,
+        "Vision_Cone_Horizontal_Angle_Max": 3.142,
+        "Vision_Cone_Vertical_Angle_Min": 0,
+        "Vision_Cone_Vertical_Angle_Max": 3.142,
+        
+        // HP
+        "Boss_HP_Min": 1000,
+        "Boss_HP_Max": 10000,
+        "Enemy_HP_Min": 200,
+        "Enemy_HP_Max": 2000,
+        
+        // Souls
+        "Boss_Souls_Min": 2000,
+        "Boss_Souls_Max": 100000,
+        "Enemy_Souls_Min": 50,
+        "Enemy_Souls_Max": 3000,
+        
+        // Stamina
+        "Stamina_Min": 500,
+        "Stamina_Max": 5000,
+        "Stamina_Regen_Min": 50,
+        "Stamina_Regen_Max": 300,
+        
+        // Defence
+        "Physical_Defence_Min": 100,
+        "Physical_Defence_Max": 1000,
+        "Magic_Defence_Min": 0,
+        "Magic_Defence_Max": 100,
+        "Lightning_Defence_Min": 0,
+        "Lightning_Defence_Max": 100,
+        "Fire_Defence_Min": 0,
+        "Fire_Defence_Max": 100,
+        "Dark_Defence_Min": 0,
+        "Dark_Defence_Max": 100,
+        "Poison_Defence_Min": 0,
+        "Poison_Defence_Max": 100,
+        "Bleed_Defence_Min": 0,
+        "Bleed_Defence_Max": 100,
+        "Curse_Defence_Min": 0,
+        "Curse_Defence_Max": 100,
+        "Petrify_Defence_Min": 0,
+        "Petrify_Defence_Max": 100,
+        
+        // Shield Defence
+        "Shield_Stability_Min": 0,
+        "Shield_Stability_Max": 100,
+        "Shield_Physical_Defence_Min": 0,
+        "Shield_Physical_Defence_Max": 100,
+        "Shield_Magic_Defence_Min": 0,
+        "Shield_Magic_Defence_Max": 100,
+        "Shield_Lightning_Defence_Min": 0,
+        "Shield_Lightning_Defence_Max": 100,
+        "Shield_Fire_Defence_Min": 0,
+        "Shield_Fire_Defence_Max": 100,
+        "Shield_Dark_Defence_Min": 0,
+        "Shield_Dark_Defence_Max": 100,
+        "Shield_Poison_Defence_Min": 0,
+        "Shield_Poison_Defence_Max": 100,
+        "Shield_Bleed_Defence_Min": 0,
+        "Shield_Bleed_Defence_Max": 100,
+        "Shield_Curse_Defence_Min": 0,
+        "Shield_Curse_Defence_Max": 100,
+        "Shield_Petrify_Defence_Min": 0,
+        "Shield_Petrify_Defence_Max": 100,
+        
+        // Poise
+        "Poise_Min": 0,
+        "Poise_Max": 100,
+        "Poise_Regen_Min": 0,
+        "Poise_Regen_Max": 2,
+        
+        // Damage
+        "Damage_A_Min": 10,
+        "Damage_A_Max": 500,
+        "Damage_B_Apply_Chance": 25,
+        "Damage_B_Min": 0,
+        "Damage_B_Max": 500,
+        "Damage_C_Apply_Chance": 25,
+        "Damage_C_Min": 0,
+        "Damage_C_Max": 500,
+        "Stamina_Damage_Min": 100,
+        "Stamina_Damage_Max": 3000,
+        
+        // Knockback
+        "Knockback_Amount_Min": 0,
+        "Knockback_Amount_Max": 10,
+        "Knockback_Speed_Min": 0,
+        "Knockback_Speed_Max": 5,
+        
+        // Attack Speed
+        "Attack_Speed_Min": 0.5,
+        "Attack_Speed_Max": 2.0,
+        "Recovery_Speed_Min": 0.5,
+        "Recovery_Speed_Max": 2.0,
+        
+        // Movement
+        "Walk_Acceleration_Min": 0,
+        "Walk_Acceleration_Max": 30,
+        "Walk_Speed_Min": 0,
+        "Walk_Speed_Max": 10,
+        "Walk_Deceleration_Min": 0,
+        "Walk_Deceleration_Max": 30,
+        "Walk_LockOn_Acceleration_Min": 0,
+        "Walk_LockOn_Acceleration_Max": 30,
+        "Walk_LockOn_Speed_Min": 0,
+        "Walk_LockOn_Speed_Max": 10,
+        "Walk_LockOn_Deceleration_Min": 0,
+        "Walk_LockOn_Deceleration_Max": 30,
+        
+        "Run_Acceleration_Min": 0,
+        "Run_Acceleration_Max": 30,
+        "Run_Speed_Min": 0,
+        "Run_Speed_Max": 10,
+        "Run_Deceleration_Min": 0,
+        "Run_Deceleration_Max": 30,
+        "Run_LockOn_Acceleration_Min": 0,
+        "Run_LockOn_Acceleration_Max": 30,
+        "Run_LockOn_Speed_Min": 0,
+        "Run_LockOn_Speed_Max": 10,
+        "Run_LockOn_Deceleration_Min": 0,
+        "Run_LockOn_Deceleration_Max": 30,
+        
+        "Jump_Height_Min": 0,
+        "Jump_Height_Max": 24,
+        "Jump_Unk51_Min": 0,
+        "Jump_Unk51_Max": 40,
+        "Jump_Unk52_Min": 0,
+        "Jump_Unk52_Max": 40,
+        "Jump_Length_Minimum_Min": 0,
+        "Jump_Length_Minimum_Max": 20,
+        "Jump_Length_Maximum_Multiplier_Min": 1,
+        "Jump_Length_Maximum_Multiplier_Max": 2,
+        "Jump_Unk53_Min": 0,
+        "Jump_Unk53_Max": 10,
+        "Jump_Unk54_Min": 0,
+        "Jump_Unk54_Max": 10,
+        "Jump_Gravity_Minimum_Min": 0,
+        "Jump_Gravity_Minimum_Max": 8,
+        "Jump_Gravity_Maximum_Min": 0,
+        "Jump_Gravity_Maximum_Max": 8,
+        "Jump_Unk55_Min": 0,
+        "Jump_Unk55_Max": 8,
+        "Jump_Unk56_Min": 0,
+        "Jump_Unk56_Max": 8,
+        "Jump_Unk57_Min": 0,
+        "Jump_Unk57_Max": 8,
+        
+        "Climb_Ladder_Speed_Min": 0,
+        "Climb_Ladder_Speed_Max": 5,
+        "Climb_Ladder_Fast_Speed_Min": 0,
+        "Climb_Ladder_Fast_Speed_Max": 5,
+        "Climb_Ladder_Slide_Speed_Min": 0,
+        "Climb_Ladder_Slide_Speed_Max": 5,
+        "Climb_Unk107_Min": 0,
+        "Climb_Unk107_Max": 30,
+        "Climb_Unk108_Min": 0,
+        "Climb_Unk108_Max": 30,
+        
+        "Slow_Walk_Turn_Rate_Min": 0,
+        "Slow_Walk_Turn_Rate_Max": 10,
+        "Walk_Turn_Rate_Min": 0,
+        "Walk_Turn_Rate_Max": 10,
+        "Unk08_Turn_Rate_Min": 0,
+        "Unk08_Turn_Rate_Max": 10,
+        "Unk09_Turn_Rate_Min": 0,
+        "Unk09_Turn_Rate_Max": 10,
+        "Unk12_Turn_Rate_Min": 0,
+        "Unk12_Turn_Rate_Max": 10,
+        "Unk13_Turn_Rate_Min": 0,
+        "Unk13_Turn_Rate_Max": 10,
+        "Unk14_Turn_Rate_Min": 0,
+        "Unk14_Turn_Rate_Max": 10,
+        "Unk15_Turn_Rate_Min": 0,
+        "Unk15_Turn_Rate_Max": 10,
+        "Walk_LockOn_Turn_Rate_Min": 0,
+        "Walk_LockOn_Turn_Rate_Max": 10,
+        
+        "Backstep_Speed_Min": 0,
+        "Backstep_Speed_Max": 30,
+        "Backstep_Distance_Min": 0,
+        "Backstep_Distance_Max": 10,
+        "Roll_Speed_Min": 0,
+        "Roll_Speed_Max": 30,
+        "Unk45_Min": 0,
+        "Unk45_Max": 10,
+        "Unk47_Min": 0,
+        "Unk47_Max": 10,
+        "Unk49_Min": 0,
+        "Unk49_Max": 10
+    }
 }

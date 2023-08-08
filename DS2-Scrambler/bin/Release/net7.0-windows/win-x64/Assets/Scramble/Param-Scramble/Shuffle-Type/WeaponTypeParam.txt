@@ -1,7 +1,0 @@
-left_hand_damage_mult
-right_hand_damage_mult
-counter_damage
-bow_distance
-guard_stamina_regen
-cast_speed
-mundane_scaling_mult

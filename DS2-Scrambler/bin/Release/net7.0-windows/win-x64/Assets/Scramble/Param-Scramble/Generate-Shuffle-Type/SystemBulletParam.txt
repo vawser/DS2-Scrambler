@@ -1,7 +1,0 @@
-sfx_id
-hit_sfx_id
-expire_sfx_id
-child_bullet_1_bullet_id
-child_bullet_2_bullet_id
-child_bullet_3_bullet_id
-speffect_on_shoot

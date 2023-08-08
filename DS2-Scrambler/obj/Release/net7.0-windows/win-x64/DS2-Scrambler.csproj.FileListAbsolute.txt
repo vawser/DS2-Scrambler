@@ -24,3 +24,4 @@ C:\Users\Xylozi\Documents\C# Projects\DS2-Scrambler\DS2-Scrambler\obj\Release\ne
 C:\Users\Xylozi\Documents\C# Projects\DS2-Scrambler\DS2-Scrambler\obj\Release\net7.0-windows\win-x64\DS2-Scrambler.pdb
 C:\Users\Xylozi\Documents\C# Projects\DS2-Scrambler\DS2-Scrambler\obj\Release\net7.0-windows\win-x64\DS2-Scrambler.genruntimeconfig.cache
 C:\Users\Xylozi\Documents\C# Projects\DS2-Scrambler\DS2-Scrambler\obj\Release\net7.0-windows\win-x64\ref\DS2-Scrambler.dll
+C:\Users\Xylozi\Documents\C# Projects\DS2-Scrambler\DS2-Scrambler\obj\Release\net7.0-windows\win-x64\DS2_Scrambler.Properties.Resources.resources

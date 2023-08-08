@@ -1,7 +1,0 @@
-left_hand_damage_mult;0.8;1.5;RANDOM
-right_hand_damage_mult;0.8;1.5;RANDOM
-counter_damage;0.8;1.5;RANDOM
-bow_distance;0;100;RANDOM
-guard_stamina_regen;0.05;0.25;RANDOM
-cast_speed;0.5;2.0;RANDOM
-mundane_scaling_mult;50;200;RANDOM

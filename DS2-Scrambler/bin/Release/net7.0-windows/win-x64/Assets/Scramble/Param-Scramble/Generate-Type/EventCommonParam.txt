@@ -1,1 +1,0 @@
-event_value;10000;1000000;RANDOM

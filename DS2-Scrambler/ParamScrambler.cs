@@ -1310,12 +1310,12 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["run_speed"].Value = GetRandomFloat(0, 10);
-                    row["run_acceleration"].Value = GetRandomFloat(0, 30);
-                    row["run_to_walk_deceleration"].Value = GetRandomFloat(0, 30);
-                    row["lock_on_run_speed"].Value = GetRandomFloat(0, 10);
-                    row["lock_on_run_acceleration"].Value = GetRandomFloat(0, 30);
-                    row["lock_on_run_to_walk_deceleration"].Value = GetRandomFloat(0, 30);
+                    row["run_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Run_Speed_Min, ScramblerData_Params.Static.PlayerParamData.Run_Speed_Max);
+                    row["run_acceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Run_Acceleration_Min, ScramblerData_Params.Static.PlayerParamData.Run_Acceleration_Max);
+                    row["run_to_walk_deceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Run_Deceleration_Min, ScramblerData_Params.Static.PlayerParamData.Run_Deceleration_Max);
+                    row["lock_on_run_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Run_LockOn_Speed_Min, ScramblerData_Params.Static.PlayerParamData.Run_LockOn_Speed_Max);
+                    row["lock_on_run_acceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Run_LockOn_Acceleration_Min, ScramblerData_Params.Static.PlayerParamData.Run_LockOn_Acceleration_Max);
+                    row["lock_on_run_to_walk_deceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Run_LockOn_Deceleration_Min, ScramblerData_Params.Static.PlayerParamData.Run_LockOn_Deceleration_Max);
                 }
             }
             if (c_ChrMoveParam_Jump)
@@ -1324,18 +1324,18 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["jump_height"].Value = GetRandomFloat(0, 24);
-                    row["Unk51"].Value = GetRandomFloat(0, 40);
-                    row["Unk52"].Value = GetRandomFloat(0, 40);
-                    row["jump_length_min"].Value = GetRandomFloat(0, 20);
-                    row["jump_length_max"].Value = ((float)row["jump_length_min"].Value * GetRandomFloat(1, 2));
-                    row["Unk53"].Value = GetRandomFloat(0, 10);
-                    row["Unk54"].Value = GetRandomFloat(0, 10);
-                    row["jump_gravity_min"].Value = GetRandomFloat(0, 8);
-                    row["jump_gravity_max"].Value = GetRandomFloat(0, 8);
-                    row["Unk55"].Value = GetRandomFloat(0, 8);
-                    row["Unk56"].Value = GetRandomFloat(0, 8);
-                    row["Unk57"].Value = GetRandomFloat(0, 8);
+                    row["jump_height"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Height_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Height_Max);
+                    row["Unk51"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Unk51_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Unk51_Max);
+                    row["Unk52"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Unk52_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Unk52_Max);
+                    row["jump_length_min"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Length_Minimum_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Length_Minimum_Max);
+                    row["jump_length_max"].Value = ((float)row["jump_length_min"].Value * GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Length_Maximum_Multiplier_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Length_Maximum_Multiplier_Max));
+                    row["Unk53"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Unk53_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Unk53_Max);
+                    row["Unk54"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Unk54_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Unk54_Max);
+                    row["jump_gravity_min"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Gravity_Minimum_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Gravity_Minimum_Max);
+                    row["jump_gravity_max"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Gravity_Maximum_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Gravity_Maximum_Max);
+                    row["Unk55"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Unk55_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Unk55_Max);
+                    row["Unk56"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Unk56_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Unk56_Max);
+                    row["Unk57"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Jump_Unk57_Min, ScramblerData_Params.Static.PlayerParamData.Jump_Unk57_Max);
 
                     // Adjust these so the player doesn't just die when they jump high
                     row["fall_distance_breakpoint_1"].Value = ((float)row["jump_height"].Value * 1.2);
@@ -1350,11 +1350,11 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["ladder_climb_speed"].Value = GetRandomFloat(0, 5);
-                    row["ladder_fast_climb_speed"].Value = GetRandomFloat(0, 5);
-                    row["ladder_slide_speed"].Value = GetRandomFloat(0, 5);
-                    row["Unk107"].Value = GetRandomFloat(0, 30);
-                    row["Unk108"].Value = GetRandomFloat(0, 30);
+                    row["ladder_climb_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Climb_Ladder_Speed_Min, ScramblerData_Params.Static.PlayerParamData.Climb_Ladder_Speed_Max);
+                    row["ladder_fast_climb_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Climb_Ladder_Fast_Speed_Min, ScramblerData_Params.Static.PlayerParamData.Climb_Ladder_Fast_Speed_Max);
+                    row["ladder_slide_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Climb_Ladder_Slide_Speed_Min, ScramblerData_Params.Static.PlayerParamData.Climb_Ladder_Slide_Speed_Max);
+                    row["Unk107"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Climb_Unk107_Min, ScramblerData_Params.Static.PlayerParamData.Climb_Unk107_Max);
+                    row["Unk108"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Climb_Unk108_Min, ScramblerData_Params.Static.PlayerParamData.Climb_Unk108_Max);
                 }
             }
             if (c_ChrMoveParam_Turn)
@@ -1363,15 +1363,15 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["slow_walk_turn_rate"].Value = GetRandomFloat(0, 10);
-                    row["walk_turn_rate"].Value = GetRandomFloat(0, 10);
-                    row["Unk08"].Value = GetRandomFloat(0, 10);
-                    row["Unk09"].Value = GetRandomFloat(0, 10);
-                    row["Unk12"].Value = GetRandomFloat(0, 10);
-                    row["Unk13"].Value = GetRandomFloat(0, 10);
-                    row["Unk14"].Value = GetRandomFloat(0, 10);
-                    row["Unk15"].Value = GetRandomFloat(0, 10);
-                    row["lock_on_walk_turn_rate"].Value = GetRandomFloat(0, 10);
+                    row["slow_walk_turn_rate"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Slow_Walk_Turn_Rate_Min, ScramblerData_Params.Static.PlayerParamData.Slow_Walk_Turn_Rate_Max);
+                    row["walk_turn_rate"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Walk_Turn_Rate_Min, ScramblerData_Params.Static.PlayerParamData.Walk_Turn_Rate_Max);
+                    row["Unk08"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Unk08_Turn_Rate_Min, ScramblerData_Params.Static.PlayerParamData.Unk08_Turn_Rate_Max);
+                    row["Unk09"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Unk09_Turn_Rate_Min, ScramblerData_Params.Static.PlayerParamData.Unk09_Turn_Rate_Max);
+                    row["Unk12"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Unk12_Turn_Rate_Min, ScramblerData_Params.Static.PlayerParamData.Unk12_Turn_Rate_Max);
+                    row["Unk13"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Unk13_Turn_Rate_Min, ScramblerData_Params.Static.PlayerParamData.Unk13_Turn_Rate_Max);
+                    row["Unk14"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Unk14_Turn_Rate_Min, ScramblerData_Params.Static.PlayerParamData.Unk14_Turn_Rate_Max);
+                    row["Unk15"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Unk15_Turn_Rate_Min, ScramblerData_Params.Static.PlayerParamData.Unk15_Turn_Rate_Max);
+                    row["lock_on_walk_turn_rate"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Walk_LockOn_Turn_Rate_Min, ScramblerData_Params.Static.PlayerParamData.Walk_LockOn_Turn_Rate_Max);
                 }
             }
             if (c_ChrMoveParam_Evasion)
@@ -1380,12 +1380,12 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["backstep_speed"].Value = GetRandomFloat(0, 30);
-                    row["backstep_distance"].Value = GetRandomFloat(0, 10);
-                    row["roll_speed"].Value = GetRandomFloat(0, 30);
-                    row["Unk45"].Value = GetRandomFloat(0, 10);
-                    row["Unk47"].Value = GetRandomFloat(0, 10);
-                    row["Unk49"].Value = GetRandomFloat(0, 10);
+                    row["backstep_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Backstep_Speed_Min, ScramblerData_Params.Static.PlayerParamData.Backstep_Speed_Max);
+                    row["backstep_distance"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Backstep_Distance_Min, ScramblerData_Params.Static.PlayerParamData.Backstep_Distance_Max);
+                    row["roll_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Roll_Speed_Min, ScramblerData_Params.Static.PlayerParamData.Roll_Speed_Max);
+                    row["Unk45"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Unk45_Min, ScramblerData_Params.Static.PlayerParamData.Unk45_Max);
+                    row["Unk47"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Unk47_Min, ScramblerData_Params.Static.PlayerParamData.Unk47_Max);
+                    row["Unk49"].Value = GetRandomFloat(ScramblerData_Params.Static.PlayerParamData.Unk49_Min, ScramblerData_Params.Static.PlayerParamData.Unk49_Max);
                 }
             }
             if (c_Tweak_BigJumpMode)
@@ -1394,14 +1394,14 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["jump_height"].Value = 12;
-                    row["jump_length_min"].Value = 12;
-                    row["jump_length_max"].Value = 24;
-                    row["jump_gravity_min"].Value = 1.0;
-                    row["jump_gravity_max"].Value = 1.0;
-                    row["Unk55"].Value = 1.0;
-                    row["Unk56"].Value = 1.0;
-                    row["Unk57"].Value = 1.0;
+                    row["jump_height"].Value = ScramblerData_Params.Static.PlayerParamData.BigJump_Jump_Height;
+                    row["jump_length_min"].Value = ScramblerData_Params.Static.PlayerParamData.BigJump_Jump_Length_Minimum;
+                    row["jump_length_max"].Value = ScramblerData_Params.Static.PlayerParamData.BigJump_Jump_Length_Maximum;
+                    row["jump_gravity_min"].Value = ScramblerData_Params.Static.PlayerParamData.BigJumpJump_Gravity_Minimum;
+                    row["jump_gravity_max"].Value = ScramblerData_Params.Static.PlayerParamData.BigJumpJump_Gravity_Maximum;
+                    row["Unk55"].Value = ScramblerData_Params.Static.PlayerParamData.BigJump_Unk55;
+                    row["Unk56"].Value = ScramblerData_Params.Static.PlayerParamData.BigJump_Unk56;
+                    row["Unk57"].Value = ScramblerData_Params.Static.PlayerParamData.BigJump_Unk57;
 
                     // Adjust these so the player doesn't just die when they jump high
                     row["fall_distance_breakpoint_1"].Value = ((float)row["jump_height"].Value * 1.2);
@@ -1943,7 +1943,7 @@ namespace DS2_Scrambler
                         {
                             bool isTrapped = true;
 
-                            if (rand.Next(100) < 50)
+                            if (rand.Next(100) < ScramblerData_Params.Static.MapParamData.Trapped_Chest_Chance)
                                 isTrapped = false;
 
                             foreach (PARAM.Cell cell in row.Cells)
@@ -2151,10 +2151,10 @@ namespace DS2_Scrambler
             {
                 foreach(PARAM.Row row in LogicComParam)
                 {
-                    row["sight_distance"].Value = GetRandomFloat(0, 100);
-                    row["detect_distance"].Value = GetRandomFloat(0, 100);
-                    row["vision_cone_horizontal_angle"].Value = GetRandomFloat(0, 3.142);
-                    row["vision_cone_vertical_angle"].Value = GetRandomFloat(0, 3.142);
+                    row["sight_distance"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.AI_Sight_Distance_Min, ScramblerData_Params.Static.EnemyParamData.AI_Sight_Distance_Max);
+                    row["detect_distance"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.AI_Detect_Distance_Min, ScramblerData_Params.Static.EnemyParamData.AI_Detect_Distance_Max);
+                    row["vision_cone_horizontal_angle"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Vision_Cone_Horizontal_Angle_Min, ScramblerData_Params.Static.EnemyParamData.Vision_Cone_Horizontal_Angle_Max);
+                    row["vision_cone_vertical_angle"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Vision_Cone_Vertical_Angle_Min, ScramblerData_Params.Static.EnemyParamData.Vision_Cone_Vertical_Angle_Max);
                 }
             }
             if (c_EnemyParam_HP)
@@ -2164,12 +2164,12 @@ namespace DS2_Scrambler
                     // Boss
                     if (ScramblerData_Core.Static.Boss_EnemyParamID_List.Contains(row.ID))
                     {
-                        row["stat_hp"].Value = GetRandomInt(1000, 30000);
+                        row["stat_hp"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Boss_HP_Min, ScramblerData_Params.Static.EnemyParamData.Boss_HP_Max);
                     }
                     // Enemy
                     else
                     {
-                        row["stat_hp"].Value = GetRandomInt(200, 5000);
+                        row["stat_hp"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Enemy_HP_Min, ScramblerData_Params.Static.EnemyParamData.Enemy_HP_Max);
                     }
                 }
             }
@@ -2180,12 +2180,12 @@ namespace DS2_Scrambler
                     // Boss
                     if (ScramblerData_Core.Static.Boss_EnemyParamID_List.Contains(row.ID))
                     {
-                        row["souls_held"].Value = GetRandomInt(3000, 100000);
+                        row["souls_held"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Boss_Souls_Min, ScramblerData_Params.Static.EnemyParamData.Boss_Souls_Max);
                     }
                     // Enemy
                     else
                     {
-                        row["souls_held"].Value = GetRandomInt(50, 3000);
+                        row["souls_held"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Enemy_Souls_Min, ScramblerData_Params.Static.EnemyParamData.Enemy_Souls_Max);
                     }
                 }
             }
@@ -2193,142 +2193,142 @@ namespace DS2_Scrambler
             {
                 foreach (PARAM.Row row in EnemyParam)
                 {
-                    row["stat_stamina"].Value = GetRandomFloat(500, 5000);
-                    row["stat_stamina_regen"].Value = GetRandomFloat(50, 300);
+                    row["stat_stamina"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Stamina_Min, ScramblerData_Params.Static.EnemyParamData.Stamina_Max);
+                    row["stat_stamina_regen"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Stamina_Regen_Min, ScramblerData_Params.Static.EnemyParamData.Stamina_Regen_Max);
                 }
             }
             if (c_EnemyParam_Defence)
             {
                 foreach (PARAM.Row row in EnemyParam)
                 {
-                    row["defence_physical"].Value = GetRandomInt(100, 1000);
-                    row["defence_magic"].Value = GetRandomInt(0, 100);
-                    row["defence_lightning"].Value = GetRandomInt(0, 100);
-                    row["defence_fire"].Value = GetRandomInt(0, 100);
-                    row["defence_dark"].Value = GetRandomInt(0, 100);
-                    row["defence_poison"].Value = GetRandomInt(0, 100);
-                    row["defence_bleed"].Value = GetRandomInt(0, 100);
-                    row["defence_curse"].Value = GetRandomInt(0, 100);
-                    row["defence_petrify"].Value = GetRandomInt(0, 100);
+                    row["defence_physical"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Physical_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Physical_Defence_Max);
+                    row["defence_magic"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Magic_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Magic_Defence_Max);
+                    row["defence_lightning"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Lightning_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Lightning_Defence_Max);
+                    row["defence_fire"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Fire_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Fire_Defence_Max);
+                    row["defence_dark"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Dark_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Dark_Defence_Max);
+                    row["defence_poison"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Poison_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Poison_Defence_Max);
+                    row["defence_bleed"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Bleed_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Bleed_Defence_Max);
+                    row["defence_curse"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Curse_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Curse_Defence_Max);
+                    row["defence_petrify"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Petrify_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Petrify_Defence_Max);
                 }
             }
             if (c_EnemyParam_ShieldDefence)
             {
                 foreach (PARAM.Row row in EnemyParam)
                 {
-                    row["shield_stability"].Value = GetRandomInt(0, 100);
-                    row["shield_absorption_physical"].Value = GetRandomInt(0, 100);
-                    row["shield_absorption_magic"].Value = GetRandomInt(0, 100);
-                    row["shield_absorption_lightning"].Value = GetRandomInt(0, 100);
-                    row["shield_absorption_fire"].Value = GetRandomInt(0, 100);
-                    row["shield_absorption_dark"].Value = GetRandomInt(0, 100);
-                    row["shield_absorption_poison"].Value = GetRandomInt(0, 100);
-                    row["shield_absorption_bleed"].Value = GetRandomInt(0, 100);
-                    row["Unk22"].Value = GetRandomInt(0, 100);
-                    row["Unk23"].Value = GetRandomInt(0, 100);
+                    row["shield_stability"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Shield_Stability_Min, ScramblerData_Params.Static.EnemyParamData.Shield_Stability_Max);
+                    row["shield_absorption_physical"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Shield_Physical_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Shield_Physical_Defence_Max);
+                    row["shield_absorption_magic"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Shield_Magic_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Shield_Magic_Defence_Max);
+                    row["shield_absorption_lightning"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Shield_Lightning_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Shield_Lightning_Defence_Max);
+                    row["shield_absorption_fire"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Shield_Fire_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Shield_Fire_Defence_Max);
+                    row["shield_absorption_dark"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Shield_Dark_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Shield_Dark_Defence_Max);
+                    row["shield_absorption_poison"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Shield_Poison_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Shield_Poison_Defence_Max);
+                    row["shield_absorption_bleed"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Shield_Bleed_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Shield_Bleed_Defence_Max);
+                    row["Unk22"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Shield_Curse_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Shield_Curse_Defence_Max);
+                    row["Unk23"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Shield_Petrify_Defence_Min, ScramblerData_Params.Static.EnemyParamData.Shield_Petrify_Defence_Max);
                 }
             }
             if (c_EnemyParam_Poise)
             {
                 foreach (PARAM.Row row in EnemyParam)
                 {
-                    row["stat_poise"].Value = GetRandomFloat(0, 100);
-                    row["stat_poise_regen"].Value = GetRandomFloat(0, 2);
+                    row["stat_poise"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Poise_Min, ScramblerData_Params.Static.EnemyParamData.Poise_Max);
+                    row["stat_poise_regen"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Poise_Regen_Min, ScramblerData_Params.Static.EnemyParamData.Poise_Regen_Max);
                 }
             }
             if (c_EnemyDamageParam_Damage)
             {
                 foreach (PARAM.Row row in EnemyDamageParam)
                 {
-                    row["damage_0"].Value = GetRandomInt(10, 1000);
+                    row["damage_0"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Damage_A_Min, ScramblerData_Params.Static.EnemyParamData.Damage_A_Max);
 
-                    if(rand.Next(100) < 20)
-                        row["damage_1"].Value = GetRandomInt(0, 500);
+                    if (rand.Next(100) < ScramblerData_Params.Static.EnemyParamData.Damage_B_Apply_Chance)
+                        row["damage_1"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Damage_B_Min, ScramblerData_Params.Static.EnemyParamData.Damage_B_Max);
 
-                    if (rand.Next(100) < 20)
-                        row["damage_2"].Value = GetRandomInt(0, 500);
+                    if (rand.Next(100) < ScramblerData_Params.Static.EnemyParamData.Damage_C_Apply_Chance)
+                        row["damage_2"].Value = GetRandomInt(ScramblerData_Params.Static.EnemyParamData.Damage_C_Min, ScramblerData_Params.Static.EnemyParamData.Damage_C_Max);
 
-                    row["stamina_damage_mult"].Value = GetRandomUShort(100, 3000);
+                    row["stamina_damage_mult"].Value = GetRandomUShort(ScramblerData_Params.Static.EnemyParamData.Stamina_Damage_Min, ScramblerData_Params.Static.EnemyParamData.Stamina_Damage_Max);
                 }
             }
             if (c_EnemyDamageParam_Knockback)
             {
                 foreach (PARAM.Row row in EnemyDamageParam)
                 {
-                    row["knockback_amount"].Value = GetRandomFloat(0, 10);
-                    row["knockback_speed"].Value = GetRandomFloat(0, 5);
+                    row["knockback_amount"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Knockback_Amount_Min, ScramblerData_Params.Static.EnemyParamData.Knockback_Amount_Max);
+                    row["knockback_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Knockback_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Knockback_Speed_Max);
                 }
             }
             if (c_EnemyDamageParam_AttackSpeed)
             {
                 foreach (PARAM.Row row in EnemyBehaviorParam)
                 {
-                    row["group_1_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_2_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_3_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_4_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_5_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_6_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_7_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_8_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_9_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_10_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_1_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_2_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_3_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_4_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_5_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_6_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_7_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_8_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_9_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_10_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
+                    row["group_1_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_2_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_3_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_4_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_5_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_6_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_7_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_8_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_9_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_10_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_1_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_2_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_3_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_4_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_5_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_6_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_7_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_8_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_9_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_10_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
                 }
                 foreach (PARAM.Row row in EnemyBehaviorSecondParam)
                 {
-                    row["group_1_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_2_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_3_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_4_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_5_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_6_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_7_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_8_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_9_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_10_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_1_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_2_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_3_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_4_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_5_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_6_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_7_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_8_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_9_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_10_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
+                    row["group_1_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_2_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_3_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_4_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_5_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_6_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_7_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_8_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_9_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_10_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_1_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_2_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_3_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_4_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_5_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_6_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_7_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_8_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_9_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_10_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
                 }
                 foreach (PARAM.Row row in EnemyBehaviorThirdParam)
                 {
-                    row["group_1_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_2_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_3_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_4_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_5_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_6_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_7_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_8_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_9_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_10_attack_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_1_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_2_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_3_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_4_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_5_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_6_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_7_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_8_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_9_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
-                    row["group_10_recovery_speed"].Value = GetRandomFloat(0.5, 2.0);
+                    row["group_1_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_2_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_3_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_4_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_5_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_6_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_7_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_8_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_9_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_10_attack_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Attack_Speed_Max);
+                    row["group_1_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_2_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_3_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_4_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_5_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_6_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_7_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_8_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_9_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
+                    row["group_10_recovery_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Recovery_Speed_Max);
                 }
             }
             if (c_EnemyMoveParam_Walk)
@@ -2337,12 +2337,12 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["walk_acceleration"].Value = GetRandomFloat(0, 30);
-                    row["walk_speed"].Value = GetRandomFloat(0, 10); ;
-                    row["walk_deceleration"].Value = GetRandomFloat(0, 30);
-                    row["lock_on_walk_acceleration"].Value = GetRandomFloat(0, 30);
-                    row["lock_on_walk_speed"].Value = GetRandomFloat(0, 10);
-                    row["lock_on_walk_deceleration"].Value = GetRandomFloat(0, 30);
+                    row["walk_acceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Walk_Acceleration_Min, ScramblerData_Params.Static.EnemyParamData.Walk_Acceleration_Max);
+                    row["walk_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Walk_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Walk_Speed_Max);
+                    row["walk_deceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Walk_Deceleration_Min, ScramblerData_Params.Static.EnemyParamData.Walk_Deceleration_Max);
+                    row["lock_on_walk_acceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Walk_LockOn_Acceleration_Min, ScramblerData_Params.Static.EnemyParamData.Walk_LockOn_Acceleration_Max);
+                    row["lock_on_walk_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Walk_LockOn_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Walk_LockOn_Speed_Max);
+                    row["lock_on_walk_deceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Walk_LockOn_Deceleration_Min, ScramblerData_Params.Static.EnemyParamData.Walk_LockOn_Deceleration_Max);
                 }
             }
             if (c_EnemyMoveParam_Run)
@@ -2351,12 +2351,12 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["run_speed"].Value = GetRandomFloat(0, 10);
-                    row["run_acceleration"].Value = GetRandomFloat(0, 30);
-                    row["run_to_walk_deceleration"].Value = GetRandomFloat(0, 30);
-                    row["lock_on_run_speed"].Value = GetRandomFloat(0, 10);
-                    row["lock_on_run_acceleration"].Value = GetRandomFloat(0, 30);
-                    row["lock_on_run_to_walk_deceleration"].Value = GetRandomFloat(0, 30);
+                    row["run_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Run_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Run_Speed_Max);
+                    row["run_acceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Run_Acceleration_Min, ScramblerData_Params.Static.EnemyParamData.Run_Acceleration_Max);
+                    row["run_to_walk_deceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Run_Deceleration_Min, ScramblerData_Params.Static.EnemyParamData.Run_Deceleration_Max);
+                    row["lock_on_run_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Run_LockOn_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Run_LockOn_Speed_Max);
+                    row["lock_on_run_acceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Run_LockOn_Acceleration_Min, ScramblerData_Params.Static.EnemyParamData.Run_LockOn_Acceleration_Max);
+                    row["lock_on_run_to_walk_deceleration"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Run_LockOn_Deceleration_Min, ScramblerData_Params.Static.EnemyParamData.Run_LockOn_Deceleration_Max);
                 }
             }
             if (c_EnemyMoveParam_Jump)
@@ -2365,18 +2365,18 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["jump_height"].Value = GetRandomFloat(0, 24);
-                    row["Unk51"].Value = GetRandomFloat(0, 40);
-                    row["Unk52"].Value = GetRandomFloat(0, 40);
-                    row["jump_length_min"].Value = GetRandomFloat(0, 20);
-                    row["jump_length_max"].Value = ((float)row["jump_length_min"].Value * GetRandomFloat(1, 2));
-                    row["Unk53"].Value = GetRandomFloat(0, 10);
-                    row["Unk54"].Value = GetRandomFloat(0, 10);
-                    row["jump_gravity_min"].Value = GetRandomFloat(0, 8);
-                    row["jump_gravity_max"].Value = GetRandomFloat(0, 8);
-                    row["Unk55"].Value = GetRandomFloat(0, 8);
-                    row["Unk56"].Value = GetRandomFloat(0, 8);
-                    row["Unk57"].Value = GetRandomFloat(0, 8);
+                    row["jump_height"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Height_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Height_Max);
+                    row["Unk51"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Unk51_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Unk51_Max);
+                    row["Unk52"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Unk52_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Unk52_Max);
+                    row["jump_length_min"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Length_Minimum_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Length_Minimum_Max);
+                    row["jump_length_max"].Value = ((float)row["jump_length_min"].Value * GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Length_Maximum_Multiplier_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Length_Maximum_Multiplier_Max));
+                    row["Unk53"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Unk53_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Unk53_Max);
+                    row["Unk54"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Unk54_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Unk54_Max);
+                    row["jump_gravity_min"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Gravity_Minimum_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Gravity_Minimum_Max);
+                    row["jump_gravity_max"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Gravity_Maximum_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Gravity_Maximum_Max);
+                    row["Unk55"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Unk55_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Unk55_Max);
+                    row["Unk56"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Unk56_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Unk56_Max);
+                    row["Unk57"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Jump_Unk57_Min, ScramblerData_Params.Static.EnemyParamData.Jump_Unk57_Max);
 
                     // Adjust these so the player doesn't just die when they jump high
                     row["fall_distance_breakpoint_1"].Value = ((float)row["jump_height"].Value * 1.2);
@@ -2391,11 +2391,11 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["ladder_climb_speed"].Value = GetRandomFloat(0, 5);
-                    row["ladder_fast_climb_speed"].Value = GetRandomFloat(0, 5);
-                    row["ladder_slide_speed"].Value = GetRandomFloat(0, 5);
-                    row["Unk107"].Value = GetRandomFloat(0, 30);
-                    row["Unk108"].Value = GetRandomFloat(0, 30);
+                    row["ladder_climb_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Climb_Ladder_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Climb_Ladder_Speed_Max);
+                    row["ladder_fast_climb_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Climb_Ladder_Fast_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Climb_Ladder_Fast_Speed_Max);
+                    row["ladder_slide_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Climb_Ladder_Slide_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Climb_Ladder_Slide_Speed_Max);
+                    row["Unk107"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Climb_Unk107_Min, ScramblerData_Params.Static.EnemyParamData.Climb_Unk107_Max);
+                    row["Unk108"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Climb_Unk108_Min, ScramblerData_Params.Static.EnemyParamData.Climb_Unk108_Max);
                 }
             }
             if (c_EnemyMoveParam_Turn)
@@ -2404,15 +2404,15 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["slow_walk_turn_rate"].Value = GetRandomFloat(0, 10);
-                    row["walk_turn_rate"].Value = GetRandomFloat(0, 10);
-                    row["Unk08"].Value = GetRandomFloat(0, 10);
-                    row["Unk09"].Value = GetRandomFloat(0, 10);
-                    row["Unk12"].Value = GetRandomFloat(0, 10);
-                    row["Unk13"].Value = GetRandomFloat(0, 10);
-                    row["Unk14"].Value = GetRandomFloat(0, 10);
-                    row["Unk15"].Value = GetRandomFloat(0, 10);
-                    row["lock_on_walk_turn_rate"].Value = GetRandomFloat(0, 10);
+                    row["slow_walk_turn_rate"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Slow_Walk_Turn_Rate_Min, ScramblerData_Params.Static.EnemyParamData.Slow_Walk_Turn_Rate_Max);
+                    row["walk_turn_rate"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Walk_Turn_Rate_Min, ScramblerData_Params.Static.EnemyParamData.Walk_Turn_Rate_Max);
+                    row["Unk08"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Unk08_Turn_Rate_Min, ScramblerData_Params.Static.EnemyParamData.Unk08_Turn_Rate_Max);
+                    row["Unk09"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Unk09_Turn_Rate_Min, ScramblerData_Params.Static.EnemyParamData.Unk09_Turn_Rate_Max);
+                    row["Unk12"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Unk12_Turn_Rate_Min, ScramblerData_Params.Static.EnemyParamData.Unk12_Turn_Rate_Max);
+                    row["Unk13"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Unk13_Turn_Rate_Min, ScramblerData_Params.Static.EnemyParamData.Unk13_Turn_Rate_Max);
+                    row["Unk14"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Unk14_Turn_Rate_Min, ScramblerData_Params.Static.EnemyParamData.Unk14_Turn_Rate_Max);
+                    row["Unk15"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Unk15_Turn_Rate_Min, ScramblerData_Params.Static.EnemyParamData.Unk15_Turn_Rate_Max);
+                    row["lock_on_walk_turn_rate"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Walk_LockOn_Turn_Rate_Min, ScramblerData_Params.Static.EnemyParamData.Walk_LockOn_Turn_Rate_Max);
                 }
             }
             if (c_EnemyMoveParam_Evasion)
@@ -2421,12 +2421,12 @@ namespace DS2_Scrambler
 
                 foreach (PARAM.Row row in rows)
                 {
-                    row["backstep_speed"].Value = GetRandomFloat(0, 30);
-                    row["backstep_distance"].Value = GetRandomFloat(0, 10);
-                    row["roll_speed"].Value = GetRandomFloat(0, 30);
-                    row["Unk45"].Value = GetRandomFloat(0, 10);
-                    row["Unk47"].Value = GetRandomFloat(0, 10);
-                    row["Unk49"].Value = GetRandomFloat(0, 10);
+                    row["backstep_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Backstep_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Backstep_Speed_Max);
+                    row["backstep_distance"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Backstep_Distance_Min, ScramblerData_Params.Static.EnemyParamData.Backstep_Distance_Max);
+                    row["roll_speed"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Roll_Speed_Min, ScramblerData_Params.Static.EnemyParamData.Roll_Speed_Max);
+                    row["Unk45"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Unk45_Min, ScramblerData_Params.Static.EnemyParamData.Unk45_Max);
+                    row["Unk47"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Unk47_Min, ScramblerData_Params.Static.EnemyParamData.Unk47_Max);
+                    row["Unk49"].Value = GetRandomFloat(ScramblerData_Params.Static.EnemyParamData.Unk49_Min, ScramblerData_Params.Static.EnemyParamData.Unk49_Max);
                 }
             }
 
