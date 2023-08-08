@@ -810,8 +810,8 @@ namespace DS2_Scrambler
         public int Sell_Price_Max { get; set; }
         public float Weight_Min { get; set; }
         public float Weight_Max { get; set; }
-        public float Durability_Min { get; set; }
-        public float Durability_Max { get; set; }
+        public int Durability_Min { get; set; }
+        public int Durability_Max { get; set; }
         public ushort STR_Requirement_Min { get; set; }
         public ushort STR_Requirement_Max { get; set; }
         public ushort DEX_Requirement_Min { get; set; }
@@ -820,26 +820,293 @@ namespace DS2_Scrambler
         public ushort INT_Requirement_Max { get; set; }
         public ushort FTH_Requirement_Min { get; set; }
         public ushort FTH_Requirement_Max { get; set; }
+        public float Physical_Defence_Scaling_Min { get; set; }
+        public float Physical_Defence_Scaling_Max { get; set; }
+        public float Unk11_Min { get; set; }
+        public float Unk11_Max { get; set; }
+        public float Unk12_Min { get; set; }
+        public float Unk12_Max { get; set; }
+        public float Unk13_Min { get; set; }
+        public float Unk13_Max { get; set; }
+        public float Poise_Min { get; set; }
+        public float Poise_Max { get; set; }
+        public float Slash_Absorption_Min { get; set; }
+        public float Slash_Absorption_Max { get; set; }
+        public float Thrust_Absorption_Min { get; set; }
+        public float Thrust_Absorption_Max { get; set; }
+        public float Strike_Absorption_Min { get; set; }
+        public float Strike_Absorption_Max { get; set; }
+        public float Standard_Absorption_Min { get; set; }
+        public float Standard_Absorption_Max { get; set; }
+        public float Magic_Absorption_Min { get; set; }
+        public float Magic_Absorption_Max { get; set; }
+        public float Lightning_Absorption_Min { get; set; }
+        public float Lightning_Absorption_Max { get; set; }
+        public float Fire_Absorption_Min { get; set; }
+        public float Fire_Absorption_Max { get; set; }
+        public float Dark_Absorption_Min { get; set; }
+        public float Dark_Absorption_Max { get; set; }
+        public float Poison_Absorption_Min { get; set; }
+        public float Poison_Absorption_Max { get; set; }
+        public float Bleed_Absorption_Min { get; set; }
+        public float Bleed_Absorption_Max { get; set; }
+        public float Petrify_Absorption_Min { get; set; }
+        public float Petrify_Absorption_Max { get; set; }
+        public float Curse_Absorption_Min { get; set; }
+        public float Curse_Absorption_Max { get; set; }
+        public float Absorption_Growth_Min { get; set; }
+        public float Absorption_Growth_Max { get; set; }
     }
     public class ParamData_Ring
     {
-
+        public int Base_Price_Min { get; set; }
+        public int Base_Price_Max { get; set; }
+        public int Sell_Price_Min { get; set; }
+        public int Sell_Price_Max { get; set; }
+        public float Weight_Min { get; set; }
+        public float Weight_Max { get; set; }
+        public int Durability_Min { get; set; }
+        public int Durability_Max { get; set; }
     }
     public class ParamData_Item
     {
+        public int Base_Price_Min { get; set; }
+        public int Base_Price_Max { get; set; }
+        public int Sell_Price_Min { get; set; }
+        public int Sell_Price_Max { get; set; }
 
+        public float Animation_Speed_Min { get; set; }
+        public float Animation_Speed_Max { get; set; }
+
+        public ushort Hold_Count_Min { get; set; }
+        public ushort Hold_Count_Max { get; set; }
     }
     public class ParamData_Spell
     {
+        public int Base_Price_Min { get; set; }
+        public int Base_Price_Max { get; set; }
+        public int Sell_Price_Min { get; set; }
+        public int Sell_Price_Max { get; set; }
+
+        public ushort INT_Requirement_Min { get; set; }
+        public ushort INT_Requirement_Max { get; set; }
+        public ushort FTH_Requirement_Min { get; set; }
+        public ushort FTH_Requirement_Max { get; set; }
+
+        public float Startup_Speed_Min { get; set; }
+        public float Startup_Speed_Max { get; set; }
+
+        public float Stamina_Consumption_Min { get; set; }
+        public float Stamina_Consumption_Max { get; set; }
+
+        public float Cast_Speed_Min { get; set; }
+        public float Cast_Speed_Max { get; set; }
+
+        public byte Slots_Used_Min { get; set; }
+        public byte Slots_Used_Max { get; set; }
+
+        public byte Base_Casts_Min { get; set; }
+        public byte Base_Casts_Max { get; set; }
+        public byte Cast_Growth_Rate_Min { get; set; }
+        public byte Cast_Growth_Rate_Max { get; set; }
 
     }
     public class ParamData_Projectiles
     {
+        public float Initial_Horizontal_Velocity_Min { get; set; }
+        public float Initial_Horizontal_Velocity_Max { get; set; }
+        public float Target_Horizontal_Velocity_Min { get; set; }
+        public float Target_Horizontal_Velocity_Max { get; set; }
+        public float Max_Horizontal_Velocity_Min { get; set; }
+        public float Max_Horizontal_Velocity_Max { get; set; }
+        public float Initial_Vertical_Velocity_Min { get; set; }
+        public float Initial_Vertical_Velocity_Max { get; set; }
+        public float Target_Vertical_Velocity_Min { get; set; }
+        public float Target_Vertical_Velocity_Max { get; set; }
+        public float Max_Vertical_Velocity_Min { get; set; }
+        public float Max_Vertical_Velocity_Max { get; set; }
+        public float Initial_Tan_Horizontal_Velocity_Min { get; set; }
+        public float Initial_Tan_Horizontal_Velocity_Max { get; set; }
+        public float Target_Tan_Horizontal_Velocity_Min { get; set; }
+        public float Target_Tan_Horizontal_Velocity_Max { get; set; }
+        public float Max_Tan_Horizontal_Velocity_Min { get; set; }
+        public float Max_Tan_Horizontal_Velocity_Max { get; set; }
+        public float Initial_Tan_Vertical_Velocity_Min { get; set; }
+        public float Initial_Tan_Vertical_Velocity_Max { get; set; }
+        public float Target_Tan_Vertical_Velocity_Min { get; set; }
+        public float Target_Tan_Vertical_Velocity_Max { get; set; }
+        public float Max_Tan_Vertical_Velocity_Min { get; set; }
+        public float Max_Tan_Vertical_Velocity_Max { get; set; }
+        public float Horizontal_Acceleration_Start_Delay_Min { get; set; }
+        public float Horizontal_Acceleration_Start_Delay_Max { get; set; }
+        public float Vertical_Acceleration_Start_Delay_Min { get; set; }
+        public float Vertical_Acceleration_Start_Delay_Max { get; set; }
+        public float Tan_Horizontal_Acceleration_Start_Delay_Min { get; set; }
+        public float Tan_Horizontal_Acceleration_Start_Delay_Max { get; set; }
+        public float Tan_Vertical_Acceleration_Start_Delay_Min { get; set; }
+        public float Tan_Vertical_Acceleration_Start_Delay_Max { get; set; }
 
+        public float Shooter_Horizontal_Angle_Min { get; set; }
+        public float Shooter_Horizontal_Angle_Max { get; set; }
+        public float Shooter_Vertical_Angle_Min { get; set; }
+        public float Shooter_Vertical_Angle_Max { get; set; }
+        public float Shooter_Unk0_Angle_Min { get; set; }
+        public float Shooter_Unk0_Angle_Max { get; set; }
+        public float Shooter_Unk1_Angle_Min { get; set; }
+        public float Shooter_Unk1_Angle_Max { get; set; }
+        public float Horizontal_Angle_Randomizer_Min { get; set; }
+        public float Horizontal_Angle_Randomizer_Max { get; set; }
+        public float Vertical_Angle_Randomizer_Min { get; set; }
+        public float Vertical_Angle_Randomizer_Max { get; set; }
+        public float Horizontal_Spread_Min { get; set; }
+        public float Horizontal_Spread_Max { get; set; }
+        public float Vertical_Spread_Min { get; set; }
+        public float Vertical_Spread_Max { get; set; }
+
+        public float Vertical_Spawn_Distance_Min { get; set; }
+        public float Vertical_Spawn_Distance_Max { get; set; }
+        public float Unk_Spawn_Distance_Min { get; set; }
+        public float Unk_Spawn_Distance_Max { get; set; }
+        public float Horizontal_Spawn_Distance_Min { get; set; }
+        public float Horizontal_Spawn_Distance_Max { get; set; }
+
+        public float Max_Life_Min { get; set; }
+        public float Max_Life_Max { get; set; }
+
+        public float Max_Angle_Change_Min { get; set; }
+        public float Max_Angle_Change_Max { get; set; }
+        public float Max_Tracking_Angle_Change_Min { get; set; }
+        public float Max_Tracking_Angle_Change_Max { get; set; }
+        public float Max_Tracking_Time_Min { get; set; }
+        public float Max_Tracking_Time_Max { get; set; }
+
+        public int Effect_Application_Chance { get; set; }
+
+        public byte Shoot_Count_Min { get; set; }
+        public byte Shoot_Count_Max { get; set; }
+        public byte Shoot_Sequential_Count_Min { get; set; }
+        public byte Shoot_Sequential_Count_Max { get; set; }
+        public float Shoot_Interval_Min { get; set; }
+        public float Shoot_Interval_Max { get; set; }
     }
     public class ParamData_Player
     {
+        public int Class_Attributes_Stat_Spread { get; set; }
 
+        public int Base_Level_Up_Cost_Min { get; set; }
+        public int Base_Level_Up_Cost_Max { get; set; }
+        public int Max_Level_Up_Cost_Min { get; set; }
+        public int Max_Level_Up_Cost_Max { get; set; }
+
+        public int Shrine_of_Winter_Unlock_Amount_Min { get; set; }
+        public int Shrine_of_Winter_Unlock_Amount_Max { get; set; }
+
+        public uint Boss_Soul_Drop_Amount_Min { get; set; }
+        public uint Boss_Soul_Drop_Amount_Max { get; set; }
+
+        public float Camera_Distance_Behind_Player_Min { get; set; }
+        public float Camera_Distance_Behind_Player_Max { get; set; }
+        public float Cameria_Horizontal_FOV_Min { get; set; }
+        public float Cameria_Horizontal_FOV_Max { get; set; }
+        public float Cameria_Vertical_FOV_Min { get; set; }
+        public float Cameria_Vertical_FOV_Max { get; set; }
+
+        public float Walk_Acceleration_Min { get; set; }
+        public float Walk_Acceleration_Max { get; set; }
+        public float Walk_Speed_Min { get; set; }
+        public float Walk_Speed_Max { get; set; }
+        public float Walk_Deceleration_Min { get; set; }
+        public float Walk_Deceleration_Max { get; set; }
+        public float Walk_LockOn_Acceleration_Min { get; set; }
+        public float Walk_LockOn_Acceleration_Max { get; set; }
+        public float Walk_LockOn_Speed_Min { get; set; }
+        public float Walk_LockOn_Speed_Max { get; set; }
+        public float Walk_LockOn_Deceleration_Min { get; set; }
+        public float Walk_LockOn_Deceleration_Max { get; set; }
+        public float Run_Acceleration_Min { get; set; }
+        public float Run_Acceleration_Max { get; set; }
+        public float Run_Speed_Min { get; set; }
+        public float Run_Speed_Max { get; set; }
+        public float Run_Deceleration_Min { get; set; }
+        public float Run_Deceleration_Max { get; set; }
+        public float Run_LockOn_Acceleration_Min { get; set; }
+        public float Run_LockOn_Acceleration_Max { get; set; }
+        public float Run_LockOn_Speed_Min { get; set; }
+        public float Run_LockOn_Speed_Max { get; set; }
+        public float Run_LockOn_Deceleration_Min { get; set; }
+        public float Run_LockOn_Deceleration_Max { get; set; }
+        public float Jump_Height_Min { get; set; }
+        public float Jump_Height_Max { get; set; }
+        public float Jump_Unk51_Min { get; set; }
+        public float Jump_Unk51_Max { get; set; }
+        public float Jump_Unk52_Min { get; set; }
+        public float Jump_Unk52_Max { get; set; }
+        public float Jump_Length_Minimum_Min { get; set; }
+        public float Jump_Length_Minimum_Max { get; set; }
+        public float Jump_Length_Maximum_Multiplier_Min { get; set; }
+        public float Jump_Length_Maximum_Multiplier_Max { get; set; }
+        public float Jump_Unk53_Min { get; set; }
+        public float Jump_Unk53_Max { get; set; }
+        public float Jump_Unk54_Min { get; set; }
+        public float Jump_Unk54_Max { get; set; }
+        public float Jump_Gravity_Minimum_Min { get; set; }
+        public float Jump_Gravity_Minimum_Max { get; set; }
+        public float Jump_Gravity_Maximum_Min { get; set; }
+        public float Jump_Gravity_Maximum_Max { get; set; }
+        public float Jump_Unk55_Min { get; set; }
+        public float Jump_Unk55_Max { get; set; }
+        public float Jump_Unk56_Min { get; set; }
+        public float Jump_Unk56_Max { get; set; }
+        public float Jump_Unk57_Min { get; set; }
+        public float Jump_Unk57_Max { get; set; }
+        public float Climb_Ladder_Speed_Min { get; set; }
+        public float Climb_Ladder_Speed_Max { get; set; }
+        public float Climb_Ladder_Fast_Speed_Min { get; set; }
+        public float Climb_Ladder_Fast_Speed_Max { get; set; }
+        public float Climb_Ladder_Slide_Speed_Min { get; set; }
+        public float Climb_Ladder_Slide_Speed_Max { get; set; }
+        public float Climb_Unk107_Min { get; set; }
+        public float Climb_Unk107_Max { get; set; }
+        public float Climb_Unk108_Min { get; set; }
+        public float Climb_Unk108_Max { get; set; }
+        public float Slow_Walk_Turn_Rate_Min { get; set; }
+        public float Slow_Walk_Turn_Rate_Max { get; set; }
+        public float Walk_Turn_Rate_Min { get; set; }
+        public float Walk_Turn_Rate_Max { get; set; }
+        public float Unk08_Turn_Rate_Min { get; set; }
+        public float Unk08_Turn_Rate_Max { get; set; }
+        public float Unk09_Turn_Rate_Min { get; set; }
+        public float Unk09_Turn_Rate_Max { get; set; }
+        public float Unk12_Turn_Rate_Min { get; set; }
+        public float Unk12_Turn_Rate_Max { get; set; }
+        public float Unk13_Turn_Rate_Min { get; set; }
+        public float Unk13_Turn_Rate_Max { get; set; }
+        public float Unk14_Turn_Rate_Min { get; set; }
+        public float Unk14_Turn_Rate_Max { get; set; }
+        public float Unk15_Turn_Rate_Min { get; set; }
+        public float Unk15_Turn_Rate_Max { get; set; }
+        public float Walk_LockOn_Turn_Rate_Min { get; set; }
+        public float Walk_LockOn_Turn_Rate_Max { get; set; }
+        public float Backstep_Speed_Min { get; set; }
+        public float Backstep_Speed_Max { get; set; }
+        public float Backstep_Distance_Min { get; set; }
+        public float Backstep_Distance_Max { get; set; }
+        public float Roll_Speed_Min { get; set; }
+        public float Roll_Speed_Max { get; set; }
+        public float Unk45_Min { get; set; }
+        public float Unk45_Max { get; set; }
+        public float Unk47_Min { get; set; }
+        public float Unk47_Max { get; set; }
+        public float Unk49_Min { get; set; }
+        public float Unk49_Max { get; set; }
+        public float BigJump_Jump_Height { get; set; }
+        public float BigJump_Jump_Length_Minimum { get; set; }
+        public float BigJump_Jump_Length_Maximum { get; set; }
+        public float BigJumpJump_Gravity_Minimum { get; set; }
+        public float BigJumpJump_Gravity_Maximum { get; set; }
+        public float BigJump_Unk55 { get; set; }
+        public float BigJump_Unk56 { get; set; }
+        public float BigJump_Unk57 { get; set; }
     }
     public class ParamData_Map
     {
