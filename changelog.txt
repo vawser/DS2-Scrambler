@@ -1,18 +1,6 @@
-﻿# 1.04
-# Enemy Scrambler
-- Reworked the enemy scrambler to allow for more granular control.
- - Added the ability to toggle which maps have the enemies scrambled.
- - Scrambling Characters is now a toggle, and scrambles them to custom locations within each level, instead of existing locations.
-- Added lots of exclusions to the scrambler for entities that should not be scrambled.
-
-# Item Scrambler
-- Adjusted Aldia's Key list to eliminate the chance it might spawn behind Aldia's Keep door.
-- Enemy Drop randomisation now includes the fixed drop range.
-- Weapons may now be given a random infusion and reinforcement when set.
-- Existing reinforcement and infusions values are removed during randomisation to fix a potential bug where a non-weapon has those values above 0.
-- The King's Ring is now treated as a Key Item instead of as a ring.
-- The Seeds of a Tree of Giants drop is no longer randomised.
-- Gilligan's shop is now retained between his moves, instead of the items being different at each 'stage'. 
-- Carhillion's shop is now retained between his moves, instead of the items being different at each 'stage'. 
-- Licia's shop is now retained between his moves, instead of the items being different at each 'stage'. 
-
+﻿#-----------------------------
+# 1.05
+#-----------------------------
+# Param Scrambler
+- Split the SpEffect list into Weapon, Armor, Ring, Item Action, Item Soul, Item Warp and Item Misc lists. 
+- Added toggles in the JSON Configuration for each of the sub-scramblers that controls which SpEffect lists they use when randomising the SpEffects.

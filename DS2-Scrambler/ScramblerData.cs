@@ -659,7 +659,14 @@ namespace DS2_Scrambler
         public List<int> Hostile_Character_EnemyParamID_List { get; set; }
         public List<int> Enemy_EnemyParamID_List { get; set; }
         public List<int> Skipped_EnemyParamID_List { get; set; }
-        public List<int> SpEffect_ID_List { get; set; }
+
+        public List<int> Weapon_SpEffect_ID_List { get; set; }
+        public List<int> Armor_SpEffect_ID_List { get; set; }
+        public List<int> Ring_SpEffect_ID_List { get; set; }
+        public List<int> Item_Action_SpEffect_ID_List { get; set; }
+        public List<int> Item_Soul_SpEffect_ID_List { get; set; }
+        public List<int> Item_Warp_SpEffect_ID_List { get; set; }
+        public List<int> Item_Misc_SpEffect_ID_List { get; set; }
 
         public List<string> WeaponActionCategoryFields { get; set; }
         public List<string> SpellCastAnimationFields { get; set; }
@@ -712,6 +719,13 @@ namespace DS2_Scrambler
         public int Base_Price_Max { get; set; }
         public int Sell_Price_Min { get; set; }
         public int Sell_Price_Max { get; set; }
+        public int Include_Weapon_Effects { get; set; }
+        public int Include_Armor_Effects { get; set; }
+        public int Include_Ring_Effects { get; set; }
+        public int Include_Item_Action_Effects { get; set; }
+        public int Include_Item_Soul_Effects { get; set; }
+        public int Include_Item_Warp_Effects { get; set; }
+        public int Include_Item_Misc_Effects { get; set; }
         public float Weight_Min { get; set; }
         public float Weight_Max { get; set; }
         public int Durability_Min { get; set; }
@@ -808,6 +822,13 @@ namespace DS2_Scrambler
         public int Base_Price_Max { get; set; }
         public int Sell_Price_Min { get; set; }
         public int Sell_Price_Max { get; set; }
+        public int Include_Weapon_Effects { get; set; }
+        public int Include_Armor_Effects { get; set; }
+        public int Include_Ring_Effects { get; set; }
+        public int Include_Item_Action_Effects { get; set; }
+        public int Include_Item_Soul_Effects { get; set; }
+        public int Include_Item_Warp_Effects { get; set; }
+        public int Include_Item_Misc_Effects { get; set; }
         public float Weight_Min { get; set; }
         public float Weight_Max { get; set; }
         public int Durability_Min { get; set; }
@@ -863,6 +884,13 @@ namespace DS2_Scrambler
         public int Base_Price_Max { get; set; }
         public int Sell_Price_Min { get; set; }
         public int Sell_Price_Max { get; set; }
+        public int Include_Weapon_Effects { get; set; }
+        public int Include_Armor_Effects { get; set; }
+        public int Include_Ring_Effects { get; set; }
+        public int Include_Item_Action_Effects { get; set; }
+        public int Include_Item_Soul_Effects { get; set; }
+        public int Include_Item_Warp_Effects { get; set; }
+        public int Include_Item_Misc_Effects { get; set; }
         public float Weight_Min { get; set; }
         public float Weight_Max { get; set; }
         public int Durability_Min { get; set; }
@@ -874,12 +902,20 @@ namespace DS2_Scrambler
         public int Base_Price_Max { get; set; }
         public int Sell_Price_Min { get; set; }
         public int Sell_Price_Max { get; set; }
-
+        public int Include_Weapon_Effects { get; set; }
+        public int Include_Armor_Effects { get; set; }
+        public int Include_Ring_Effects { get; set; }
+        public int Include_Item_Action_Effects { get; set; }
+        public int Include_Item_Soul_Effects { get; set; }
+        public int Include_Item_Warp_Effects { get; set; }
+        public int Include_Item_Misc_Effects { get; set; }
         public float Animation_Speed_Min { get; set; }
         public float Animation_Speed_Max { get; set; }
 
         public ushort Hold_Count_Min { get; set; }
         public ushort Hold_Count_Max { get; set; }
+
+        public int Force_Homeward_Item_Effects { get; set; }
     }
     public class ParamData_Spell
     {
@@ -913,6 +949,14 @@ namespace DS2_Scrambler
     }
     public class ParamData_Projectiles
     {
+        public int Include_Weapon_Effects { get; set; }
+        public int Include_Armor_Effects { get; set; }
+        public int Include_Ring_Effects { get; set; }
+        public int Include_Item_Action_Effects { get; set; }
+        public int Include_Item_Soul_Effects { get; set; }
+        public int Include_Item_Warp_Effects { get; set; }
+        public int Include_Item_Misc_Effects { get; set; }
+
         public float Initial_Horizontal_Velocity_Min { get; set; }
         public float Initial_Horizontal_Velocity_Max { get; set; }
         public float Target_Horizontal_Velocity_Min { get; set; }

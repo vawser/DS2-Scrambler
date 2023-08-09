@@ -11,6 +11,15 @@
         "Sell_Price_Min": 10,
         "Sell_Price_Max": 10000,
         
+        // Effect
+        "Include_Weapon_Effects": 1,
+        "Include_Armor_Effects": 1,
+        "Include_Ring_Effects": 1,
+        "Include_Item_Action_Effects": 1,
+        "Include_Item_Soul_Effects": 0,
+        "Include_Item_Warp_Effects": 0,
+        "Include_Item_Misc_Effects": 0,
+        
         // Weight
         "Weight_Min": 0.1,
         "Weight_Max": 30,
@@ -131,6 +140,15 @@
         "Sell_Price_Min": 10,
         "Sell_Price_Max": 10000,
         
+        // Effect
+        "Include_Weapon_Effects": 1,
+        "Include_Armor_Effects": 1,
+        "Include_Ring_Effects": 1,
+        "Include_Item_Action_Effects": 1,
+        "Include_Item_Soul_Effects": 0,
+        "Include_Item_Warp_Effects": 0,
+        "Include_Item_Misc_Effects": 0,
+        
         // Weight
         "Weight_Min": 0.1,
         "Weight_Max": 30,
@@ -203,6 +221,15 @@
         "Sell_Price_Min": 10,
         "Sell_Price_Max": 10000,
         
+        // Effect
+        "Include_Weapon_Effects": 1,
+        "Include_Armor_Effects": 1,
+        "Include_Ring_Effects": 1,
+        "Include_Item_Action_Effects": 1,
+        "Include_Item_Soul_Effects": 0,
+        "Include_Item_Warp_Effects": 0,
+        "Include_Item_Misc_Effects": 0,
+        
         // Weight
         "Weight_Min": 0.1,
         "Weight_Max": 10,
@@ -220,13 +247,25 @@
         "Sell_Price_Min": 10,
         "Sell_Price_Max": 10000,
         
+        // Effect
+        "Include_Weapon_Effects": 1,
+        "Include_Armor_Effects": 1,
+        "Include_Ring_Effects": 1,
+        "Include_Item_Action_Effects": 1,
+        "Include_Item_Soul_Effects": 1,
+        "Include_Item_Warp_Effects": 0,
+        "Include_Item_Misc_Effects": 0,
+        
         // Animation Speed
         "Animation_Speed_Min": 0.5,
         "Animation_Speed_Max": 2.0,
         
         // Hold Count
         "Hold_Count_Min": 2,
-        "Hold_Count_Max": 99
+        "Hold_Count_Max": 99,
+        
+        // Tweak
+        "Force_Homeward_Item_Effects": 1 // This forces the Homeward Bone, Aged Feather and Darksign to have there regular effects
     },
     
     // Spell Tab
@@ -268,6 +307,15 @@
     
     // Projectile Tab
     "ProjectileParamData": {
+        // Effect
+        "Include_Weapon_Effects": 1,
+        "Include_Armor_Effects": 1,
+        "Include_Ring_Effects": 1,
+        "Include_Item_Action_Effects": 1,
+        "Include_Item_Soul_Effects": 0,
+        "Include_Item_Warp_Effects": 0,
+        "Include_Item_Misc_Effects": 0,
+        
         // Velocity
         "Initial_Horizontal_Velocity_Min": 0,
         "Initial_Horizontal_Velocity_Max": 30,

@@ -938,8 +938,8 @@
         855000, // Voice Marker - Brightstone Cove
         837400 // Player Start Sequence
     ],    
-    // Determines which SpEffect IDs can be used for new SpEffect generation.
-    "SpEffect_ID_List":
+    // Weapon Category - Determines which SpEffect IDs can be used for new SpEffect generation.
+    "Weapon_SpEffect_ID_List":
     [
         1140000, // Blue Dagger
         1830000, // Majestic Greatsword
@@ -980,7 +980,11 @@
         11640000, // Drakekeeper's Greatshield
         11720000, // Watchdragon Parma
         11730000, // Blossom Kite Shield
-        11750000, // Wicked Eye Greatshield
+        11750000 // Wicked Eye Greatshield
+    ],
+    // Armor Category - Determines which SpEffect IDs can be used for new SpEffect generation.
+    "Armor_SpEffect_ID_List":
+    [
         21140100, // Traveling Merchant Hat
         21210100, // Jester's Cap
         21210101, // Jester's Robes
@@ -1077,7 +1081,11 @@
         27700100, // Hexer's Hood
         27710100, // Chaos Hood
         27830100, // Nahr Alma Hood
-        27830101, // Nahr Alma Robes
+        27830101 // Nahr Alma Robes
+    ],
+    // Ring Category - Determines which SpEffect IDs can be used for new SpEffect generation.
+    "Ring_SpEffect_ID_List":
+    [
         40010000, // Life Ring
         40010001, // Life Ring+1
         40010002, // Life Ring+2
@@ -1199,33 +1207,11 @@
         41110000, // Ring of the Embedded
         41120000, // Ring of the Living
         41130000, // Yorgh's Ring
-        42000000, // Agape Ring
-        50600000, // Soldier Key
-        50610000, // Key to King's Passage
-        50800000, // Bastille Key
-        50810000, // Iron Key
-        50820000, // Forgotten Key
-        50830000, // Brightstone Key
-        50840000, // Antiquated Key
-        50850000, // Fang Key
-        50860000, // House Key
-        50870000, // Lenigrast's Key
-        50880000, // Smooth & Silky Stone
-        50885000, // Small Smooth & Silky Stone
-        50890000, // Rotunda Lockstone
-        50900000, // Giant's Kinship
-        50910000, // Ashen Mist Heart
-        50920000, // Soul of a Giant
-        50930000, // Tseldora Den Key
-        50940000, // Champion's Tablet
-        50950000, // Ladder Miniature
-        50960000, // Soul Vessel
-        50970000, // Undead Lockaway Key
-        50990000, // Dull Ember
-        51000000, // Crushed Eye Orb
-        51010000, // Simpleton's Spice
-        51020000, // Skeptic's Spice
-        51030000, // Aldia Key
+        42000000 // Agape Ring
+    ],
+    // Item Consumable Category - Determines which SpEffect IDs can be used for new SpEffect generation.
+    "Item_Action_SpEffect_ID_List":
+    [
         60010000, // Lifegem
         60020000, // Radiant Lifegem
         60030000, // Old Radiant Lifegem
@@ -1264,15 +1250,7 @@
         60290000, // Bleeding Serum
         60310000, // Green Blossom
         60320000, // Rusted Coin
-        60350000, // Homeward Bone
-        60355000, // Aged Feather
-        60360000, // Darksign
         60370000, // Silver Talisman
-        60375000, // UNKNOWN
-        60405000, // Dragon Head Stone
-        60405010, // Dragon Head Stone
-        60406000, // Dragon Torso Stone
-        60406010, // Dragon Torso Stone
         60410000, // Repair Powder
         60430000, // Flame Butterfly
         60450000, // Prism Stone
@@ -1293,6 +1271,11 @@
         60600000, // Lacerating Knife
         60610000, // Corrosive Urn
         60620000, // Holy Water Urn
+        62170000 // Seed of a Tree of Giants
+    ],
+    // Item Soul Category - Determines which SpEffect IDs can be used for new SpEffect generation.
+    "Item_Soul_SpEffect_ID_List":
+    [
         60625000, // Fading Soul
         60630000, // Soul of a Lost Undead
         60640000, // Large Soul of a Lost Undead
@@ -1304,36 +1287,6 @@
         60700000, // Large Soul of a Brave Warrior
         60710000, // Soul of a Hero
         60720000, // Soul of a Great Hero
-        60760000, // Wood Arrow
-        60770000, // Iron Arrow
-        60780000, // Magic Arrow
-        60790000, // Lightning Arrow
-        60800000, // Fire Arrow
-        60810000, // Dark Arrow
-        60820000, // Poison Arrow
-        60830000, // Lacerating Arrow
-        60850000, // Iron Greatarrow
-        60870000, // Lightning Greatarrow
-        60880000, // Fire Greatarrow
-        60900000, // Destructive Greatarrow
-        60910000, // Wood Bolt
-        60920000, // Heavy Bolt
-        60930000, // Magic Bolt
-        60940000, // Lightning Bolt
-        60950000, // Fire Bolt
-        60960000, // Dark Bolt
-        62000000, // Dried Fingers
-        62020000, // Bone of Order
-        62030000, // White Sign Soapstone
-        62040000, // Small White Sign Soapstone
-        62045000, // Red Sign Soapstone
-        62050000, // Cracked Blue Eye Orb
-        62060000, // Cracked Red Eye Orb
-        62070000, // Dragon Eye
-        62100000, // Token of Fidelity
-        62110000, // Token of Spite
-        62160000, // Black Separation Crystal
-        62170000, // Seed of a Tree of Giants
         64000000, // Soul of the Pursuer
         64010000, // Soul of the Last Giant
         64020000, // Dragonrider Soul
@@ -1379,6 +1332,76 @@
         64590000, // Soul of Zallen- the King's Pet
         64600000, // Loyce Soul
         64610000 // Soul of Lud- the King's Pet
+    ],
+    // Item Warp Category - Determines which SpEffect IDs can be used for new SpEffect generation.
+    "Item_Warp_SpEffect_ID_List":
+    [
+        60350000, // Homeward Bone
+        60355000, // Aged Feather
+        60360000 // Darksign
+    ],
+    // Item Misc Category - Determines which SpEffect IDs can be used for new SpEffect generation.
+    "Item_Misc_SpEffect_ID_List":
+    [
+        50600000, // Soldier Key
+        50610000, // Key to King's Passage
+        50800000, // Bastille Key
+        50810000, // Iron Key
+        50820000, // Forgotten Key
+        50830000, // Brightstone Key
+        50840000, // Antiquated Key
+        50850000, // Fang Key
+        50860000, // House Key
+        50870000, // Lenigrast's Key
+        50880000, // Smooth & Silky Stone
+        50885000, // Small Smooth & Silky Stone
+        50890000, // Rotunda Lockstone
+        50900000, // Giant's Kinship
+        50910000, // Ashen Mist Heart
+        50920000, // Soul of a Giant
+        50930000, // Tseldora Den Key
+        50940000, // Champion's Tablet
+        50950000, // Ladder Miniature
+        50960000, // Soul Vessel
+        50970000, // Undead Lockaway Key
+        50990000, // Dull Ember
+        51000000, // Crushed Eye Orb
+        51010000, // Simpleton's Spice
+        51020000, // Skeptic's Spice
+        51030000, // Aldia Key
+        60405000, // Dragon Head Stone
+        60405010, // Dragon Head Stone
+        60406000, // Dragon Torso Stone
+        60406010, // Dragon Torso Stone
+        60760000, // Wood Arrow
+        60770000, // Iron Arrow
+        60780000, // Magic Arrow
+        60790000, // Lightning Arrow
+        60800000, // Fire Arrow
+        60810000, // Dark Arrow
+        60820000, // Poison Arrow
+        60830000, // Lacerating Arrow
+        60850000, // Iron Greatarrow
+        60870000, // Lightning Greatarrow
+        60880000, // Fire Greatarrow
+        60900000, // Destructive Greatarrow
+        60910000, // Wood Bolt
+        60920000, // Heavy Bolt
+        60930000, // Magic Bolt
+        60940000, // Lightning Bolt
+        60950000, // Fire Bolt
+        60960000, // Dark Bolt
+        62000000, // Dried Fingers
+        62020000, // Bone of Order
+        62030000, // White Sign Soapstone
+        62040000, // Small White Sign Soapstone
+        62045000, // Red Sign Soapstone
+        62050000, // Cracked Blue Eye Orb
+        62060000, // Cracked Red Eye Orb
+        62070000, // Dragon Eye
+        62100000, // Token of Fidelity
+        62110000, // Token of Spite
+        62160000 // Black Separation Crystal
     ],
     
     // Determines which WeaponActionCategoryFields fields are for the 'Scramble Moveset' toggle.

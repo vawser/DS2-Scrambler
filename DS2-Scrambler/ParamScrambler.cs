@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using SoulsFormats;
@@ -155,12 +156,66 @@ namespace DS2_Scrambler
                     row.ID <= ScramblerData_Items.Static.WeaponParam_Category_End
                 ).ToList();
 
+                List<int> list = new List<int>();
+
+                if (ScramblerData_Params.Static.WeaponParamData.Include_Weapon_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Weapon_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.WeaponParamData.Include_Armor_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Armor_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.WeaponParamData.Include_Ring_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Ring_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.WeaponParamData.Include_Item_Action_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Action_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.WeaponParamData.Include_Item_Soul_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Soul_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.WeaponParamData.Include_Item_Warp_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Warp_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.WeaponParamData.Include_Item_Misc_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Misc_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+
                 foreach (PARAM.Row row in rows)
                 {
-                    var list = ScramblerData_Core.Static.SpEffect_ID_List;
-                    var result = list[rand.Next(list.Count)];
+                    if (list.Count > 0)
+                    {
+                        var result = list[rand.Next(list.Count)];
 
-                    row["speffect_id"].Value = result;
+                        row["speffect_id"].Value = result;
+                    }
                 }
             }
             if (c_WeaponParam_Weapon_Weight)
@@ -531,12 +586,66 @@ namespace DS2_Scrambler
                     row.ID <= ScramblerData_Items.Static.ArmorParam_Category_End
                 ).ToList();
 
+                List<int> list = new List<int>();
+
+                if (ScramblerData_Params.Static.ArmorParamData.Include_Weapon_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Weapon_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ArmorParamData.Include_Armor_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Armor_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ArmorParamData.Include_Ring_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Ring_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ArmorParamData.Include_Item_Action_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Action_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ArmorParamData.Include_Item_Soul_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Soul_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ArmorParamData.Include_Item_Warp_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Warp_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ArmorParamData.Include_Item_Misc_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Misc_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+
                 foreach (PARAM.Row row in rows)
                 {
-                    var list = ScramblerData_Core.Static.SpEffect_ID_List;
-                    var result = list[rand.Next(list.Count)];
+                    if (list.Count > 0)
+                    {
+                        var result = list[rand.Next(list.Count)];
 
-                    row["speffect_id"].Value = result;
+                        row["speffect_id"].Value = result;
+                    }
                 }
             }
             if (c_ArmorParam_Armor_Weight)
@@ -714,12 +823,66 @@ namespace DS2_Scrambler
                 row.ID <= ScramblerData_Items.Static.RingParam_Category_End
                 ).ToList();
 
+                List<int> list = new List<int>();
+
+                if (ScramblerData_Params.Static.RingParamData.Include_Weapon_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Weapon_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.RingParamData.Include_Armor_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Armor_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.RingParamData.Include_Ring_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Ring_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.RingParamData.Include_Item_Action_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Action_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.RingParamData.Include_Item_Soul_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Soul_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.RingParamData.Include_Item_Warp_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Warp_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.RingParamData.Include_Item_Misc_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Misc_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+
                 foreach (PARAM.Row row in rows)
                 {
-                    var list = ScramblerData_Core.Static.SpEffect_ID_List;
-                    var result = list[rand.Next(list.Count)];
+                    if (list.Count > 0)
+                    {
+                        var result = list[rand.Next(list.Count)];
 
-                    row["speffect_id"].Value = result;
+                        row["speffect_id"].Value = result;
+                    }
                 }
             }
             if (c_RingParam_Ring_Weight)
@@ -803,12 +966,82 @@ namespace DS2_Scrambler
                 row.ID <= ScramblerData_Items.Static.ItemParam_Category_End
                 ).ToList();
 
+                List<int> list = new List<int>();
+
+                if (ScramblerData_Params.Static.ItemParamData.Include_Weapon_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Weapon_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ItemParamData.Include_Armor_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Armor_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ItemParamData.Include_Ring_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Ring_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ItemParamData.Include_Item_Action_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Action_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ItemParamData.Include_Item_Soul_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Soul_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ItemParamData.Include_Item_Warp_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Warp_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ItemParamData.Include_Item_Misc_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Misc_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+
                 foreach (PARAM.Row row in rows)
                 {
-                    var list = ScramblerData_Core.Static.SpEffect_ID_List;
-                    var result = list[rand.Next(list.Count)];
+                    if (list.Count > 0)
+                    {
+                        var result = list[rand.Next(list.Count)];
 
-                    row["speffect_id"].Value = result;
+                        row["speffect_id"].Value = result;
+                    }
+
+                    if (ScramblerData_Params.Static.ItemParamData.Force_Homeward_Item_Effects == 1)
+                    {
+                        if(row.ID == 60350000)
+                        {
+                            row["speffect_id"].Value = 60350000;
+                        }
+                        if (row.ID == 60355000)
+                        {
+                            row["speffect_id"].Value = 60355000;
+                        }
+                        if (row.ID == 60360000)
+                        {
+                            row["speffect_id"].Value = 60360000;
+                        }
+                    }
                 }
             }
 
@@ -1161,15 +1394,69 @@ namespace DS2_Scrambler
             }
             if(c_Bullet_Effect)
             {
+                List<int> list = new List<int>();
+
+                if (ScramblerData_Params.Static.ProjectileParamData.Include_Weapon_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Weapon_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ProjectileParamData.Include_Armor_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Armor_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ProjectileParamData.Include_Ring_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Ring_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ProjectileParamData.Include_Item_Action_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Action_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ProjectileParamData.Include_Item_Soul_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Soul_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ProjectileParamData.Include_Item_Warp_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Warp_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+                if (ScramblerData_Params.Static.ProjectileParamData.Include_Item_Misc_Effects == 1)
+                {
+                    foreach (int entry in ScramblerData_Core.Static.Item_Misc_SpEffect_ID_List)
+                    {
+                        list.Add(entry);
+                    }
+                }
+
                 foreach (PARAM.Row row in rows)
                 {
-                    var list = ScramblerData_Core.Static.SpEffect_ID_List;
-                    var result = list[rand.Next(list.Count)];
+                    if (list.Count > 0)
+                    {
+                        var result = list[rand.Next(list.Count)];
 
-                    if(rand.Next(100) <= ScramblerData_Params.Static.ProjectileParamData.Effect_Application_Chance) // Only apply to 25% of bullets
-                        row["speffect_on_shoot"].Value = result;
-                    else
-                        row["speffect_on_shoot"].Value = 0;
+                        if (rand.Next(100) <= ScramblerData_Params.Static.ProjectileParamData.Effect_Application_Chance) // Only apply to 25% of bullets
+                            row["speffect_on_shoot"].Value = result;
+                        else
+                            row["speffect_on_shoot"].Value = 0;
+                    }
                 }
             }
             if (c_Bullet_Count)
